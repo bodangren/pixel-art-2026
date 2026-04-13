@@ -1,0 +1,16 @@
+{
+  "run_id": "gemini-3.1-pro__2026-04-04__r1",
+  "model_id": "gemini-3.1-pro",
+  "run_date": "2026-04-04",
+  "variant": "r1",
+  "benchmark_id": "labyrinth-goblin-king",
+  "prompt_version": "v1.0",
+  "asset_paths": {
+    "background": "assets/background.png",
+    "hero": "assets/hero-3x3-sheet.png",
+    "enemy": "assets/goblin-3x3-sheet.png",
+    "effect": "assets/orb-sheet.png"
+  },
+  "status": "completed",
+  "generation_notes": "Benchmark run for Gemini 3.1 Pro"
+}

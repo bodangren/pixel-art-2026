@@ -1,0 +1,33 @@
+{
+  "game_id": "labyrinth-goblin-king",
+  "theme": "A dark dungeon maze crawling with goblins. The player is a hero/knight who becomes a Paladin with a golden aura.",
+  "assets": [
+    {
+      "id": "background",
+      "description": "A dark, atmospheric stone dungeon floor texture suitable for a maze background.",
+      "type": "background",
+      "dimensions": "1024x1024"
+    },
+    {
+      "id": "hero-3x3-sheet",
+      "description": "A heroic knight character. 3x3 sprite sheet showing idle, walk, and attack poses. 64x64 tiles.",
+      "type": "sheet",
+      "dimensions": "192x192",
+      "grid": "3x3"
+    },
+    {
+      "id": "goblin-3x3-sheet",
+      "description": "A small, green, menacing goblin. 3x3 sprite sheet. 64x64 tiles.",
+      "type": "sheet",
+      "dimensions": "192x192",
+      "grid": "3x3"
+    },
+    {
+      "id": "orb-sheet",
+      "description": "Magical word orbs. 1x3 sheet showing standard and glowing states. 64x64 tiles.",
+      "type": "sheet",
+      "dimensions": "192x64",
+      "grid": "1x3"
+    }
+  ]
+}

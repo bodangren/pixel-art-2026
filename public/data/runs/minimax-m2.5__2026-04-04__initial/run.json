@@ -1,0 +1,17 @@
+{
+  "run_id": "minimax-m2.5__2026-04-04__initial",
+  "model_id": "minimax-m2.5",
+  "run_date": "2026-04-04",
+  "variant": "initial",
+  "benchmark_game_id": "labyrinth-of-the-goblin-king",
+  "asset_file_paths": {},
+  "status": "incomplete",
+  "generation_notes": "Migrated from initial benchmark run.",
+  "technical_grade": {
+    "alignment_score": 5,
+    "palette_consistency_score": 5,
+    "transparency_score": 5,
+    "total_technical_score": 5,
+    "linter_notes": ""
+  }
+}

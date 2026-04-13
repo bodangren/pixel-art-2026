@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-04-04T22:47:42.660Z",
+  "rubric_scores": {
+    "background": 2,
+    "hero": 3,
+    "enemy": 3,
+    "effect": 3,
+    "pack": 3
+  },
+  "notes": "Background  lighting blobs destroy the maps.",
+  "weighted_total_score": 2.8,
+  "would_use_in_prototype_now": false
+}
