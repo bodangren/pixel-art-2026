@@ -24,6 +24,13 @@
 
 - (2026-04-09, static_benchmark_app) Writing acceptance criteria before implementation caught scope creep early
 
+- (2026-04-14, benchmark_dashboard_ui) TDD approach with vitest + React Testing Library works well - wrote failing tests first, then implemented component
+
+## Platform Notes
+<!-- Environment-specific learnings -->
+
+- (2026-04-14, build) Linux/x64 platform requires `next build --webpack` instead of Turbopack due to missing native SWC bindings
+
 ## Planning Improvements
 <!-- Notes on where estimates were wrong and why -->
 
