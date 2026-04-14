@@ -18,7 +18,8 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
   Phase 1: Complete | Phase 2: Complete | Phase 3: Complete
 
 - [ ] **Track: Benchmark Dashboard & Comparison UI**
-  Replace the static README with an interactive web dashboard (e.g., Next.js). Features include pixel-level zooming, side-by-side comparison of sprites across models, and metadata visualization.
+   *Link: [./tracks/benchmark_dashboard_ui_20260414/](./tracks/benchmark_dashboard_ui_20260414/)*
+   Replace the static README with an interactive web dashboard (e.g., Next.js). Features include pixel-level zooming, side-by-side comparison of sprites across models, and metadata visualization.
 
 - [ ] **Track: Dynamic Game Preview Integration**
   Create a lightweight web-based engine for 'Labyrinth of the Goblin King' that can hot-reload these assets to see how they look when animated and tiled in-game.
