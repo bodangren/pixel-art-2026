@@ -19,6 +19,8 @@
 
 - (2026-04-13, repo) Adding .gitignore after files are tracked does NOT remove them from history; large files (node_modules/@next/swc-*.node, 124MB) block push. Need `git rm --cached` + history rewrite to fix.
 
+- (2026-04-15, benchmark_dashboard_ui) React `key` prop cannot be spread - must be passed directly to JSX element, not as part of a spread object
+
 ## Patterns That Worked Well
 <!-- Approaches worth repeating -->
 

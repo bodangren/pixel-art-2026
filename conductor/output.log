@@ -741,3 +741,50 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks/benchmark_da
    - [ ] Add zoom level controls (1x, 2x, 4x, 8x, max)
 
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   conductor/output.log
+	modified:   conductor/tracks/benchmark_dashboard_ui_20260414/plan.md
+	new file:   src/components/AssetCard.test.tsx
+	new file:   src/components/AssetCard.tsx
+	modified:   src/components/AssetGallery.tsx
+	new file:   src/components/GalleryControls.test.tsx
+	new file:   src/components/GalleryControls.tsx
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git commit -m "[MiniMax-M2] Complete Phase 2: Asset Gallery View with AssetCard component and filter/sort controls"
+[main ae17590] [MiniMax-M2] Complete Phase 2: Asset Gallery View with AssetCard component and filter/sort controls
+ 7 files changed, 952 insertions(+), 30 deletions(-)
+ create mode 100644 src/components/AssetCard.test.tsx
+ create mode 100644 src/components/AssetCard.tsx
+ create mode 100644 src/components/GalleryControls.test.tsx
+ create mode 100644 src/components/GalleryControls.tsx
+[0m
+[0m$ [0mgit push
+To https://github.com/bodangren/pixel-art-2026.git
+   eec8602..ae17590  main -> main
+[0m
+[0m→ [0mRead conductor/tech-debt.md
+[0m→ [0mRead conductor/lessons-learned.md
+[0m
+[0m← [0mEdit conductor/lessons-learned.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+@@ -18,8 +18,10 @@
+ - (2026-04-10, automated_validation_scoring_engine) datetime.utcnow() deprecated - use datetime.now(timezone.utc) instead
+ 
+ - (2026-04-13, repo) Adding .gitignore after files are tracked does NOT remove them from history; large files (node_modules/@next/swc-*.node, 124MB) block push. Need `git rm --cached` + history rewrite to fix.
+ 
++- (2026-04-15, benchmark_dashboard_ui) React `key` prop cannot be spread - must be passed directly to JSX element, not as part of a spread object
++
+ ## Patterns That Worked Well
+ <!-- Approaches worth repeating -->
+ 
+ - (2026-04-09, static_benchmark_app) Writing acceptance criteria before implementation caught scope creep early
+
+[0m
