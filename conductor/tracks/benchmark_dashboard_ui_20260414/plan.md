@@ -10,14 +10,14 @@
   - [x] Create data parsing utilities
 
 ## Phase 2: Asset Gallery View
-- [ ] Task: Build gallery grid component
-  - [ ] Create AssetCard component
-  - [ ] Implement filter controls
-  - [ ] Add sort functionality
-- [ ] Task: Integrate with existing data structure
-  - [ ] Read data/runs/ directory
-  - [ ] Parse validation JSON files
-  - [ ] Display run metadata
+- [x] Task: Build gallery grid component
+  - [x] Create AssetCard component
+  - [x] Implement filter controls
+  - [x] Add sort functionality
+- [x] Task: Integrate with existing data structure
+  - [x] Read data/runs/ directory
+  - [x] Parse validation JSON files
+  - [x] Display run metadata
 
 ## Phase 3: Pixel Zoom Viewer
 - [ ] Task: Implement zoom container component
