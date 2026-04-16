@@ -41,3 +41,5 @@
 - (2026-04-11, automated_validation_scoring_engine) When refactoring score_asset(), the has_transparency flag defaults to False which causes incorrect scoring - validate_asset() only adds has_transparency key when there's an issue, so score_asset() should check issues list instead of flag
 
 - (2026-04-12, automated_validation_scoring_engine) TypeScript for-of loops with async operations - must capture loop variable in compound data structure before loop, not destructure after filter
+
+- (2026-04-16, benchmark_dashboard_ui) jsdom does not perform real bounding rect calculations; mouse hover events in tests need explicit fireEvent calls that update component state directly rather than relying on browser geometry
