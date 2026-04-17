@@ -13,4 +13,4 @@
 | 2026-04-11 | automated_validation_scoring_engine | score_asset transparency logic - defaulting to False | Low | Resolved | Refactored to check issue list directly instead of has_transparency flag |
 | 2026-04-12 | automated_validation_scoring_engine | Validation pipeline integration | Low | Resolved | build-derived-logic.ts now runs validation and computes average_tech_score |
 | 2026-04-13 | repo | node_modules/@next/swc-*.node files tracked (124MB each) exceed GitHub 100MB limit | Critical | Open | Files committed before .gitignore was effective; need git rm --cached + rebase/filter-branch |
-| 2026-04-16 | benchmark_dashboard_ui | ZoomContainer could replace ZoomPanel in ComparisonView | Low | Open | ZoomContainer has more features (pan, max zoom, hover grid); consolidate implementations |
+| 2026-04-16 | benchmark_dashboard_ui | ZoomContainer replaced ZoomPanel in ComparisonView | Low | Resolved | ZoomContainer has more features (pan, max zoom, hover grid); consolidated implementations |

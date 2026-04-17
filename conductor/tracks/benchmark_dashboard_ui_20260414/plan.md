@@ -20,13 +20,13 @@
   - [x] Display run metadata
 
 ## Phase 3: Pixel Zoom Viewer
-- [ ] Task: Implement zoom container component
-  - [ ] Add zoom level controls (1x, 2x, 4x, 8x, max)
-  - [ ] Implement nearest-neighbor interpolation via CSS
-  - [ ] Add pan functionality on drag
-- [ ] Task: Create sprite sheet grid overlay
-  - [ ] Detect 3x3 grid structure
-  - [ ] Display cell borders on hover
+- [x] Task: Implement zoom container component
+  - [x] Add zoom level controls (1x, 2x, 4x, 8x, max)
+  - [x] Implement nearest-neighbor interpolation via CSS
+  - [x] Add pan functionality on drag
+- [x] Task: Create sprite sheet grid overlay
+  - [x] Detect 3x3 grid structure
+  - [x] Display cell borders on hover
 
 ## Phase 4: Side-by-Side Comparison
 - [x] Task: Build comparison view component
