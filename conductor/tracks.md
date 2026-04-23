@@ -27,6 +27,6 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [ ] **Track: Multi-Genre/Style Expansion**
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, or Top-down Sci-fi) and assets (UI buttons, font sheets).
 
-- [ ] **Track: Git History Cleanup**
+- [x] **Track: Git History Cleanup**
    *Link: [./tracks/git_history_cleanup_20260423/](./tracks/git_history_cleanup_20260423/)*
-   Remove 124MB node_modules/@next/swc-*.node files from git history using BFG Repo-Cleaner or git filter-repo to unblock GitHub pushes.
+   Remove 124MB node_modules/@next/swc-*.node files from git history using BFG Repo-Cleaner or git filter-repo to unblock GitHub pushes. (Resolved: files were never committed, repo is clean)
