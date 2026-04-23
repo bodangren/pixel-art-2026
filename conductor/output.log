@@ -1253,3 +1253,124 @@ Route (app)
 ○  (Static)  prerendered as static content
 ●  (SSG)     prerendered as static HTML (uses generateStaticParams)
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "fix(benchmark_dashboard_ui): add initialReviews prop to ComparisonView test
+
+MiniMax-M2.7"
+[main c3a7557] fix(benchmark_dashboard_ui): add initialReviews prop to ComparisonView test
+ 4 files changed, 384 insertions(+), 9 deletions(-)
+[0m
+[0m← [0mEdit conductor/tracks/benchmark_dashboard_ui_20260414/plan.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks/benchmark_dashboard_ui_20260414/plan.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks/benchmark_dashboard_ui_20260414/plan.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks/benchmark_dashboard_ui_20260414/plan.md
+@@ -46,11 +46,11 @@
+   - [x] Empty states
+   - [x] Error boundaries
+ 
+ ## Phase 6: Testing & Integration
+-- [ ] Task: Write unit tests
+-  - [ ] Test data parsing utilities
+-  - [ ] Test zoom/pan functionality
+-  - [ ] Test comparison logic
+-- [ ] Task: Run build verification
+-  - [ ] TypeScript type check
+-  - [ ] Build production bundle
+\ No newline at end of file
++- [x] Task: Write unit tests
++  - [x] Test data parsing utilities
++  - [x] Test zoom/pan functionality
++  - [x] Test comparison logic
++- [x] Task: Run build verification
++  - [x] TypeScript type check
++  - [x] Build production bundle
+\ No newline at end of file
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add conductor/tracks/benchmark_dashboard_ui_20260414/plan.md && git commit -m "conductor(plan): mark benchmark_dashboard_ui track complete" && git push origin main
+[main 79e521a] conductor(plan): mark benchmark_dashboard_ui track complete
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   8ab34d2..79e521a  main -> main
+[0m
+[0m← [0mEdit conductor/tracks.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
+@@ -16,12 +16,12 @@
+   *Link: [./tracks/automated_validation_scoring_engine_20260410/](./tracks/automated_validation_scoring_engine_20260410/)*
+   Develop a validation tool to automatically verify if generated assets meet technical specs (correct dimensions, 3x3 grid alignment, transparent backgrounds, and specific hex code adherence).
+   Phase 1: Complete | Phase 2: Complete | Phase 3: Complete
+ 
+-- [~] **Track: Benchmark Dashboard & Comparison UI**
++- [x] **Track: Benchmark Dashboard & Comparison UI**
+    *Link: [./tracks/benchmark_dashboard_ui_20260414/](./tracks/benchmark_dashboard_ui_20260414/)*
+    Replace the static README with an interactive web dashboard (e.g., Next.js). Features include pixel-level zooming, side-by-side comparison of sprites across models, and metadata visualization.
+-   Phase 5: Pending | Phase 6: Pending
++   Phase 1-6: Complete
+ 
+ - [ ] **Track: Dynamic Game Preview Integration**
+   Create a lightweight web-based engine for 'Labyrinth of the Goblin King' that can hot-reload these assets to see how they look when animated and tiled in-game.
+ 
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add conductor/tracks.md && git commit -m "conductor: mark benchmark_dashboard_ui track complete" && git push origin main
+[main f545963] conductor: mark benchmark_dashboard_ui track complete
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   79e521a..f545963  main -> main
+[0m
+[0m→ [0mRead conductor/tech-debt.md
+[0m→ [0mRead conductor/lessons-learned.md
+[0m
+[0m← [0mEdit conductor/lessons-learned.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+@@ -44,4 +44,6 @@
+ 
+ - (2026-04-16, benchmark_dashboard_ui) jsdom does not perform real bounding rect calculations; mouse hover events in tests need explicit fireEvent calls that update component state directly rather than relying on browser geometry
+ 
+ - (2026-04-17, git_history_cleanup) swc binary files (124MB) were never actually committed to this repo; the tech-debt item was a false alarm. The .gitignore was effective from the start. Do a dry-run push before starting large cleanup operations to verify the issue exists.
++
++- (2026-04-17, benchmark_dashboard_ui) ComparisonView client component cannot dynamically import server-only code (fs). For static export, pass initial data as props from server component instead of fetching client-side.
+
+[0m
+[0m← [0mEdit conductor/lessons-learned.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+@@ -46,4 +46,6 @@
+ 
+ - (2026-04-17, git_history_cleanup) swc binary files (124MB) were never actually committed to this repo; the tech-debt item was a false alarm. The .gitignore was effective from the start. Do a dry-run push before starting large cleanup operations to verify the issue exists.
+ 
+ - (2026-04-17, benchmark_dashboard_ui) ComparisonView client component cannot dynamically import server-only code (fs). For static export, pass initial data as props from server component instead of fetching client-side.
++
++- (2026-04-17, benchmark_dashboard_ui) Added npm test script pointing to vitest run for Phase 6 verification
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add conductor/lessons-learned.md && git commit -m "conductor: update lessons-learned after benchmark_dashboard_ui track" && git push origin main
+[main 4c12328] conductor: update lessons-learned after benchmark_dashboard_ui track
+ 1 file changed, 4 insertions(+)
+To https://github.com/bodangren/pixel-art-2026.git
+   f545963..4c12328  main -> main
+[0m
+[0m$ [0mgit log --oneline -10
+4c12328 conductor: update lessons-learned after benchmark_dashboard_ui track
+f545963 conductor: mark benchmark_dashboard_ui track complete
+79e521a conductor(plan): mark benchmark_dashboard_ui track complete
+c3a7557 fix(benchmark_dashboard_ui): add initialReviews prop to ComparisonView test
+7ddb492 feat(benchmark_dashboard_ui): add Phase 5 dashboard layout
+8ab34d2 conductor: mark git_history_cleanup track complete
+e1f548c conductor: update tech-debt and lessons-learned after git_history_cleanup track
+99d5b57 conductor(plan): Mark git_history_cleanup track complete
+1e10d15 chore: update output log
+8d7a741 chore: add git history cleanup track
+[0m
+[0m$ [0mgit log -1 --format="%H"
+4c12328a214ef80c85d4cd03b7b7239265ebccc3
+[0m
+[0m→ [0mRead conductor/output.log
