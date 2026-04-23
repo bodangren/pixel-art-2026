@@ -16,12 +16,22 @@ interface SpriteSheet {
   rows: number
 }
 
+type AnimationState = 'idle' | 'walk' | 'attack'
+
 interface AnimatedSprite {
   sheet: SpriteSheet
   currentFrame: number
   frameCount: number
   fps: number
   lastUpdate: number
+  state: AnimationState
+}
+
+const ANIMATION_STATES: AnimationState[] = ['idle', 'walk', 'attack']
+const STATE_ROWS: Record<AnimationState, number> = {
+  idle: 0,
+  walk: 1,
+  attack: 2
 }
 
 const SPRITE_SIZE = 48
@@ -59,6 +69,8 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
   const [showGrid, setShowGrid] = useState(false)
   const [heroX, setHeroX] = useState(CANVAS_WIDTH / 2)
   const [heroY, setHeroY] = useState(CANVAS_HEIGHT / 2)
+  const [animationState, setAnimationState] = useState<AnimationState>('idle')
+  const [isPaused, setIsPaused] = useState(false)
 
   const selectedRun = runs.find(r => r.run_id === selectedRunId)
 
@@ -79,7 +91,8 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
         currentFrame: 0,
         frameCount: heroSheet.columns,
         fps,
-        lastUpdate: performance.now()
+        lastUpdate: performance.now(),
+        state: 'idle'
       }
       animatedSpritesRef.current.set('hero', heroAnim)
 
@@ -94,36 +107,9 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
     if (!selectedRun) return
 
     setTimeout(() => {
-      setLoading(true)
-      const basePath = `/data/runs/${selectedRun.run_id}/`
-
-      loadImage(basePath + selectedRun.asset_paths.hero)
-        .then(heroImg => {
-          const heroSheet = { image: heroImg, width: heroImg.width, height: heroImg.height, ...extractFrames(heroImg) }
-          spritesRef.current.set('hero', heroSheet)
-
-          return loadImage(basePath + selectedRun.asset_paths.background)
-            .then(bgImg => {
-              backgroundRef.current = bgImg
-
-              const heroAnim: AnimatedSprite = {
-                sheet: heroSheet,
-                currentFrame: 0,
-                frameCount: heroSheet.columns,
-                fps,
-                lastUpdate: performance.now()
-              }
-              animatedSpritesRef.current.set('hero', heroAnim)
-            })
-        })
-        .catch(err => {
-          console.error('Failed to load sprites:', err)
-        })
-        .finally(() => {
-          setLoading(false)
-        })
+      loadSprites(selectedRun)
     }, 0)
-  }, [selectedRun, fps])
+  }, [selectedRun, loadSprites])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -156,14 +142,14 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
       if (heroAnim) {
         heroAnim.fps = fps
 
-        if (timestamp - heroAnim.lastUpdate > 1000 / fps) {
+        if (!isPaused && timestamp - heroAnim.lastUpdate > 1000 / fps) {
           heroAnim.currentFrame = (heroAnim.currentFrame + 1) % heroAnim.frameCount
           heroAnim.lastUpdate = timestamp
         }
 
         const { image, columns } = heroAnim.sheet
         const col = heroAnim.currentFrame % columns
-        const row = 0
+        const row = STATE_ROWS[animationState]
         const srcX = col * SPRITE_SIZE
         const srcY = row * SPRITE_SIZE
 
@@ -219,7 +205,7 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
     return () => {
       cancelAnimationFrame(animationRef.current)
     }
-  }, [fps, showGrid, heroX, heroY])
+  }, [fps, showGrid, heroX, heroY, animationState, isPaused])
 
   const handleCanvasClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -271,6 +257,28 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
             className="w-4 h-4"
           />
           Show Grid
+        </label>
+
+        <button
+          onClick={() => setIsPaused(p => !p)}
+          className="px-3 py-2 bg-blue-700 hover:bg-blue-600 text-white text-xs rounded"
+        >
+          {isPaused ? '▶ Play' : '⏸ Pause'}
+        </button>
+
+        <label className="flex flex-col gap-1 text-xs text-slate-400">
+          Animation:
+          <select
+            value={animationState}
+            onChange={(e) => setAnimationState(e.target.value as AnimationState)}
+            className="bg-slate-800 text-white px-3 py-2 rounded border border-slate-700 text-sm"
+          >
+            {ANIMATION_STATES.map(state => (
+              <option key={state} value={state}>
+                {state.charAt(0).toUpperCase() + state.slice(1)}
+              </option>
+            ))}
+          </select>
         </label>
 
         <button
