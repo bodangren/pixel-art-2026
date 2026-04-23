@@ -45,7 +45,11 @@ describe('ComparisonView Component', () => {
     runs: [mockRunLeft, mockRunRight],
     initialLeftRunId: 'run-001',
     initialRightRunId: 'run-002',
-    assetKey: 'hero' as const
+    assetKey: 'hero' as const,
+    initialReviews: [
+      { runId: 'run-001', review: null },
+      { runId: 'run-002', review: null }
+    ]
   }
 
   beforeEach(() => {

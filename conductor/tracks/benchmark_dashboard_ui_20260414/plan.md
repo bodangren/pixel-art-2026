@@ -38,13 +38,13 @@
   - [x] Display side-by-side validation results
 
 ## Phase 5: Dashboard Layout & Polish
-- [~] Task: Create main dashboard layout
-  - [ ] Navigation between gallery and comparison
-  - [ ] Responsive design implementation
-- [ ] Task: Add loading states and error handling
-  - [ ] Loading skeletons
-  - [ ] Empty states
-  - [ ] Error boundaries
+- [x] Task: Create main dashboard layout
+  - [x] Navigation between gallery and comparison
+  - [x] Responsive design implementation
+- [x] Task: Add loading states and error handling
+  - [x] Loading skeletons
+  - [x] Empty states
+  - [x] Error boundaries
 
 ## Phase 6: Testing & Integration
 - [ ] Task: Write unit tests
