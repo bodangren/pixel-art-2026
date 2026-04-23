@@ -28,15 +28,10 @@
 
 - (2026-04-14, benchmark_dashboard_ui) TDD approach with vitest + React Testing Library works well - wrote failing tests first, then implemented component
 
-## Platform Notes
-<!-- Environment-specific learnings -->
-
-- (2026-04-14, build) Linux/x64 platform requires `next build --webpack` instead of Turbopack due to missing native SWC bindings
-
 ## Planning Improvements
 <!-- Notes on where estimates were wrong and why -->
 
-- (2026-04-09, static_benchmark_app) Underestimated Phase 5 static export complexity - Next.js Turbopack build behavior differs from expected
+- (2026-04-09, static_benchmark_app) Underestimated Phase 5 static export complexity - Next.js Turbopack build behavior differs from expected; use `next build --webpack` on Linux/x64
 
 - (2026-04-11, automated_validation_scoring_engine) When refactoring score_asset(), the has_transparency flag defaults to False which causes incorrect scoring - validate_asset() only adds has_transparency key when there's an issue, so score_asset() should check issues list instead of flag
 
@@ -48,4 +43,4 @@
 
 - (2026-04-17, benchmark_dashboard_ui) ComparisonView client component cannot dynamically import server-only code (fs). For static export, pass initial data as props from server component instead of fetching client-side.
 
-- (2026-04-17, benchmark_dashboard_ui) Added npm test script pointing to vitest run for Phase 6 verification
+- (2026-04-23, game_preview) ESLint rules prohibit calling setState synchronously within useEffect. Use setTimeout(() => {...}, 0) to defer execution, or use .then()/.finally() promise chains instead of async/await directly in effects.
