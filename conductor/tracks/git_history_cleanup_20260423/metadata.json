@@ -1,0 +1,11 @@
+{
+  "track_id": "git_history_cleanup_20260423",
+  "type": "chore",
+  "status": "new",
+  "created_at": "2026-04-23T00:00:00Z",
+  "updated_at": "2026-04-23T00:00:00Z",
+  "description": "Remove 124MB node_modules/@next/swc-*.node files from git history using git filter-repo or BFG Repo-Cleaner to unblock GitHub pushes.",
+  "estimated_tasks": 6,
+  "actual_tasks": null,
+  "deviation_notes": ""
+}
