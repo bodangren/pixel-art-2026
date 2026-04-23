@@ -44,4 +44,4 @@
 
 - (2026-04-16, benchmark_dashboard_ui) jsdom does not perform real bounding rect calculations; mouse hover events in tests need explicit fireEvent calls that update component state directly rather than relying on browser geometry
 
-- (2026-04-17, benchmark_dashboard_ui) Phase 3 (ZoomContainer) implemented with zoom levels (1x, 2x, 4x, 8x, max), pan on drag, and 3x3 grid hover detection
+- (2026-04-17, git_history_cleanup) swc binary files (124MB) were never actually committed to this repo; the tech-debt item was a false alarm. The .gitignore was effective from the start. Do a dry-run push before starting large cleanup operations to verify the issue exists.
