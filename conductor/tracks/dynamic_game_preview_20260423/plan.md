@@ -11,14 +11,14 @@
   - [x] Handle transparency
 
 ## Phase 2: Animation System
-- [ ] Task: Implement animation engine
-  - [ ] Frame-based sprite animation
-  - [ ] Animation state machine (idle, walk, attack)
-  - [ ] Configurable FPS
-- [ ] Task: Add animation controls
-  - [ ] Play/pause controls
-  - [ ] Speed slider
-  - [ ] Animation state selector
+- [x] Task: Implement animation engine
+  - [x] Frame-based sprite animation
+  - [x] Animation state machine (idle, walk, attack)
+  - [x] Configurable FPS
+- [x] Task: Add animation controls
+  - [x] Play/pause controls
+  - [x] Speed slider
+  - [x] Animation state selector
 
 ## Phase 3: Tiled Map Preview
 - [ ] Task: Implement tilemap renderer

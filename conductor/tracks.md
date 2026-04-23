@@ -25,7 +25,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [~] **Track: Dynamic Game Preview Integration**
    *Link: [./tracks/dynamic_game_preview_20260423/](./tracks/dynamic_game_preview_20260423/)*
    Create a lightweight web-based engine for 'Labyrinth of the Goblin King' that can hot-reload these assets to see how they look when animated and tiled in-game.
-   Phase 1: Complete
+   Phase 1-2: Complete
 
 - [ ] **Track: Multi-Genre/Style Expansion**
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, or Top-down Sci-fi) and assets (UI buttons, font sheets).
