@@ -546,3 +546,38 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
 +- (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
 
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "chore: update track status and memory files
+
+- Mark Phase 2 complete in dynamic_game_preview plan
+- Update tracks.md Phase 1-2 status
+- Resolve tech-debt item for duplicate sprite loading
+- Add lesson about consolidation to lessons-learned" && git push
+[main 3518610] chore: update track status and memory files
+ 5 files changed, 428 insertions(+), 10 deletions(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   77b6590..3518610  main -> main
+[0m
+[0m# [0mTodos
+[x] Review previous phase work (Phase 1: Game Canvas Setup)
+[x] Implement animation state machine (idle, walk, attack)
+[x] Add play/pause controls to animation
+[x] Add animation state selector UI
+[x] Fix duplicate sprite-loading logic in GameCanvas
+[x] Verify build and tests
+[x] Commit changes and update track status
+[0m
+Autonomous run complete.
+
+**Summary:**
+- **Track:** Dynamic Game Preview Integration
+- **Completed Phase:** Phase 2 (Animation System)
+- **Changes:**
+  - Added `AnimationState` type (`idle`, `walk`, `attack`) with `STATE_ROWS` mapping for 3x3 sprite sheet rows
+  - Added `isPaused` state and play/pause button
+  - Added animation state selector dropdown
+  - Fixed duplicate sprite-loading logic (resolved tech-debt item)
+  - Fixed `react-hooks/exhaustive-deps` warning
+- **Tests:** 51 passed
+- **Linting:** No errors in GameCanvas
+
+Committed as `ba14580` and `3518610` (track status update). Pushed to origin.

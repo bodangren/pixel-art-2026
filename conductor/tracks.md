@@ -5,31 +5,43 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 ---
 
 - [x] **Track: Build static benchmark/review app for game-asset model leaderboard**
-  *Link: [./tracks/static_benchmark_app_20260404/](./tracks/static_benchmark_app_20260404/)*
+  *Link: [./archive/static_benchmark_app_20260404/](./archive/static_benchmark_app_20260404/)*
   Turn this repo into a semi-automated benchmark system for evaluating image models on generating starter pixel-art asset packs.
 
 - [x] **Track: Build autonomous asset generation pipeline**
-  *Link: [./tracks/feature_asset_generation_orchestrator_20260404/](./tracks/feature_asset_generation_orchestrator_20260404/)*
+  *Link: [./archive/feature_asset_generation_orchestrator_20260404/](./archive/feature_asset_generation_orchestrator_20260404/)*
   Identify games missing assets in advantage-games, research requirements, and trigger LLM generation.
 
 - [x] **Track: Automated Technical Validation (Scoring Engine)**
-  *Link: [./tracks/automated_validation_scoring_engine_20260410/](./tracks/automated_validation_scoring_engine_20260410/)*
+  *Link: [./archive/automated_validation_scoring_engine_20260410/](./archive/automated_validation_scoring_engine_20260410/)*
   Develop a validation tool to automatically verify if generated assets meet technical specs (correct dimensions, 3x3 grid alignment, transparent backgrounds, and specific hex code adherence).
   Phase 1: Complete | Phase 2: Complete | Phase 3: Complete
 
 - [x] **Track: Benchmark Dashboard & Comparison UI**
-   *Link: [./tracks/benchmark_dashboard_ui_20260414/](./tracks/benchmark_dashboard_ui_20260414/)*
+   *Link: [./archive/benchmark_dashboard_ui_20260414/](./archive/benchmark_dashboard_ui_20260414/)*
    Replace the static README with an interactive web dashboard (e.g., Next.js). Features include pixel-level zooming, side-by-side comparison of sprites across models, and metadata visualization.
    Phase 1-6: Complete
 
-- [~] **Track: Dynamic Game Preview Integration**
-   *Link: [./tracks/dynamic_game_preview_20260423/](./tracks/dynamic_game_preview_20260423/)*
+- [x] **Track: Dynamic Game Preview Integration**
+   *Link: [./archive/dynamic_game_preview_20260423/](./archive/dynamic_game_preview_20260423/)*
    Create a lightweight web-based engine for 'Labyrinth of the Goblin King' that can hot-reload these assets to see how they look when animated and tiled in-game.
    Phase 1-2: Complete
 
 - [ ] **Track: Multi-Genre/Style Expansion**
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, or Top-down Sci-fi) and assets (UI buttons, font sheets).
 
+- [ ] **Track: Batch Generation Pipeline**
+  *Link: [./tracks/batch_generation_pipeline_20260424/](./tracks/batch_generation_pipeline_20260424/)*
+  Parallel asset generation for multiple games, progress tracking, failure handling with retry, batch result aggregation.
+
+- [ ] **Track: Asset Quality Metrics Dashboard**
+  *Link: [./tracks/asset_quality_dashboard_20260424/](./tracks/asset_quality_dashboard_20260424/)*
+  Quality score distribution charts, trend analysis, model comparison radar charts, anomaly detection, export reports.
+
+- [ ] **Track: Game Engine Integration Tests**
+  *Link: [./tracks/game_engine_integration_tests_20260424/](./tracks/game_engine_integration_tests_20260424/)*
+  Automated testing in Phaser/Unity/Godot, sprite animation verification, tilemap rendering tests, performance benchmarking.
+
 - [x] **Track: Git History Cleanup**
-   *Link: [./tracks/git_history_cleanup_20260423/](./tracks/git_history_cleanup_20260423/)*
+   *Link: [./archive/git_history_cleanup_20260423/](./archive/git_history_cleanup_20260423/)*
    Remove 124MB node_modules/@next/swc-*.node files from git history using BFG Repo-Cleaner or git filter-repo to unblock GitHub pushes. (Resolved: files were never committed, repo is clean)
