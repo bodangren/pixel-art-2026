@@ -38,7 +38,7 @@
   - [x] Display side-by-side validation results
 
 ## Phase 5: Dashboard Layout & Polish
-- [ ] Task: Create main dashboard layout
+- [~] Task: Create main dashboard layout
   - [ ] Navigation between gallery and comparison
   - [ ] Responsive design implementation
 - [ ] Task: Add loading states and error handling

@@ -8,6 +8,7 @@ interface ComparisonViewProps {
   initialLeftRunId: string;
   initialRightRunId: string;
   assetKey: 'background' | 'hero' | 'enemy' | 'effect';
+  initialReviews?: { runId: string; review: Review | null }[];
 }
 
 interface ZoomPanelProps {
@@ -179,33 +180,46 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({
   runs,
   initialLeftRunId,
   initialRightRunId,
-  assetKey
+  assetKey,
+  initialReviews
 }) => {
   const [leftRunId, setLeftRunId] = useState(initialLeftRunId);
   const [rightRunId, setRightRunId] = useState(initialRightRunId);
   const [selectedAsset, setSelectedAsset] = useState(assetKey);
   const [zoom, setZoom] = useState(4);
   const [transparent, setTransparent] = useState(false);
-  const [leftReview, setLeftReview] = useState<Review | null>(null);
-  const [rightReview, setRightReview] = useState<Review | null>(null);
+  const [leftReview, setLeftReview] = useState<Review | null>(() => {
+    if (initialReviews) {
+      const found = initialReviews.find(r => r.runId === leftRunId);
+      return found?.review ?? null;
+    }
+    return null;
+  });
+  const [rightReview, setRightReview] = useState<Review | null>(() => {
+    if (initialReviews) {
+      const found = initialReviews.find(r => r.runId === rightRunId);
+      return found?.review ?? null;
+    }
+    return null;
+  });
   
   const leftRun = runs.find((r) => r.run_id === leftRunId);
   const rightRun = runs.find((r) => r.run_id === rightRunId);
   
   useEffect(() => {
+    if (initialReviews) return;
     const fetchReviews = async () => {
-      const { getReview } = await import('@/../lib/data');
       if (leftRunId) {
-        const review = await getReview(leftRunId);
-        setLeftReview(review);
+        const res = await fetch(`/api/reviews?runId=${leftRunId}`);
+        if (res.ok) setLeftReview(await res.json());
       }
       if (rightRunId) {
-        const review = await getReview(rightRunId);
-        setRightReview(review);
+        const res = await fetch(`/api/reviews?runId=${rightRunId}`);
+        if (res.ok) setRightReview(await res.json());
       }
     };
     fetchReviews();
-  }, [leftRunId, rightRunId]);
+  }, [leftRunId, rightRunId, initialReviews]);
   
   if (!leftRun || !rightRun) {
     return (

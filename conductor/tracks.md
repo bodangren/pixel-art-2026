@@ -17,9 +17,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
   Develop a validation tool to automatically verify if generated assets meet technical specs (correct dimensions, 3x3 grid alignment, transparent backgrounds, and specific hex code adherence).
   Phase 1: Complete | Phase 2: Complete | Phase 3: Complete
 
-- [ ] **Track: Benchmark Dashboard & Comparison UI**
+- [~] **Track: Benchmark Dashboard & Comparison UI**
    *Link: [./tracks/benchmark_dashboard_ui_20260414/](./tracks/benchmark_dashboard_ui_20260414/)*
    Replace the static README with an interactive web dashboard (e.g., Next.js). Features include pixel-level zooming, side-by-side comparison of sprites across models, and metadata visualization.
+   Phase 5: Pending | Phase 6: Pending
 
 - [ ] **Track: Dynamic Game Preview Integration**
   Create a lightweight web-based engine for 'Labyrinth of the Goblin King' that can hot-reload these assets to see how they look when animated and tiled in-game.

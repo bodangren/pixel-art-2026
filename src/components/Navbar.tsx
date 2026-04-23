@@ -15,8 +15,25 @@ const Navbar = () => {
           <span className="font-black tracking-tighter text-xl">PIXEL-BENCH</span>
         </Link>
         <div className="flex gap-8 items-center">
-          <Link 
-            href="/leaderboard" 
+          <Link
+            href="/runs"
+            className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
+              pathname === '/runs' ? 'text-blue-400' : 'text-slate-500 hover:text-white'
+            }`}
+          >
+            Gallery
+          </Link>
+          <Link
+            href="/compare"
+            className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
+              pathname === '/compare' ? 'text-blue-400' : 'text-slate-500 hover:text-white'
+            }`}
+          >
+            Compare
+          </Link>
+          <div className="h-4 w-px bg-white/10" />
+          <Link
+            href="/leaderboard"
             className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
               pathname === '/leaderboard' ? 'text-blue-400' : 'text-slate-500 hover:text-white'
             }`}
