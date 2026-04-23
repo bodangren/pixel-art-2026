@@ -9,10 +9,8 @@ async function runValidation(runId: string): Promise<number> {
     const proc = spawn('python3', ['scripts/validate_run.py', runId, '--output', '/tmp/validation_report.json'], {
       cwd: process.cwd(),
     })
-    let stdout = ''
-    let stderr = ''
-    proc.stdout.on('data', (data) => { stdout += data.toString() })
-    proc.stderr.on('data', (data) => { stderr += data.toString() })
+    proc.stdout.on('data', () => {})
+    proc.stderr.on('data', () => {})
     proc.on('close', (code) => {
       if (code === 0) {
         try {

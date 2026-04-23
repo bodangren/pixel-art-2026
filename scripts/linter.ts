@@ -12,7 +12,7 @@ async function lintRun(runId: string) {
   const assets = run.asset_file_paths;
 
   let alignmentScore = 5;
-  let paletteScore = 5;
+  const paletteScore = 5;
   let transparencyScore = 5;
   const notes: string[] = [];
 

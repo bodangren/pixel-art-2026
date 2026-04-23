@@ -14,3 +14,5 @@
 | 2026-04-12 | automated_validation_scoring_engine | Validation pipeline integration | Low | Resolved | build-derived-logic.ts now runs validation and computes average_tech_score |
 | 2026-04-13 | repo | node_modules/@next/swc-*.node files tracked (124MB each) exceed GitHub 100MB limit | Critical | Resolved | Verified: swc files were never committed to this repo; backup confirmed clean (992K), push succeeds |
 | 2026-04-16 | benchmark_dashboard_ui | ZoomContainer replaced ZoomPanel in ComparisonView | Low | Resolved | ZoomContainer has more features (pan, max zoom, hover grid); consolidated implementations |
+| 2026-04-24 | dynamic_game_preview | GameCanvas has duplicate sprite-loading logic (loadSprites callback + useEffect both do the same thing) | Medium | Open | Consolidate into single load function; useEffect re-triggers on fps change unnecessarily |
+| 2026-04-24 | dynamic_game_preview | ComparisonView ZoomPanel uses inline `<img>` with `imageRendering: pixelated` instead of ZoomContainer | Medium | Open | ZoomPanel in ComparisonView should reuse ZoomContainer component for consistency |

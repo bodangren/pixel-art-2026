@@ -37,8 +37,8 @@ const ZoomPanel: React.FC<ZoomPanelProps> = ({
   const isBackground = assetKey === 'background';
   const isSheet = assetKey === 'hero' || assetKey === 'enemy' || assetKey === 'effect';
   
-  const rows = assetKey.includes('3x3') ? 3 : 1;
-  const cols = assetKey.includes('3x3') ? 3 : 3;
+  const rows = isSheet ? 3 : 1;
+  const cols = isSheet ? 3 : 1;
   const frameSize = 64;
   const totalFrames = rows * cols;
   
