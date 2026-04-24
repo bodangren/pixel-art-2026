@@ -46,3 +46,5 @@
 - (2026-04-23, game_preview) ESLint rules prohibit calling setState synchronously within useEffect. Use setTimeout(() => {...}, 0) to defer execution, or use .then()/.finally() promise chains instead of async/await directly in effects.
 
 - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
+
+- (2026-04-24, batch_ui) Testing checkbox labels - `getByRole('checkbox', { name: 'text' })` matches accessible name which may include child text content. Use `aria-label` on checkbox input directly for precise matching in tests.
