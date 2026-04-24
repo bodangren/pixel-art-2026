@@ -30,9 +30,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [ ] **Track: Multi-Genre/Style Expansion**
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, or Top-down Sci-fi) and assets (UI buttons, font sheets).
 
-- [ ] **Track: Batch Generation Pipeline**
+- [x] **Track: Batch Generation Pipeline**
   *Link: [./tracks/batch_generation_pipeline_20260424/](./tracks/batch_generation_pipeline_20260424/)*
   Parallel asset generation for multiple games, progress tracking, failure handling with retry, batch result aggregation.
+  Phase 1-5: Complete
 
 - [ ] **Track: Asset Quality Metrics Dashboard**
   *Link: [./tracks/asset_quality_dashboard_20260424/](./tracks/asset_quality_dashboard_20260424/)*
