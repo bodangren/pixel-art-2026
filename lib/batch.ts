@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { StyleCategory } from './style-metadata'
 
 export const batchJobStatusSchema = z.enum(['pending', 'running', 'completed', 'failed', 'cancelled'])
 
@@ -12,7 +13,8 @@ export const batchJobSchema = z.object({
   completed_at: z.string().optional(),
   run_id: z.string().optional(),
   error: z.string().optional(),
-  retry_count: z.number().min(0).default(0)
+  retry_count: z.number().min(0).default(0),
+  style: StyleCategory.optional()
 })
 
 export const batchConfigSchema = z.object({
@@ -21,7 +23,8 @@ export const batchConfigSchema = z.object({
   models: z.array(z.string()).min(1),
   max_concurrency: z.number().min(1).max(10).default(3),
   retry_limit: z.number().min(0).max(5).default(3),
-  created_at: z.string()
+  created_at: z.string(),
+  style: StyleCategory.optional()
 })
 
 export type BatchConfig = z.infer<typeof batchConfigSchema>
@@ -55,14 +58,15 @@ export class BatchState {
     this.config = config
   }
 
-  addJob(gameSlug: string, modelId: string): BatchJob {
+  addJob(gameSlug: string, modelId: string, style?: StyleCategory): BatchJob {
     const job: BatchJob = {
       id: createJobId(gameSlug, modelId),
       game_slug: gameSlug,
       model_id: modelId,
       status: 'pending',
       created_at: new Date().toISOString(),
-      retry_count: 0
+      retry_count: 0,
+      style
     }
     this.jobs.set(job.id, job)
     return job
