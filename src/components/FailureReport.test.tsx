@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import FailureReport from './FailureReport'
-import { BatchJob } from '@/lib/batch'
+import { BatchJob } from '@/../lib/batch'
 
 describe('FailureReport', () => {
   it('shows success message when no failures', () => {

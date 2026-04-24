@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { BatchResult } from '@/lib/batch-results'
+import { BatchResult } from '@/../lib/batch-results'
 
 interface BatchResultsComparisonProps {
   results: BatchResult[]
@@ -66,7 +66,7 @@ const BatchResultsComparison: React.FC<BatchResultsComparisonProps> = ({ results
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="p-4 bg-slate-800/50 rounded-lg">
           <h4 className="text-xs font-bold text-slate-400 uppercase mb-3">Model Performance</h4>
-          {Object.entries(results[0].model_stats).map(([model, stats]) => (
+          {Object.entries(results[0].model_stats).map(([model, stats]: [string, { games_completed: number; games_failed: number }]) => (
             <div key={model} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
               <span className="font-mono text-sm text-slate-300">{model}</span>
               <div className="flex gap-4 text-sm">

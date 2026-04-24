@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import BatchProgress from './BatchProgress'
-import { BatchProgress as BatchProgressType } from '@/lib/batch'
+import { BatchProgress as BatchProgressType } from '@/../lib/batch'
 
 describe('BatchProgress', () => {
   it('renders progress with all status counts', () => {

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { BatchJob } from '@/lib/batch'
+import { BatchJob } from '@/../lib/batch'
 
 interface FailureReportProps {
   failedJobs: BatchJob[]

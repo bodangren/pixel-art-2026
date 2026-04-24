@@ -18,5 +18,5 @@
 | 2026-04-24 | dynamic_game_preview | ComparisonView ZoomPanel uses inline `<img>` with `imageRendering: pixelated` instead of ZoomContainer | Medium | Open | ZoomPanel in ComparisonView should reuse ZoomContainer component for consistency |
 | 2026-04-24 | batch_generation_pipeline | Phase 1: BatchConfig schema and BatchState implemented | Low | Resolved | Phase 2-5 now complete - parallel execution, progress UI, failure handling, result aggregation |
 | 2026-04-24 | batch_generation_pipeline | Phase 5: BatchResultsComparison and export functions | Low | Open | Batch results UI complete with CSV/JSON export |
-| 2026-04-24 | multi_genre_expansion | New track created for style expansion (RPG, isometric, sci-fi, UI, font) | Medium | In Progress | Phases 1-4 complete; Phase 5 integration remaining |
+| 2026-04-24 | multi_genre_expansion | New track created for style expansion (RPG, isometric, sci-fi, UI, font) | Medium | Resolved | All 5 phases complete - style-metadata, validation, dashboard, batch pipeline, integration |
 | 2026-04-24 | build | Next.js Turbopack lacks native bindings on linux/x64 | Medium | Open | Use `next build --webpack` on this platform |

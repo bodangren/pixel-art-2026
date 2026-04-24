@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { BatchProgress as BatchProgressType } from '@/lib/batch'
+import { BatchProgress as BatchProgressType } from '@/../lib/batch'
 
 interface BatchProgressProps {
   progress: BatchProgressType

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import BatchResultsComparison from './BatchResultsComparison'
-import { BatchResult } from '@/lib/batch-results'
+import { BatchResult } from '@/../lib/batch-results'
 
 describe('BatchResultsComparison', () => {
   it('shows empty state when no results', () => {
