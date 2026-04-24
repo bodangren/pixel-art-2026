@@ -28,7 +28,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    Phase 1-2: Complete
 
 - [x] **Track: Multi-Genre/Style Expansion**
-  *Link: [./tracks/multi_genre_expansion_20260424/](./tracks/multi_genre_expansion_20260424/)*
+  *Link: [./archive/multi_genre_expansion_20260424/](./archive/multi_genre_expansion_20260424/)*
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, Top-down Sci-fi) and assets (UI buttons, font sheets).
   Phase 1-5: Complete (141 tests passing)
 
