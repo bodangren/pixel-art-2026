@@ -27,9 +27,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    Create a lightweight web-based engine for 'Labyrinth of the Goblin King' that can hot-reload these assets to see how they look when animated and tiled in-game.
    Phase 1-2: Complete
 
-- [ ] **Track: Multi-Genre/Style Expansion**
+- [x] **Track: Multi-Genre/Style Expansion**
   *Link: [./tracks/multi_genre_expansion_20260424/](./tracks/multi_genre_expansion_20260424/)*
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, Top-down Sci-fi) and assets (UI buttons, font sheets).
+  Phase 1-5: Complete (141 tests passing)
 
 - [ ] **Track: Asset Quality Metrics Dashboard**
   *Link: [./tracks/asset_quality_dashboard_20260424/](./tracks/asset_quality_dashboard_20260424/)*
