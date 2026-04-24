@@ -51,3 +51,5 @@
 - (2026-04-24, batch_orchestrator) runBatch async function needs explicit tracking of completedCount with setInterval check to properly resolve when all jobs finish. Promise resolves too early if not properly synchronized.
 - (2026-04-24, batch_orchestrator) Expose backoff delay in onJobRetry callback (delayMs parameter) so UI can show retry scheduling info to user.
 - (2026-04-24, batch_results) createBatchResult expects jobs matching batchJobSchema - passing filtered jobs as `jobs as any` bypasses type checking but works at runtime.
+- (2026-04-24, multi_genre) StyleCategory enum needs z.infer to properly export TypeScript type - z.enum produces type union directly
+- (2026-04-24, build) Next.js Turbopack requires native SWC bindings; on linux/x64 without them use `next build --webpack`
