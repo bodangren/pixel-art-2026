@@ -211,3 +211,155 @@ tests/test_style_validation.py::TestStyleWeightedScoring::test_isometric_grid_he
    Start at  23:38:07
    Duration  34.40s (transform 1.45s, setup 5.37s, import 7.73s, tests 9.77s, environment 63.20s)
 [0m
+[0m$ [0mgit add -A && git commit -m "Phase 2: Style-specific validation rules
+
+- Add STYLE_PRESETS for RPG, isometric, sci-fi, UI, font
+- Implement validate_isometric_alignment (2:1 ratio)
+- Implement validate_scifi_grid (4x4 grid divisibility)
+- Implement validate_font_monospace (16-char grid)
+- Add style-weighted scoring (palette-heavy for font, grid-heavy for isometric)
+- Add --style parameter to validate_asset
+- 13 Python tests passing, 132 total tests passing
+
+Assistant: MiniMax-M2.7"
+[main ac38f03] Phase 2: Style-specific validation rules
+ 5 files changed, 407 insertions(+), 47 deletions(-)
+ create mode 100644 tests/__pycache__/test_style_validation.cpython-312-pytest-9.0.3.pyc
+ create mode 100644 tests/test_style_validation.py
+[0m
+[0m✱ [0mGlob "**/dashboard/**/*.tsx"[90m 0 matches[0m
+[0m✱ [0mGlob "app/**/*.tsx"[90m 0 matches[0m
+[0m✱ [0mGlob "**/*.tsx"[90m 36 matches[0m
+[0m→ [0mRead src/app/runs/page.tsx
+[0m→ [0mRead src/app/page.tsx
+[0m→ [0mRead src/components/ComparisonView.tsx
+[0m
+[0m← [0mWrite src/components/StyleFilter.tsx
+Wrote file successfully.
+[0m
+[0m← [0mWrite src/components/StyleReferenceGallery.tsx
+Wrote file successfully.
+[0m
+[0m← [0mWrite src/components/StyleFilter.test.tsx
+Wrote file successfully.
+[0m
+[0m$ [0mnpm run test -- --run src/components/StyleFilter.test.tsx 2>&1 | tail -25
+Error: Failed to resolve import "../StyleFilter" from "src/components/StyleFilter.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx:3:24
+  1  |  import { describe, it, expect } from "vitest";
+  2  |  import { render, screen, userEvent } from "@/tests/test-utils";
+  3  |  import StyleFilter from "../StyleFilter";
+     |                           ^
+  4  |  var _jsxFileName = "/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx";
+  5  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30259:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30256:14
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27544:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:27607:30
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27575:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30048:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:24177:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  23:40:47
+   Duration  1.73s (transform 42ms, setup 136ms, import 0ms, tests 0ms, environment 1.23s)
+[0m
+[0m← [0mEdit src/components/StyleFilter.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx
+@@ -1,7 +1,7 @@
+ import { describe, it, expect } from 'vitest';
+ import { render, screen, userEvent } from '@/tests/test-utils';
+-import StyleFilter from '../StyleFilter';
++import StyleFilter from './StyleFilter';
+ 
+ describe('StyleFilter', () => {
+   it('renders all style options', () => {
+     render(<StyleFilter selectedStyle="all" onStyleChange={() => {}} />);
+
+[0m
+[0m$ [0mhead -5 src/components/ComparisonView.test.tsx
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
+import ComparisonView from './ComparisonView'
+
+vi.mock('@/lib/data', () => ({
+[0m
+[0m→ [0mRead src/components/StyleFilter.test.tsx
+[0m
+[0m← [0mEdit src/components/StyleFilter.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx
+@@ -1,5 +1,5 @@
+-import { describe, it, expect } from 'vitest';
++import { describe, it, expect, vi } from 'vitest';
+ import { render, screen, userEvent } from '@/tests/test-utils';
+ import StyleFilter from './StyleFilter';
+ 
+ describe('StyleFilter', () => {
+
+[0m
+[0m✱ [0mGlob "**/tests/test-utils*"[90m 0 matches[0m
+[0m
+[0m$ [0mrg "from.*test-utils" src/components/ 2>/dev/null | head -5
+(no output)
+[0m
+[0m$ [0mrg "test-utils" --type-add 'test:*.test.ts*' src/components/*.test.tsx 2>/dev/null | head -10
+(no output)
+[0m
+[0m→ [0mRead src/components/BatchProgress.test.tsx[90m [limit=20][0m
+[0m
+[0m← [0mWrite src/components/StyleFilter.test.tsx
+Wrote file successfully.
+[0m
+[0m$ [0mnpm run test -- --run src/components/StyleFilter.test.tsx 2>&1 | tail -25
+Error: Failed to resolve import "@testing-library/user-event" from "src/components/StyleFilter.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx:3:22
+  1  |  import { describe, it, expect, vi } from "vitest";
+  2  |  import { render, screen } from "@testing-library/react";
+  3  |  import userEvent from "@testing-library/user-event";
+     |                         ^
+  4  |  import StyleFilter from "./StyleFilter";
+  5  |  var _jsxFileName = "/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/StyleFilter.test.tsx";
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:30259:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:30256:14
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/node.js:27544:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:27607:30
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:27575:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:30048:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:24177:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  23:42:05
+   Duration  1.75s (transform 34ms, setup 144ms, import 0ms, tests 0ms, environment 1.24s)
+[0m
+[0m← [0mWrite src/components/StyleFilter.test.tsx
+Wrote file successfully.
+[0m
+[0m$ [0mnpm run test -- --run src/components/StyleFilter.test.tsx 2>&1 | tail -25
+> pixel-art-next@0.1.0 test
+> vitest run --run src/components/StyleFilter.test.tsx
+
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  23:42:27
+   Duration  2.17s (transform 63ms, setup 145ms, import 197ms, tests 362ms, environment 1.23s)
+[0m
