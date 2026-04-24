@@ -19,7 +19,6 @@ export function ModelComparisonChart({ data, title }: ModelComparisonChartProps)
           <YAxis domain={[0, 5]} tick={{ fill: '#94a3b8', fontSize: 12 }} />
           <Tooltip
             contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#fff' }}
-            formatter={(value: number, name: string) => [value, name === 'averageScore' ? 'Avg Score' : 'Runs']}
           />
           <Bar dataKey="averageScore" radius={[4, 4, 0, 0]}>
             {data.map((_, index) => (

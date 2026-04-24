@@ -19,7 +19,6 @@ export function Histogram({ data, title }: HistogramProps) {
           <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} />
           <Tooltip
             contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#fff' }}
-            formatter={(value: number, name: string) => [value, name === 'count' ? 'Count' : 'Percentage']}
           />
           <Bar dataKey="count" radius={[4, 4, 0, 0]}>
             {data.map((_, index) => (

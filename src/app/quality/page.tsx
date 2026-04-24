@@ -1,85 +1,78 @@
-'use client'
-
-import { useState, useEffect } from 'react'
+import { listRuns, getReview } from '../../../lib/data'
+import type { Review } from '../../../lib/schemas'
 import { Histogram } from '@/components/Histogram'
 import { BoxPlot } from '@/components/BoxPlot'
 import { ModelComparisonChart } from '@/components/ModelComparisonChart'
 import { TrendLine } from '@/components/TrendLine'
 import { AnomalyAlert } from '@/components/AnomalyAlert'
 import { RadarChartComponent } from '@/components/RadarChartComponent'
-import { exportToCSV, exportToJSON, generateReportHTML } from '@/lib/quality-export'
-import type { AggregatedMetrics, TrendPoint } from '@/lib/quality-metrics'
+import { detectAnomalies, calculateDistribution, calculateTrend } from '../../../lib/quality-metrics'
 
-interface ModelData {
-  model_id: string
-  run_count: number
-  average_human_score: number
-  reviews: Array<{ weighted_total_score: number }>
+interface ModelMetrics {
+  modelId: string
+  runCount: number
+  averageScore: number
+  scores: number[]
   dates: string[]
 }
 
-export default function QualityDashboard() {
-  const [modelData, setModelData] = useState<ModelData[]>([])
-  const [loading, setLoading] = useState(true)
+async function getModelMetrics(): Promise<ModelMetrics[]> {
+  const runs = await listRuns()
+  const models = Array.from(new Set(runs.map(r => r.model_id)))
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const res = await fetch('/api/quality-metrics')
-        if (res.ok) {
-          const data = await res.json()
-          setModelData(data)
-        }
-      } catch {
-        setModelData([])
-      }
-      setLoading(false)
+  return await Promise.all(models.map(async (modelId) => {
+    const modelRuns = runs.filter(r => r.model_id === modelId)
+    const reviews: Review[] = []
+
+    for (const run of modelRuns) {
+      const review = await getReview(run.run_id)
+      if (review) reviews.push(review)
     }
-    loadData()
-  }, [])
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-slate-400">Loading quality metrics...</div>
-      </div>
-    )
-  }
+    const scores = reviews.map(r => r.weighted_total_score)
+    const avgScore = scores.length > 0
+      ? scores.reduce((a, b) => a + b, 0) / scores.length
+      : 0
 
-  const metrics: AggregatedMetrics[] = modelData.map(m => ({
-    modelId: m.model_id,
-    runCount: m.run_count,
-    averageScore: m.average_human_score,
-    scoreDistribution: {
-      total: m.reviews.length,
-      mean: m.average_human_score,
-      median: m.average_human_score,
-      stdDev: 0.5,
-      bins: [0, 0, 0, 0, 0],
-      quartiles: { min: 1, q1: 2, median: 3, q3: 4, max: 5 }
-    },
-    trend: { slope: 0, direction: 'stable' as const, points: [] },
-    anomalies: [],
-    latestDate: m.dates[0] || ''
+    return {
+      modelId,
+      runCount: modelRuns.length,
+      averageScore: avgScore,
+      scores,
+      dates: modelRuns.map(r => r.run_date)
+    }
   }))
+}
 
-  const histogramData = metrics[0]?.scoreDistribution.bins.map((count, i) => ({
-    bin: String(i + 1),
-    count,
-    percentage: metrics[0] ? (count / metrics[0].scoreDistribution.total) * 100 : 0
-  })) || []
+export default async function QualityDashboard() {
+  const modelMetrics = await getModelMetrics()
 
-  const comparisonData = metrics.map(m => ({
+  const histogramData = modelMetrics[0]
+    ? calculateDistribution(modelMetrics[0].scores).bins.map((count, i) => ({
+        bin: String(i + 1),
+        count,
+        percentage: modelMetrics[0] ? (count / modelMetrics[0].scores.length) * 100 : 0
+      }))
+    : []
+
+  const comparisonData = modelMetrics.map(m => ({
     model: m.modelId,
     averageScore: m.averageScore,
     runCount: m.runCount
   }))
 
-  const trendData: TrendPoint[] = modelData[0]?.dates.map((date, i) => ({
-    date,
-    score: modelData[0]?.reviews[i]?.weighted_total_score || 0,
-    movingAvg: 0
-  })) || []
+  const allScores = modelMetrics.flatMap(m => m.scores)
+  const allAnomalies = detectAnomalies(allScores, calculateDistribution(allScores).mean - calculateDistribution(allScores).stdDev)
+
+  const trendData = modelMetrics[0]
+    ? modelMetrics[0].dates.map((date, i) => ({
+        date,
+        score: modelMetrics[0]!.scores[i] || 0,
+        movingAvg: 0
+      }))
+    : []
+
+  const dist = calculateDistribution(allScores)
 
   const radarData = [
     { metric: 'Background', value: 3.0, baseline: 2.8 },
@@ -89,48 +82,10 @@ export default function QualityDashboard() {
     { metric: 'Pack', value: 3.4, baseline: 3.1 }
   ]
 
-  const allAnomalies = metrics.flatMap(m => m.anomalies)
-
-  const handleExportCSV = () => {
-    const csv = exportToCSV(metrics)
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'quality-metrics.csv'
-    a.click()
-    URL.revokeObjectURL(url)
-  }
-
-  const handleExportJSON = () => {
-    const json = exportToJSON(metrics)
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'quality-metrics.json'
-    a.click()
-    URL.revokeObjectURL(url)
-  }
-
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Quality Metrics Dashboard</h1>
-        <div className="flex gap-2">
-          <button
-            onClick={handleExportCSV}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm"
-          >
-            Export CSV
-          </button>
-          <button
-            onClick={handleExportJSON}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm"
-          >
-            Export JSON
-          </button>
-        </div>
       </div>
 
       <AnomalyAlert anomalies={allAnomalies} />
@@ -139,11 +94,11 @@ export default function QualityDashboard() {
         <Histogram data={histogramData} title="Score Distribution" />
         <BoxPlot
           title="Score Quartiles"
-          min={1}
-          q1={2.5}
-          median={3.2}
-          q3={4.0}
-          max={5}
+          min={dist.quartiles.min}
+          q1={dist.quartiles.q1}
+          median={dist.quartiles.median}
+          q3={dist.quartiles.q3}
+          max={dist.quartiles.max}
         />
       </div>
 
@@ -152,7 +107,7 @@ export default function QualityDashboard() {
       <TrendLine
         data={trendData}
         title="Quality Trend Over Time"
-        direction={metrics[0]?.trend.direction || 'stable'}
+        direction={calculateTrend(modelMetrics[0]?.dates.map((d, i) => ({ date: d, score: modelMetrics[0]?.scores[i] || 0 })) || []).direction}
       />
 
       <RadarChartComponent data={radarData} title="Model Performance vs Baseline" />

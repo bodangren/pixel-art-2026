@@ -53,3 +53,5 @@
 - (2026-04-24, batch_results) createBatchResult expects jobs matching batchJobSchema - passing filtered jobs as `jobs as any` bypasses type checking but works at runtime.
 - (2026-04-24, multi_genre) StyleCategory enum needs z.infer to properly export TypeScript type - z.enum produces type union directly
 - (2026-04-24, build) Next.js Turbopack requires native SWC bindings; on linux/x64 without them use `next build --webpack`
+- (2026-04-25, quality_dashboard) Recharts Tooltip formatter type mismatch - ValueType | undefined not assignable to number; removing formatter is simplest fix
+- (2026-04-25, quality_dashboard) Static export (output: 'export') does not support API routes; embed data fetching in page components as async server components
