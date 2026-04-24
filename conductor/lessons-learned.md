@@ -48,3 +48,6 @@
 - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
 
 - (2026-04-24, batch_ui) Testing checkbox labels - `getByRole('checkbox', { name: 'text' })` matches accessible name which may include child text content. Use `aria-label` on checkbox input directly for precise matching in tests.
+- (2026-04-24, batch_orchestrator) runBatch async function needs explicit tracking of completedCount with setInterval check to properly resolve when all jobs finish. Promise resolves too early if not properly synchronized.
+- (2026-04-24, batch_orchestrator) Expose backoff delay in onJobRetry callback (delayMs parameter) so UI can show retry scheduling info to user.
+- (2026-04-24, batch_results) createBatchResult expects jobs matching batchJobSchema - passing filtered jobs as `jobs as any` bypasses type checking but works at runtime.
