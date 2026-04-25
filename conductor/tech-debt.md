@@ -21,3 +21,4 @@
 | 2026-04-24 | multi_genre_expansion | New track created for style expansion (RPG, isometric, sci-fi, UI, font) | Medium | Resolved | All 5 phases complete - style-metadata, validation, dashboard, batch pipeline, integration |
 | 2026-04-24 | build | Next.js Turbopack lacks native bindings on linux/x64 | Medium | Resolved | Use `next build --webpack` on this platform |
 | 2026-04-25 | asset_quality_dashboard | Quality metrics dashboard - Recharts tooltip formatter typing issue | Low | Resolved | Removed custom formatter to avoid TS2322 error |
+| 2026-04-25 | visual_refresh | Lamborghini identity applied to UI (Navbar, AssetCard, layout, globals.css) | Medium | Resolved | New DESIGN.md defines obsidian/gold aesthetic; build + 168 tests pass |
