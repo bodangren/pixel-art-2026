@@ -43,3 +43,5 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [x] **Track: Git History Cleanup**
    *Link: [./archive/git_history_cleanup_20260423/](./archive/git_history_cleanup_20260423/)*
    Remove 124MB node_modules/@next/swc-*.node files from git history using BFG Repo-Cleaner or git filter-repo to unblock GitHub pushes. (Resolved: files were never committed, repo is clean)
+
+- [~] [Visual Refresh: Define Unique Identity](tracks/visual_refresh_20260425/index.md)
