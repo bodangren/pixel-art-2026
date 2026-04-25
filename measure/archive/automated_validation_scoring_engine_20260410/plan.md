@@ -16,7 +16,7 @@
 - [x] **Task: Implement color palette extraction and validation** a1b2c3d4
     - [x] Write tests for palette extraction
     - [x] Implement hex code adherence checker
-- [x] **Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)** a1b2c3d4
+- [x] **Task: Measure - User Manual Verification 'Phase 1' (Protocol in workflow.md)** a1b2c3d4
     - Automated verification: `python3 -m pytest scripts/test_validate_run.py` - 10 tests passed
     - CLI test: `python3 scripts/validate_run.py gemini-2.5-flash__2026-04-04__initial --verbose` succeeded
 
@@ -30,7 +30,7 @@
 - [x] **Task: Integrate with existing run data structure**
     - [x] Write tests for run data loading
     - [x] Implement run data integrator
-- [x] **Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)**
+- [x] **Task: Measure - User Manual Verification 'Phase 2' (Protocol in workflow.md)**
     - Automated verification: `python3 -m pytest scripts/test_validate_run.py` - 16 tests passed
     - CLI test: `python3 scripts/validate_run.py gemini-2.5-flash__2026-04-04__initial --verbose` succeeded
 
@@ -41,6 +41,6 @@
 - [x] **Task: Add to existing build-derived pipeline**
     - [x] Write tests for pipeline integration
     - [x] Implement pipeline hook
-- [x] **Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)**
+- [x] **Task: Measure - User Manual Verification 'Phase 3' (Protocol in workflow.md)**
     - Automated verification: `python3 -m pytest scripts/test_validate_run.py` - 23 tests passed
     - CLI test: `python3 scripts/validate_run.py gemini-2.5-flash__2026-04-04__initial --verbose` succeeded

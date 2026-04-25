@@ -13,7 +13,7 @@
 - [x] Task: Identify all oversized blobs. [1e10d15]
   - [x] Run `git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)'` to list large objects. - No swc or node_modules files found in history
   - [x] Confirm the list matches expected `node_modules/@next/swc-*.node` files. - No such files in history; repo is already clean
-- [x] Task: Conductor — User Manual Verification 'Phase 1: Backup and Tool Setup' (Protocol in workflow.md)
+- [x] Task: Measure — User Manual Verification 'Phase 1: Backup and Tool Setup' (Protocol in workflow.md)
 
 ## Phase 2: History Rewrite
 
@@ -29,7 +29,7 @@
   - [x] Re-run large object scan to confirm removal. - No large objects found
   - [x] Check no single file exceeds 100MB. - Confirmed: repo is 532K total
   - [x] Verify `.gitignore` changes are intact. - .gitignore has node_modules/ and *.node
-- [x] Task: Conductor — User Manual Verification 'Phase 2: History Rewrite' (Protocol in workflow.md)
+- [x] Task: Measure — User Manual Verification 'Phase 2: History Rewrite' (Protocol in workflow.md)
 
 ## Phase 3: Push, Verification, and Cleanup
 
@@ -45,4 +45,4 @@
   - [x] Write instructions for re-cloning (not pulling). - No action needed; repo is clean
   - [x] Explain what was removed and why. - No removal needed; swc files were never committed to this repo
   - [x] Share via README or team communication channel. - Updated tech-debt.md to reflect resolution
-- [x] Task: Conductor — User Manual Verification 'Phase 3: Push, Verification, and Cleanup' (Protocol in workflow.md)
+- [x] Task: Measure — User Manual Verification 'Phase 3: Push, Verification, and Cleanup' (Protocol in workflow.md)

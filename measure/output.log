@@ -1,13 +1,13 @@
 [0m
 > build · MiniMax-M2.7
 [0m
-[0m→ [0mRead conductor/autonomous_prompt.md
-[0m→ [0mSkill "conductor"
-[0m→ [0mRead conductor/tracks.md
-[0m→ [0mRead conductor/tech-debt.md
-[0m→ [0mRead conductor/lessons-learned.md
+[0m→ [0mRead measure/autonomous_prompt.md
+[0m→ [0mSkill "measure"
+[0m→ [0mRead measure/tracks.md
+[0m→ [0mRead measure/tech-debt.md
+[0m→ [0mRead measure/lessons-learned.md
 [0m✗ [0mread failed
-[91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/current_directive.md
+[91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/current_directive.md
 [0m
 [0m$ [0mgit status
 On branch main
@@ -16,13 +16,13 @@ Your branch is up to date with 'origin/main'.
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
-	modified:   conductor/output.log
-	modified:   conductor/tracks.md
+	modified:   measure/output.log
+	modified:   measure/tracks.md
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 	DESIGN.md
-	conductor/tracks/visual_refresh_20260425/
+	measure/tracks/visual_refresh_20260425/
 	visual_refresh_track.log
 
 no changes added to commit (use "git add" and/or "git commit -a")
@@ -33,18 +33,18 @@ db743c4 checkpoint: Asset Quality Metrics Dashboard track complete (MiniMax-M2.7
 2509b13 Phase 4: RadarChart component for multi-metric comparison
 [0m
 [0m✗ [0mread failed
-[91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks/visual_refresh_20260425/index.md
-[0m✱ [0mGlob "conductor/tracks/visual_refresh_20260425/**/*"[90m 3 matches[0m
-[0m→ [0mRead conductor/tracks/visual_refresh_20260425/plan.md
-[0m→ [0mRead conductor/tracks/visual_refresh_20260425/spec.md
-[0m→ [0mRead conductor/tracks/visual_refresh_20260425/metadata.json
+[91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/visual_refresh_20260425/index.md
+[0m✱ [0mGlob "measure/tracks/visual_refresh_20260425/**/*"[90m 3 matches[0m
+[0m→ [0mRead measure/tracks/visual_refresh_20260425/plan.md
+[0m→ [0mRead measure/tracks/visual_refresh_20260425/spec.md
+[0m→ [0mRead measure/tracks/visual_refresh_20260425/metadata.json
 [0m→ [0mRead DESIGN.md
 [0m
-[0m$ [0mgit diff conductor/tracks.md
-diff --git a/conductor/tracks.md b/conductor/tracks.md
+[0m$ [0mgit diff measure/tracks.md
+diff --git a/measure/tracks.md b/measure/tracks.md
 index 3edfb53..f01db1f 100644
---- a/conductor/tracks.md
-+++ b/conductor/tracks.md
+--- a/measure/tracks.md
++++ b/measure/tracks.md
 @@ -43,3 +43,5 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
  - [x] **Track: Git History Cleanup**
     *Link: [./archive/git_history_cleanup_20260423/](./archive/git_history_cleanup_20260423/)*
@@ -52,7 +52,7 @@ index 3edfb53..f01db1f 100644
 +
 +- [~] [Visual Refresh: Define Unique Identity](tracks/visual_refresh_20260425/index.md)
 [0m
-[0m$ [0mgit add conductor/tracks.md && git commit -m "track status: Visual Refresh track added to tracks registry"
+[0m$ [0mgit add measure/tracks.md && git commit -m "track status: Visual Refresh track added to tracks registry"
 [main 7c4ac68] track status: Visual Refresh track added to tracks registry
  1 file changed, 2 insertions(+)
 [0m
@@ -358,22 +358,22 @@ Route (app)
 [main 7c13b7a] Phase 2: Apply Lamborghini identity across UI (Navbar, AssetCard, layout) [MiniMax-M2.7]
  10 files changed, 512 insertions(+), 1410 deletions(-)
  create mode 100644 DESIGN.md
- create mode 100644 conductor/tracks/visual_refresh_20260425/metadata.json
- create mode 100644 conductor/tracks/visual_refresh_20260425/plan.md
- create mode 100644 conductor/tracks/visual_refresh_20260425/spec.md
+ create mode 100644 measure/tracks/visual_refresh_20260425/metadata.json
+ create mode 100644 measure/tracks/visual_refresh_20260425/plan.md
+ create mode 100644 measure/tracks/visual_refresh_20260425/spec.md
  create mode 100644 visual_refresh_track.log
 [0m
 [0m$ [0mgit push
 To https://github.com/bodangren/pixel-art-2026.git
    db743c4..7c13b7a  main -> main
 [0m
-[0m→ [0mRead conductor/tech-debt.md
+[0m→ [0mRead measure/tech-debt.md
 [0m
-[0m← [0mEdit conductor/tech-debt.md
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
+[0m← [0mEdit measure/tech-debt.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
 ===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
 @@ -19,5 +19,6 @@
  | 2026-04-24 | batch_generation_pipeline | Phase 1: BatchConfig schema and BatchState implemented | Low | Resolved | Phase 2-5 now complete - parallel execution, progress UI, failure handling, result aggregation |
  | 2026-04-24 | batch_generation_pipeline | Phase 5: BatchResultsComparison and export functions | Low | Open | Batch results UI complete with CSV/JSON export |
@@ -386,13 +386,13 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
 \ No newline at end of file
 
 [0m
-[0m→ [0mRead conductor/lessons-learned.md
+[0m→ [0mRead measure/lessons-learned.md
 [0m
-[0m← [0mEdit conductor/lessons-learned.md
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+[0m← [0mEdit measure/lessons-learned.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
 ===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
 @@ -46,12 +46,11 @@
  - (2026-04-23, game_preview) ESLint rules prohibit calling setState synchronously within useEffect. Use setTimeout(() => {...}, 0) to defer execution, or use .then()/.finally() promise chains instead of async/await directly in effects.
  
@@ -417,11 +417,11 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/lessons-learned.md
 To https://github.com/bodangren/pixel-art-2026.git
    7c13b7a..558ec09  main -> main
 [0m
-[0m← [0mEdit conductor/tracks.md
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
+[0m← [0mEdit measure/tracks.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
 ===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
 @@ -43,5 +43,5 @@
  - [x] **Track: Git History Cleanup**
     *Link: [./archive/git_history_cleanup_20260423/](./archive/git_history_cleanup_20260423/)*
@@ -431,3 +431,12 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tracks.md
 +- [x] [Visual Refresh: Define Unique Identity](tracks/visual_refresh_20260425/index.md)
 
 [0m
+[0m$ [0mgit add -A && git commit -m "track: Visual Refresh marked complete in tracks registry [MiniMax-M2.7]" && git push
+[main b11a4b3] track: Visual Refresh marked complete in tracks registry [MiniMax-M2.7]
+ 2 files changed, 23 insertions(+), 1 deletion(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   558ec09..b11a4b3  main -> main
+[0m
+Visual Refresh track complete. All phases verified (168 tests passing, build successful). Checked off in tracks registry and pushed.
+
+Next unstarted track: **Asset Quality Metrics Dashboard** (Quality score distribution charts, trend analysis, model comparison radar charts, anomaly detection, export reports).

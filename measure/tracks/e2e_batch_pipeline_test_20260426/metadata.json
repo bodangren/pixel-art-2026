@@ -1,0 +1,9 @@
+{
+  "id": "e2e_batch_pipeline_test_20260426",
+  "title": "End-to-End Batch Pipeline Test",
+  "status": "pending",
+  "priority": "medium",
+  "type": "test",
+  "created": "2026-04-26",
+  "depends_on": []
+}

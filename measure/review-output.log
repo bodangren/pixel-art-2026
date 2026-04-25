@@ -1,12 +1,12 @@
 [0m
 > build · glm-5.1
 [0m
-[0m→ [0mRead conductor/review-prompt.md
-I'll follow the review process. Let me start by gathering recent changes and reading the conductor files.
+[0m→ [0mRead measure/review-prompt.md
+I'll follow the review process. Let me start by gathering recent changes and reading the measure files.
 [0m✗ [0mread failed
-[91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/current-priority.md
-[0m→ [0mRead conductor/tracks.md
-[0m→ [0mRead conductor/tech-debt.md
+[91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/current-priority.md
+[0m→ [0mRead measure/tracks.md
+[0m→ [0mRead measure/tech-debt.md
 [0m
 [0m$ [0mgit log --since="24 hours ago" --oneline
 c9ade47 Complete multi_genre_expansion track - all 5 phases done
@@ -22,51 +22,51 @@ df13910 feat(batch): Phase 2-4 parallel execution, progress UI, failure handling
 c838e24 autonomous: checkpoint Phase 1 batch config complete
 90423b0 chore: update tech-debt and lessons-learned for batch Phase 1
 48d2efb feat(batch): Phase 1 of Batch Generation Pipeline
-3041c60 conductor: archive 6 tracks, create 3 new pending tracks
+3041c60 measure: archive 6 tracks, create 3 new pending tracks
 3518610 chore: update track status and memory files
 ba14580 feat(GameCanvas): add animation state machine (idle/walk/attack) and pause control
-823da7e chore: update conductor logs
+823da7e chore: update measure logs
 44725a9 chore(review): fix 5 lint/style issues and ComparisonView rows/cols bug
 [0m
 [0m$ [0mgit diff --name-only HEAD~20 HEAD
-conductor/archive/automated_validation_scoring_engine_20260410/metadata.json
-conductor/archive/automated_validation_scoring_engine_20260410/plan.md
-conductor/archive/automated_validation_scoring_engine_20260410/spec.md
-conductor/archive/benchmark_dashboard_ui_20260414/index.md
-conductor/archive/benchmark_dashboard_ui_20260414/metadata.json
-conductor/archive/benchmark_dashboard_ui_20260414/plan.md
-conductor/archive/benchmark_dashboard_ui_20260414/spec.md
-conductor/archive/dynamic_game_preview_20260423/metadata.json
-conductor/archive/dynamic_game_preview_20260423/plan.md
-conductor/archive/dynamic_game_preview_20260423/spec.md
-conductor/archive/feature_asset_generation_orchestrator_20260404/metadata.json
-conductor/archive/feature_asset_generation_orchestrator_20260404/plan.md
-conductor/archive/feature_asset_generation_orchestrator_20260404/spec.md
-conductor/archive/git_history_cleanup_20260423/metadata.json
-conductor/archive/git_history_cleanup_20260423/plan.md
-conductor/archive/git_history_cleanup_20260423/spec.md
-conductor/archive/static_benchmark_app_20260404/index.md
-conductor/archive/static_benchmark_app_20260404/metadata.json
-conductor/archive/static_benchmark_app_20260404/plan.md
-conductor/archive/static_benchmark_app_20260404/spec.md
-conductor/lessons-learned.md
-conductor/output.log
-conductor/review-output.log
-conductor/tech-debt.md
-conductor/tracks.md
-conductor/tracks/asset_quality_dashboard_20260424/metadata.json
-conductor/tracks/asset_quality_dashboard_20260424/plan.md
-conductor/tracks/asset_quality_dashboard_20260424/spec.md
-conductor/tracks/batch_generation_pipeline_20260424/metadata.json
-conductor/tracks/batch_generation_pipeline_20260424/plan.md
-conductor/tracks/batch_generation_pipeline_20260424/spec.md
-conductor/tracks/game_engine_integration_tests_20260424/metadata.json
-conductor/tracks/game_engine_integration_tests_20260424/plan.md
-conductor/tracks/game_engine_integration_tests_20260424/spec.md
-conductor/tracks/multi_genre_expansion_20260424/index.md
-conductor/tracks/multi_genre_expansion_20260424/metadata.json
-conductor/tracks/multi_genre_expansion_20260424/plan.md
-conductor/tracks/multi_genre_expansion_20260424/spec.md
+measure/archive/automated_validation_scoring_engine_20260410/metadata.json
+measure/archive/automated_validation_scoring_engine_20260410/plan.md
+measure/archive/automated_validation_scoring_engine_20260410/spec.md
+measure/archive/benchmark_dashboard_ui_20260414/index.md
+measure/archive/benchmark_dashboard_ui_20260414/metadata.json
+measure/archive/benchmark_dashboard_ui_20260414/plan.md
+measure/archive/benchmark_dashboard_ui_20260414/spec.md
+measure/archive/dynamic_game_preview_20260423/metadata.json
+measure/archive/dynamic_game_preview_20260423/plan.md
+measure/archive/dynamic_game_preview_20260423/spec.md
+measure/archive/feature_asset_generation_orchestrator_20260404/metadata.json
+measure/archive/feature_asset_generation_orchestrator_20260404/plan.md
+measure/archive/feature_asset_generation_orchestrator_20260404/spec.md
+measure/archive/git_history_cleanup_20260423/metadata.json
+measure/archive/git_history_cleanup_20260423/plan.md
+measure/archive/git_history_cleanup_20260423/spec.md
+measure/archive/static_benchmark_app_20260404/index.md
+measure/archive/static_benchmark_app_20260404/metadata.json
+measure/archive/static_benchmark_app_20260404/plan.md
+measure/archive/static_benchmark_app_20260404/spec.md
+measure/lessons-learned.md
+measure/output.log
+measure/review-output.log
+measure/tech-debt.md
+measure/tracks.md
+measure/tracks/asset_quality_dashboard_20260424/metadata.json
+measure/tracks/asset_quality_dashboard_20260424/plan.md
+measure/tracks/asset_quality_dashboard_20260424/spec.md
+measure/tracks/batch_generation_pipeline_20260424/metadata.json
+measure/tracks/batch_generation_pipeline_20260424/plan.md
+measure/tracks/batch_generation_pipeline_20260424/spec.md
+measure/tracks/game_engine_integration_tests_20260424/metadata.json
+measure/tracks/game_engine_integration_tests_20260424/plan.md
+measure/tracks/game_engine_integration_tests_20260424/spec.md
+measure/tracks/multi_genre_expansion_20260424/index.md
+measure/tracks/multi_genre_expansion_20260424/metadata.json
+measure/tracks/multi_genre_expansion_20260424/plan.md
+measure/tracks/multi_genre_expansion_20260424/spec.md
 lib/batch-orchestrator.test.ts
 lib/batch-orchestrator.ts
 lib/batch-results.test.ts
@@ -2132,7 +2132,7 @@ index 0000000..d583686
 +  it('calls onSubmit with cor
 [0m
 Now let me read the remaining changed component files and run the tests/lint:
-[0m$ [0mls conductor/code_styleguides/ 2>/dev/null || echo "No code_styleguides directory"
+[0m$ [0mls measure/code_styleguides/ 2>/dev/null || echo "No code_styleguides directory"
 general.md
 html-css.md
 typescript.md
@@ -2886,11 +2886,11 @@ Now let me verify the fixes:
 [ ] Report findings and update tech-debt.md if needed
 [0m
 All type errors fixed (remaining one is auto-generated Next.js file, not our code). All 141 tests pass. Let me commit the fixes:
-[0m← [0mEdit conductor/tech-debt.md
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
+[0m← [0mEdit measure/tech-debt.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
 ===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
 @@ -17,6 +17,6 @@
  | 2026-04-24 | dynamic_game_preview | GameCanvas has duplicate sprite-loading logic (loadSprites callback + useEffect both do the same thing) | Medium | Resolved | Consolidated into single loadSprites function; useEffect now calls loadSprites directly |
  | 2026-04-24 | dynamic_game_preview | ComparisonView ZoomPanel uses inline `<img>` with `imageRendering: pixelated` instead of ZoomContainer | Medium | Open | ZoomPanel in ComparisonView should reuse ZoomContainer component for consistency |
@@ -2902,7 +2902,7 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/conductor/tech-debt.md
 \ No newline at end of file
 
 [0m
-[0m$ [0mgit add lib/style-metadata.ts src/components/BatchConfigForm.test.tsx src/components/BatchProgress.tsx src/components/BatchProgress.test.tsx src/components/BatchResultsComparison.tsx src/components/BatchResultsComparison.test.tsx src/components/FailureReport.tsx src/components/FailureReport.test.tsx conductor/tech-debt.md && git commit -m "chore(review): fix 7 lint/style issues"
+[0m$ [0mgit add lib/style-metadata.ts src/components/BatchConfigForm.test.tsx src/components/BatchProgress.tsx src/components/BatchProgress.test.tsx src/components/BatchResultsComparison.tsx src/components/BatchResultsComparison.test.tsx src/components/FailureReport.tsx src/components/FailureReport.test.tsx measure/tech-debt.md && git commit -m "chore(review): fix 7 lint/style issues"
 [main 1c55488] chore(review): fix 7 lint/style issues
  9 files changed, 9 insertions(+), 10 deletions(-)
 [0m
