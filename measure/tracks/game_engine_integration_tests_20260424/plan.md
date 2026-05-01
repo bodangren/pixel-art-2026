@@ -23,7 +23,7 @@
 - [x] 4.4 Write tests for performance thresholds
 
 ## Phase 5: Cross-Engine Compatibility
-- [ ] 5.1 Add Unity test runner (WebGL)
-- [ ] 5.2 Implement Godot test runner (HTML5)
-- [ ] 5.3 Create compatibility report generator
-- [ ] 5.4 Write end-to-end tests for full integration suite
+- [x] 5.1 Add Unity test runner (WebGL)
+- [x] 5.2 Implement Godot test runner (HTML5)
+- [x] 5.3 Create compatibility report generator
+- [x] 5.4 Write end-to-end tests for full integration suite
