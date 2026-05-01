@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { IntegrationTestFramework, createMockTestRunner, type SpriteAnimationTest } from './game-engine-test-framework'
+import { IntegrationTestFramework, createMockTestRunner, type SpriteAnimationTest, type GameEngineTestRunner } from './game-engine-test-framework'
 
 describe('IntegrationTestFramework', () => {
   let framework: IntegrationTestFramework

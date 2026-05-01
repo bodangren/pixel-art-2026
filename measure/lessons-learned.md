@@ -47,4 +47,4 @@
 
 - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
 - (2026-04-24-25, build/validation) Next.js Turbopack requires native SWC bindings on linux/x64 use `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter; Static export does not support API routes - embed data fetching in async server components
-- (2026-05-01, game_engine_tests) TDD with pure TypeScript functions works well for game engine test infrastructure; validateSpriteSheet and detectFrameDrops are reusable utilities
+- (2026-05-02, typescript_strict_mode) TypeScript type-only imports (import type { X }) must be explicitly included - `as unknown as Type` in tests requires the Type to be imported; test file was missing GameEngineTestRunner import causing TS2304 at compile time
