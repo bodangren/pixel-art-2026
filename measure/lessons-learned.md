@@ -46,9 +46,5 @@
 - (2026-04-23, game_preview) ESLint rules prohibit calling setState synchronously within useEffect. Use setTimeout(() => {...}, 0) to defer execution, or use .then()/.finally() promise chains instead of async/await directly in effects.
 
 - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
-
-- (2026-04-24, batch_orchestrator) Expose backoff delay in onJobRetry callback (delayMs parameter) so UI can show retry scheduling info; createBatchResult expects jobs matching batchJobSchema - passing filtered jobs as `jobs as any` bypasses type checking but works at runtime.
-- (2026-04-24, multi_genre) StyleCategory enum needs z.infer to properly export TypeScript type - z.enum produces type union directly
 - (2026-04-24-25, build/validation) Next.js Turbopack requires native SWC bindings on linux/x64 use `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter; Static export does not support API routes - embed data fetching in async server components
-- (2026-04-25, visual_refresh) CSS variables for design system - components with Tailwind utility classes need direct style updates; CSS classes alone may not override framework defaults
 - (2026-05-01, game_engine_tests) TDD with pure TypeScript functions works well for game engine test infrastructure; validateSpriteSheet and detectFrameDrops are reusable utilities
