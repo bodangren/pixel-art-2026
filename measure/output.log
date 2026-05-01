@@ -773,3 +773,89 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/e2e_batch_pipe
 +- [x] Configure test timeouts and retries — Tests complete in <5min requirement met (runs in ~2s)
 
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "E2E batch pipeline test: complete 3-stage integration tests (8 tests, 227 total passing) [MiniMax-M2.7]"
+[main e305355] E2E batch pipeline test: complete 3-stage integration tests (8 tests, 227 total passing) [MiniMax-M2.7]
+ 10 files changed, 1015 insertions(+), 36 deletions(-)
+ create mode 100644 lib/e2e-batch-pipeline.test.ts
+ rename measure/{tracks => archive}/typescript_strict_mode_20260426/metadata.json (87%)
+ create mode 100644 measure/archive/typescript_strict_mode_20260426/plan.md
+ rename measure/{tracks => archive}/typescript_strict_mode_20260426/spec.md (100%)
+ delete mode 100644 measure/tracks/typescript_strict_mode_20260426/plan.md
+[0m
+[0m← [0mEdit measure/tracks/e2e_batch_pipeline_test_20260426/metadata.json
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/e2e_batch_pipeline_test_20260426/metadata.json
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/e2e_batch_pipeline_test_20260426/metadata.json
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/e2e_batch_pipeline_test_20260426/metadata.json
+@@ -1,8 +1,8 @@
+ {
+   "id": "e2e_batch_pipeline_test_20260426",
+   "title": "End-to-End Batch Pipeline Test",
+-  "status": "pending",
++  "status": "completed",
+   "priority": "medium",
+   "type": "test",
+   "created": "2026-04-26",
+   "depends_on": []
+
+[0m
+[0m← [0mEdit measure/tracks.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+@@ -53,7 +53,7 @@
+ - [x] **Track: TypeScript Strict Mode**
+    *Link: [./archive/typescript_strict_mode_20260426/](./archive/typescript_strict_mode_20260426/)*
+    *Status: Complete* — 0 `any` types found, strict mode already enabled; fixed type import bug.
+ 
+-- [ ] **Track: End-to-End Batch Pipeline Test**
+-  *Link: [./tracks/e2e_batch_pipeline_test_20260426/](./tracks/e2e_batch_pipeline_test_20260426/)*
+-  Full integration test from LLM generation through validation to dashboard display.
++- [x] **Track: End-to-End Batch Pipeline Test**
++   *Link: [./archive/e2e_batch_pipeline_test_20260426/](./archive/e2e_batch_pipeline_test_20260426/)*
++   *Status: Complete* — 8 integration tests covering 3 pipeline stages (generation → validation → display); 227 tests passing
+
+[0m
+[0m$ [0mmkdir -p /home/daniel-bo/Desktop/pixel-art-benchmark/measure/archive/e2e_batch_pipeline_test_20260426 && mv /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/e2e_batch_pipeline_test_20260426/* /home/daniel-bo/Desktop/pixel-art-benchmark/measure/archive/e2e_batch_pipeline_test_20260426/ && rmdir /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/e2e_batch_pipeline_test_20260426
+(no output)
+[0m
+[0m← [0mEdit measure/tech-debt.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+@@ -8,18 +8,19 @@
+ 
+ | Date | Track | Item | Severity | Status | Notes |
+ |------|-------|------|----------|--------|-------|
+ | 2026-04-09 | static_benchmark_app | Missing`.gitignore` - build artifacts committed | Medium | Resolved | Added .gitignore with .next/, node_modules/ |
+-| 2026-04-09 | static_benchmark_app | Widespread `any` types (22 locations) | Low | Open | Gradually replace with proper types |
++| 2026-04-09 | static_benchmark_app | Widespread `any` types (22 locations) | Low | Resolved | 0 found - strict mode already enabled; test file had missing type import |
+ | 2026-04-11 | automated_validation_scoring_engine | score_asset transparency logic - defaulting to False | Low | Resolved | Refactored to check issue list directly instead of has_transparency flag |
+ | 2026-04-12 | automated_validation_scoring_engine | Validation pipeline integration | Low | Resolved | build-derived-logic.ts now runs validation and computes average_tech_score |
+ | 2026-04-13 | repo | node_modules/@next/swc-*.node files tracked (124MB each) exceed GitHub 100MB limit | Critical | Resolved | Verified: swc files were never committed to this repo; backup confirmed clean (992K), push succeeds |
+ | 2026-04-16 | benchmark_dashboard_ui | ZoomContainer replaced ZoomPanel in ComparisonView | Low | Resolved | ZoomContainer has more features (pan, max zoom, hover grid); consolidated implementations |
+ | 2026-04-24 | dynamic_game_preview | GameCanvas has duplicate sprite-loading logic (loadSprites callback + useEffect both do the same thing) | Medium | Resolved | Consolidated into single loadSprites function; useEffect now calls loadSprites directly |
+-| 2026-04-24 | dynamic_game_preview | ComparisonView ZoomPanel uses inline `<img>` with `imageRendering: pixelated` instead of ZoomContainer | Medium | Open | ZoomPanel in ComparisonView should reuse ZoomContainer component for consistency |
++| 2026-04-24 | dynamic_game_preview | ComparisonView ZoomPanel uses inline `<img>` with `imageRendering: pixelated` instead of ZoomContainer | Medium | Resolved | ZoomPanel in ComparisonView now reuses ZoomContainer component |
+ | 2026-04-24 | batch_generation_pipeline | Phase 1: BatchConfig schema and BatchState implemented | Low | Resolved | Phase 2-5 now complete - parallel execution, progress UI, failure handling, result aggregation |
+-| 2026-04-24 | batch_generation_pipeline | Phase 5: BatchResultsComparison and export functions | Low | Open | Batch results UI complete with CSV/JSON export |
++| 2026-04-24 | batch_generation_pipeline | Phase 5: BatchResultsComparison and export functions | Low | Resolved | Batch results UI complete with CSV/JSON export |
+ | 2026-04-24 | multi_genre_expansion | New track created for style expansion (RPG, isometric, sci-fi, UI, font) | Medium | Resolved | All 5 phases complete - style-metadata, validation, dashboard, batch pipeline, integration |
+ | 2026-04-24 | build | Next.js Turbopack lacks native bindings on linux/x64 | Medium | Resolved | Use `next build --webpack` on this platform |
+ | 2026-04-25 | asset_quality_dashboard | Quality metrics dashboard - Recharts tooltip formatter typing issue | Low | Resolved | Removed custom formatter to avoid TS2322 error |
+ | 2026-04-25 | visual_refresh | Lamborghini identity applied to UI (Navbar, AssetCard, layout, globals.css) | Medium | Resolved | New DESIGN.md defines obsidian/gold aesthetic; build + 168 tests pass |
+-| 2026-05-01 | game_engine_integration_tests | Game Engine Integration Tests track complete - 219 tests, cross-engine compatibility report generation | Low | Resolved | Implemented IntegrationTestFramework, sprite animation, tilemap, and performance benchmarks |
+\ No newline at end of file
++| 2026-05-02 | typescript_strict_mode | test file missing type-only import (GameEngineTestRunner) | Low | Resolved | Added explicit `type` import in test file; no `any` types found in codebase |
++| 2026-05-02 | e2e_batch_pipeline | E2E pipeline tests in lib/ | Low | Resolved | 8 tests added covering generation→validation→display; 227 total tests pass |
+\ No newline at end of file
+
+[0m
+[0m$ [0mwc -l /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+25 /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+[0m
+[0m$ [0mwc -l /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+50 /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+[0m

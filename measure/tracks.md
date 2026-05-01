@@ -54,6 +54,6 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Link: [./archive/typescript_strict_mode_20260426/](./archive/typescript_strict_mode_20260426/)*
    *Status: Complete* — 0 `any` types found, strict mode already enabled; fixed type import bug.
 
-- [ ] **Track: End-to-End Batch Pipeline Test**
-  *Link: [./tracks/e2e_batch_pipeline_test_20260426/](./tracks/e2e_batch_pipeline_test_20260426/)*
-  Full integration test from LLM generation through validation to dashboard display.
+- [x] **Track: End-to-End Batch Pipeline Test**
+   *Link: [./archive/e2e_batch_pipeline_test_20260426/](./archive/e2e_batch_pipeline_test_20260426/)*
+   *Status: Complete* — 8 integration tests covering 3 pipeline stages (generation → validation → display); 227 tests passing
