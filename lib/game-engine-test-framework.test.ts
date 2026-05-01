@@ -92,8 +92,8 @@ describe('IntegrationTestFramework', () => {
 
   it('cleans up all runners', async () => {
     const mockCleanup = { cleanup: async () => {} }
-    framework.registerRunner('phaser', mockCleanup as any)
-    framework.registerRunner('unity', mockCleanup as any)
+    framework.registerRunner('phaser', mockCleanup as unknown as GameEngineTestRunner)
+    framework.registerRunner('unity', mockCleanup as unknown as GameEngineTestRunner)
 
     await framework.cleanup()
 

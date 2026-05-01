@@ -1,4 +1,4 @@
-import { z } from 'zod'
+// Zod validation schema for sprite animation tests
 
 export interface SpriteAnimationTestProps {
   assetPath: string

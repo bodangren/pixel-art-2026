@@ -110,7 +110,7 @@ export function createMockTestRunner(engine: 'phaser' | 'unity' | 'godot'): Game
       durationMs: Math.random() * 100 + 50,
       timestamp: new Date().toISOString(),
     }),
-    runPerformanceBenchmark: async (benchmark) => ({
+    runPerformanceBenchmark: async () => ({
       testId: `perf-${Date.now()}`,
       engine,
       passed: true,

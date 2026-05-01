@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import type { IntegrationTestResult } from './game-engine-test-framework'
+// IntegrationTestResult type imported from game-engine-test-framework
 import type { TilemapRenderTestResult } from './tilemap-render-test'
 import type { SpriteAnimationTestResult } from './sprite-animation-test'
 import type { PerformanceBenchmarkResult } from './performance-benchmark'
