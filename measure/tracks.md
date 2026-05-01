@@ -38,7 +38,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    Phase 1-5: Complete (168 tests passing)
 
 - [x] **Track: Game Engine Integration Tests**
-   *Link: [./tracks/game_engine_integration_tests_20260424/](./tracks/game_engine_integration_tests_20260424/)*
+   *Link: [./archive/game_engine_integration_tests_20260424/](./archive/game_engine_integration_tests_20260424/)*
    Automated testing in Phaser/Unity/Godot, sprite animation verification, tilemap rendering tests, performance benchmarking.
    Phase 1-5: Complete (219 tests passing)
 
@@ -57,3 +57,23 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [x] **Track: End-to-End Batch Pipeline Test**
    *Link: [./archive/e2e_batch_pipeline_test_20260426/](./archive/e2e_batch_pipeline_test_20260426/)*
    *Status: Complete* — 8 integration tests covering 3 pipeline stages (generation → validation → display); 227 tests passing
+
+---
+
+## Upcoming Tracks
+
+- [ ] **Track: Public Leaderboard System**
+   *Link: [./tracks/leaderboard_system_20260502/](./tracks/leaderboard_system_20260502/)*
+   *Priority: High* — Aggregate review scores across all runs, rank models, provide filtering/sorting to identify top performers.
+
+- [ ] **Track: Advanced Sprite Inspection Tools**
+   *Link: [./tracks/sprite_inspection_tools_20260502/](./tracks/sprite_inspection_tools_20260502/)*
+   *Priority: High* — Add animation playback controls (frame-stepping, FPS slider, loop modes) for evaluating sprite quality frame-by-frame.
+
+- [ ] **Track: CI/CD Pipeline Automation**
+   *Link: [./tracks/ci_cd_pipeline_20260502/](./tracks/ci_cd_pipeline_20260502/)*
+   *Priority: Medium* — GitHub Actions workflows for automated lint, test, build, and deploy on PRs and main branch pushes.
+
+- [ ] **Track: Accessibility Audit (WCAG 2.1 AA)**
+   *Link: [./tracks/accessibility_audit_20260502/](./tracks/accessibility_audit_20260502/)*
+   *Priority: Medium* — Audit and fix keyboard navigation, screen reader support, color contrast, and motion preferences.
