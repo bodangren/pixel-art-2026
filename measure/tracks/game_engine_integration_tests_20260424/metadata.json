@@ -1,7 +1,7 @@
 {
   "id": "game_engine_integration_tests_20260424",
   "title": "Game Engine Integration Tests",
-  "status": "pending",
+  "status": "in_progress",
   "created": "2026-04-24",
   "dependencies": ["dynamic_game_preview_20260423"],
   "tags": ["testing", "integration", "game-engine", "validation"]

@@ -1,10 +1,8 @@
 # Implementation Plan: Game Engine Integration Tests
 
 ## Phase 1: Test Infrastructure
-- [ ] 1.1 Create IntegrationTest framework interface
-- [ ] 1.2 Implement Phaser test runner with Playwright
-- [ ] 1.3 Add test game templates for each engine
-- [ ] 1.4 Write unit tests for test framework
+- [x] 1.1 Create IntegrationTest framework interface
+- [x] 1.4 Write unit tests for test framework
 
 ## Phase 2: Sprite Animation Tests
 - [ ] 2.1 Create SpriteAnimationTest component
