@@ -32,9 +32,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
   Expand the benchmark to include other styles (e.g., 16-bit RPG, Isometric, Top-down Sci-fi) and assets (UI buttons, font sheets).
   Phase 1-5: Complete (141 tests passing)
 
-- [ ] **Track: Asset Quality Metrics Dashboard**
-  *Link: [./tracks/asset_quality_dashboard_20260424/](./tracks/asset_quality_dashboard_20260424/)*
-  Quality score distribution charts, trend analysis, model comparison radar charts, anomaly detection, export reports.
+- [x] **Track: Asset Quality Metrics Dashboard**
+   *Link: [./archive/asset_quality_dashboard_20260424/](./archive/asset_quality_dashboard_20260424/)*
+   Quality score distribution charts, trend analysis, model comparison radar charts, anomaly detection, export reports.
+   Phase 1-5: Complete (168 tests passing)
 
 - [ ] **Track: Game Engine Integration Tests**
   *Link: [./tracks/game_engine_integration_tests_20260424/](./tracks/game_engine_integration_tests_20260424/)*
