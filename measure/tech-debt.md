@@ -24,3 +24,5 @@
 | 2026-04-25 | visual_refresh | Lamborghini identity applied to UI (Navbar, AssetCard, layout, globals.css) | Medium | Resolved | New DESIGN.md defines obsidian/gold aesthetic; build + 168 tests pass |
 | 2026-05-02 | typescript_strict_mode | test file missing type-only import (GameEngineTestRunner) | Low | Resolved | Added explicit `type` import in test file; no `any` types found in codebase |
 | 2026-05-02 | e2e_batch_pipeline | E2E pipeline tests in lib/ | Low | Resolved | 8 tests added covering generation→validation→display; 227 total tests pass |
+| 2026-05-02 | leaderboard_system | Leaderboard computed at build time from runs-index.json and leaderboard.json | Low | Open | Currently reads from derived JSON files; no live aggregation yet |
+| 2026-05-02 | leaderboard_system | Sort by name descending uses localeCompare which sorts uppercase before lowercase | Low | Open | name sort case sensitivity - 'SONNET' > 'gemini' with toLowerCase but inconsistent |

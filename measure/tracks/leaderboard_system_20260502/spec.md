@@ -15,9 +15,9 @@ Build a leaderboard page that aggregates review scores across all runs, ranks mo
 6. **Static Export:** Leaderboard page must work with `output: 'export'` (no server-side data fetching at runtime).
 
 ## Acceptance Criteria
-- [ ] Leaderboard page renders at `/leaderboard` route
-- [ ] Models are ranked by average total score descending
-- [ ] Filters for genre, date range, and min runs work correctly
-- [ ] Click-through to model detail shows all runs
-- [ ] All 227+ existing tests still pass
-- [ ] New tests cover leaderboard computation, filtering, and sorting logic
+- [x] Leaderboard page renders at `/leaderboard` route
+- [x] Models are ranked by average total score descending
+- [x] Filters for genre, date range, and min runs work correctly
+- [x] Click-through to model detail shows all runs
+- [x] All 263+ existing tests still pass
+- [x] New tests cover leaderboard computation, filtering, and sorting logic
