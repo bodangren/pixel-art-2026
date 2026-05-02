@@ -226,14 +226,80 @@ describe('Accessibility Audit — jest-axe integration', () => {
     it('should have no accessibility violations', async () => {
       const { container } = render(
         <ReviewTools
-          score={4.0}
-          onScoreChange={() => {}}
-          notes="Test notes"
-          onNotesChange={() => {}}
+          zoom={2}
+          onZoomChange={() => {}}
+          showGrid={false}
+          onGridToggle={() => {}}
+          showCheckerboard={false}
+          onCheckerboardToggle={() => {}}
         />
       )
       const results = await axe(container)
       expectNoViolations(results)
+    })
+
+    it('has toolbar role and aria-label', () => {
+      render(
+        <ReviewTools
+          zoom={2}
+          onZoomChange={() => {}}
+          showGrid={false}
+          onGridToggle={() => {}}
+          showCheckerboard={false}
+          onCheckerboardToggle={() => {}}
+        />
+      )
+      const toolbar = screen.getByRole('toolbar')
+      expect(toolbar).toHaveAttribute('aria-label')
+    })
+
+    it('slider has aria-valuemin, aria-valuemax, aria-valuenow', () => {
+      render(
+        <ReviewTools
+          zoom={2}
+          onZoomChange={() => {}}
+          showGrid={false}
+          onGridToggle={() => {}}
+          showCheckerboard={false}
+          onCheckerboardToggle={() => {}}
+        />
+      )
+      const slider = screen.getByRole('slider')
+      expect(slider).toHaveAttribute('aria-valuemin')
+      expect(slider).toHaveAttribute('aria-valuemax')
+      expect(slider).toHaveAttribute('aria-valuenow')
+    })
+
+    it('toggles have aria-pressed attribute', () => {
+      render(
+        <ReviewTools
+          zoom={2}
+          onZoomChange={() => {}}
+          showGrid={false}
+          onGridToggle={() => {}}
+          showCheckerboard={false}
+          onCheckerboardToggle={() => {}}
+        />
+      )
+      const buttons = screen.getAllByRole('button')
+      buttons.forEach(btn => {
+        expect(btn).toHaveAttribute('aria-pressed')
+      })
+    })
+
+    it('has aria-live region for zoom value', () => {
+      render(
+        <ReviewTools
+          zoom={2}
+          onZoomChange={() => {}}
+          showGrid={false}
+          onGridToggle={() => {}}
+          showCheckerboard={false}
+          onCheckerboardToggle={() => {}}
+        />
+      )
+      const liveRegion = document.querySelector('[aria-live="polite"]')
+      expect(liveRegion).toBeInTheDocument()
     })
   })
 

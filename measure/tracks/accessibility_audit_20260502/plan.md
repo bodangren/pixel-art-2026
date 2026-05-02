@@ -8,12 +8,12 @@
 - [x] Verify existing 340+ tests still pass with new test dependencies
 
 ## Phase 2: Keyboard Navigation Fixes
-- [ ] Write tests verifying all buttons, sliders, and links are focusable
-- [ ] Write tests for focus trap in modals/overlays
-- [ ] Add visible focus styles (outline) to all interactive elements
-- [ ] Implement focus management for tab switching and route changes
-- [ ] Add skip-to-content link at top of layout
-- [ ] Verify all tests pass
+- [x] Write tests verifying all buttons, sliders, and links are focusable
+- [x] Write tests for focus trap in modals/overlays
+- [x] Add visible focus styles (outline) to all interactive elements
+- [x] Implement focus management for tab switching and route changes
+- [x] Add skip-to-content link at top of layout
+- [x] Verify all tests pass
 
 ## Phase 3: ARIA & Screen Reader
 - [ ] Write tests checking ARIA labels on image elements
@@ -28,5 +28,5 @@
 - [ ] Add `prefers-reduced-motion` media query to disable sprite auto-play
 - [ ] Ensure focus indicators have sufficient contrast (3:1 minimum)
 - [ ] Run full axe-core audit — 0 critical violations
-- [ ] Run full test suite — all 227+ tests must pass
+- [ ] Run full test suite — all 355+ tests must pass
 - [ ] Run `next lint` with no errors

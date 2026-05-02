@@ -78,7 +78,9 @@ const SpriteSheetPreview: React.FC<SpriteSheetPreviewProps> = ({ src, rows, cols
         <h3 className="text-lg font-bold uppercase tracking-tight">Sprite Animation</h3>
         <button
           onClick={() => setShowGrid(!showGrid)}
+          aria-pressed={showGrid}
           className={`px-4 py-1.5 rounded font-medium transition-colors ${showGrid ? 'bg-green-600' : 'bg-slate-700 hover:bg-slate-600'}`}
+          aria-label="Toggle grid overlay"
         >
           Grid
         </button>
@@ -101,6 +103,8 @@ const SpriteSheetPreview: React.FC<SpriteSheetPreviewProps> = ({ src, rows, cols
               backgroundPosition: `-${col * frameSize * zoom}px -${row * frameSize * zoom}px`,
               imageRendering: 'pixelated',
             }}
+            role="img"
+            aria-label={`Sprite frame ${frame + 1} of ${totalFrames}`}
           />
           {showGrid && (
             <div
@@ -108,6 +112,7 @@ const SpriteSheetPreview: React.FC<SpriteSheetPreviewProps> = ({ src, rows, cols
               style={{
                 boxShadow: `inset 0 0 0 1px rgba(239, 68, 68, 0.5)`
               }}
+              aria-hidden="true"
             />
           )}
         </div>
