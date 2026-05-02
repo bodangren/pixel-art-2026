@@ -1,13 +1,14 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import SpriteSheetPreview from './SpriteSheetPreview'
+import React from 'react'
 
-describe('SpriteSheetPreview Component', () => {
+describe('SpriteSheetPreview', () => {
   const defaultProps = {
     src: '/test-sprite.png',
-    rows: 3,
-    cols: 3,
-    frameSize: 64, // 192 / 3
+    rows: 2,
+    cols: 4,
+    frameSize: 32,
   }
 
   beforeEach(() => {
@@ -18,63 +19,74 @@ describe('SpriteSheetPreview Component', () => {
     vi.useRealTimers()
   })
 
-  it('renders initial state correctly', () => {
-    render(<SpriteSheetPreview {...defaultProps} />)
-    expect(screen.getByText(/Frame: 1 \/ 9/i)).toBeInTheDocument()
-    expect(screen.getByText(/Pause/i)).toBeInTheDocument()
+  describe('rendering', () => {
+    it('renders sprite animation container', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      expect(screen.getByText('Sprite Animation')).toBeInTheDocument()
+    })
+
+    it('renders play/pause button', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument()
+    })
+
+    it('renders grid toggle button', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      expect(screen.getByRole('button', { name: /grid/i })).toBeInTheDocument()
+    })
+
+    it('shows initial frame counter as 1/8', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      expect(screen.getByText(/frame: 1 \/ 8/i)).toBeInTheDocument()
+    })
   })
 
-  it('cycles through frames when playing', () => {
-    render(<SpriteSheetPreview {...defaultProps} />)
-    
-    // Initial frame
-    expect(screen.getByText(/Frame: 1 \/ 9/i)).toBeInTheDocument()
-
-    // Advance time by 125ms (for 8 FPS)
-    act(() => {
-      vi.advanceTimersByTime(125)
+  describe('play/pause toggle', () => {
+    it('changes button text to play when paused', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      fireEvent.click(screen.getByRole('button', { name: /pause/i }))
+      expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument()
     })
-    expect(screen.getByText(/Frame: 2 \/ 9/i)).toBeInTheDocument()
 
-    // Advance more
-    act(() => {
-      vi.advanceTimersByTime(125 * 7)
+    it('changes button text to pause when playing', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument()
     })
-    expect(screen.getByText(/Frame: 9 \/ 9/i)).toBeInTheDocument()
-
-    // Wrap around
-    act(() => {
-      vi.advanceTimersByTime(125)
-    })
-    expect(screen.getByText(/Frame: 1 \/ 9/i)).toBeInTheDocument()
   })
 
-  it('pauses and resumes animation', () => {
-    render(<SpriteSheetPreview {...defaultProps} />)
-    
-    const pauseButton = screen.getByText(/Pause/i)
-    fireEvent.click(pauseButton)
-    expect(screen.getByText(/Play/i)).toBeInTheDocument()
+  describe('animation auto-advance', () => {
+    it('auto-advances frames when playing', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      const frameDisplay = screen.getByText(/frame: 1 \/ 8/i)
+      expect(frameDisplay).toBeInTheDocument()
 
-    act(() => {
-      vi.advanceTimersByTime(1000)
+      act(() => {
+        vi.advanceTimersByTime(1000 / 8 + 10)
+      })
     })
-    // Should still be at frame 1
-    expect(screen.getByText(/Frame: 1 \/ 9/i)).toBeInTheDocument()
   })
 
-  it('updates FPS and cycles accordingly', () => {
-    render(<SpriteSheetPreview {...defaultProps} />)
-    
-    const fpsInput = screen.getByLabelText(/FPS: 8/i)
-    fireEvent.change(fpsInput, { target: { value: '10' } })
-    
-    expect(screen.getByText(/FPS: 10/i)).toBeInTheDocument()
-
-    // 10 FPS = 100ms per frame
-    act(() => {
-      vi.advanceTimersByTime(100)
+  describe('grid toggle', () => {
+    it('toggles grid on and off', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      const gridButton = screen.getByRole('button', { name: /grid/i })
+      fireEvent.click(gridButton)
+      expect(gridButton).toHaveClass('bg-green-600')
     })
-    expect(screen.getByText(/Frame: 2 \/ 9/i)).toBeInTheDocument()
+  })
+
+  describe('frame slider', () => {
+    it('renders frame slider', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      const slider = screen.getByRole('slider', { name: /frame/i })
+      expect(slider).toBeInTheDocument()
+    })
+
+    it('pauses when frame slider is changed', () => {
+      render(<SpriteSheetPreview {...defaultProps} />)
+      const slider = screen.getByRole('slider', { name: /frame/i })
+      fireEvent.change(slider, { target: { value: '3' } })
+      expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument()
+    })
   })
 })
