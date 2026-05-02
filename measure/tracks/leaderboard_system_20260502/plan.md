@@ -1,16 +1,16 @@
 # Plan: Public Leaderboard System
 
 ## Phase 1: Data Layer (TDD)
-- [ ] Write tests for `computeLeaderboard()` — aggregates scores per model, handles missing reviews
-- [ ] Write tests for filtering logic — genre, date range, min run count
-- [ ] Write tests for sorting — by avg score, best score, run count, name
-- [ ] Implement `computeLeaderboard()` in `lib/leaderboard.ts`
-- [ ] Implement filter and sort functions
-- [ ] Verify all tests pass
+- [x] Write tests for `computeLeaderboard()` — aggregates scores per model, handles missing reviews
+- [x] Write tests for filtering logic — genre, date range, min run count
+- [x] Write tests for sorting — by avg score, best score, run count, name
+- [x] Implement `computeLeaderboard()` in `lib/leaderboard.ts`
+- [x] Implement filter and sort functions
+- [x] Verify all tests pass
 
 ## Phase 2: UI Components (TDD)
-- [ ] Write tests for `LeaderboardTable` — renders rows, handles empty state
-- [ ] Write tests for `LeaderboardFilters` — genre dropdown, date picker, min runs input
+- [x] Write tests for `LeaderboardTable` — renders rows, handles empty state
+- [x] Write tests for `LeaderboardFilters` — genre dropdown, date picker, min runs input
 - [ ] Implement `LeaderboardTable` component with sortable column headers
 - [ ] Implement `LeaderboardFilters` component
 - [ ] Implement `ModelDetailPanel` — shows all runs for a selected model
