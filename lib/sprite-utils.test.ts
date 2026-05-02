@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { extractFrames, FramePlayer, type LoopMode } from './sprite-utils'
+import { extractFrames, FramePlayer } from './sprite-utils'
 
 describe('extractFrames', () => {
   it('extracts correct number of frames from sprite sheet', () => {
