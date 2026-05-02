@@ -31,6 +31,9 @@ const SpriteSheetPreview: React.FC<SpriteSheetPreviewProps> = ({ src, rows, cols
   useEffect(() => {
     if (!isPlaying) return
 
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches) return
+
     const interval = 1000 / fps
     const timer = setInterval(() => {
       if (playerRef.current) {

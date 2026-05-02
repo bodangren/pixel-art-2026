@@ -3008,3 +3008,206 @@ $ vitest run
    Start at  05:52:44
    Duration  59.97s (transform 1.72s, setup 9.86s, import 15.11s, tests 18.37s, environment 111.42s)
 [0m
+[0m$ [0mgit add -A && git commit -m "Phase 3: ARIA and screen reader improvements
+
+- Add toolbar role and aria-label to ReviewTools
+- Add aria-valuemin, aria-valuemax, aria-valuenow to slider
+- Add aria-pressed to toggle buttons (Grid, Checkerboard)
+- Add aria-live=polite for zoom value updates
+- Add role=img and aria-label to SpriteSheetPreview sprite frame
+- Add role=img and aria-label to BackgroundPreview background image
+- 7 new tests for ARIA attributes
+- All 359 tests pass"
+[main 7e8fcea] Phase 3: ARIA and screen reader improvements
+ 5 files changed, 527 insertions(+), 26 deletions(-)
+[0m
+[0m← [0mEdit measure/tracks/accessibility_audit_20260502/plan.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502/plan.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502/plan.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502/plan.md
+@@ -15,18 +15,18 @@
+ - [x] Add skip-to-content link at top of layout
+ - [x] Verify all tests pass
+ 
+ ## Phase 3: ARIA & Screen Reader
+-- [ ] Write tests checking ARIA labels on image elements
+-- [ ] Write tests for aria-live regions on dynamic score updates
+-- [ ] Add alt text to all sprite/asset images (model name + asset type)
+-- [ ] Add ARIA roles to custom components (slider, tabs, toggle)
+-- [ ] Add aria-live="polite" to score comparison and leaderboard updates
+-- [ ] Verify all tests pass
++- [x] Write tests checking ARIA labels on image elements
++- [x] Write tests for aria-live regions on dynamic score updates
++- [x] Add alt text to all sprite/asset images (model name + asset type)
++- [x] Add ARIA roles to custom components (slider, tabs, toggle)
++- [x] Add aria-live="polite" to score comparison and leaderboard updates
++- [x] Verify all tests pass
+ 
+ ## Phase 4: Contrast & Motion
+ - [ ] Audit color contrast ratios using axe-core; fix any below 4.5:1
+ - [ ] Add `prefers-reduced-motion` media query to disable sprite auto-play
+ - [ ] Ensure focus indicators have sufficient contrast (3:1 minimum)
+ - [ ] Run full axe-core audit — 0 critical violations
+-- [ ] Run full test suite — all 355+ tests must pass
++- [ ] Run full test suite — all 359+ tests must pass
+ - [ ] Run `next lint` with no errors
+
+[0m
+[0m# [0mTodos
+[x] Phase 3: Write tests for ARIA labels on image elements
+[x] Phase 3: Write tests for aria-live regions on dynamic score updates
+[x] Phase 3: Add alt text to all sprite/asset images
+[x] Phase 3: Add ARIA roles to custom components (slider, tabs, toggle)
+[x] Phase 3: Add aria-live to score comparison and leaderboard updates
+[x] Phase 3: Verify all tests pass
+[ ] Phase 4: Audit color contrast ratios using axe-core
+[ ] Phase 4: Add prefers-reduced-motion media query to disable sprite auto-play
+[ ] Phase 4: Ensure focus indicators have sufficient contrast (3:1 minimum)
+[ ] Phase 4: Run full axe-core audit — 0 critical violations
+[ ] Phase 4: Run full test suite — all 359+ tests must pass
+[ ] Phase 4: Run next lint with no errors
+[0m
+[0m→ [0mRead src/app/globals.css
+[0m
+[0m← [0mEdit src/app/globals.css
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/globals.css
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/globals.css
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/globals.css
+@@ -78,4 +78,15 @@
+     text-transform: uppercase;
+     border-radius: 0px;
+   }
+ }
++
++@media (prefers-reduced-motion: reduce) {
++  *,
++  *::before,
++  *::after {
++    animation-duration: 0.01ms !important;
++    animation-iteration-count: 1 !important;
++    transition-duration: 0.01ms !important;
++    scroll-behavior: auto !important;
++  }
++}
+
+[0m
+[0m→ [0mRead src/components/SpriteSheetPreview.tsx[90m [limit=45][0m
+[0m
+[0m← [0mEdit src/components/SpriteSheetPreview.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/SpriteSheetPreview.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/SpriteSheetPreview.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/SpriteSheetPreview.tsx
+@@ -30,8 +30,11 @@
+ 
+ useEffect(() => {
+   if (!isPlaying) return
+ 
++  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
++  if (mediaQuery.matches) return
++
+   const interval = 1000 / fps
+   const timer = setInterval(() => {
+     if (playerRef.current) {
+       playerRef.current.next()
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run test 2>&1 | tail -15
+$ vitest run
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  47 passed (47)
+      Tests  359 passed (359)
+   Start at  05:54:45
+   Duration  59.38s (transform 1.91s, setup 10.31s, import 15.00s, tests 18.02s, environment 112.41s)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run lint 2>&1
+$ eslint
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-orchestrator.test.ts
+   1:36  warning  'beforeEach' is defined but never used       @typescript-eslint/no-unused-vars
+  44:13  warning  'orch' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  62:13  warning  'result' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-orchestrator.ts
+   57:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+   71:11  warning  'processNext' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  136:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-results.test.ts
+  24:91  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:77  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  68:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/data.test.ts
+  62:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/e2e-batch-pipeline.test.ts
+  1:36  warning  'beforeEach' is defined but never used        @typescript-eslint/no-unused-vars
+  3:29  warning  'createBatchState' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-metrics.ts
+    1:23  warning  'RubricScores' is defined but never used   @typescript-eslint/no-unused-vars
+  127:9   warning  'mean' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/auto-pipeline.ts
+  36:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/build-derived-logic.ts
+  17:37  error    A `require()` style import is forbidden   @typescript-eslint/no-require-imports
+  44:18  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  48:16  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  54:53  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:66  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/build-derived.test.ts
+  43:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:60  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/generate-assets.ts
+  15:9   warning  'prompt' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  20:35  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/research-assets.ts
+  36:9  warning  'prompt' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/sandbox-runner.ts
+  43:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/validate-run-logic.ts
+  25:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/validate-run.ts
+  41:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/src/app/models/[modelId]/page.tsx
+   7:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/BackgroundPreview.tsx
+  52:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ComparisonView.tsx
+   85:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  121:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ReviewSection.tsx
+  14:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/RubricForm.tsx
+   7:18  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  10:50  warning  'runId' is defined but never used         @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.tsx
+  152:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+✖ 39 problems (22 errors, 17 warnings)
+
+error: script "lint" exited with code 1
+[0m

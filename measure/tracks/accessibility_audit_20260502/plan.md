@@ -16,17 +16,17 @@
 - [x] Verify all tests pass
 
 ## Phase 3: ARIA & Screen Reader
-- [ ] Write tests checking ARIA labels on image elements
-- [ ] Write tests for aria-live regions on dynamic score updates
-- [ ] Add alt text to all sprite/asset images (model name + asset type)
-- [ ] Add ARIA roles to custom components (slider, tabs, toggle)
-- [ ] Add aria-live="polite" to score comparison and leaderboard updates
-- [ ] Verify all tests pass
+- [x] Write tests checking ARIA labels on image elements
+- [x] Write tests for aria-live regions on dynamic score updates
+- [x] Add alt text to all sprite/asset images (model name + asset type)
+- [x] Add ARIA roles to custom components (slider, tabs, toggle)
+- [x] Add aria-live="polite" to score comparison and leaderboard updates
+- [x] Verify all tests pass
 
 ## Phase 4: Contrast & Motion
 - [ ] Audit color contrast ratios using axe-core; fix any below 4.5:1
 - [ ] Add `prefers-reduced-motion` media query to disable sprite auto-play
 - [ ] Ensure focus indicators have sufficient contrast (3:1 minimum)
 - [ ] Run full axe-core audit — 0 critical violations
-- [ ] Run full test suite — all 355+ tests must pass
+- [ ] Run full test suite — all 359+ tests must pass
 - [ ] Run `next lint` with no errors
