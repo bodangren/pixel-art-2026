@@ -72,9 +72,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Priority: High* — Add animation playback controls (frame-stepping, FPS slider, loop modes) for evaluating sprite quality frame-by-frame.
    **Phase 1-4: Complete (59 sprite-related tests passing)**
 
-- [ ] **Track: CI/CD Pipeline Automation**
+- [x] **Track: CI/CD Pipeline Automation**
    *Link: [./tracks/ci_cd_pipeline_20260502/](./tracks/ci_cd_pipeline_20260502/)*
    *Priority: Medium* — GitHub Actions workflows for automated lint, test, build, and deploy on PRs and main branch pushes.
+   **Phase 1-4: Complete (340 tests passing)**
 
 - [ ] **Track: Accessibility Audit (WCAG 2.1 AA)**
    *Link: [./tracks/accessibility_audit_20260502/](./tracks/accessibility_audit_20260502/)*
