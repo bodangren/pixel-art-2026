@@ -13,8 +13,6 @@
 ## Recurring Gotchas
 <!-- Problems encountered repeatedly; save future tracks from the same pain -->
 
-- (2026-04-09, static_benchmark_app) TypeScript `any` types proliferate when handling external JSON data - need schema validation layer early
-
 - (2026-04-10, automated_validation_scoring_engine) datetime.utcnow() deprecated - use datetime.now(timezone.utc) instead
 
 - (2026-04-13, repo) Adding .gitignore after files are tracked does NOT remove them from history; large files (node_modules/@next/swc-*.node, 124MB) block push. Need `git rm --cached` + history rewrite to fix.
@@ -48,3 +46,4 @@
 - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
 - (2026-04-24-25, build/validation) Next.js Turbopack requires native SWC bindings on linux/x64 use `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter; Static export does not support API routes - embed data fetching in async server components
 - (2026-05-02, sprite_inspection) When a type is only used as a value (e.g., in `as const` assertions), importing it with `import type` causes unused import warnings. Use regular import. SpriteSheetPreview had internal animation state instead of using the separate AnimationControls component - refactored to use AnimationControls + FramePlayer for proper separation of concerns.
+- (2026-05-03, accessibility_audit) jest-axe with vitest requires custom `expectNoViolations()` helper since `toHaveNoViolations()` is a Chai matcher not available in vitest. axe results need to be awaited in async tests. Phase 4 tasks completed: skip-to-content link, focus-visible CSS, focus trap in modals, prefers-reduced-motion for sprite auto-play, ARIA roles (toolbar, slider, button) and aria attributes (aria-pressed, aria-live, aria-modal).
