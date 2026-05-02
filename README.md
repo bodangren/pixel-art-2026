@@ -1,5 +1,7 @@
 # Pixel Art Benchmark Report
 
+[![CI](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/ci.yml) [![Deploy](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/deploy.yml/badge.svg)](https://github.com/daniel-bo/pixel-art-benchmark/deployments)
+
 This repository contains the outputs from running `pixel-art-benchmark.md` across multiple models and versions.
 
 Each completed run produced the four required assets:
@@ -107,3 +109,31 @@ All model runs used this prompt:
 ### Minimax M2.5
 
 The `minimax-m2.5` directory did not complete the benchmark. It contains only the asset-generation script and no generated PNG files, so there is nothing to display for visual comparison.
+
+## CI/CD
+
+This project uses GitHub Actions for continuous integration and deployment.
+
+### Workflows
+
+- **CI** (`.github/workflows/ci.yml`): Runs on every push and PR to `main`. Executes lint, TypeScript type checking, unit tests, and production build on Node 20 and Node 22.
+- **Deploy** (`.github/workflows/deploy.yml`): Runs on every push to `main`. Deploys to Vercel automatically.
+
+### Required Secrets
+
+To enable deployments, add these repository secrets:
+
+| Secret | Description |
+|--------|-------------|
+| `VERCEL_TOKEN` | Vercel personal access token |
+| `VERCEL_ORG_ID` | Vercel organization ID |
+| `VERCEL_PROJECT_ID` | Vercel project ID |
+
+### Local Development
+
+```bash
+bun run dev      # Start dev server
+bun run build    # Production build
+bun run test     # Run test suite
+bun run lint     # Lint code
+```
