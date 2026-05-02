@@ -9,12 +9,12 @@
 - [x] Verify all tests pass
 
 ## Phase 2: Animation Controls UI (TDD)
-- [ ] Write tests for `AnimationControls` — play/pause button, FPS slider, frame counter
-- [ ] Write tests for keyboard shortcut handling (←/→ for stepping)
-- [ ] Implement `AnimationControls` component with play/pause, FPS slider, step buttons
-- [ ] Implement `FrameCounter` display component
-- [ ] Implement `LoopModeSelector` (once/loop/ping-pong)
-- [ ] Verify all tests pass
+- [x] Write tests for `AnimationControls` — play/pause button, FPS slider, frame counter
+- [x] Write tests for keyboard shortcut handling (←/→ for stepping)
+- [x] Implement `AnimationControls` component with play/pause, FPS slider, step buttons
+- [x] Implement `FrameCounter` display component
+- [x] Implement `LoopModeSelector` (once/loop/ping-pong)
+- [x] Verify all tests pass
 
 ## Phase 3: Canvas Renderer
 - [ ] Write tests for `SpriteCanvas` — renders correct frame at given index
