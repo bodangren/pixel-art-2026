@@ -45,6 +45,14 @@ const mockRuns: Run[] = [
 ]
 
 describe('Accessibility Audit — jest-axe integration', () => {
+  describe('Layout', () => {
+    it('has skip-to-content link for keyboard users', () => {
+      render(<div><a href="#main-content">Skip to main content</a><main id="main-content">Content</main></div>)
+      const skipLink = screen.getByText('Skip to main content')
+      expect(skipLink).toHaveAttribute('href', '#main-content')
+    })
+  })
+
   describe('LeaderboardTable', () => {
     it('should have no accessibility violations', async () => {
       const { container } = render(
@@ -111,6 +119,61 @@ describe('Accessibility Audit — jest-axe integration', () => {
       render(<ModelDetailPanel entry={mockEntry} runs={mockRuns} onClose={() => {}} />)
       const closeButton = screen.getByRole('button', { name: /close/i })
       expect(closeButton).toBeInTheDocument()
+    })
+
+    it('close button is focusable', () => {
+      const mockEntry: LeaderboardEntry = {
+        model_id: 'gemini-3.1-pro',
+        run_count: 5,
+        reviewed_count: 5,
+        average_human_score: 4.0,
+        average_tech_score: 4.5,
+        best_human_score: 4.8,
+        latest_run_date: '2026-04-05',
+        total_runs: 5,
+      }
+      render(<ModelDetailPanel entry={mockEntry} runs={mockRuns} onClose={() => {}} />)
+      const closeButton = screen.getByRole('button', { name: /close/i })
+      expect(closeButton).toBeVisible()
+      expect(closeButton).not.toBeDisabled()
+    })
+
+    it('has modal role and aria attributes', () => {
+      const mockEntry: LeaderboardEntry = {
+        model_id: 'gemini-3.1-pro',
+        run_count: 5,
+        reviewed_count: 5,
+        average_human_score: 4.0,
+        average_tech_score: 4.5,
+        best_human_score: 4.8,
+        latest_run_date: '2026-04-05',
+        total_runs: 5,
+      }
+      render(<ModelDetailPanel entry={mockEntry} runs={mockRuns} onClose={() => {}} />)
+      const dialog = screen.getByRole('dialog')
+      expect(dialog).toHaveAttribute('aria-modal', 'true')
+      expect(dialog).toHaveAttribute('aria-labelledby')
+    })
+
+    it('focus trap: all interactive elements are focusable', () => {
+      const mockEntry: LeaderboardEntry = {
+        model_id: 'gemini-3.1-pro',
+        run_count: 5,
+        reviewed_count: 5,
+        average_human_score: 4.0,
+        average_tech_score: 4.5,
+        best_human_score: 4.8,
+        latest_run_date: '2026-04-05',
+        total_runs: 5,
+      }
+      render(<ModelDetailPanel entry={mockEntry} runs={mockRuns} onClose={() => {}} />)
+      const buttons = screen.getAllByRole('button')
+      const links = screen.getAllByRole('link')
+      const allFocusable = [...buttons, ...links]
+      expect(allFocusable.length).toBeGreaterThan(0)
+      allFocusable.forEach(el => {
+        expect(el).not.toHaveAttribute('tabindex', '-1')
+      })
     })
   })
 

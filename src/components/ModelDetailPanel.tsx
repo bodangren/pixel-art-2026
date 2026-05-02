@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import type { LeaderboardEntry } from '@/../lib/leaderboard'
 import type { Run } from '@/../lib/schemas'
@@ -12,18 +12,52 @@ interface ModelDetailPanelProps {
 }
 
 const ModelDetailPanel: React.FC<ModelDetailPanelProps> = ({ entry, runs, onClose }) => {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab' || !panelRef.current) return
+
+      const focusableElements = panelRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault()
+        lastElement?.focus()
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault()
+        firstElement?.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    closeButtonRef.current?.focus()
+
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
+
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-white/10 rounded-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <div className="bg-slate-900 border border-white/10 rounded-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden shadow-2xl" ref={panelRef}>
         <div className="p-6 border-b border-white/5">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-3xl font-black text-white tracking-tight">{entry.model_id}</h2>
+              <h2 id="panel-title" className="text-3xl font-black text-white tracking-tight">{entry.model_id}</h2>
               <p className="text-slate-500 font-mono text-xs mt-1 uppercase tracking-widest">Model Details</p>
             </div>
             <button
+              ref={closeButtonRef}
               onClick={onClose}
               className="px-4 py-2 bg-slate-800 border border-white/10 rounded-lg text-slate-400 text-sm font-bold hover:bg-slate-700 hover:text-white transition-colors"
+              aria-label="Close panel"
             >
               Close
             </button>
