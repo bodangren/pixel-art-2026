@@ -63,20 +63,32 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 ## Upcoming Tracks
 
 - [x] **Track: Public Leaderboard System**
-   *Link: [./tracks/leaderboard_system_20260502/](./tracks/leaderboard_system_20260502/)*
+   *Link: [./archive/leaderboard_system_20260502/](./archive/leaderboard_system_20260502/)*
    *Priority: High* — Aggregate review scores across all runs, rank models, provide filtering/sorting to identify top performers.
    **Phase 1-4: Complete (263 tests passing)**
 
 - [x] **Track: Advanced Sprite Inspection Tools**
-   *Link: [./tracks/sprite_inspection_tools_20260502/](./tracks/sprite_inspection_tools_20260502/)*
+   *Link: [./archive/sprite_inspection_tools_20260502/](./archive/sprite_inspection_tools_20260502/)*
    *Priority: High* — Add animation playback controls (frame-stepping, FPS slider, loop modes) for evaluating sprite quality frame-by-frame.
    **Phase 1-4: Complete (59 sprite-related tests passing)**
 
 - [x] **Track: CI/CD Pipeline Automation**
-   *Link: [./tracks/ci_cd_pipeline_20260502/](./tracks/ci_cd_pipeline_20260502/)*
+   *Link: [./archive/ci_cd_pipeline_20260502/](./archive/ci_cd_pipeline_20260502/)*
    *Priority: Medium* — GitHub Actions workflows for automated lint, test, build, and deploy on PRs and main branch pushes.
    **Phase 1-4: Complete (340 tests passing)**
 
 - [ ] **Track: Accessibility Audit (WCAG 2.1 AA)**
    *Link: [./tracks/accessibility_audit_20260502/](./tracks/accessibility_audit_20260502/)*
    *Priority: Medium* — Audit and fix keyboard navigation, screen reader support, color contrast, and motion preferences.
+
+- [ ] **Track: Batch Export and Reporting**
+   *Link: [./tracks/batch-export-and-reporting_20260503/](./tracks/batch-export-and-reporting_20260503/)*
+   *Priority: High* — Add CSV/JSON export for leaderboard rankings, quality metrics, and model comparison data.
+
+- [ ] **Track: Canvas Interaction E2E Testing**
+   *Link: [./tracks/canvas-interaction-testing_20260503/](./tracks/canvas-interaction-testing_20260503/)*
+   *Priority: Medium* — Add integration tests for sprite inspection tools, zoom/pan interactions, and game canvas workflows.
+
+- [ ] **Track: Multi-Game Preview Expansion**
+   *Link: [./tracks/game-preview-multi-game_20260503/](./tracks/game-preview-multi-game_20260503/)*
+   *Priority: Medium* — Extend dynamic game preview to support RPG, isometric, and sci-fi templates beyond Labyrinth.
