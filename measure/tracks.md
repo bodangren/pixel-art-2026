@@ -65,7 +65,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [ ] **Track: Public Leaderboard System**
    *Link: [./tracks/leaderboard_system_20260502/](./tracks/leaderboard_system_20260502/)*
    *Priority: High* — Aggregate review scores across all runs, rank models, provide filtering/sorting to identify top performers.
-   **Phase 1: Complete**
+   **Phase 1-3: Complete (263 tests passing)**
 
 - [ ] **Track: Advanced Sprite Inspection Tools**
    *Link: [./tracks/sprite_inspection_tools_20260502/](./tracks/sprite_inspection_tools_20260502/)*
