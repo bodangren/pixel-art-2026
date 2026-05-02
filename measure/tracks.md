@@ -67,9 +67,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Priority: High* — Aggregate review scores across all runs, rank models, provide filtering/sorting to identify top performers.
    **Phase 1-4: Complete (263 tests passing)**
 
-- [ ] **Track: Advanced Sprite Inspection Tools**
+- [x] **Track: Advanced Sprite Inspection Tools**
    *Link: [./tracks/sprite_inspection_tools_20260502/](./tracks/sprite_inspection_tools_20260502/)*
    *Priority: High* — Add animation playback controls (frame-stepping, FPS slider, loop modes) for evaluating sprite quality frame-by-frame.
+   **Phase 1-4: Complete (59 sprite-related tests passing)**
 
 - [ ] **Track: CI/CD Pipeline Automation**
    *Link: [./tracks/ci_cd_pipeline_20260502/](./tracks/ci_cd_pipeline_20260502/)*

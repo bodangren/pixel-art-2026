@@ -24,5 +24,7 @@
 | 2026-04-25 | visual_refresh | Lamborghini identity applied to UI (Navbar, AssetCard, layout, globals.css) | Medium | Resolved | New DESIGN.md defines obsidian/gold aesthetic; build + 168 tests pass |
 | 2026-05-02 | typescript_strict_mode | test file missing type-only import (GameEngineTestRunner) | Low | Resolved | Added explicit `type` import in test file; no `any` types found in codebase |
 | 2026-05-02 | e2e_batch_pipeline | E2E pipeline tests in lib/ | Low | Resolved | 8 tests added covering generation→validation→display; 227 total tests pass |
-| 2026-05-02 | leaderboard_system | Leaderboard computed at build time from runs-index.json and leaderboard.json | Low | Open | Currently reads from derived JSON files; no live aggregation yet |
-| 2026-05-02 | leaderboard_system | Sort by name descending uses localeCompare which sorts uppercase before lowercase | Low | Open | name sort case sensitivity - 'SONNET' > 'gemini' with toLowerCase but inconsistent |
+| 2026-05-02 | sprite_inspection | Phase 1: sprite-utils.ts with extractFrames() and FramePlayer class | Low | Resolved | 31 tests; lib/sprite-utils.ts created |
+| 2026-05-02 | sprite_inspection | Phase 2: AnimationControls component with LoopModeSelector, FrameCounter | Low | Resolved | 18 tests; src/components/AnimationControls.tsx created |
+| 2026-05-02 | sprite_inspection | Phase 3-4: SpriteSheetPreview integrated with AnimationControls and FramePlayer | Low | Resolved | 10 tests; SpriteSheetPreview now uses FramePlayer for state management |
+| 2026-05-02 | sprite_inspection | SpriteSheetPreview used internal state instead of AnimationControls | Medium | Resolved | Refactored to use AnimationControls with FramePlayer; proper separation of concerns |
