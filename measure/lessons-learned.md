@@ -47,6 +47,4 @@
 
 - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
 - (2026-04-24-25, build/validation) Next.js Turbopack requires native SWC bindings on linux/x64 use `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter; Static export does not support API routes - embed data fetching in async server components
-- (2026-05-02, sprite_inspection) When a type is only used as a value (e.g., in `as const` assertions), importing it with `import type` causes unused import warnings. Use regular import instead.
-
-- (2026-05-02, sprite_inspection) SpriteSheetPreview had internal animation state instead of using the separate AnimationControls component. Refactored to use AnimationControls + FramePlayer for proper separation of concerns.
+- (2026-05-02, sprite_inspection) When a type is only used as a value (e.g., in `as const` assertions), importing it with `import type` causes unused import warnings. Use regular import. SpriteSheetPreview had internal animation state instead of using the separate AnimationControls component - refactored to use AnimationControls + FramePlayer for proper separation of concerns.
