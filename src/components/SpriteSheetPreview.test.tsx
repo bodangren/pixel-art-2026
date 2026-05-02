@@ -75,18 +75,16 @@ describe('SpriteSheetPreview', () => {
     })
   })
 
-  describe('frame slider', () => {
-    it('renders frame slider', () => {
+  describe('frame stepping via controls', () => {
+    it('renders prev/next step buttons', () => {
       render(<SpriteSheetPreview {...defaultProps} />)
-      const slider = screen.getByRole('slider', { name: /frame/i })
-      expect(slider).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /prev/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument()
     })
 
-    it('pauses when frame slider is changed', () => {
+    it('renders loop mode selector', () => {
       render(<SpriteSheetPreview {...defaultProps} />)
-      const slider = screen.getByRole('slider', { name: /frame/i })
-      fireEvent.change(slider, { target: { value: '3' } })
-      expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument()
+      expect(screen.getByRole('radio', { name: /loop/i })).toBeInTheDocument()
     })
   })
 })
