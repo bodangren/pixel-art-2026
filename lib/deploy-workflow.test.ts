@@ -4,7 +4,6 @@ import { parse } from 'yaml'
 
 describe('GitHub Actions Deploy Workflow', () => {
   const workflowPath = '.github/workflows/deploy.yml'
-  let workflow: ReturnType<typeof parse>
 
   it('deploy.yml file exists', () => {
     expect(() => readFileSync(workflowPath, 'utf8')).not.toThrow()
@@ -12,7 +11,7 @@ describe('GitHub Actions Deploy Workflow', () => {
 
   it('parses as valid YAML', () => {
     const content = readFileSync(workflowPath, 'utf8')
-    expect(() => { workflow = parse(content) }).not.toThrow()
+    expect(() => { parse(content) }).not.toThrow()
   })
 
   it('has name "Deploy"', () => {

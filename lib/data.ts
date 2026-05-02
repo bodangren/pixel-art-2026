@@ -54,7 +54,7 @@ export async function getLeaderboard(
   const leaderboardDataPath = path.join(DERIVED_DIR, 'leaderboard.json')
 
   let runs: Run[] = []
-  let techGrades: Record<string, { alignment_score: number; palette_consistency_score: number; transparency_score: number; total_technical_score: number; linter_notes: string }> = {}
+  const techGrades: Record<string, { alignment_score: number; palette_consistency_score: number; transparency_score: number; total_technical_score: number; linter_notes: string }> = {}
 
   try {
     const runsIndexContent = await fs.readFile(runsIndexPath, 'utf-8')
