@@ -1,11 +1,11 @@
 # Plan: Accessibility Audit (WCAG 2.1 AA)
 
 ## Phase 1: Automated Audit (TDD)
-- [ ] Install `@axe-core/react` and `jest-axe` for automated accessibility testing
-- [ ] Write tests using jest-axe to scan key pages/components for violations
-- [ ] Run initial audit on leaderboard, asset detail, and comparison views
-- [ ] Document all critical and high-severity violations found
-- [ ] Verify existing 227+ tests still pass with new test dependencies
+- [x] Install `@axe-core/react` and `jest-axe` for automated accessibility testing
+- [x] Write tests using jest-axe to scan key pages/components for violations
+- [x] Run initial audit on leaderboard, asset detail, and comparison views
+- [x] Document all critical and high-severity violations found
+- [x] Verify existing 340+ tests still pass with new test dependencies
 
 ## Phase 2: Keyboard Navigation Fixes
 - [ ] Write tests verifying all buttons, sliders, and links are focusable
