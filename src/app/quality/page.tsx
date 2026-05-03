@@ -6,6 +6,7 @@ import { ModelComparisonChart } from '@/components/ModelComparisonChart'
 import { TrendLine } from '@/components/TrendLine'
 import { AnomalyAlert } from '@/components/AnomalyAlert'
 import { RadarChartComponent } from '@/components/RadarChartComponent'
+import ExportButton from '@/components/ExportButton'
 import { detectAnomalies, calculateDistribution, calculateTrend } from '../../../lib/quality-metrics'
 
 interface ModelMetrics {
@@ -82,10 +83,23 @@ export default async function QualityDashboard() {
     { metric: 'Pack', value: 3.4, baseline: 3.1 }
   ]
 
+  const exportData = modelMetrics.map(m => ({
+    model: m.modelId,
+    runs: m.runCount,
+    avg_score: m.averageScore.toFixed(2),
+    scores: m.scores.join(';')
+  }))
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Quality Metrics Dashboard</h1>
+        <ExportButton
+          exportType="csv"
+          data={exportData}
+          filename={`quality-metrics-${new Date().toISOString().split('T')[0]}.csv`}
+          label="Export CSV"
+        />
       </div>
 
       <AnomalyAlert anomalies={allAnomalies} />

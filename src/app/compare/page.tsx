@@ -1,6 +1,7 @@
 import React from 'react';
 import { listRuns, getReview } from '@/../lib/data';
 import ComparisonView from '@/components/ComparisonView';
+import ExportDropdown from '@/components/ExportDropdown';
 import Link from 'next/link';
 
 export default async function ComparePage() {

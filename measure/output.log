@@ -658,3 +658,389 @@ Route (app)
 ○  (Static)  prerendered as static content
 ●  (SSG)     prerendered as static HTML (uses generateStaticParams)
 [0m
+[0m$ [0mgit add -A && git commit -m "feat: batch export phase 1-2 - export utilities and leaderboard export dropdown
+
+- Add lib/export.ts with toCsv, toJsonExport, downloadFile helpers
+- Add lib/export.test.ts with 5 tests
+- Create ExportDropdown component with CSV/JSON export options
+- Add ExportDropdown.test.tsx with 6 tests
+- Add ExportDropdown to LeaderboardClient page
+- 370 tests passing (up from 359)" && git push
+[main dda19ce] feat: batch export phase 1-2 - export utilities and leaderboard export dropdown
+ 8 files changed, 389 insertions(+), 2 deletions(-)
+ create mode 100644 lib/export.test.ts
+ create mode 100644 lib/export.ts
+ create mode 100644 src/components/ExportDropdown.test.tsx
+ create mode 100644 src/components/ExportDropdown.tsx
+To https://github.com/bodangren/pixel-art-2026.git
+   35ae82a..dda19ce  main -> main
+[0m
+[0m✱ [0mGlob "src/app/quality/**/*.tsx"[90m 1 match[0m
+[0m→ [0mRead src/app/quality/page.tsx
+[0m→ [0mRead src/app/compare/page.tsx
+[0m→ [0mRead src/components/ComparisonView.tsx[90m [limit=80][0m
+[0m
+[0m← [0mEdit src/app/compare/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+@@ -1,7 +1,8 @@
+ import React from 'react';
+ import { listRuns, getReview } from '@/../lib/data';
+ import ComparisonView from '@/components/ComparisonView';
++import ExportDropdown from '@/components/ExportDropdown';
+ import Link from 'next/link';
+ 
+ export default async function ComparePage() {
+   const runs = await listRuns();
+
+[0m
+[0m← [0mEdit src/app/compare/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+@@ -29,13 +29,27 @@
+     </div>
+   );
+ }
+ 
++const exportData = runsWithReviews.map(r => ({
++  model: r.run.model_id,
++  run_date: r.run.run_date,
++  human_score: r.review?.weighted_total_score ?? null,
++  background_score: r.review?.rubric_scores.background ?? null,
++  hero_score: r.review?.rubric_scores.hero ?? null,
++  enemy_score: r.review?.rubric_scores.enemy ?? null,
++  effect_score: r.review?.rubric_scores.effect ?? null,
++  pack_score: r.review?.rubric_scores.pack ?? null
++}))
++
+ return (
+   <div className="container mx-auto p-8 bg-slate-950 text-white min-h-screen">
+-    <div className="mb-8">
+-      <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
+-      <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
++    <div className="mb-8 flex justify-between items-start">
++      <div>
++        <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
++        <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
++      </div>
++      <ExportDropdown entries={[]} label="Export Comparison" />
+     </div>
+     <ComparisonView
+       runs={sortedRuns}
+       initialLeftRunId={sortedRuns[0]?.run_id || ''}
+
+[0m
+[0m← [0mEdit src/app/compare/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+@@ -29,27 +29,13 @@
+     </div>
+   );
+ }
+ 
+-const exportData = runsWithReviews.map(r => ({
+-  model: r.run.model_id,
+-  run_date: r.run.run_date,
+-  human_score: r.review?.weighted_total_score ?? null,
+-  background_score: r.review?.rubric_scores.background ?? null,
+-  hero_score: r.review?.rubric_scores.hero ?? null,
+-  enemy_score: r.review?.rubric_scores.enemy ?? null,
+-  effect_score: r.review?.rubric_scores.effect ?? null,
+-  pack_score: r.review?.rubric_scores.pack ?? null
+-}))
+-
+ return (
+   <div className="container mx-auto p-8 bg-slate-950 text-white min-h-screen">
+-    <div className="mb-8 flex justify-between items-start">
+-      <div>
+-        <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
+-        <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
+-      </div>
+-      <ExportDropdown entries={[]} label="Export Comparison" />
++    <div className="mb-8">
++      <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
++      <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
+     </div>
+     <ComparisonView
+       runs={sortedRuns}
+       initialLeftRunId={sortedRuns[0]?.run_id || ''}
+
+[0m
+[0m← [0mEdit src/app/quality/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+@@ -5,8 +5,9 @@
+ import { ModelComparisonChart } from '@/components/ModelComparisonChart'
+ import { TrendLine } from '@/components/TrendLine'
+ import { AnomalyAlert } from '@/components/AnomalyAlert'
+ import { RadarChartComponent } from '@/components/RadarChartComponent'
++import ExportDropdown from '@/components/ExportDropdown'
+ import { detectAnomalies, calculateDistribution, calculateTrend } from '../../../lib/quality-metrics'
+ 
+ interface ModelMetrics {
+   modelId: string
+
+[0m
+[0m← [0mEdit src/app/quality/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+@@ -86,8 +86,31 @@
+ return (
+   <div className="space-y-8">
+     <div className="flex justify-between items-center">
+       <h1 className="text-3xl font-bold">Quality Metrics Dashboard</h1>
++      <button
++        onClick={() => {
++          const metrics = modelMetrics.map(m => ({
++            model: m.modelId,
++            runs: m.runCount,
++            avg_score: m.averageScore.toFixed(2),
++            scores: m.scores.join(';')
++          }))
++          const csv = metrics.map(m => Object.values(m).join(',')).join('\n')
++          const blob = new Blob([csv], { type: 'text/csv' })
++          const url = URL.createObjectURL(blob)
++          const a = document.createElement('a')
++          a.href = url
++          a.download = `quality-metrics-${new Date().toISOString().split('T')[0]}.csv`
++          document.body.appendChild(a)
++          a.click()
++          document.body.removeChild(a)
++          URL.revokeObjectURL(url)
++        }}
++        className="px-4 py-2 bg-slate-800 border border-white/10 rounded-lg text-sm font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
++      >
++        Export CSV
++      </button>
+     </div>
+ 
+     <AnomalyAlert anomalies={allAnomalies} />
+ 
+
+[0m
+[0m← [0mWrite src/components/ExportButton.tsx
+Wrote file successfully.
+[0m
+[0m← [0mEdit src/app/quality/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+@@ -5,9 +5,9 @@
+ import { ModelComparisonChart } from '@/components/ModelComparisonChart'
+ import { TrendLine } from '@/components/TrendLine'
+ import { AnomalyAlert } from '@/components/AnomalyAlert'
+ import { RadarChartComponent } from '@/components/RadarChartComponent'
+-import ExportDropdown from '@/components/ExportDropdown'
++import ExportButton from '@/components/ExportButton'
+ import { detectAnomalies, calculateDistribution, calculateTrend } from '../../../lib/quality-metrics'
+ 
+ interface ModelMetrics {
+   modelId: string
+
+[0m
+[0m← [0mEdit src/app/quality/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+@@ -86,10 +86,10 @@
+ return (
+   <div className="space-y-8">
+     <div className="flex justify-between items-center">
+       <h1 className="text-3xl font-bold">Quality Metrics Dashboard</h1>
+-      <button
+-        onClick={() => {
++      <ExportButton
++        onExport={() => {
+           const metrics = modelMetrics.map(m => ({
+             model: m.modelId,
+             runs: m.runCount,
+             avg_score: m.averageScore.toFixed(2),
+@@ -105,12 +105,10 @@
+           a.click()
+           document.body.removeChild(a)
+           URL.revokeObjectURL(url)
+         }}
+-        className="px-4 py-2 bg-slate-800 border border-white/10 rounded-lg text-sm font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+-      >
+-        Export CSV
+-      </button>
++        label="Export CSV"
++      />
+     </div>
+ 
+     <AnomalyAlert anomalies={allAnomalies} />
+ 
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npx vitest run --reporter=dot 2>&1 | tail -20
+(no output)
+
+<bash_metadata>
+bash tool terminated command after exceeding timeout 180000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</bash_metadata>
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 300 npx vitest run --reporter=dot 2>&1 | tail -25
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+······stderr | tests/accessibility.test.tsx > Accessibility Audit — jest-axe integration > AssetCard > should have no violations for sprite sheet
+An update to SpriteSheetPreview inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+·····························································Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+··························································································································································································································································································
+
+ Test Files  49 passed (49)
+      Tests  370 passed (370)
+   Start at  12:07:36
+   Duration  146.99s (transform 5.32s, setup 23.87s, import 42.54s, tests 56.89s, environment 263.56s)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npm run build 2>&1 | tail -30
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+✓ Compiled successfully in 24.2s
+  Running TypeScript ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Finished TypeScript in 22.9s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/24) ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Generating static pages using 3 workers (6/24) 
+  Generating static pages using 3 workers (12/24) 
+Error occurred prerendering page "/quality". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: Event handlers cannot be passed to Client Component props.
+  {onExport: function onExport, label: ...}
+             ^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at stringify (<anonymous>) {
+  digest: '2131301020'
+}
+Export encountered an error on /quality/page: /quality, exiting the build.
+⨯ Next.js build worker exited with code: 1 and signal: null
+[0m
+[0m← [0mWrite src/components/ExportButton.tsx
+Wrote file successfully.
+[0m
+[0m→ [0mRead src/app/quality/page.tsx
+[0m
+[0m← [0mEdit src/app/quality/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/quality/page.tsx
+@@ -82,31 +82,23 @@
+   { metric: 'Effect', value: 2.8, baseline: 3.0 },
+   { metric: 'Pack', value: 3.4, baseline: 3.1 }
+ ]
+ 
++const exportData = modelMetrics.map(m => ({
++  model: m.modelId,
++  runs: m.runCount,
++  avg_score: m.averageScore.toFixed(2),
++  scores: m.scores.join(';')
++}))
++
+ return (
+   <div className="space-y-8">
+     <div className="flex justify-between items-center">
+       <h1 className="text-3xl font-bold">Quality Metrics Dashboard</h1>
+       <ExportButton
+-        onExport={() => {
+-          const metrics = modelMetrics.map(m => ({
+-            model: m.modelId,
+-            runs: m.runCount,
+-            avg_score: m.averageScore.toFixed(2),
+-            scores: m.scores.join(';')
+-          }))
+-          const csv = metrics.map(m => Object.values(m).join(',')).join('\n')
+-          const blob = new Blob([csv], { type: 'text/csv' })
+-          const url = URL.createObjectURL(blob)
+-          const a = document.createElement('a')
+-          a.href = url
+-          a.download = `quality-metrics-${new Date().toISOString().split('T')[0]}.csv`
+-          document.body.appendChild(a)
+-          a.click()
+-          document.body.removeChild(a)
+-          URL.revokeObjectURL(url)
+-        }}
++        exportType="csv"
++        data={exportData}
++        filename={`quality-metrics-${new Date().toISOString().split('T')[0]}.csv`}
+         label="Export CSV"
+       />
+     </div>
+ 
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npm run build 2>&1 | tail -40
+✓ Compiled successfully in 30.3s
+  Running TypeScript ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Finished TypeScript in 21.4s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/24) ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Generating static pages using 3 workers (6/24) 
+  Generating static pages using 3 workers (12/24) 
+  Generating static pages using 3 workers (18/24) 
+✓ Generating static pages using 3 workers (24/24) in 3.6s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /compare
+├ ○ /leaderboard
+├ ● /models/[modelId]
+│ ├ /models/Gemini-2.5-flash
+│ ├ /models/Gemini-2.5-pro
+│ ├ /models/Gemini-3-flash
+│ └ [+11 more paths]
+├ ○ /preview
+├ ○ /quality
+├ ○ /runs
+└ ● /runs/[runId]
+  └ /runs/gemini-3.1-pro__2026-04-04__r1
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+[0m
