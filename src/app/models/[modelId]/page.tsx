@@ -1,10 +1,11 @@
 import React from 'react';
 import { listRuns, getLeaderboard } from '@/../lib/data';
+import type { LeaderboardEntry } from '@/../lib/leaderboard';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
   const leaderboard = await getLeaderboard();
-  return leaderboard.map((model: any) => ({
+  return leaderboard.map((model: LeaderboardEntry) => ({
     modelId: model.model_id,
   }));
 }
@@ -16,7 +17,7 @@ export default async function ModelPage({ params }: { params: Promise<{ modelId:
     .sort((a, b) => new Date(b.run_date).getTime() - new Date(a.run_date).getTime());
   
   const leaderboard = await getLeaderboard();
-  const modelStats = leaderboard.find((m: any) => m.model_id === modelId);
+  const modelStats = leaderboard.find((m: LeaderboardEntry) => m.model_id === modelId);
 
   return (
     <div className="container mx-auto p-8 bg-slate-950 text-white min-h-screen">

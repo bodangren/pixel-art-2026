@@ -1,10 +1,7 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import {
   GameTemplate,
   TemplateGenre,
-  SpriteSlot,
-  TilemapConfig,
-  RenderConfig,
   getTemplate,
   getAllTemplates,
   listGenres

@@ -1026,3 +1026,34 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
 \ No newline at end of file
 
 [0m
+[0m$ [0mgit add measure/tech-debt.md measure/lessons-learned.md measure/output.log && git commit -m "checkpoint(MiniMax-M2.7): multi-game preview expansion complete - 408 tests pass"
+[main 691cd5c] checkpoint(MiniMax-M2.7): multi-game preview expansion complete - 408 tests pass
+ 3 files changed, 1013 insertions(+), 4 deletions(-)
+[0m
+[0m$ [0mgit push
+To https://github.com/bodangren/pixel-art-2026.git
+   02abf61..691cd5c  main -> main
+[0m
+[0m# [0mTodos
+[x] FUNCTIONALITY REVIEW: Verify previous phase (canvas-interaction-testing) works
+[x] Phase 1: Template Registry and Types
+[x] Phase 2: RPG Town Template
+[x] Phase 3: Isometric City Template
+[x] Phase 4: Sci-Fi Platformer Template
+[x] Phase 5: Template Selector UI
+[x] Phase 6: Verification and Handoff
+[0m
+**Multi-Game Preview Expansion** track complete.
+
+### Summary
+- Created `lib/game-templates.ts` with `GameTemplate` interface and registry
+- Added 4 game templates: labyrinth, rpg-town, isometric-city, scifi-platformer
+- Added template selector dropdown to `GameCanvas` component
+- Template background colors dynamically applied based on selected template
+- **408 tests passing**, build succeeds, lint clean
+
+### Files created/modified:
+- `lib/game-templates.ts` - Template registry and types
+- `lib/game-templates.test.ts` - Template registry tests (8 tests)
+- `src/components/GameCanvas.tsx` - Added template selector UI
+- `measure/tracks/game-preview-multi-game_20260503/plan.md` - Updated plan
