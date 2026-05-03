@@ -1,36 +1,36 @@
 # Plan: Batch Export and Reporting
 
-## Phase 1: Export Utilities [ ]
+## Phase 1: Export Utilities [x]
 
-- [ ] Write test: `toCsv` converts array of objects to CSV string with headers
-- [ ] Write test: `toCsv` handles special characters (commas, quotes, newlines)
-- [ ] Write test: `toJsonExport` produces valid JSON with metadata timestamp
-- [ ] Create `lib/export.ts` with `toCsv` and `toJsonExport` utilities
-- [ ] Write test: `downloadFile` triggers browser download with correct MIME type
-- [ ] Create `lib/download.ts` with `downloadFile` helper (Blob + URL.createObjectURL)
+- [x] Write test: `toCsv` converts array of objects to CSV string with headers
+- [x] Write test: `toCsv` handles special characters (commas, quotes, newlines)
+- [x] Write test: `toJsonExport` produces valid JSON with metadata timestamp
+- [x] Create `lib/export.ts` with `toCsv` and `toJsonExport` utilities
+- [x] Write test: `downloadFile` triggers browser download with correct MIME type
+- [x] Create `lib/download.ts` with `downloadFile` helper (Blob + URL.createObjectURL)
 
-## Phase 2: Leaderboard Export [ ]
+## Phase 2: Leaderboard Export [x]
 
-- [ ] Write test: leaderboard export button renders on leaderboard page
-- [ ] Write test: CSV export includes all visible columns (model, rank, score, subscores)
-- [ ] Add export dropdown to leaderboard page with CSV and JSON options
-- [ ] Wire export to leaderboard data source (current filtered/sorted view)
-- [ ] Add accessible button labels and keyboard support
+- [x] Write test: leaderboard export button renders on leaderboard page
+- [x] Write test: CSV export includes all visible columns (model, rank, score, subscores)
+- [x] Add export dropdown to leaderboard page with CSV and JSON options
+- [x] Wire export to leaderboard data source (current filtered/sorted view)
+- [x] Add accessible button labels and keyboard support
 
-## Phase 3: Quality Dashboard Export [ ]
+## Phase 3: Quality Dashboard Export [x]
 
-- [ ] Write test: quality dashboard export includes score distributions
-- [ ] Write test: JSON export includes trend data with date keys
-- [ ] Add export button to quality metrics dashboard
-- [ ] Export score distributions as JSON (model → score → count)
-- [ ] Export trend data as JSON (date → model → average score)
+- [x] Write test: quality dashboard export includes score distributions
+- [x] Write test: JSON export includes trend data with date keys
+- [x] Add export button to quality metrics dashboard
+- [x] Export score distributions as JSON (model → score → count)
+- [x] Export trend data as JSON (date → model → average score)
 
-## Phase 4: Comparison View Export [ ]
+## Phase 4: Comparison View Export [x]
 
-- [ ] Write test: comparison export includes both models' subscores
-- [ ] Write test: CSV has columns for model-a, model-b, and delta
-- [ ] Add export button to comparison view
-- [ ] Export side-by-side comparison as CSV with delta column
+- [x] Write test: comparison export includes both models' subscores
+- [x] Write test: CSV has columns for model-a, model-b, and delta
+- [x] Add export button to comparison view
+- [x] Export side-by-side comparison as CSV with delta column
 
 ## Phase 5: Verification and Handoff [ ]
 
