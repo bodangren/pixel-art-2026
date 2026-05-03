@@ -15,6 +15,8 @@
 | 2026-04-13 | repo | node_modules/@next/swc-*.node files tracked (124MB each) exceed GitHub 100MB limit | Critical | Resolved | Verified: swc files were never committed to this repo; backup confirmed clean (992K), push succeeds |
 | 2026-04-16 | benchmark_dashboard_ui | ZoomContainer replaced ZoomPanel in ComparisonView | Low | Resolved | ZoomContainer has more features (pan, max zoom, hover grid); consolidated implementations |
 | 2026-04-24 | dynamic_game_preview | GameCanvas has duplicate sprite-loading logic (loadSprites callback + useEffect both do the same thing) | Medium | Resolved | Consolidated into single loadSprites function; useEffect now calls loadSprites directly |
+| 2026-05-03 | canvas_interaction_testing | Phase 1-4: SpriteSheetPreview, ZoomContainer, GameCanvas integration tests added | Low | Resolved | 157 component tests pass; cross-component sync tests for AnimationControls/FramePlayer |
+| 2026-05-03 | canvas_interaction_testing | Phase 5: Verification and handoff complete | Low | Resolved | Build succeeds, lint passes (only pre-existing warnings), 172 tests pass |
 | 2026-04-24 | dynamic_game_preview | ComparisonView ZoomPanel uses inline `<img>` with `imageRendering: pixelated` instead of ZoomContainer | Medium | Resolved | ZoomPanel in ComparisonView now reuses ZoomContainer component |
 | 2026-04-24 | batch_generation_pipeline | Phase 1: BatchConfig schema and BatchState implemented | Low | Resolved | Phase 2-5 now complete - parallel execution, progress UI, failure handling, result aggregation |
 | 2026-04-24 | batch_generation_pipeline | Phase 5: BatchResultsComparison and export functions | Low | Resolved | Batch results UI complete with CSV/JSON export |

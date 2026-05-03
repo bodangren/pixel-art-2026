@@ -87,9 +87,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Priority: High* — Add CSV/JSON export for leaderboard rankings, quality metrics, and model comparison data.
    **Phase 1-4: Complete (370 tests passing)**
 
-- [ ] **Track: Canvas Interaction E2E Testing**
-   *Link: [./tracks/canvas-interaction-testing_20260503/](./tracks/canvas-interaction-testing_20260503/)*
-   *Priority: Medium* — Add integration tests for sprite inspection tools, zoom/pan interactions, and game canvas workflows.
+- [x] **Track: Canvas Interaction E2E Testing**
+    *Link: [./tracks/canvas-interaction-testing_20260503/](./tracks/canvas-interaction-testing_20260503/)*
+    *Priority: Medium* — Add integration tests for sprite inspection tools, zoom/pan interactions, and game canvas workflows.
+    **Phase 1-5: Complete (172 tests passing)**
 
 - [ ] **Track: Multi-Game Preview Expansion**
    *Link: [./tracks/game-preview-multi-game_20260503/](./tracks/game-preview-multi-game_20260503/)*
