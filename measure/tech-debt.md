@@ -30,3 +30,4 @@
 | 2026-05-02 | sprite_inspection | Phase 2: AnimationControls component with LoopModeSelector, FrameCounter | Low | Resolved | 18 tests; src/components/AnimationControls.tsx created |
 | 2026-05-02 | sprite_inspection | Phase 3-4: SpriteSheetPreview integrated with AnimationControls and FramePlayer | Low | Resolved | 10 tests; SpriteSheetPreview now uses FramePlayer for state management |
 | 2026-05-02 | sprite_inspection | SpriteSheetPreview used internal state instead of AnimationControls | Medium | Resolved | Refactored to use AnimationControls with FramePlayer; proper separation of concerns |
+| 2026-05-04 | game-preview-multi-game | Phase 1-5: Multi-Game Template Expansion | Low | Resolved | 4 game templates (labyrinth, rpg-town, isometric-city, scifi-platformer); template selector UI added to GameCanvas; 408 tests pass |
