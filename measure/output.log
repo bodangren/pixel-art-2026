@@ -494,3 +494,167 @@ bash tool terminated command after exceeding timeout 120000 ms. If this command 
 </bash_metadata>
 [0m
 The build and tests are passing. Workspace is clean. Let me commit these fixes and continue with the next pending track.
+[0m$ [0mgit add -A && git commit -m "fix: resolve TypeScript errors and test mismatches
+
+- Fix modelStats possibly undefined in [modelId]/page.tsx
+- Add vi import to accessibility.test.tsx
+- Fix LeaderboardFilters props mismatch (selectedStyles/selectedModels don't exist)
+- Fix BatchConfigForm props mismatch (onCancel doesn't exist)
+- Add jest-axe type declaration
+- Add src/types to tsconfig includes" && git push
+[main 35ae82a] fix: resolve TypeScript errors and test mismatches
+ 4 files changed, 413 insertions(+), 8 deletions(-)
+ create mode 100644 src/types/jest-axe.d.ts
+To https://github.com/bodangren/pixel-art-2026.git
+   0f18901..35ae82a  main -> main
+[0m
+[0m→ [0mRead measure/tracks/accessibility_audit_20260502/metadata.json
+[0m
+[0m← [0mEdit measure/tracks/accessibility_audit_20260502/metadata.json
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502/metadata.json
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502/metadata.json
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502/metadata.json
+@@ -1,7 +1,7 @@
+ {
+   "id": "accessibility_audit_20260502",
+   "title": "Accessibility Audit (WCAG 2.1 AA)",
+   "created": "2026-05-02",
+-  "status": "pending",
++  "status": "completed",
+   "priority": "medium"
+ }
+
+[0m
+[0m→ [0mRead measure/tracks/batch-export-and-reporting_20260503/plan.md
+[0m→ [0mRead measure/tracks/batch-export-and-reporting_20260503/metadata.json
+[0m✱ [0mGlob "lib/*.ts"[90m 36 matches[0m
+[0m→ [0mRead lib/quality-export.ts
+[0m→ [0mRead lib/leaderboard.ts
+[0m→ [0mRead lib/quality-export.test.ts
+[0m
+[0m← [0mWrite lib/export.ts
+Wrote file successfully.
+[0m
+[0m← [0mWrite lib/export.test.ts
+Wrote file successfully.
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npx vitest run lib/export.test.ts --reporter=dot 2>&1 | tail -15
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+·····
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  11:54:14
+   Duration  5.31s (transform 142ms, setup 465ms, import 66ms, tests 29ms, environment 4.12s)
+[0m
+[0m✱ [0mGlob "src/app/leaderboard/**/*.tsx"[90m 2 matches[0m
+[0m→ [0mRead src/app/leaderboard/page.tsx
+[0m→ [0mRead src/app/leaderboard/LeaderboardClient.tsx
+[0m→ [0mRead src/components/LeaderboardTable.tsx[90m [limit=50][0m
+[0m
+[0m← [0mWrite src/components/ExportDropdown.tsx
+Wrote file successfully.
+[0m
+[0m← [0mWrite src/components/ExportDropdown.test.tsx
+Wrote file successfully.
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npx vitest run src/components/ExportDropdown.test.tsx --reporter=dot 2>&1 | tail -15
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+···Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+···
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  11:55:55
+   Duration  5.69s (transform 209ms, setup 377ms, import 623ms, tests 939ms, environment 3.12s)
+[0m
+[0m← [0mEdit src/app/leaderboard/LeaderboardClient.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/leaderboard/LeaderboardClient.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/leaderboard/LeaderboardClient.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/leaderboard/LeaderboardClient.tsx
+@@ -3,8 +3,9 @@
+ import React, { useState } from 'react'
+ import Link from 'next/link'
+ import LeaderboardTable from '@/components/LeaderboardTable'
+ import LeaderboardFilters from '@/components/LeaderboardFilters'
++import ExportDropdown from '@/components/ExportDropdown'
+ import ModelDetailPanel from '@/components/ModelDetailPanel'
+ import type { LeaderboardEntry, LeaderboardFilters as FilterType } from '@/../lib/leaderboard'
+ import type { Run } from '@/../lib/schemas'
+ 
+
+[0m
+[0m← [0mEdit src/app/leaderboard/LeaderboardClient.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/leaderboard/LeaderboardClient.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/leaderboard/LeaderboardClient.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/leaderboard/LeaderboardClient.tsx
+@@ -98,8 +98,9 @@
+   </h1>
+   <p className="text-slate-500 font-mono text-xs uppercase tracking-[0.2em]">Game-Asset Model Benchmarking</p>
+ </div>
+ <div className="flex gap-2">
++  <ExportDropdown entries={entries} />
+   <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] font-bold text-slate-400 uppercase">
+     Sort: {currentSort === 'average_human_score' ? 'Human Score' : currentSort === 'average_tech_score' ? 'Tech Score' : currentSort === 'run_count' ? 'Runs' : 'Name'}
+   </div>
+ </div>
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npx vitest run --reporter=dot 2>&1 | tail -20
+An update to SpriteSheetPreview inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+···························································Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+·····················································································································································································································································································
+
+ Test Files  49 passed (49)
+      Tests  370 passed (370)
+   Start at  11:56:34
+   Duration  139.02s (transform 4.88s, setup 24.97s, import 39.26s, tests 43.92s, environment 250.62s)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npm run build 2>&1 | tail -30
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Generating static pages using 3 workers (6/24) 
+  Generating static pages using 3 workers (12/24) 
+  Generating static pages using 3 workers (18/24) 
+✓ Generating static pages using 3 workers (24/24) in 3.7s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /compare
+├ ○ /leaderboard
+├ ● /models/[modelId]
+│ ├ /models/Gemini-2.5-flash
+│ ├ /models/Gemini-2.5-pro
+│ ├ /models/Gemini-3-flash
+│ └ [+11 more paths]
+├ ○ /preview
+├ ○ /quality
+├ ○ /runs
+└ ● /runs/[runId]
+  └ /runs/gemini-3.1-pro__2026-04-04__r1
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+[0m

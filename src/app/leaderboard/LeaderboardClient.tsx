@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import LeaderboardTable from '@/components/LeaderboardTable'
 import LeaderboardFilters from '@/components/LeaderboardFilters'
+import ExportDropdown from '@/components/ExportDropdown'
 import ModelDetailPanel from '@/components/ModelDetailPanel'
 import type { LeaderboardEntry, LeaderboardFilters as FilterType } from '@/../lib/leaderboard'
 import type { Run } from '@/../lib/schemas'
@@ -98,6 +99,7 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialEntries, a
             <p className="text-slate-500 font-mono text-xs uppercase tracking-[0.2em]">Game-Asset Model Benchmarking</p>
           </div>
           <div className="flex gap-2">
+            <ExportDropdown entries={entries} />
             <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] font-bold text-slate-400 uppercase">
               Sort: {currentSort === 'average_human_score' ? 'Human Score' : currentSort === 'average_tech_score' ? 'Tech Score' : currentSort === 'run_count' ? 'Runs' : 'Name'}
             </div>
