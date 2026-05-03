@@ -77,13 +77,15 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Priority: Medium* — GitHub Actions workflows for automated lint, test, build, and deploy on PRs and main branch pushes.
    **Phase 1-4: Complete (340 tests passing)**
 
-- [ ] **Track: Accessibility Audit (WCAG 2.1 AA)**
+- [x] **Track: Accessibility Audit (WCAG 2.1 AA)**
    *Link: [./tracks/accessibility_audit_20260502/](./tracks/accessibility_audit_20260502/)*
    *Priority: Medium* — Audit and fix keyboard navigation, screen reader support, color contrast, and motion preferences.
+   **Phase 1-4: Complete (359 tests passing)**
 
-- [ ] **Track: Batch Export and Reporting**
-   *Link: [./tracks/batch-export-and-reporting_20260503/](./tracks/batch-export-and-reporting_20260503/)*
+- [x] **Track: Batch Export and Reporting**
+   *Link: [./archive/batch-export-and-reporting_20260503/](./archive/batch-export-and-reporting_20260503/)*
    *Priority: High* — Add CSV/JSON export for leaderboard rankings, quality metrics, and model comparison data.
+   **Phase 1-4: Complete (370 tests passing)**
 
 - [ ] **Track: Canvas Interaction E2E Testing**
    *Link: [./tracks/canvas-interaction-testing_20260503/](./tracks/canvas-interaction-testing_20260503/)*

@@ -1283,3 +1283,68 @@ Not implemented: navigation to another Document
    Start at  12:22:27
    Duration  87.68s (transform 3.29s, setup 14.22s, import 24.36s, tests 30.51s, environment 157.82s)
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "complete: batch export and reporting track
+
+- Phase 1: Export utilities (toCsv, toJsonExport)
+- Phase 2: Leaderboard export with ExportDropdown
+- Phase 3: Quality dashboard export with ExportButton
+- Phase 4: Comparison view export with delta columns
+- 370 tests passing" && git push
+[main fc71040] complete: batch export and reporting track
+ 3 files changed, 133 insertions(+), 25 deletions(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   38d319e..fc71040  main -> main
+[0m
+Let me finalize by updating the memory files and committing:
+[0m→ [0mRead measure/tech-debt.md
+[0m→ [0mRead measure/lessons-learned.md
+[0m
+[0m← [0mEdit measure/lessons-learned.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+@@ -46,4 +46,5 @@
+ - (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - loadSprites callback AND useEffect both loaded sprites independently. Consolidated into single loadSprites function called by both paths.
+ - (2026-04-24-25, build/validation) Next.js Turbopack requires native SWC bindings on linux/x64 use `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter; Static export does not support API routes - embed data fetching in async server components
+ - (2026-05-02, sprite_inspection) When a type is only used as a value (e.g., in `as const` assertions), importing it with `import type` causes unused import warnings. Use regular import. SpriteSheetPreview had internal animation state instead of using the separate AnimationControls component - refactored to use AnimationControls + FramePlayer for proper separation of concerns.
+ - (2026-05-03, accessibility_audit) jest-axe with vitest requires custom `expectNoViolations()` helper since `toHaveNoViolations()` is a Chai matcher not available in vitest. axe results need to be awaited in async tests. Phase 4 tasks completed: skip-to-content link, focus-visible CSS, focus trap in modals, prefers-reduced-motion for sprite auto-play, ARIA roles (toolbar, slider, button) and aria attributes (aria-pressed, aria-live, aria-modal).
++- (2026-05-03, batch_export) Server components cannot pass event handlers to client components - onClick props containing functions cause serialization error during SSR. Use client components for export buttons that need event handlers, or pass serializable data (exportType, data) instead of callbacks.
+
+[0m
+[0m→ [0mRead measure/tracks.md[90m [limit=35, offset=75][0m
+[0m
+[0m← [0mEdit measure/tracks.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+@@ -76,15 +76,17 @@
+    *Link: [./archive/ci_cd_pipeline_20260502/](./archive/ci_cd_pipeline_20260502/)*
+    *Priority: Medium* — GitHub Actions workflows for automated lint, test, build, and deploy on PRs and main branch pushes.
+    **Phase 1-4: Complete (340 tests passing)**
+ 
+-- [ ] **Track: Accessibility Audit (WCAG 2.1 AA)**
++- [x] **Track: Accessibility Audit (WCAG 2.1 AA)**
+    *Link: [./tracks/accessibility_audit_20260502/](./tracks/accessibility_audit_20260502/)*
+    *Priority: Medium* — Audit and fix keyboard navigation, screen reader support, color contrast, and motion preferences.
++   **Phase 1-4: Complete (359 tests passing)**
+ 
+-- [ ] **Track: Batch Export and Reporting**
+-   *Link: [./tracks/batch-export-and-reporting_20260503/](./tracks/batch-export-and-reporting_20260503/)*
++- [x] **Track: Batch Export and Reporting**
++   *Link: [./archive/batch-export-and-reporting_20260503/](./archive/batch-export-and-reporting_20260503/)*
+    *Priority: High* — Add CSV/JSON export for leaderboard rankings, quality metrics, and model comparison data.
++   **Phase 1-4: Complete (370 tests passing)**
+ 
+ - [ ] **Track: Canvas Interaction E2E Testing**
+    *Link: [./tracks/canvas-interaction-testing_20260503/](./tracks/canvas-interaction-testing_20260503/)*
+    *Priority: Medium* — Add integration tests for sprite inspection tools, zoom/pan interactions, and game canvas workflows.
+
+[0m
+[0m$ [0mmkdir -p /home/daniel-bo/Desktop/pixel-art-benchmark/measure/archive && mv /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/accessibility_audit_20260502 /home/daniel-bo/Desktop/pixel-art-benchmark/measure/archive/ && mv /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/batch-export-and-reporting_20260503 /home/daniel-bo/Desktop/pixel-art-benchmark/measure/archive/
+(no output)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit --no-edit && git push
+Aborting commit due to empty commit message.
+[0m
