@@ -1,44 +1,44 @@
 # Plan: Multi-Game Preview Expansion
 
-## Phase 1: Template Registry and Types [ ]
+## Phase 1: Template Registry and Types [x]
 
-- [ ] Write test: GameTemplate type has required fields (id, name, genre, spriteSlots, tilemapConfig)
-- [ ] Write test: registry.getTemplate("labyrinth") returns the existing game config
-- [ ] Define `GameTemplate` interface with id, name, genre, spriteSlots, tilemapConfig, renderConfig
-- [ ] Create `lib/game-templates.ts` with template registry
-- [ ] Migrate existing Labyrinth config into registry format
+- [x] Write test: GameTemplate type has required fields (id, name, genre, spriteSlots, tilemapConfig)
+- [x] Write test: registry.getTemplate("labyrinth") returns the existing game config
+- [x] Define `GameTemplate` interface with id, name, genre, spriteSlots, tilemapConfig, renderConfig
+- [x] Create `lib/game-templates.ts` with template registry
+- [x] Migrate existing Labyrinth config into registry format
 
-## Phase 2: RPG Town Template [ ]
+## Phase 2: RPG Town Template [x]
 
-- [ ] Write test: RPG town template renders with hero, NPC, and building sprites
-- [ ] Define RPG town tilemap (grass, paths, buildings, trees)
-- [ ] Map sprite slots: hero → character, npc → character, building → structure, tree → scenery
-- [ ] Implement minimal top-down render logic (tile grid + sprite overlay)
-- [ ] Test with existing asset packs that have character sprites
+- [x] Write test: RPG town template renders with hero, NPC, and building sprites
+- [x] Define RPG town tilemap (grass, paths, buildings, trees)
+- [x] Map sprite slots: hero → character, npc → character, building → structure, tree → scenery
+- [x] Implement minimal top-down render logic (tile grid + sprite overlay)
+- [x] Test with existing asset packs that have character sprites
 
-## Phase 3: Isometric City Template [ ]
+## Phase 3: Isometric City Template [x]
 
-- [ ] Write test: isometric template renders with correct diamond-shaped tiles
-- [ ] Define isometric tilemap (ground tiles, building footprints, roads)
-- [ ] Map sprite slots: building → structure, ground → terrain, vehicle → prop
-- [ ] Implement isometric projection math (diamond tile rendering)
-- [ ] Test with isometric style assets from multi-genre expansion
+- [x] Write test: isometric template renders with correct diamond-shaped tiles
+- [x] Define isometric tilemap (ground tiles, building footprints, roads)
+- [x] Map sprite slots: building → structure, ground → terrain, vehicle → prop
+- [x] Implement isometric projection math (diamond tile rendering)
+- [x] Test with isometric style assets from multi-genre expansion
 
-## Phase 4: Sci-Fi Platformer Template [ ]
+## Phase 4: Sci-Fi Platformer Template [x]
 
-- [ ] Write test: platformer template renders platforms and character sprites
-- [ ] Define side-scrolling tilemap (platforms, background, enemies)
-- [ ] Map sprite slots: hero → character, enemy → creature, platform → terrain, background → scenery
-- [ ] Implement simple parallax background rendering
-- [ ] Test with sci-fi style assets
+- [x] Write test: platformer template renders platforms and character sprites
+- [x] Define side-scrolling tilemap (platforms, background, enemies)
+- [x] Map sprite slots: hero → character, enemy → creature, platform → terrain, background → scenery
+- [x] Implement simple parallax background rendering
+- [x] Test with sci-fi style assets
 
-## Phase 5: Template Selector UI [ ]
+## Phase 5: Template Selector UI [x]
 
-- [ ] Write test: template selector dropdown renders on game preview page
-- [ ] Write test: selecting a template re-renders the canvas with new config
-- [ ] Add template selector to dynamic game preview page
-- [ ] Persist selected template in URL search params
-- [ ] Wire template selection to GameCanvas re-render
+- [x] Write test: template selector dropdown renders on game preview page
+- [x] Write test: selecting a template re-renders the canvas with new config
+- [x] Add template selector to dynamic game preview page
+- [x] Persist selected template in URL search params
+- [x] Wire template selection to GameCanvas re-render
 
 ## Phase 6: Verification and Handoff [ ]
 

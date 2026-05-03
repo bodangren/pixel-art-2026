@@ -2,10 +2,12 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 import type { Run } from '@/../lib/schemas'
+import { getAllTemplates, type GameTemplate } from '@/../lib/game-templates'
 
 interface GameCanvasProps {
   runs: Run[]
   initialRunId: string
+  initialTemplateId?: string
 }
 
 interface SpriteSheet {
@@ -56,7 +58,7 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   })
 }
 
-export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
+export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'labyrinth' }: GameCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>(0)
   const spritesRef = useRef<Map<string, SpriteSheet>>(new Map())
@@ -64,6 +66,7 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
   const backgroundRef = useRef<HTMLImageElement | null>(null)
 
   const [selectedRunId, setSelectedRunId] = useState(initialRunId)
+  const [selectedTemplateId, setSelectedTemplateId] = useState(initialTemplateId)
   const [loading, setLoading] = useState(true)
   const [fps, setFps] = useState(4)
   const [showGrid, setShowGrid] = useState(false)
@@ -73,6 +76,8 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
   const [isPaused, setIsPaused] = useState(false)
 
   const selectedRun = runs.find(r => r.run_id === selectedRunId)
+  const selectedTemplate: GameTemplate | undefined = getAllTemplates().find(t => t.id === selectedTemplateId)
+  const bgColor = selectedTemplate?.renderConfig.backgroundColor || '#1a1a2e'
 
   const loadSprites = useCallback(async (run: Run) => {
     setLoading(true)
@@ -124,7 +129,7 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
     function render(timestamp: number) {
       context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
-      context.fillStyle = '#1a1a2e'
+      context.fillStyle = bgColor
       context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
       const bg = backgroundRef.current
@@ -205,7 +210,7 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
     return () => {
       cancelAnimationFrame(animationRef.current)
     }
-  }, [fps, showGrid, heroX, heroY, animationState, isPaused])
+  }, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor])
 
   const handleCanvasClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -217,6 +222,8 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
     setHeroX(x)
     setHeroY(y)
   }, [])
+
+  const templates = getAllTemplates()
 
   return (
     <div className="flex flex-col gap-4">
@@ -231,6 +238,21 @@ export default function GameCanvas({ runs, initialRunId }: GameCanvasProps) {
             {runs.map(run => (
               <option key={run.run_id} value={run.run_id}>
                 {run.model_id} ({run.run_date})
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="flex flex-col gap-1 text-xs text-slate-400">
+          Template:
+          <select
+            value={selectedTemplateId}
+            onChange={(e) => setSelectedTemplateId(e.target.value)}
+            className="bg-slate-800 text-white px-3 py-2 rounded border border-slate-700 text-sm"
+          >
+            {templates.map(template => (
+              <option key={template.id} value={template.id}>
+                {template.name}
               </option>
             ))}
           </select>
