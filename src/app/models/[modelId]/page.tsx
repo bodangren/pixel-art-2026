@@ -39,7 +39,7 @@ export default async function ModelPage({ params }: { params: Promise<{ modelId:
         </div>
         <div className="bg-slate-900 p-6 rounded-2xl border border-white/5">
           <div className="text-xs font-bold text-slate-500 uppercase mb-1">Avg Human Score</div>
-          <div className="text-3xl font-black text-emerald-400">{modelStats?.average_human_score > 0 ? modelStats.average_human_score.toFixed(1) : 'N/A'}</div>
+          <div className="text-3xl font-black text-emerald-400">{modelStats && modelStats.average_human_score > 0 ? modelStats.average_human_score.toFixed(1) : 'N/A'}</div>
         </div>
         <div className="bg-slate-900 p-6 rounded-2xl border border-white/5">
           <div className="text-xs font-bold text-slate-500 uppercase mb-1">Latest Run</div>

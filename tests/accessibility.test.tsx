@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
@@ -75,10 +75,7 @@ describe('Accessibility Audit — jest-axe integration', () => {
     it('should have no accessibility violations', async () => {
       const { container } = render(
         <LeaderboardFilters
-          selectedStyles={[]}
-          selectedModels={[]}
-          onStyleChange={() => {}}
-          onModelChange={() => {}}
+          onFilterChange={() => {}}
         />
       )
       const results = await axe(container)
@@ -308,7 +305,6 @@ describe('Accessibility Audit — jest-axe integration', () => {
       const { container } = render(
         <BatchConfigForm
           onSubmit={() => {}}
-          onCancel={() => {}}
         />
       )
       const results = await axe(container)
@@ -316,7 +312,7 @@ describe('Accessibility Audit — jest-axe integration', () => {
     })
 
     it('has accessible form inputs with labels', () => {
-      render(<BatchConfigForm onSubmit={() => {}} onCancel={() => {}} />)
+      render(<BatchConfigForm onSubmit={() => {}} />)
       const spinbuttons = screen.getAllByRole('spinbutton')
       spinbuttons.forEach(input => {
         expect(input).toHaveAttribute('id')
