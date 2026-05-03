@@ -1,7 +1,7 @@
 import React from 'react';
 import { listRuns, getReview } from '@/../lib/data';
 import ComparisonView from '@/components/ComparisonView';
-import ExportDropdown from '@/components/ExportDropdown';
+import ComparisonExport from '@/components/ComparisonExport';
 import Link from 'next/link';
 
 export default async function ComparePage() {
@@ -32,9 +32,15 @@ export default async function ComparePage() {
 
   return (
     <div className="container mx-auto p-8 bg-slate-950 text-white min-h-screen">
-      <div className="mb-8">
-        <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
-        <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
+      <div className="mb-8 flex justify-between items-start">
+        <div>
+          <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
+          <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
+        </div>
+        <ComparisonExport
+          runs={sortedRuns}
+          reviews={runsWithReviews.map(r => ({ runId: r.run.run_id, review: r.review }))}
+        />
       </div>
       <ComparisonView
         runs={sortedRuns}

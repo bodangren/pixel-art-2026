@@ -1044,3 +1044,134 @@ Route (app)
 ○  (Static)  prerendered as static content
 ●  (SSG)     prerendered as static HTML (uses generateStaticParams)
 [0m
+[0m$ [0mgit add -A && git commit -m "feat: batch export phase 3 - quality dashboard export
+
+- Add ExportButton client component for quality metrics export
+- Fix quality page to use client component for CSV export
+- 370 tests passing, build succeeds" && git push
+[main 3866134] feat: batch export phase 3 - quality dashboard export
+ 4 files changed, 511 insertions(+)
+ create mode 100644 src/components/ExportButton.tsx
+To https://github.com/bodangren/pixel-art-2026.git
+   dda19ce..3866134  main -> main
+[0m
+[0m→ [0mRead src/app/compare/page.tsx
+[0m
+[0m← [0mEdit src/app/compare/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+@@ -1,8 +1,7 @@
+ import React from 'react';
+ import { listRuns, getReview } from '@/../lib/data';
+ import ComparisonView from '@/components/ComparisonView';
+-import ExportDropdown from '@/components/ExportDropdown';
+ import Link from 'next/link';
+ 
+ export default async function ComparePage() {
+   const runs = await listRuns();
+
+[0m
+[0m← [0mWrite src/components/ComparisonExport.tsx
+Wrote file successfully.
+[0m
+[0m← [0mEdit src/app/compare/page.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/compare/page.tsx
+@@ -1,7 +1,8 @@
+ import React from 'react';
+ import { listRuns, getReview } from '@/../lib/data';
+ import ComparisonView from '@/components/ComparisonView';
++import ComparisonExport from '@/components/ComparisonExport';
+ import Link from 'next/link';
+ 
+ export default async function ComparePage() {
+   const runs = await listRuns();
+@@ -30,11 +31,17 @@
+   }
+ 
+   return (
+     <div className="container mx-auto p-8 bg-slate-950 text-white min-h-screen">
+-      <div className="mb-8">
+-        <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
+-        <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
++      <div className="mb-8 flex justify-between items-start">
++        <div>
++          <h1 className="text-4xl font-black tracking-tight mb-2">Compare Models</h1>
++          <p className="text-slate-500 text-sm font-mono">Side-by-side asset comparison with synchronized zoom</p>
++        </div>
++        <ComparisonExport
++          runs={sortedRuns}
++          reviews={runsWithReviews.map(r => ({ runId: r.run.run_id, review: r.review }))}
++        />
+       </div>
+       <ComparisonView
+         runs={sortedRuns}
+         initialLeftRunId={sortedRuns[0]?.run_id || ''}
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 300 npx vitest run --reporter=dot 2>&1 | tail -20
+An update to SpriteSheetPreview inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+·····················································Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+···································································································································································································································································································
+
+ Test Files  49 passed (49)
+      Tests  370 passed (370)
+   Start at  12:16:31
+   Duration  177.87s (transform 5.87s, setup 36.40s, import 51.84s, tests 54.77s, environment 319.40s)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && npm run build 2>&1 | tail -40
+✓ Compiled successfully in 30.1s
+  Running TypeScript ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Finished TypeScript in 27.4s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/24) ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Generating static pages using 3 workers (6/24) 
+  Generating static pages using 3 workers (12/24) 
+  Generating static pages using 3 workers (18/24) 
+✓ Generating static pages using 3 workers (24/24) in 3.7s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /compare
+├ ○ /leaderboard
+├ ● /models/[modelId]
+│ ├ /models/Gemini-2.5-flash
+│ ├ /models/Gemini-2.5-pro
+│ ├ /models/Gemini-3-flash
+│ └ [+11 more paths]
+├ ○ /preview
+├ ○ /quality
+├ ○ /runs
+└ ● /runs/[runId]
+  └ /runs/gemini-3.1-pro__2026-04-04__r1
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+[0m
