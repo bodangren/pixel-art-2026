@@ -97,7 +97,8 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Priority: Medium* — Extend dynamic game preview to support RPG, isometric, and sci-fi templates beyond Labyrinth.
    **Phase 1-5: Complete**
 
-- [ ] **Track: GameCanvas Template Canvas Dimensions**
+- [x] **Track: GameCanvas Template Canvas Dimensions**
    *Link: [./tracks/gamecanvas_template_canvas/](./tracks/gamecanvas_template_canvas/)*
    *Priority: Medium* — Fix GameCanvas to use template-defined canvasWidth/Height instead of hardcoded 640x480.
+   **Phase 1-4: Complete**
    **Phase 1-4: Pending**
