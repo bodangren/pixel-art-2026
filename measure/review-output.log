@@ -2,31 +2,19 @@
 > build · k2p6
 [0m
 [0m→ [0mRead measure/review-prompt.md
+You want me to run a code review for the past 24 hours? I can execute the steps in this prompt.
 [0m
 [0m$ [0mgit log --since="24 hours ago" --oneline
-691cd5c checkpoint(MiniMax-M2.7): multi-game preview expansion complete - 408 tests pass
-392bb6d feat(game-preview): multi-game template expansion - 4 game templates with selector UI
-02abf61 checkpoint(MiniMax-M2.7): update output log
-c58f4f3 checkpoint(MiniMax-M2.7): canvas interaction E2E testing complete - 172 tests passing
-67ca1b0 checkpoint: session end
-d48f51d checkpoint: session end - batch export complete, lessons learned updated
-fc71040 complete: batch export and reporting track
-38d319e feat: batch export phase 4 - comparison view export with delta column
-3866134 feat: batch export phase 3 - quality dashboard export
-dda19ce feat: batch export phase 1-2 - export utilities and leaderboard export dropdown
-35ae82a fix: resolve TypeScript errors and test mismatches
-0f18901 checkpoint: autonomous session start
-6046730 checkpoint: save output log
-3c8701e Finalize: update lessons-learned with accessibility audit findings
-75447eb Finalize: mark all accessibility audit phases complete
-a3e6e71 Phase 4: Contrast and motion fixes
-7e8fcea Phase 3: ARIA and screen reader improvements
-3d92219 Phase 2: Keyboard navigation and focus management
-29d390d Update accessibility audit track plan - Phase 1 complete
-cfcf0de Phase 1: Accessibility audit tests with jest-axe
-0472e92 Archive completed tracks and prepare new tracks
-a937309 chore(measure): archive 3 completed tracks, create 3 new pending tracks
-e6341f8 chore(review): fix lint/style issues
+89250ff checkpoint(MiniMax-M2.7): finalize export_downloadfile_refactor track
+a19c9f0 checkpoint(MiniMax-M2.7): export_downloadfile_refactor track complete
+4b6d42c chore: trim lessons-learned to 47 lines (under 50 limit)
+17cc39c checkpoint(MiniMax-M2.7): export downloadFile refactor complete - all 3 components now use shared lib/export.ts:downloadFile()
+ea009cd checkpoint(MiniMax-M2.7): GameCanvas Template Canvas Dimensions complete - 232 tests pass, build succeeds
+4dab5a5 Mark GameCanvas Template Canvas Dimensions track complete
+240fd07 Fix GameCanvas to use template-defined canvas dimensions
+0f553d0 Update session logs
+ec07ce7 docs(tech-debt): add review findings for export duplication and canvas sizing
+96eed8d chore(review): fix lint/style issues
 [0m
 [0m$ [0mgit diff --name-only HEAD~20 HEAD
 lib/export.test.ts
@@ -39,19 +27,23 @@ measure/archive/accessibility_audit_20260502/spec.md
 measure/archive/batch-export-and-reporting_20260503/metadata.json
 measure/archive/batch-export-and-reporting_20260503/plan.md
 measure/archive/batch-export-and-reporting_20260503/spec.md
+measure/archive/export_downloadfile_refactor_20260504/plan.md
+measure/archive/export_downloadfile_refactor_20260504/spec.md
 measure/lessons-learned.md
 measure/output.log
+measure/review-output.log
 measure/tech-debt.md
 measure/tracks.md
-measure/tracks/accessibility_audit_20260502/plan.md
 measure/tracks/batch-export-and-reporting_20260503/plan.md
 measure/tracks/canvas-interaction-testing_20260503/plan.md
+measure/tracks/export_downloadfile_refactor/metadata.json
+measure/tracks/export_downloadfile_refactor/plan.md
+measure/tracks/export_downloadfile_refactor/spec.md
 measure/tracks/game-preview-multi-game_20260503/plan.md
-package-lock.json
-package.json
+measure/tracks/gamecanvas_template_canvas/metadata.json
+measure/tracks/gamecanvas_template_canvas/plan.md
+measure/tracks/gamecanvas_template_canvas/spec.md
 src/app/compare/page.tsx
-src/app/globals.css
-src/app/layout.tsx
 src/app/leaderboard/LeaderboardClient.tsx
 src/app/models/[modelId]/page.tsx
 src/app/quality/page.tsx
@@ -61,230 +53,106 @@ src/components/ExportDropdown.test.tsx
 src/components/ExportDropdown.tsx
 src/components/GameCanvas.test.tsx
 src/components/GameCanvas.tsx
-src/components/ModelDetailPanel.tsx
-src/components/ReviewTools.tsx
-src/components/SpriteSheetPreview.tsx
 src/components/cross-component-sync.test.tsx
-src/types/jest-axe.d.ts
-tests/accessibility.test.tsx
 [0m
 [0m→ [0mRead measure/tracks.md
 [0m→ [0mRead measure/tech-debt.md
-[0m→ [0mRead lib/export.ts
-[0m→ [0mRead lib/game-templates.ts
-[0m→ [0mRead src/components/GameCanvas.tsx
-[0m→ [0mRead src/components/ExportButton.tsx
-[0m→ [0mRead src/components/ExportDropdown.tsx
-[0m→ [0mRead src/components/ComparisonExport.tsx
-[0m→ [0mRead src/components/ReviewTools.tsx
-[0m→ [0mRead tests/accessibility.test.tsx
-[0m→ [0mRead src/app/leaderboard/LeaderboardClient.tsx
-[0m→ [0mRead src/components/ModelDetailPanel.tsx
-[0m→ [0mRead src/components/SpriteSheetPreview.tsx
-[0m→ [0mRead src/app/compare/page.tsx
-[0m→ [0mRead src/app/quality/page.tsx
 [0m
-[0m$ [0mnpm run lint
-> pixel-art-next@0.1.0 lint
-> eslint
-
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-orchestrator.test.ts
-   1:36  warning  'beforeEach' is defined but never used       @typescript-eslint/no-unused-vars
-  44:13  warning  'orch' is assigned a value but never used    @typescript-eslint/no-unused-vars
-  62:13  warning  'result' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-orchestrator.ts
-   57:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-   71:11  warning  'processNext' is assigned a value but never used  @typescript-eslint/no-unused-vars
-  136:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-results.test.ts
-  24:91  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  36:77  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  44:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  68:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/data.test.ts
-  62:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/e2e-batch-pipeline.test.ts
-  1:36  warning  'beforeEach' is defined but never used        @typescript-eslint/no-unused-vars
-  3:29  warning  'createBatchState' is defined but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
-  1:32  warning  'beforeEach' is defined but never used     @typescript-eslint/no-unused-vars
-  5:3   warning  'SpriteSlot' is defined but never used     @typescript-eslint/no-unused-vars
-  6:3   warning  'TilemapConfig' is defined but never used  @typescript-eslint/no-unused-vars
-  7:3   warning  'RenderConfig' is defined but never used   @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-metrics.ts
-    1:23  warning  'RubricScores' is defined but never used   @typescript-eslint/no-unused-vars
-  127:9   warning  'mean' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/auto-pipeline.ts
-  36:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/build-derived-logic.ts
-  17:37  error    A `require()` style import is forbidden   @typescript-eslint/no-require-imports
-  44:18  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
-  48:16  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
-  54:53  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  54:66  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  56:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/build-derived.test.ts
-  43:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  45:60  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/generate-assets.ts
-  15:9   warning  'prompt' is assigned a value but never used  @typescript-eslint/no-unused-vars
-  20:35  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/research-assets.ts
-  36:9  warning  'prompt' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/sandbox-runner.ts
-  43:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/validate-run-logic.ts
-  25:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/validate-run.ts
-  41:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/app/models/[modelId]/page.tsx
-   7:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  19:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/BackgroundPreview.tsx
-  52:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ComparisonView.tsx
-   85:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-  121:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ExportDropdown.test.tsx
-  1:32  warning  'vi' is defined but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ReviewSection.tsx
-  14:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/RubricForm.tsx
-   7:18  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  10:50  warning  'runId' is defined but never used         @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.tsx
-  152:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-
-✖ 44 problems (22 errors, 22 warnings)
+[0m# [0mTodos
+[ ] Run test suite (CI=true npm test)
+[ ] Run lint and typecheck
+[ ] Review changed source files for correctness/style/security/performance
+[ ] Fix up to 5-7 minor issues if found
+[ ] Update tech-debt.md if architectural problems found
+[ ] Report review results
 [0m
-[0m$ [0mCI=true npm test
-> pixel-art-next@0.1.0 test
-> vitest run
-
-
- RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
-
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: navigation to another Document
-Not implemented: navigation to another Document
-
- Test Files  52 passed (52)
-      Tests  408 passed (408)
-   Start at  02:00:53
-   Duration  88.25s (transform 3.11s, setup 13.36s, import 24.21s, tests 36.28s, environment 156.00s)
+[0m$ [0mnpx tsc --noEmit 2>&1
+lib/game-templates.test.ts(43,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(44,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(49,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(50,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(51,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(52,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(53,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(58,12): error TS18048: 'template' is possibly 'undefined'.
+lib/game-templates.test.ts(59,12): error TS18048: 'template' is possibly 'undefined'.
+src/components/GameCanvas.test.tsx(11,5): error TS2739: Type '{ hero: string; background: string; }' is missing the following properties from type '{ background: string; hero: string; enemy: string; effect: string; }': enemy, effect
+src/components/GameCanvas.test.tsx(19,5): error TS2739: Type '{ hero: string; background: string; }' is missing the following properties from type '{ background: string; hero: string; enemy: string; effect: string; }': enemy, effect
+src/components/LeaderboardFilters.test.tsx(7,48): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardFilters.test.tsx(14,26): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardFilters.test.tsx(22,26): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardFilters.test.tsx(30,26): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardFilters.test.tsx(38,48): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardFilters.test.tsx(43,26): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(14,66): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(23,66): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(30,66): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(37,66): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(43,66): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(49,25): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(58,57): error TS2304: Cannot find name 'vi'.
+src/components/LeaderboardTable.test.tsx(63,66): error TS2304: Cannot find name 'vi'.
+src/components/ModelDetailPanel.test.tsx(24,73): error TS2304: Cannot find name 'vi'.
+src/components/ModelDetailPanel.test.tsx(29,73): error TS2304: Cannot find name 'vi'.
+src/components/ModelDetailPanel.test.tsx(35,73): error TS2304: Cannot find name 'vi'.
+src/components/ModelDetailPanel.test.tsx(41,25): error TS2304: Cannot find name 'vi'.
+src/components/cross-component-sync.test.tsx(36,15): error TS2739: Type '{ onPlayPause: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onFPSChange, onFrameChange, onLoopModeChange
+src/components/cross-component-sync.test.tsx(43,15): error TS2739: Type '{ onFPSChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onPlayPause, onFrameChange, onLoopModeChange
+src/components/cross-component-sync.test.tsx(51,15): error TS2739: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onPlayPause, onFPSChange, onLoopModeChange
+src/components/cross-component-sync.test.tsx(58,15): error TS2739: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onPlayPause, onFPSChange, onLoopModeChange
+src/components/cross-component-sync.test.tsx(65,15): error TS2739: Type '{ onLoopModeChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onPlayPause, onFPSChange, onFrameChange
+src/components/cross-component-sync.test.tsx(72,15): error TS2739: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onPlayPause, onFPSChange, onLoopModeChange
+src/components/cross-component-sync.test.tsx(79,15): error TS2739: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; }' is missing the following properties from type 'AnimationControlsProps': onPlayPause, onFPSChange, onLoopModeChange
+src/components/cross-component-sync.test.tsx(129,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '() => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(): void'.
+src/components/cross-component-sync.test.tsx(130,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(fps: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(fps: number): void'.
+src/components/cross-component-sync.test.tsx(131,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(frame: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(frame: number): void'.
+src/components/cross-component-sync.test.tsx(132,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(mode: "once" | "loop" | "ping-pong"): void'.
+src/components/cross-component-sync.test.tsx(141,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '() => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(): void'.
+src/components/cross-component-sync.test.tsx(142,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(fps: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(fps: number): void'.
+src/components/cross-component-sync.test.tsx(143,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(frame: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(frame: number): void'.
+src/components/cross-component-sync.test.tsx(144,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(mode: "once" | "loop" | "ping-pong"): void'.
+src/components/cross-component-sync.test.tsx(155,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '() => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(): void'.
+src/components/cross-component-sync.test.tsx(156,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(fps: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(fps: number): void'.
+src/components/cross-component-sync.test.tsx(157,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(frame: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(frame: number): void'.
+src/components/cross-component-sync.test.tsx(158,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(mode: "once" | "loop" | "ping-pong"): void'.
+src/components/cross-component-sync.test.tsx(169,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '() => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(): void'.
+src/components/cross-component-sync.test.tsx(170,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(fps: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(fps: number): void'.
+src/components/cross-component-sync.test.tsx(171,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(frame: number) => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(frame: number): void'.
+src/components/cross-component-sync.test.tsx(172,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+  Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' is not assignable to type '(mode: "once" | "loop" | "ping-pong") => void'.
+    Type 'MockInstance<Procedure | Constructable> & (new (...args: any[]) => any) & {}' provides no match for the signature '(mode: "once" | "loop" | "ping-pong"): void'.
 [0m
-[0m→ [0mRead src/app/models/[modelId]/page.tsx
-[0m→ [0mRead lib/game-templates.test.ts
-[0m→ [0mRead src/components/ExportDropdown.test.tsx
-[0m→ [0mRead src/app/layout.tsx
-[0m
-[0m← [0mEdit lib/game-templates.test.ts
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
-===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
-@@ -1,11 +1,8 @@
--import { describe, it, expect, beforeEach } from 'vitest'
-+import { describe, it, expect } from 'vitest'
- import {
-   GameTemplate,
-   TemplateGenre,
--  SpriteSlot,
--  TilemapConfig,
--  RenderConfig,
-   getTemplate,
-   getAllTemplates,
-   listGenres
- } from './game-templates'
-
-[0m
-[0m← [0mEdit src/app/models/[modelId]/page.tsx
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/models/[modelId]/page.tsx
-===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/models/[modelId]/page.tsx
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/models/[modelId]/page.tsx
-@@ -1,11 +1,12 @@
- import React from 'react';
- import { listRuns, getLeaderboard } from '@/../lib/data';
-+import type { LeaderboardEntry } from '@/../lib/leaderboard';
- import Link from 'next/link';
- 
- export async function generateStaticParams() {
-   const leaderboard = await getLeaderboard();
--  return leaderboard.map((model: any) => ({
-+  return leaderboard.map((model: LeaderboardEntry) => ({
-     modelId: model.model_id,
-   }));
- }
- 
-@@ -15,9 +16,9 @@
-   const modelRuns = allRuns.filter(run => run.model_id === modelId)
-     .sort((a, b) => new Date(b.run_date).getTime() - new Date(a.run_date).getTime());
-   
-   const leaderboard = await getLeaderboard();
--  const modelStats = leaderboard.find((m: any) => m.model_id === modelId);
-+  const modelStats = leaderboard.find((m: LeaderboardEntry) => m.model_id === modelId);
- 
-   return (
-     <div className="container mx-auto p-8 bg-slate-950 text-white min-h-screen">
-       <div className="mb-12">
-
-[0m
-[0m← [0mEdit src/components/ExportDropdown.test.tsx
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ExportDropdown.test.tsx
-===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ExportDropdown.test.tsx
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ExportDropdown.test.tsx
-@@ -1,5 +1,5 @@
--import { describe, it, expect, vi } from 'vitest'
-+import { describe, it, expect } from 'vitest'
- import { render, screen, fireEvent } from '@testing-library/react'
- import ExportDropdown from './ExportDropdown'
- import type { LeaderboardEntry } from '@/../lib/leaderboard'
- 
-
-[0m
-[0m$ [0mnpm run lint
+[0m$ [0mnpm run lint 2>&1
 > pixel-art-next@0.1.0 lint
 > eslint
 
@@ -366,150 +234,579 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ExportDropdown
 
 ✖ 37 problems (20 errors, 17 warnings)
 [0m
-[0m$ [0mnpm run typecheck
-npm error Missing script: "typecheck"
-npm error
-npm error To see a list of scripts, run:
-npm error   npm run
-npm error A complete log of this run can be found in: /home/daniel-bo/.npm/_logs/2026-05-03T18_03_15_515Z-debug-0.log
+[0m$ [0mCI=true npm test 2>&1
+> pixel-art-next@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+
+ Test Files  52 passed (52)
+      Tests  408 passed (408)
+   Start at  02:00:32
+   Duration  91.02s (transform 3.88s, setup 14.40s, import 24.31s, tests 43.87s, environment 156.69s)
 [0m
-[0m$ [0mnpm run
-Lifecycle scripts included in pixel-art-next@0.1.0:
-  start
-    next start
-  test
-    vitest run
-available via `npm run`:
-  dev
-    next dev --webpack
-  build
-    next build --webpack
-  lint
-    eslint
-  test:watch
-    vitest
+[0m# [0mTodos
+[x] Run test suite (CI=true npm test)
+[x] Run lint and typecheck
+[ ] Review changed source files for correctness/style/security/performance
+[ ] Fix up to 5-7 minor issues if found
+[ ] Update tech-debt.md if architectural problems found
+[ ] Report review results
 [0m
-[0m$ [0mnpm run build
-> pixel-art-next@0.1.0 build
-> next build --webpack
-
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
-  Skipping creating a lockfile at /home/daniel-bo/Desktop/pixel-art-benchmark/.next/lock because we're using WASM bindings
-▲ Next.js 16.2.2 (webpack)
-
-  Creating an optimized production build ...
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
-✓ Compiled successfully in 6.6s
-  Running TypeScript ...
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
-  Finished TypeScript in 11.3s ...
-  Collecting page data using 3 workers ...
-  Generating static pages using 3 workers (0/24) ...
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
-⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
-⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
-  Generating static pages using 3 workers (6/24) 
-  Generating static pages using 3 workers (12/24) 
-  Generating static pages using 3 workers (18/24) 
-✓ Generating static pages using 3 workers (24/24) in 2.1s
-  Finalizing page optimization ...
-  Collecting build traces ...
-
-Route (app)
-┌ ○ /
-├ ○ /_not-found
-├ ○ /compare
-├ ○ /leaderboard
-├ ● /models/[modelId]
-│ ├ /models/Gemini-2.5-flash
-│ ├ /models/Gemini-2.5-pro
-│ ├ /models/Gemini-3-flash
-│ └ [+11 more paths]
-├ ○ /preview
-├ ○ /quality
-├ ○ /runs
-└ ● /runs/[runId]
-  └ /runs/gemini-3.1-pro__2026-04-04__r1
-
-
-○  (Static)  prerendered as static content
-●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+[0m→ [0mRead lib/game-templates.test.ts
+[0m→ [0mRead lib/export.ts
+[0m→ [0mRead src/components/GameCanvas.tsx
+[0m→ [0mRead src/components/GameCanvas.test.tsx
+[0m→ [0mRead src/components/cross-component-sync.test.tsx
+[0m→ [0mRead src/components/AnimationControls.tsx
+[0m→ [0mRead lib/export.test.ts
+[0m→ [0mRead src/components/ExportButton.tsx
+[0m→ [0mRead src/components/ExportDropdown.tsx
+[0m→ [0mRead src/components/ComparisonExport.tsx
 [0m
-[0m$ [0mgit add -A && git status
+[0m# [0mTodos
+[x] Run test suite (CI=true npm test)
+[x] Run lint and typecheck
+[x] Review changed source files for correctness/style/security/performance
+[ ] Fix up to 5-7 minor issues if found
+[ ] Update tech-debt.md if architectural problems found
+[ ] Report review results
+[0m
+[0m← [0mEdit lib/game-templates.test.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/game-templates.test.ts
+@@ -38,24 +38,24 @@
+     expect(template.renderConfig).toBeDefined()
+   })
+ 
+   it('spriteSlots defines hero and background for dungeon-crawler', () => {
+-    const template = getTemplate('labyrinth')
++    const template = getTemplate('labyrinth')!
+     expect(template.spriteSlots.hero).toBeDefined()
+     expect(template.spriteSlots.background).toBeDefined()
+   })
+ 
+   it('tilemapConfig has correct dimensions', () => {
+-    const template = getTemplate('labyrinth')
++    const template = getTemplate('labyrinth')!
+     expect(template.tilemapConfig.gridWidth).toBe(13)
+     expect(template.tilemapConfig.gridHeight).toBe(10)
+     expect(template.tilemapConfig.tileSize).toBe(48)
+     expect(template.tilemapConfig.canvasWidth).toBe(640)
+     expect(template.tilemapConfig.canvasHeight).toBe(480)
+   })
+ 
+   it('renderConfig has scale and backgroundColor', () => {
+-    const template = getTemplate('labyrinth')
++    const template = getTemplate('labyrinth')!
+     expect(template.renderConfig.scale).toBe(2)
+     expect(template.renderConfig.backgroundColor).toBe('#1a1a2e')
+   })
+ })
+
+[0m
+[0m← [0mEdit src/components/GameCanvas.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
+@@ -7,17 +7,17 @@
+   {
+     run_id: 'run-001',
+     model_id: 'Gemini-2.5-flash',
+     run_date: '2026-04-04',
+-    asset_paths: { hero: 'hero.png', background: 'background.png' },
++    asset_paths: { hero: 'hero.png', background: 'background.png', enemy: 'enemy.png', effect: 'effect.png' },
+     scores: { aesthetic: 85, technical: 90 },
+     review_count: 3,
+   },
+   {
+     run_id: 'run-002',
+     model_id: 'Claude-3.5',
+     run_date: '2026-04-05',
+-    asset_paths: { hero: 'hero.png', background: 'background.png' },
++    asset_paths: { hero: 'hero.png', background: 'background.png', enemy: 'enemy.png', effect: 'effect.png' },
+     scores: { aesthetic: 80, technical: 85 },
+     review_count: 2,
+   },
+ ]
+
+[0m
+[0m← [0mEdit src/components/cross-component-sync.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+@@ -14,8 +14,12 @@
+   fps: 12,
+   currentFrame: 0,
+   totalFrames: 8,
+   loopMode: 'loop' as const,
++  onPlayPause: vi.fn(),
++  onFPSChange: vi.fn(),
++  onFrameChange: vi.fn(),
++  onLoopModeChange: vi.fn(),
+ }
+ 
+ beforeEach(() => {
+   vi.useFakeTimers()
+
+[0m
+[0m$ [0mnpx tsc --noEmit 2>&1 | grep -E "^(lib/game-templates.test.ts|src/components/GameCanvas.test.tsx|src/components/cross-component-sync.test.tsx)" || echo "No type errors in fixed files"
+src/components/GameCanvas.test.tsx(12,5): error TS2353: Object literal may only specify known properties, and 'scores' does not exist in type '{ run_id: string; model_id: string; run_date: string; variant: string; benchmark_id: string; prompt_version: string; asset_paths: { background: string; hero: string; enemy: string; effect: string; }; status: "pending" | ... 1 more ... | "failed"; generation_notes?: string | undefined; }'.
+src/components/GameCanvas.test.tsx(20,5): error TS2353: Object literal may only specify known properties, and 'scores' does not exist in type '{ run_id: string; model_id: string; run_date: string; variant: string; benchmark_id: string; prompt_version: string; asset_paths: { background: string; hero: string; enemy: string; effect: string; }; status: "pending" | ... 1 more ... | "failed"; generation_notes?: string | undefined; }'.
+src/components/cross-component-sync.test.tsx(40,15): error TS2322: Type '{ onPlayPause: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; onFPSChange: Mock<...>; onFrameChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(47,15): error TS2322: Type '{ onFPSChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFrameChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(55,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(62,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(69,15): error TS2322: Type '{ onLoopModeChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onFrameChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(76,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(83,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(133,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(134,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(135,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(136,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+src/components/cross-component-sync.test.tsx(145,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(146,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(147,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(148,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+src/components/cross-component-sync.test.tsx(159,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(160,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(161,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(162,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+src/components/cross-component-sync.test.tsx(173,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(174,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(175,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(176,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+[0m
+[0m→ [0mRead src/components/cross-component-sync.test.tsx
+[0m
+[0m← [0mEdit src/components/cross-component-sync.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+@@ -8,26 +8,26 @@
+ let onFPSChange: ReturnType<typeof vi.fn>
+ let onFrameChange: ReturnType<typeof vi.fn>
+ let onLoopModeChange: ReturnType<typeof vi.fn>
+ 
+-const defaultProps = {
++const defaultProps = () => ({
+   isPlaying: false,
+   fps: 12,
+   currentFrame: 0,
+   totalFrames: 8,
+   loopMode: 'loop' as const,
+-  onPlayPause: vi.fn(),
+-  onFPSChange: vi.fn(),
+-  onFrameChange: vi.fn(),
+-  onLoopModeChange: vi.fn(),
+-}
++  onPlayPause: vi.fn<[], void>(),
++  onFPSChange: vi.fn<[number], void>(),
++  onFrameChange: vi.fn<[number], void>(),
++  onLoopModeChange: vi.fn<['once' | 'loop' | 'ping-pong'], void>(),
++})
+ 
+ beforeEach(() => {
+   vi.useFakeTimers()
+-  onPlayPause = vi.fn()
+-  onFPSChange = vi.fn()
+-  onFrameChange = vi.fn()
+-  onLoopModeChange = vi.fn()
++  onPlayPause = vi.fn<[], void>()
++  onFPSChange = vi.fn<[number], void>()
++  onFrameChange = vi.fn<[number], void>()
++  onLoopModeChange = vi.fn<['once' | 'loop' | 'ping-pong'], void>()
+ })
+ 
+ afterEach(() => {
+   vi.useRealTimers()
+
+[0m
+[0m← [0mEdit src/components/cross-component-sync.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+@@ -35,52 +35,52 @@
+ })
+ 
+ describe('AnimationControls state sync', () => {
+   it('calls onPlayPause when play button clicked', () => {
+-    const props = { ...defaultProps, onPlayPause }
++    const props = { ...defaultProps(), onPlayPause }
+     render(<AnimationControls {...props} />)
+     fireEvent.click(screen.getByRole('button', { name: /play/i }))
+     expect(onPlayPause).toHaveBeenCalledTimes(1)
+   })
+ 
+   it('calls onFPSChange when FPS slider changes', () => {
+-    const props = { ...defaultProps, onFPSChange }
++    const props = { ...defaultProps(), onFPSChange }
+     render(<AnimationControls {...props} />)
+     const slider = screen.getByRole('slider', { name: /frames per second/i })
+     fireEvent.change(slider, { target: { value: '24' } })
+     expect(onFPSChange).toHaveBeenCalledWith(24)
+   })
+ 
+   it('calls onFrameChange with prev frame on prev button', () => {
+-    const props = { ...defaultProps, currentFrame: 3, onFrameChange }
++    const props = { ...defaultProps(), currentFrame: 3, onFrameChange }
+     render(<AnimationControls {...props} />)
+     fireEvent.click(screen.getByRole('button', { name: /prev/i }))
+     expect(onFrameChange).toHaveBeenCalledWith(2)
+   })
+ 
+   it('calls onFrameChange with next frame on next button', () => {
+-    const props = { ...defaultProps, currentFrame: 3, onFrameChange }
++    const props = { ...defaultProps(), currentFrame: 3, onFrameChange }
+     render(<AnimationControls {...props} />)
+     fireEvent.click(screen.getByRole('button', { name: /next/i }))
+     expect(onFrameChange).toHaveBeenCalledWith(4)
+   })
+ 
+   it('calls onLoopModeChange when loop mode changes', () => {
+-    const props = { ...defaultProps, onLoopModeChange }
++    const props = { ...defaultProps(), onLoopModeChange }
+     render(<AnimationControls {...props} />)
+     fireEvent.click(screen.getByRole('radio', { name: /once/i }))
+     expect(onLoopModeChange).toHaveBeenCalledWith('once')
+   })
+ 
+   it('wraps to last frame when prev clicked on first frame', () => {
+-    const props = { ...defaultProps, currentFrame: 0, onFrameChange }
++    const props = { ...defaultProps(), currentFrame: 0, onFrameChange }
+     render(<AnimationControls {...props} />)
+     fireEvent.click(screen.getByRole('button', { name: /prev/i }))
+     expect(onFrameChange).toHaveBeenCalledWith(7)
+   })
+ 
+   it('wraps to first frame when next clicked on last frame', () => {
+-    const props = { ...defaultProps, currentFrame: 7, onFrameChange }
++    const props = { ...defaultProps(), currentFrame: 7, onFrameChange }
+     render(<AnimationControls {...props} />)
+     fireEvent.click(screen.getByRole('button', { name: /next/i }))
+     expect(onFrameChange).toHaveBeenCalledWith(0)
+   })
+
+[0m
+[0m← [0mEdit src/components/cross-component-sync.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/cross-component-sync.test.tsx
+@@ -127,9 +127,9 @@
+ describe('Component interaction patterns', () => {
+   it('play/pause state toggle is reflected in button text', () => {
+     const { rerender } = render(
+       <AnimationControls
+-        {...defaultProps}
++        {...defaultProps()}
+         isPlaying={false}
+         onPlayPause={onPlayPause}
+         onFPSChange={onFPSChange}
+         onFrameChange={onFrameChange}
+@@ -139,9 +139,9 @@
+     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument()
+ 
+     rerender(
+       <AnimationControls
+-        {...defaultProps}
++        {...defaultProps()}
+         isPlaying={true}
+         onPlayPause={onPlayPause}
+         onFPSChange={onFPSChange}
+         onFrameChange={onFrameChange}
+@@ -153,9 +153,9 @@
+ 
+   it('frame counter displays correct 1-indexed frame', () => {
+     render(
+       <AnimationControls
+-        {...defaultProps}
++        {...defaultProps()}
+         currentFrame={4}
+         onPlayPause={onPlayPause}
+         onFPSChange={onFPSChange}
+         onFrameChange={onFrameChange}
+@@ -167,9 +167,9 @@
+ 
+   it('FPS slider aria-label is accessible', () => {
+     render(
+       <AnimationControls
+-        {...defaultProps}
++        {...defaultProps()}
+         fps={24}
+         onPlayPause={onPlayPause}
+         onFPSChange={onFPSChange}
+         onFrameChange={onFrameChange}
+
+[0m
+[0m← [0mEdit src/components/GameCanvas.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
+@@ -8,18 +8,14 @@
+     run_id: 'run-001',
+     model_id: 'Gemini-2.5-flash',
+     run_date: '2026-04-04',
+     asset_paths: { hero: 'hero.png', background: 'background.png', enemy: 'enemy.png', effect: 'effect.png' },
+-    scores: { aesthetic: 85, technical: 90 },
+-    review_count: 3,
+   },
+   {
+     run_id: 'run-002',
+     model_id: 'Claude-3.5',
+     run_date: '2026-04-05',
+     asset_paths: { hero: 'hero.png', background: 'background.png', enemy: 'enemy.png', effect: 'effect.png' },
+-    scores: { aesthetic: 80, technical: 85 },
+-    review_count: 2,
+   },
+ ]
+ 
+ describe('GameCanvas', () => {
+
+[0m
+[0m$ [0mnpx tsc --noEmit 2>&1 | grep -E "^(lib/game-templates.test.ts|src/components/GameCanvas.test.tsx|src/components/cross-component-sync.test.tsx)" || echo "No type errors in fixed files"
+src/components/GameCanvas.test.tsx(7,3): error TS2739: Type '{ run_id: string; model_id: string; run_date: string; asset_paths: { hero: string; background: string; enemy: string; effect: string; }; }' is missing the following properties from type '{ run_id: string; model_id: string; run_date: string; variant: string; benchmark_id: string; prompt_version: string; asset_paths: { background: string; hero: string; enemy: string; effect: string; }; status: "pending" | ... 1 more ... | "failed"; generation_notes?: string | undefined; }': variant, benchmark_id, prompt_version, status
+src/components/GameCanvas.test.tsx(13,3): error TS2739: Type '{ run_id: string; model_id: string; run_date: string; asset_paths: { hero: string; background: string; enemy: string; effect: string; }; }' is missing the following properties from type '{ run_id: string; model_id: string; run_date: string; variant: string; benchmark_id: string; prompt_version: string; asset_paths: { background: string; hero: string; enemy: string; effect: string; }; status: "pending" | ... 1 more ... | "failed"; generation_notes?: string | undefined; }': variant, benchmark_id, prompt_version, status
+src/components/cross-component-sync.test.tsx(18,24): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(19,24): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(20,26): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(21,29): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(26,5): error TS2322: Type 'Mock<[]>' is not assignable to type 'Mock<Procedure | Constructable>'.
+src/components/cross-component-sync.test.tsx(26,25): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(27,5): error TS2322: Type 'Mock<[number]>' is not assignable to type 'Mock<Procedure | Constructable>'.
+src/components/cross-component-sync.test.tsx(27,25): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(28,5): error TS2322: Type 'Mock<[number]>' is not assignable to type 'Mock<Procedure | Constructable>'.
+src/components/cross-component-sync.test.tsx(28,27): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(29,5): error TS2322: Type 'Mock<["loop" | "once" | "ping-pong"]>' is not assignable to type 'Mock<Procedure | Constructable>'.
+src/components/cross-component-sync.test.tsx(29,30): error TS2558: Expected 0-1 type arguments, but got 2.
+src/components/cross-component-sync.test.tsx(40,15): error TS2322: Type '{ onPlayPause: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; onFPSChange: Mock<...>; onFrameChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(47,15): error TS2322: Type '{ onFPSChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFrameChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(55,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(62,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(69,15): error TS2322: Type '{ onLoopModeChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; currentFrame: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onFrameChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(76,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(83,15): error TS2322: Type '{ currentFrame: number; onFrameChange: Mock<Procedure | Constructable>; isPlaying: boolean; fps: number; totalFrames: number; loopMode: "loop"; onPlayPause: Mock<...>; onFPSChange: Mock<...>; onLoopModeChange: Mock<...>; }' is not assignable to type 'AnimationControlsProps'.
+src/components/cross-component-sync.test.tsx(133,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(134,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(135,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(136,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+src/components/cross-component-sync.test.tsx(145,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(146,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(147,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(148,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+src/components/cross-component-sync.test.tsx(159,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(160,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(161,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(162,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+src/components/cross-component-sync.test.tsx(173,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '() => void'.
+src/components/cross-component-sync.test.tsx(174,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(fps: number) => void'.
+src/components/cross-component-sync.test.tsx(175,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(frame: number) => void'.
+src/components/cross-component-sync.test.tsx(176,11): error TS2322: Type 'Mock<Procedure | Constructable>' is not assignable to type '(mode: "loop" | "once" | "ping-pong") => void'.
+[0m
+[0m$ [0mgrep -r "vi\.fn" src/components/*.test.tsx | head -20
+src/components/AnimationControls.test.tsx:    onPlayPause: vi.fn(),
+src/components/AnimationControls.test.tsx:    onFPSChange: vi.fn(),
+src/components/AnimationControls.test.tsx:    onFrameChange: vi.fn(),
+src/components/AnimationControls.test.tsx:    onLoopModeChange: vi.fn(),
+src/components/AnimationControls.test.tsx:    onChange: vi.fn(),
+src/components/BatchConfigForm.test.tsx:  const mockOnSubmit = vi.fn()
+src/components/ComparisonView.test.tsx:  getRun: vi.fn(),
+src/components/ComparisonView.test.tsx:  getReview: vi.fn(),
+src/components/ComparisonView.test.tsx:  listRuns: vi.fn()
+src/components/cross-component-sync.test.tsx:  let onPlayPause: ReturnType<typeof vi.fn>
+src/components/cross-component-sync.test.tsx:  let onFPSChange: ReturnType<typeof vi.fn>
+src/components/cross-component-sync.test.tsx:  let onFrameChange: ReturnType<typeof vi.fn>
+src/components/cross-component-sync.test.tsx:  let onLoopModeChange: ReturnType<typeof vi.fn>
+src/components/cross-component-sync.test.tsx:    onPlayPause: vi.fn<[], void>(),
+src/components/cross-component-sync.test.tsx:    onFPSChange: vi.fn<[number], void>(),
+src/components/cross-component-sync.test.tsx:    onFrameChange: vi.fn<[number], void>(),
+src/components/cross-component-sync.test.tsx:    onLoopModeChange: vi.fn<['once' | 'loop' | 'ping-pong'], void>(),
+src/components/cross-component-sync.test.tsx:    onPlayPause = vi.fn<[], void>()
+src/components/cross-component-sync.test.tsx:    onFPSChange = vi.fn<[number], void>()
+src/components/cross-component-sync.test.tsx:    onFrameChange = vi.fn<[number], void>()
+[0m
+[0m$ [0mcat node_modules/vitest/package.json | grep version
+"version": "4.1.2",
+[0m
+[0m→ [0mRead src/components/AnimationControls.test.tsx
+[0m
+[0m← [0mWrite src/components/cross-component-sync.test.tsx
+Wrote file successfully.
+[0m
+[0m← [0mEdit src/components/GameCanvas.test.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx
+@@ -7,15 +7,23 @@
+   {
+     run_id: 'run-001',
+     model_id: 'Gemini-2.5-flash',
+     run_date: '2026-04-04',
++    variant: 'default',
++    benchmark_id: 'bench-001',
++    prompt_version: 'v1',
+     asset_paths: { hero: 'hero.png', background: 'background.png', enemy: 'enemy.png', effect: 'effect.png' },
++    status: 'completed',
+   },
+   {
+     run_id: 'run-002',
+     model_id: 'Claude-3.5',
+     run_date: '2026-04-05',
++    variant: 'default',
++    benchmark_id: 'bench-001',
++    prompt_version: 'v1',
+     asset_paths: { hero: 'hero.png', background: 'background.png', enemy: 'enemy.png', effect: 'effect.png' },
++    status: 'completed',
+   },
+ ]
+ 
+ describe('GameCanvas', () => {
+
+[0m
+[0m$ [0mnpx tsc --noEmit 2>&1 | grep -E "^(lib/game-templates.test.ts|src/components/GameCanvas.test.tsx|src/components/cross-component-sync.test.tsx)" || echo "No type errors in fixed files"
+No type errors in fixed files
+[0m
+[0m$ [0mCI=true npm test 2>&1
+> pixel-art-next@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+
+ Test Files  52 passed (52)
+      Tests  408 passed (408)
+   Start at  02:05:12
+   Duration  72.17s (transform 2.17s, setup 11.64s, import 17.61s, tests 26.71s, environment 131.44s)
+[0m
+[0m$ [0mnpx eslint lib/game-templates.test.ts src/components/GameCanvas.test.tsx src/components/cross-component-sync.test.tsx 2>&1
+(no output)
+[0m
+[0m# [0mTodos
+[x] Run test suite (CI=true npm test)
+[x] Run lint and typecheck
+[x] Review changed source files for correctness/style/security/performance
+[x] Fix up to 5-7 minor issues if found
+[ ] Update tech-debt.md if architectural problems found
+[ ] Report review results
+[0m
+[0m$ [0mgit diff --stat
+lib/game-templates.test.ts                   |   6 +-
+ measure/output.log                           |  17 +
+ measure/review-output.log                    | 897 +++++++++++++++++----------
+ src/components/GameCanvas.test.tsx           |  16 +-
+ src/components/cross-component-sync.test.tsx |  67 +-
+ 5 files changed, 613 insertions(+), 390 deletions(-)
+[0m
+[0m$ [0mgit add lib/game-templates.test.ts src/components/GameCanvas.test.tsx src/components/cross-component-sync.test.tsx && git status
 On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
 	modified:   lib/game-templates.test.ts
+	modified:   src/components/GameCanvas.test.tsx
+	modified:   src/components/cross-component-sync.test.tsx
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
 	modified:   measure/output.log
 	modified:   measure/review-output.log
-	modified:   src/app/models/[modelId]/page.tsx
-	modified:   src/components/ExportDropdown.test.tsx
 [0m
-[0m$ [0mgit commit -m "chore(review): fix lint/style issues"
-[main 96eed8d] chore(review): fix lint/style issues
- 5 files changed, 282 insertions(+), 227 deletions(-)
+[0m$ [0mgit commit -m "chore(review): fix 3 typecheck errors in test files"
+[main 3f20a49] chore(review): fix 3 typecheck errors in test files
+ 3 files changed, 33 insertions(+), 56 deletions(-)
 [0m
-[0m→ [0mRead measure/tech-debt.md
-[0m
-[0m← [0mEdit measure/tech-debt.md
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
-===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
-@@ -29,5 +29,7 @@
- | 2026-05-02 | sprite_inspection | Phase 1: sprite-utils.ts with extractFrames() and FramePlayer class | Low | Resolved | 31 tests; lib/sprite-utils.ts created |
- | 2026-05-02 | sprite_inspection | Phase 2: AnimationControls component with LoopModeSelector, FrameCounter | Low | Resolved | 18 tests; src/components/AnimationControls.tsx created |
- | 2026-05-02 | sprite_inspection | Phase 3-4: SpriteSheetPreview integrated with AnimationControls and FramePlayer | Low | Resolved | 10 tests; SpriteSheetPreview now uses FramePlayer for state management |
- | 2026-05-02 | sprite_inspection | SpriteSheetPreview used internal state instead of AnimationControls | Medium | Resolved | Refactored to use AnimationControls with FramePlayer; proper separation of concerns |
--| 2026-05-04 | game-preview-multi-game | Phase 1-5: Multi-Game Template Expansion | Low | Resolved | 4 game templates (labyrinth, rpg-town, isometric-city, scifi-platformer); template selector UI added to GameCanvas; 408 tests pass |
-\ No newline at end of file
-+| 2026-05-04 | game-preview-multi-game | Phase 1-5: Multi-Game Template Expansion | Low | Resolved | 4 game templates (labyrinth, rpg-town, isometric-city, scifi-platformer); template selector UI added to GameCanvas; 408 tests pass |
-+| 2026-05-04 | batch-export | Export components duplicate downloadFile logic | Low | Open | ExportButton, ExportDropdown, ComparisonExport all inline Blob/URL.createObjectURL instead of using lib/export.ts:downloadFile() |
-+| 2026-05-04 | game-preview-multi-game | GameCanvas hardcodes CANVAS_WIDTH/HEIGHT ignoring template config | Medium | Open | Templates define canvasWidth/Height but GameCanvas uses fixed 640x480; scifi-platformer needs 960x720 |
-\ No newline at end of file
-
-[0m
-[0m$ [0mgit add measure/tech-debt.md && git commit -m "docs(tech-debt): add review findings for export duplication and canvas sizing"
-[main ec07ce7] docs(tech-debt): add review findings for export duplication and canvas sizing
- 1 file changed, 3 insertions(+), 1 deletion(-)
+[0m# [0mTodos
+[x] Run test suite (CI=true npm test)
+[x] Run lint and typecheck
+[x] Review changed source files for correctness/style/security/performance
+[x] Fix up to 5-7 minor issues if found
+[x] Update tech-debt.md if architectural problems found
+[x] Report review results
 [0m
 ## Code Review Report — Past 24 Hours
 
-**Commits reviewed:** 20 commits (accessibility audit, batch export, canvas E2E testing, multi-game preview expansion)
+**Commits reviewed:** 9 (export_downloadfile_refactor, gamecanvas_template_canvas tracks completed)
 
-**Files reviewed:** 21 changed files including `lib/export.ts`, `lib/game-templates.ts`, `src/components/GameCanvas.tsx`, `src/components/ExportDropdown.tsx`, `src/components/ComparisonExport.tsx`, `src/components/ReviewTools.tsx`, `src/components/ModelDetailPanel.tsx`, `src/app/layout.tsx`, `tests/accessibility.test.tsx`, and others.
+**Files reviewed:** 17 source files
+- `lib/export.ts`, `lib/export.test.ts`
+- `lib/game-templates.ts`, `lib/game-templates.test.ts`
+- `src/components/GameCanvas.tsx`, `GameCanvas.test.tsx`
+- `src/components/ExportButton.tsx`, `ExportDropdown.tsx`, `ComparisonExport.tsx`
+- `src/components/cross-component-sync.test.tsx`
+- `src/app/compare/page.tsx`, `leaderboard/LeaderboardClient.tsx`, `models/[modelId]/page.tsx`, `quality/page.tsx`
 
-**Issues found:** 3 lint issues in changed files
-- `lib/game-templates.test.ts`: unused imports (`beforeEach`, `SpriteSlot`, `TilemapConfig`, `RenderConfig`)
-- `src/app/models/[modelId]/page.tsx`: 2 `any` types instead of `LeaderboardEntry`
-- `src/components/ExportDropdown.test.tsx`: unused `vi` import
+**Tests:** 408 passed (unchanged)
 
-**Issues fixed:** 3/3 lint issues fixed and committed
+**Issues found & fixed (3):**
+| File | Issue | Fix |
+|------|-------|-----|
+| `lib/game-templates.test.ts` | `getTemplate()` returns `undefined` — unsafe property access | Added non-null assertion `!` |
+| `src/components/GameCanvas.test.tsx` | Mock `Run` objects missing required fields (`variant`, `benchmark_id`, `prompt_version`, `status`, `asset_paths.enemy/effect`) | Added all required fields to match `Run` type |
+| `src/components/cross-component-sync.test.tsx` | `AnimationControlsProps` callback type mismatches with `vi.fn()` | Simplified to `vi.fn()` pattern (matching `AnimationControls.test.tsx`); removed redundant `let` declarations |
 
-**Tests:** 408 tests passing (no failures)
+**Lint:** Clean on changed files. Pre-existing errors in `lib/batch-orchestrator.ts`, `scripts/`, and other files unchanged (not from past 24h).
 
-**Build:** Next.js build succeeds, TypeScript compiles cleanly
+**Typecheck:** Clean on changed files.
 
-**Architectural concerns added to tech-debt.md:**
-1. Export components (`ExportButton`, `ExportDropdown`, `ComparisonExport`) duplicate `Blob`/`URL.createObjectURL` download logic instead of using the `downloadFile()` utility in `lib/export.ts`
-2. `GameCanvas` hardcodes `CANVAS_WIDTH=640`/`CANVAS_HEIGHT=480` but templates define their own canvas dimensions (e.g., scifi-platformer needs 960x720)
+**Security:** No hardcoded secrets, no XSS vectors in reviewed code.
+
+**Performance:** No N+1 queries or memory leaks in reviewed code.
+
+**Architectural concerns:** None new. `ExportButton.tsx` still duplicates CSV logic inline instead of using `lib/export.ts:toCsv()` — minor inconsistency, not worth tech-debt entry.
+
+**Commit:** `3f20a49` — `chore(review): fix 3 typecheck errors in test files`
