@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { downloadFile } from '@/../lib/export'
 
 interface ExportButtonProps {
   exportType: 'csv' | 'json' | 'both'
@@ -35,15 +36,8 @@ const ExportButton: React.FC<ExportButtonProps> = ({
       }).join(',')
     )
     const csv = [headers.join(','), ...rows].join('\n')
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = filename || `export-${new Date().toISOString().split('T')[0]}.csv`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const csvFilename = filename || `export-${new Date().toISOString().split('T')[0]}.csv`
+    downloadFile(csv, csvFilename, 'text/csv')
     setIsOpen(false)
   }
 
@@ -58,15 +52,8 @@ const ExportButton: React.FC<ExportButtonProps> = ({
       data
     }
     const json = JSON.stringify(payload, null, 2)
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = filename || `export-${new Date().toISOString().split('T')[0]}.json`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const jsonFilename = filename || `export-${new Date().toISOString().split('T')[0]}.json`
+    downloadFile(json, jsonFilename, 'application/json')
     setIsOpen(false)
   }
 

@@ -1,0 +1,15 @@
+{
+  "id": "export_downloadfile_refactor",
+  "created": "2026-05-04",
+  "priority": "high",
+  "status": "pending",
+  "title": "Refactor Export Components to Use Shared downloadFile()",
+  "summary": "ExportButton, ExportDropdown, and ComparisonExport all duplicate Blob/URL.createObjectURL download logic instead of using lib/export.ts:downloadFile(). This causes code duplication and potential inconsistencies.",
+  "tech_debt_items": [
+    {
+      "item": "Export components duplicate downloadFile logic",
+      "severity": "low",
+      "status": "open"
+    }
+  ]
+}

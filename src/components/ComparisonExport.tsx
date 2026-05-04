@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import type { Run, Review } from '@/../lib/schemas'
-import { toCsv, toJsonExport } from '@/../lib/export'
+import { toCsv, toJsonExport, downloadFile } from '@/../lib/export'
 
 interface ComparisonExportProps {
   runs: Run[]
@@ -90,15 +90,7 @@ const ComparisonExport: React.FC<ComparisonExportProps> = ({ runs, reviews }) =>
     ]
 
     const csv = toCsv(rows)
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `comparison-${leftRun.run_id}-vs-${rightRun.run_id}.csv`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    downloadFile(csv, `comparison-${leftRun.run_id}-vs-${rightRun.run_id}.csv`, 'text/csv')
     setIsOpen(false)
   }
 
@@ -136,15 +128,7 @@ const ComparisonExport: React.FC<ComparisonExportProps> = ({ runs, reviews }) =>
     }
 
     const json = toJsonExport(comparison, { source: 'comparison_view' })
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `comparison-${leftRun.run_id}-vs-${rightRun.run_id}.json`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    downloadFile(json, `comparison-${leftRun.run_id}-vs-${rightRun.run_id}.json`, 'application/json')
     setIsOpen(false)
   }
 

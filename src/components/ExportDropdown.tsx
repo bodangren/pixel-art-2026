@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import type { LeaderboardEntry } from '@/../lib/leaderboard'
-import { toCsv, toJsonExport } from '@/../lib/export'
+import { toCsv, toJsonExport, downloadFile } from '@/../lib/export'
 
 interface ExportDropdownProps {
   entries: LeaderboardEntry[]
@@ -23,29 +23,13 @@ const ExportDropdown: React.FC<ExportDropdownProps> = ({ entries, label = 'Expor
       latest_run_date: e.latest_run_date
     }))
     const csv = toCsv(rows)
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `leaderboard-${new Date().toISOString().split('T')[0]}.csv`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    downloadFile(csv, `leaderboard-${new Date().toISOString().split('T')[0]}.csv`, 'text/csv')
     setIsOpen(false)
   }
 
   const handleExportJSON = () => {
     const json = toJsonExport(entries, { source: 'leaderboard' })
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `leaderboard-${new Date().toISOString().split('T')[0]}.json`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    downloadFile(json, `leaderboard-${new Date().toISOString().split('T')[0]}.json`, 'application/json')
     setIsOpen(false)
   }
 
