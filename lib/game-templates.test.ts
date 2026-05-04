@@ -39,13 +39,13 @@ describe('GameTemplate', () => {
   })
 
   it('spriteSlots defines hero and background for dungeon-crawler', () => {
-    const template = getTemplate('labyrinth')
+    const template = getTemplate('labyrinth')!
     expect(template.spriteSlots.hero).toBeDefined()
     expect(template.spriteSlots.background).toBeDefined()
   })
 
   it('tilemapConfig has correct dimensions', () => {
-    const template = getTemplate('labyrinth')
+    const template = getTemplate('labyrinth')!
     expect(template.tilemapConfig.gridWidth).toBe(13)
     expect(template.tilemapConfig.gridHeight).toBe(10)
     expect(template.tilemapConfig.tileSize).toBe(48)
@@ -54,7 +54,7 @@ describe('GameTemplate', () => {
   })
 
   it('renderConfig has scale and backgroundColor', () => {
-    const template = getTemplate('labyrinth')
+    const template = getTemplate('labyrinth')!
     expect(template.renderConfig.scale).toBe(2)
     expect(template.renderConfig.backgroundColor).toBe('#1a1a2e')
   })
