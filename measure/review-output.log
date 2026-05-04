@@ -453,3 +453,63 @@ Route (app)
 ○  (Static)  prerendered as static content
 ●  (SSG)     prerendered as static HTML (uses generateStaticParams)
 [0m
+[0m$ [0mgit add -A && git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   lib/game-templates.test.ts
+	modified:   measure/output.log
+	modified:   measure/review-output.log
+	modified:   src/app/models/[modelId]/page.tsx
+	modified:   src/components/ExportDropdown.test.tsx
+[0m
+[0m$ [0mgit commit -m "chore(review): fix lint/style issues"
+[main 96eed8d] chore(review): fix lint/style issues
+ 5 files changed, 282 insertions(+), 227 deletions(-)
+[0m
+[0m→ [0mRead measure/tech-debt.md
+[0m
+[0m← [0mEdit measure/tech-debt.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+@@ -29,5 +29,7 @@
+ | 2026-05-02 | sprite_inspection | Phase 1: sprite-utils.ts with extractFrames() and FramePlayer class | Low | Resolved | 31 tests; lib/sprite-utils.ts created |
+ | 2026-05-02 | sprite_inspection | Phase 2: AnimationControls component with LoopModeSelector, FrameCounter | Low | Resolved | 18 tests; src/components/AnimationControls.tsx created |
+ | 2026-05-02 | sprite_inspection | Phase 3-4: SpriteSheetPreview integrated with AnimationControls and FramePlayer | Low | Resolved | 10 tests; SpriteSheetPreview now uses FramePlayer for state management |
+ | 2026-05-02 | sprite_inspection | SpriteSheetPreview used internal state instead of AnimationControls | Medium | Resolved | Refactored to use AnimationControls with FramePlayer; proper separation of concerns |
+-| 2026-05-04 | game-preview-multi-game | Phase 1-5: Multi-Game Template Expansion | Low | Resolved | 4 game templates (labyrinth, rpg-town, isometric-city, scifi-platformer); template selector UI added to GameCanvas; 408 tests pass |
+\ No newline at end of file
++| 2026-05-04 | game-preview-multi-game | Phase 1-5: Multi-Game Template Expansion | Low | Resolved | 4 game templates (labyrinth, rpg-town, isometric-city, scifi-platformer); template selector UI added to GameCanvas; 408 tests pass |
++| 2026-05-04 | batch-export | Export components duplicate downloadFile logic | Low | Open | ExportButton, ExportDropdown, ComparisonExport all inline Blob/URL.createObjectURL instead of using lib/export.ts:downloadFile() |
++| 2026-05-04 | game-preview-multi-game | GameCanvas hardcodes CANVAS_WIDTH/HEIGHT ignoring template config | Medium | Open | Templates define canvasWidth/Height but GameCanvas uses fixed 640x480; scifi-platformer needs 960x720 |
+\ No newline at end of file
+
+[0m
+[0m$ [0mgit add measure/tech-debt.md && git commit -m "docs(tech-debt): add review findings for export duplication and canvas sizing"
+[main ec07ce7] docs(tech-debt): add review findings for export duplication and canvas sizing
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+[0m
+## Code Review Report — Past 24 Hours
+
+**Commits reviewed:** 20 commits (accessibility audit, batch export, canvas E2E testing, multi-game preview expansion)
+
+**Files reviewed:** 21 changed files including `lib/export.ts`, `lib/game-templates.ts`, `src/components/GameCanvas.tsx`, `src/components/ExportDropdown.tsx`, `src/components/ComparisonExport.tsx`, `src/components/ReviewTools.tsx`, `src/components/ModelDetailPanel.tsx`, `src/app/layout.tsx`, `tests/accessibility.test.tsx`, and others.
+
+**Issues found:** 3 lint issues in changed files
+- `lib/game-templates.test.ts`: unused imports (`beforeEach`, `SpriteSlot`, `TilemapConfig`, `RenderConfig`)
+- `src/app/models/[modelId]/page.tsx`: 2 `any` types instead of `LeaderboardEntry`
+- `src/components/ExportDropdown.test.tsx`: unused `vi` import
+
+**Issues fixed:** 3/3 lint issues fixed and committed
+
+**Tests:** 408 tests passing (no failures)
+
+**Build:** Next.js build succeeds, TypeScript compiles cleanly
+
+**Architectural concerns added to tech-debt.md:**
+1. Export components (`ExportButton`, `ExportDropdown`, `ComparisonExport`) duplicate `Blob`/`URL.createObjectURL` download logic instead of using the `downloadFile()` utility in `lib/export.ts`
+2. `GameCanvas` hardcodes `CANVAS_WIDTH=640`/`CANVAS_HEIGHT=480` but templates define their own canvas dimensions (e.g., scifi-platformer needs 960x720)
