@@ -6,11 +6,7 @@
 ## Architecture & Design
 <!-- Decisions made that future tracks should be aware of -->
 
-- (2026-04-09, static_benchmark_app) Static export with dynamic routes requires generateStaticParams - cannot use purely dynamic routes for SSG
-
 - (2026-04-10, automated_validation_scoring_engine) Python Pillow for image validation - good choice for pixel-art analysis; handles RGBA properly
-
-## Recurring Gotchas
 <!-- Problems encountered repeatedly; save future tracks from the same pain -->
 
 - (2026-04-10, automated_validation_scoring_engine) datetime.utcnow() deprecated - use datetime.now(timezone.utc) instead
