@@ -37,8 +37,8 @@ const STATE_ROWS: Record<AnimationState, number> = {
 }
 
 const SPRITE_SIZE = 48
-const CANVAS_WIDTH = 640
-const CANVAS_HEIGHT = 480
+const DEFAULT_CANVAS_WIDTH = 640
+const DEFAULT_CANVAS_HEIGHT = 480
 const SCALE = 2
 
 function extractFrames(image: HTMLImageElement): { columns: number; rows: number } {
@@ -70,14 +70,17 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
   const [loading, setLoading] = useState(true)
   const [fps, setFps] = useState(4)
   const [showGrid, setShowGrid] = useState(false)
-  const [heroX, setHeroX] = useState(CANVAS_WIDTH / 2)
-  const [heroY, setHeroY] = useState(CANVAS_HEIGHT / 2)
   const [animationState, setAnimationState] = useState<AnimationState>('idle')
   const [isPaused, setIsPaused] = useState(false)
 
   const selectedRun = runs.find(r => r.run_id === selectedRunId)
   const selectedTemplate: GameTemplate | undefined = getAllTemplates().find(t => t.id === selectedTemplateId)
   const bgColor = selectedTemplate?.renderConfig.backgroundColor || '#1a1a2e'
+  const canvasWidth = selectedTemplate?.tilemapConfig.canvasWidth || DEFAULT_CANVAS_WIDTH
+  const canvasHeight = selectedTemplate?.tilemapConfig.canvasHeight || DEFAULT_CANVAS_HEIGHT
+
+  const [heroX, setHeroX] = useState(canvasWidth / 2)
+  const [heroY, setHeroY] = useState(canvasHeight / 2)
 
   const loadSprites = useCallback(async (run: Run) => {
     setLoading(true)
@@ -127,17 +130,17 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
     context.imageSmoothingEnabled = false
 
     function render(timestamp: number) {
-      context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+      context.clearRect(0, 0, canvasWidth, canvasHeight)
 
       context.fillStyle = bgColor
-      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+      context.fillRect(0, 0, canvasWidth, canvasHeight)
 
       const bg = backgroundRef.current
       if (bg) {
         const tileWidth = bg.width * SCALE
         const tileHeight = bg.height * SCALE
-        for (let y = 0; y < CANVAS_HEIGHT; y += tileHeight) {
-          for (let x = 0; x < CANVAS_WIDTH; x += tileWidth) {
+        for (let y = 0; y < canvasHeight; y += tileHeight) {
+          for (let x = 0; x < canvasWidth; x += tileWidth) {
             context.drawImage(bg, x, y, tileWidth, tileHeight)
           }
         }
@@ -188,16 +191,16 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
       if (showGrid) {
         context.strokeStyle = 'rgba(255, 255, 255, 0.1)'
         context.lineWidth = 1
-        for (let x = 0; x < CANVAS_WIDTH; x += SPRITE_SIZE * SCALE) {
+        for (let x = 0; x < canvasWidth; x += SPRITE_SIZE * SCALE) {
           context.beginPath()
           context.moveTo(x, 0)
-          context.lineTo(x, CANVAS_HEIGHT)
+          context.lineTo(x, canvasHeight)
           context.stroke()
         }
-        for (let y = 0; y < CANVAS_HEIGHT; y += SPRITE_SIZE * SCALE) {
+        for (let y = 0; y < canvasHeight; y += SPRITE_SIZE * SCALE) {
           context.beginPath()
           context.moveTo(0, y)
-          context.lineTo(CANVAS_WIDTH, y)
+          context.lineTo(canvasWidth, y)
           context.stroke()
         }
       }
@@ -210,7 +213,7 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
     return () => {
       cancelAnimationFrame(animationRef.current)
     }
-  }, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor])
+  }, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor, canvasWidth, canvasHeight])
 
   const handleCanvasClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -314,8 +317,8 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
       <div className="relative">
         <canvas
           ref={canvasRef}
-          width={CANVAS_WIDTH}
-          height={CANVAS_HEIGHT}
+          width={canvasWidth}
+          height={canvasHeight}
           onClick={handleCanvasClick}
           className="border border-slate-700 rounded cursor-crosshair"
           style={{ imageSmoothingEnabled: false } as React.CSSProperties}

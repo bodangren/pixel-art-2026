@@ -1,0 +1,15 @@
+{
+  "id": "gamecanvas_template_canvas",
+  "created": "2026-05-04",
+  "priority": "medium",
+  "status": "pending",
+  "title": "Fix GameCanvas to Use Template Canvas Dimensions",
+  "summary": "GameCanvas hardcodes CANVAS_WIDTH/HEIGHT ignoring template config. Templates define canvasWidth/Height but GameCanvas uses fixed 640x480; scifi-platformer needs 960x720.",
+  "tech_debt_items": [
+    {
+      "item": "GameCanvas hardcodes CANVAS_WIDTH/HEIGHT ignoring template config",
+      "severity": "medium",
+      "status": "open"
+    }
+  ]
+}

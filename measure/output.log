@@ -22,3 +22,452 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 [0m
+[0m$ [0mgit add measure/output.log measure/review-output.log && git commit -m "Update session logs" && git push
+[main 0f553d0] Update session logs
+ 2 files changed, 70 insertions(+), 1045 deletions(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   691cd5c..0f553d0  main -> main
+[0m
+[0m✱ [0mGrep "\[~\]"[90m 0 matches[0m
+[0m✱ [0mGlob "measure/current_directive*"[90m 0 matches[0m
+No directive, no in-progress. Top open tech-debt: GameCanvas hardcodes canvas dimensions ignoring template config (Medium).
+[0m✱ [0mGlob "**/GameCanvas*"[90m 2 matches[0m
+[0m→ [0mRead src/components/GameCanvas.tsx
+Found the issue. GameCanvas hardcodes `CANVAS_WIDTH=640` and `CANVAS_HEIGHT=480` at lines 40-41, ignoring template-defined dimensions. Let me check the template schema:
+[0m→ [0mRead lib/game-templates.ts
+[0m→ [0mSkill "measure"
+[0m
+[0m$ [0mmkdir -p measure/tracks/gamecanvas_template_canvas
+(no output)
+[0m
+[0m← [0mWrite measure/tracks/gamecanvas_template_canvas/metadata.json
+Wrote file successfully.
+[0m
+[0m← [0mWrite measure/tracks/gamecanvas_template_canvas/spec.md
+Wrote file successfully.
+[0m
+[0m← [0mWrite measure/tracks/gamecanvas_template_canvas/plan.md
+Wrote file successfully.
+[0m
+[0m→ [0mRead measure/tracks.md[90m [limit=10, offset=90][0m
+[0m
+[0m← [0mEdit measure/tracks.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+@@ -95,4 +95,9 @@
+ - [x] **Track: Multi-Game Preview Expansion**
+    *Link: [./tracks/game-preview-multi-game_20260503/](./tracks/game-preview-multi-game_20260503/)*
+    *Priority: Medium* — Extend dynamic game preview to support RPG, isometric, and sci-fi templates beyond Labyrinth.
+    **Phase 1-5: Complete**
++
++- [ ] **Track: GameCanvas Template Canvas Dimensions**
++   *Link: [./tracks/gamecanvas_template_canvas/](./tracks/gamecanvas_template_canvas/)*
++   *Priority: Medium* — Fix GameCanvas to use template-defined canvasWidth/Height instead of hardcoded 640x480.
++   **Phase 1-4: Pending**
+
+[0m
+[0m# [0mTodos
+[ ] Update GameCanvas to read canvas dimensions from template tilemapConfig
+[ ] Run tests to verify no regressions
+[ ] Add tests for template-specific canvas dimensions
+[ ] Visual verification with browser-harness
+[ ] Update tech-debt.md and finalize
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -36,10 +36,10 @@
+   attack: 2
+ }
+ 
+ const SPRITE_SIZE = 48
+-const CANVAS_WIDTH = 640
+-const CANVAS_HEIGHT = 480
++const DEFAULT_CANVAS_WIDTH = 640
++const DEFAULT_CANVAS_HEIGHT = 480
+ const SCALE = 2
+ 
+ function extractFrames(image: HTMLImageElement): { columns: number; rows: number } {
+   const width = image.width
+
+[0m
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=20, offset=68][0m
+[0m✗ [0medit failed
+[91m[1mError: [0mCould not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings.
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=15, offset=68][0m
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=50, offset=38][0m
+[0m✗ [0medit failed
+[91m[1mError: [0mCould not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings.
+[0m
+[0m$ [0mcat -A /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx | head -90 | tail -20
+const [fps, setFps] = useState(4)$
+  const [showGrid, setShowGrid] = useState(false)$
+  const [heroX, setHeroX] = useState(CANVAS_WIDTH / 2)$
+  const [heroY, setHeroY] = useState(CANVAS_HEIGHT / 2)$
+  const [animationState, setAnimationState] = useState<AnimationState>('idle')$
+  const [isPaused, setIsPaused] = useState(false)$
+$
+  const selectedRun = runs.find(r => r.run_id === selectedRunId)$
+  const selectedTemplate: GameTemplate | undefined = getAllTemplates().find(t => t.id === selectedTemplateId)$
+  const bgColor = selectedTemplate?.renderConfig.backgroundColor || '#1a1a2e'$
+$
+  const loadSprites = useCallback(async (run: Run) => {$
+    setLoading(true)$
+    const basePath = `/data/runs/${run.run_id}/`$
+$
+    try {$
+      const heroImg = await loadImage(basePath + run.asset_paths.hero)$
+      const heroSheet = { image: heroImg, width: heroImg.width, height: heroImg.height, ...extractFrames(heroImg) }$
+      spritesRef.current.set('hero', heroSheet)$
+$
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -77,9 +77,14 @@
+ 
+ const selectedRun = runs.find(r => r.run_id === selectedRunId)
+ const selectedTemplate: GameTemplate | undefined = getAllTemplates().find(t => t.id === selectedTemplateId)
+ const bgColor = selectedTemplate?.renderConfig.backgroundColor || '#1a1a2e'
++const canvasWidth = selectedTemplate?.tilemapConfig.canvasWidth || DEFAULT_CANVAS_WIDTH
++const canvasHeight = selectedTemplate?.tilemapConfig.canvasHeight || DEFAULT_CANVAS_HEIGHT
+ 
++const [heroX, setHeroX] = useState(canvasWidth / 2)
++const [heroY, setHeroY] = useState(canvasHeight / 2)
++
+ const loadSprites = useCallback(async (run: Run) => {
+   setLoading(true)
+   const basePath = `/data/runs/${run.run_id}/`
+ 
+
+[0m
+[0m✱ [0mGrep "CANVAS_WIDTH|CANVAS_HEIGHT"[90m 16 matches[0m
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=20, offset=70][0m
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -69,10 +69,8 @@
+ const [selectedTemplateId, setSelectedTemplateId] = useState(initialTemplateId)
+ const [loading, setLoading] = useState(true)
+ const [fps, setFps] = useState(4)
+ const [showGrid, setShowGrid] = useState(false)
+-const [heroX, setHeroX] = useState(CANVAS_WIDTH / 2)
+-const [heroY, setHeroY] = useState(CANVAS_HEIGHT / 2)
+ const [animationState, setAnimationState] = useState<AnimationState>('idle')
+ const [isPaused, setIsPaused] = useState(false)
+ 
+ const selectedRun = runs.find(r => r.run_id === selectedRunId)
+
+[0m
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=40, offset=125][0m
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=40, offset=185][0m
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -129,19 +129,19 @@
+ const context = ctx as CanvasRenderingContext2D
+ context.imageSmoothingEnabled = false
+ 
+ function render(timestamp: number) {
+-  context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
++  context.clearRect(0, 0, canvasWidth, canvasHeight)
+ 
+   context.fillStyle = bgColor
+-  context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
++  context.fillRect(0, 0, canvasWidth, canvasHeight)
+ 
+   const bg = backgroundRef.current
+   if (bg) {
+     const tileWidth = bg.width * SCALE
+     const tileHeight = bg.height * SCALE
+-    for (let y = 0; y < CANVAS_HEIGHT; y += tileHeight) {
+-      for (let x = 0; x < CANVAS_WIDTH; x += tileWidth) {
++    for (let y = 0; y < canvasHeight; y += tileHeight) {
++      for (let x = 0; x < canvasWidth; x += tileWidth) {
+         context.drawImage(bg, x, y, tileWidth, tileHeight)
+       }
+     }
+   }
+
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -190,18 +190,18 @@
+ 
+ if (showGrid) {
+   context.strokeStyle = 'rgba(255, 255, 255, 0.1)'
+   context.lineWidth = 1
+-  for (let x = 0; x < CANVAS_WIDTH; x += SPRITE_SIZE * SCALE) {
++  for (let x = 0; x < canvasWidth; x += SPRITE_SIZE * SCALE) {
+     context.beginPath()
+     context.moveTo(x, 0)
+-    context.lineTo(x, CANVAS_HEIGHT)
++    context.lineTo(x, canvasHeight)
+     context.stroke()
+   }
+-  for (let y = 0; y < CANVAS_HEIGHT; y += SPRITE_SIZE * SCALE) {
++  for (let y = 0; y < canvasHeight; y += SPRITE_SIZE * SCALE) {
+     context.beginPath()
+     context.moveTo(0, y)
+-    context.lineTo(CANVAS_WIDTH, y)
++    context.lineTo(canvasWidth, y)
+     context.stroke()
+   }
+ }
+ 
+
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -212,9 +212,9 @@
+ 
+   return () => {
+     cancelAnimationFrame(animationRef.current)
+   }
+-}, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor])
++}, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor, canvasWidth, canvasHeight])
+ 
+ const handleCanvasClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
+   const canvas = canvasRef.current
+   if (!canvas) return
+
+[0m
+[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=20, offset=315][0m
+[0m
+[0m← [0mEdit src/components/GameCanvas.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.tsx
+@@ -316,10 +316,10 @@
+ 
+ <div className="relative">
+   <canvas
+     ref={canvasRef}
+-    width={CANVAS_WIDTH}
+-    height={CANVAS_HEIGHT}
++    width={canvasWidth}
++    height={canvasHeight}
+     onClick={handleCanvasClick}
+     className="border border-slate-700 rounded cursor-crosshair"
+     style={{ imageSmoothingEnabled: false } as React.CSSProperties}
+   />
+
+[0m
+[0m✱ [0mGrep "CANVAS_WIDTH|CANVAS_HEIGHT"[90m 4 matches[0m
+[0m
+[0m# [0mTodos
+[x] Update GameCanvas to read canvas dimensions from template tilemapConfig
+[ ] Run tests to verify no regressions
+[ ] Add tests for template-specific canvas dimensions
+[ ] Visual verification with browser-harness
+[ ] Update tech-debt.md and finalize
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun test 2>&1 | tail -30
+at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.test.tsx:76:5)
+(fail) ZoomContainer Component > does not show grid overlay for non-3x3 asset
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.test.tsx:83:5)
+(fail) ZoomContainer Component > shows 3x3 grid overlay when is3x3Grid and showGrid are true
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.test.tsx:90:5)
+(fail) ZoomContainer Component > handles drag to pan when zoomed in
+
+ 232 pass
+ 176 fail
+ 449 expect() calls
+Ran 408 tests across 52 files. [2.26s]
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run build 2>&1 | tail -30
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Generating static pages using 3 workers (6/24) 
+  Generating static pages using 3 workers (12/24) 
+  Generating static pages using 3 workers (18/24) 
+✓ Generating static pages using 3 workers (24/24) in 2.4s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /compare
+├ ○ /leaderboard
+├ ● /models/[modelId]
+│ ├ /models/Gemini-2.5-flash
+│ ├ /models/Gemini-2.5-pro
+│ ├ /models/Gemini-3-flash
+│ └ [+11 more paths]
+├ ○ /preview
+├ ○ /quality
+├ ○ /runs
+└ ● /runs/[runId]
+  └ /runs/gemini-3.1-pro__2026-04-04__r1
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun test src/components/GameCanvas.test.tsx 2>&1 | tail -20
+^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx:128:7)
+(fail) GameCanvas > sprite animation > changes animation state when selector changes
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/GameCanvas.test.tsx:136:29)
+(fail) GameCanvas > canvas interaction > canvas has correct cursor style
+
+ 0 pass
+ 15 fail
+Ran 15 tests across 1 file. [251.00ms]
+[0m
+[0m→ [0mRead src/components/GameCanvas.test.tsx
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun test --reporter=verbose 2>&1 | grep -A2 "GameCanvas.*rendering.*correct dimensions" | head -5
+(no output)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git diff src/components/GameCanvas.tsx
+diff --git a/src/components/GameCanvas.tsx b/src/components/GameCanvas.tsx
+index aec44b2..63437d3 100644
+--- a/src/components/GameCanvas.tsx
++++ b/src/components/GameCanvas.tsx
+@@ -37,8 +37,8 @@ const STATE_ROWS: Record<AnimationState, number> = {
+ }
+ 
+ const SPRITE_SIZE = 48
+-const CANVAS_WIDTH = 640
+-const CANVAS_HEIGHT = 480
++const DEFAULT_CANVAS_WIDTH = 640
++const DEFAULT_CANVAS_HEIGHT = 480
+ const SCALE = 2
+ 
+ function extractFrames(image: HTMLImageElement): { columns: number; rows: number } {
+@@ -70,14 +70,17 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
+   const [loading, setLoading] = useState(true)
+   const [fps, setFps] = useState(4)
+   const [showGrid, setShowGrid] = useState(false)
+-  const [heroX, setHeroX] = useState(CANVAS_WIDTH / 2)
+-  const [heroY, setHeroY] = useState(CANVAS_HEIGHT / 2)
+   const [animationState, setAnimationState] = useState<AnimationState>('idle')
+   const [isPaused, setIsPaused] = useState(false)
+ 
+   const selectedRun = runs.find(r => r.run_id === selectedRunId)
+   const selectedTemplate: GameTemplate | undefined = getAllTemplates().find(t => t.id === selectedTemplateId)
+   const bgColor = selectedTemplate?.renderConfig.backgroundColor || '#1a1a2e'
++  const canvasWidth = selectedTemplate?.tilemapConfig.canvasWidth || DEFAULT_CANVAS_WIDTH
++  const canvasHeight = selectedTemplate?.tilemapConfig.canvasHeight || DEFAULT_CANVAS_HEIGHT
++
++  const [heroX, setHeroX] = useState(canvasWidth / 2)
++  const [heroY, setHeroY] = useState(canvasHeight / 2)
+ 
+   const loadSprites = useCallback(async (run: Run) => {
+     setLoading(true)
+@@ -127,17 +130,17 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
+     context.imageSmoothingEnabled = false
+ 
+     function render(timestamp: number) {
+-      context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
++      context.clearRect(0, 0, canvasWidth, canvasHeight)
+ 
+       context.fillStyle = bgColor
+-      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
++      context.fillRect(0, 0, canvasWidth, canvasHeight)
+ 
+       const bg = backgroundRef.current
+       if (bg) {
+         const tileWidth = bg.width * SCALE
+         const tileHeight = bg.height * SCALE
+-        for (let y = 0; y < CANVAS_HEIGHT; y += tileHeight) {
+-          for (let x = 0; x < CANVAS_WIDTH; x += tileWidth) {
++        for (let y = 0; y < canvasHeight; y += tileHeight) {
++          for (let x = 0; x < canvasWidth; x += tileWidth) {
+             context.drawImage(bg, x, y, tileWidth, tileHeight)
+           }
+         }
+@@ -188,16 +191,16 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
+       if (showGrid) {
+         context.strokeStyle = 'rgba(255, 255, 255, 0.1)'
+         context.lineWidth = 1
+-        for (let x = 0; x < CANVAS_WIDTH; x += SPRITE_SIZE * SCALE) {
++        for (let x = 0; x < canvasWidth; x += SPRITE_SIZE * SCALE) {
+           context.beginPath()
+           context.moveTo(x, 0)
+-          context.lineTo(x, CANVAS_HEIGHT)
++          context.lineTo(x, canvasHeight)
+           context.stroke()
+         }
+-        for (let y = 0; y < CANVAS_HEIGHT; y += SPRITE_SIZE * SCALE) {
++        for (let y = 0; y < canvasHeight; y += SPRITE_SIZE * SCALE) {
+           context.beginPath()
+           context.moveTo(0, y)
+-          context.lineTo(CANVAS_WIDTH, y)
++          context.lineTo(canvasWidth, y)
+           context.stroke()
+         }
+       }
+@@ -210,7 +213,7 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
+     return () => {
+       cancelAnimationFrame(animationRef.current)
+     }
+-  }, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor])
++  }, [fps, showGrid, heroX, heroY, animationState, isPaused, bgColor, canvasWidth, canvasHeight])
+ 
+   const handleCanvasClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
+     const canvas = canvasRef.current
+@@ -314,8 +317,8 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
+       <div className="relative">
+         <canvas
+           ref={canvasRef}
+-          width={CANVAS_WIDTH}
+-          height={CANVAS_HEIGHT}
++          width={canvasWidth}
++          height={canvasHeight}
+           onClick={handleCanvasClick}
+           className="border border-slate-700 rounded cursor-crosshair"
+           style={{ imageSmoothingEnabled: false } as React.CSSProperties}
+[0m
