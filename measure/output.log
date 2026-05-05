@@ -740,3 +740,78 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
     **Phase 1-4: Complete (370 tests passing)**
 
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   measure/archive/archive_cleanup_20260505/plan.md
+	new file:   measure/archive/archive_cleanup_20260505/spec.md
+	renamed:    measure/tracks/canvas-interaction-testing_20260503/metadata.json -> measure/archive/canvas-interaction-testing_20260503/metadata.json
+	renamed:    measure/tracks/canvas-interaction-testing_20260503/plan.md -> measure/archive/canvas-interaction-testing_20260503/plan.md
+	renamed:    measure/tracks/canvas-interaction-testing_20260503/spec.md -> measure/archive/canvas-interaction-testing_20260503/spec.md
+	renamed:    measure/tracks/export_downloadfile_refactor/metadata.json -> measure/archive/export_downloadfile_refactor/metadata.json
+	renamed:    measure/tracks/export_downloadfile_refactor/plan.md -> measure/archive/export_downloadfile_refactor/plan.md
+	renamed:    measure/tracks/export_downloadfile_refactor/spec.md -> measure/archive/export_downloadfile_refactor/spec.md
+	renamed:    measure/tracks/game-preview-multi-game_20260503/metadata.json -> measure/archive/game-preview-multi-game_20260503/metadata.json
+	renamed:    measure/tracks/game-preview-multi-game_20260503/plan.md -> measure/archive/game-preview-multi-game_20260503/plan.md
+	renamed:    measure/tracks/game-preview-multi-game_20260503/spec.md -> measure/archive/game-preview-multi-game_20260503/spec.md
+	renamed:    measure/tracks/gamecanvas_template_canvas/metadata.json -> measure/archive/gamecanvas_template_canvas/metadata.json
+	renamed:    measure/tracks/gamecanvas_template_canvas/plan.md -> measure/archive/gamecanvas_template_canvas/plan.md
+	renamed:    measure/tracks/gamecanvas_template_canvas/spec.md -> measure/archive/gamecanvas_template_canvas/spec.md
+	renamed:    measure/tracks/minimax_benchmark_completion_20260505/metadata.json -> measure/archive/minimax_benchmark_completion_20260505/metadata.json
+	renamed:    measure/tracks/minimax_benchmark_completion_20260505/plan.md -> measure/archive/minimax_benchmark_completion_20260505/plan.md
+	renamed:    measure/tracks/minimax_benchmark_completion_20260505/spec.md -> measure/archive/minimax_benchmark_completion_20260505/spec.md
+	modified:   measure/output.log
+	modified:   measure/tracks.md
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git commit -m "checkpoint(MiniMax-M2.7): archive 6 completed tracks - canvas-interaction, game-preview-multi-game, export_downloadfile_refactor, gamecanvas_template_canvas, minimax_benchmark_completion, accessibility_audit"
+[main c22ae16] checkpoint(MiniMax-M2.7): archive 6 completed tracks - canvas-interaction, game-preview-multi-game, export_downloadfile_refactor, gamecanvas_template_canvas, minimax_benchmark_completion, accessibility_audit
+ 19 files changed, 804 insertions(+), 7 deletions(-)
+ create mode 100644 measure/archive/archive_cleanup_20260505/plan.md
+ create mode 100644 measure/archive/archive_cleanup_20260505/spec.md
+ rename measure/{tracks => archive}/canvas-interaction-testing_20260503/metadata.json (100%)
+ rename measure/{tracks => archive}/canvas-interaction-testing_20260503/plan.md (100%)
+ rename measure/{tracks => archive}/canvas-interaction-testing_20260503/spec.md (100%)
+ rename measure/{tracks => archive}/export_downloadfile_refactor/metadata.json (100%)
+ rename measure/{tracks => archive}/export_downloadfile_refactor/plan.md (100%)
+ rename measure/{tracks => archive}/export_downloadfile_refactor/spec.md (100%)
+ rename measure/{tracks => archive}/game-preview-multi-game_20260503/metadata.json (100%)
+ rename measure/{tracks => archive}/game-preview-multi-game_20260503/plan.md (100%)
+ rename measure/{tracks => archive}/game-preview-multi-game_20260503/spec.md (100%)
+ rename measure/{tracks => archive}/gamecanvas_template_canvas/metadata.json (100%)
+ rename measure/{tracks => archive}/gamecanvas_template_canvas/plan.md (100%)
+ rename measure/{tracks => archive}/gamecanvas_template_canvas/spec.md (100%)
+ rename measure/{tracks => archive}/minimax_benchmark_completion_20260505/metadata.json (100%)
+ rename measure/{tracks => archive}/minimax_benchmark_completion_20260505/plan.md (100%)
+ rename measure/{tracks => archive}/minimax_benchmark_completion_20260505/spec.md (100%)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git push
+To https://github.com/bodangren/pixel-art-2026.git
+   1efb736..c22ae16  main -> main
+[0m
+[0m$ [0mwc -l /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+35 /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+   48 /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+   83 total
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add measure/tech-debt.md measure/lessons-learned.md measure/tracks.md && git commit --allow-empty -m "checkpoint(MiniMax-M2.7): archive cleanup complete - workspace clean, 408 tests pass"
+[main 58652e5] checkpoint(MiniMax-M2.7): archive cleanup complete - workspace clean, 408 tests pass
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git push
+To https://github.com/bodangren/pixel-art-2026.git
+   c22ae16..58652e5  main -> main
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   measure/output.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[0m
