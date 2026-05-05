@@ -425,3 +425,14 @@ Not implemented: navigation to another Document
    Start at  05:40:38
    Duration  74.50s (transform 2.61s, setup 11.88s, import 19.19s, tests 26.51s, environment 135.80s)
 [0m
+[0m$ [0mgit add -A && git commit -m "fix: replace any types with ReviewData interface in ReviewSection and RubricForm" && git push
+[main b2a83c3] fix: replace any types with ReviewData interface in ReviewSection and RubricForm
+ 4 files changed, 426 insertions(+), 10 deletions(-)
+To https://github.com/bodangren/pixel-art-2026.git
+   4bb1bde..b2a83c3  main -> main
+[0m
+[0m$ [0mwc -l measure/tech-debt.md measure/lessons-learned.md
+35 measure/tech-debt.md
+   48 measure/lessons-learned.md
+   83 total
+[0m
