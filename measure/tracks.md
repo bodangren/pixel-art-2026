@@ -78,9 +78,19 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    **Phase 1-4: Complete (340 tests passing)**
 
 - [x] **Track: Accessibility Audit (WCAG 2.1 AA)**
-   *Link: [./tracks/accessibility_audit_20260502/](./tracks/accessibility_audit_20260502/)*
+   *Link: [./archive/accessibility_audit_20260502/](./archive/accessibility_audit_20260502/)*
    *Priority: Medium* — Audit and fix keyboard navigation, screen reader support, color contrast, and motion preferences.
    **Phase 1-4: Complete (359 tests passing)**
+
+- [x] **Track: Export DownloadFile Refactor**
+    *Link: [./archive/export_downloadfile_refactor_20260504/](./archive/export_downloadfile_refactor_20260504/)*
+    *Priority: Medium* — Refactor ExportButton, ExportDropdown, ComparisonExport to use shared lib/export.ts:downloadFile()
+**Phase 1-4: Complete**
+
+- [x] **Track: Archive Completed Tracks**
+   *Link: [./archive/archive_cleanup_20260505/](./archive/archive_cleanup_20260505/)*
+   *Priority: Low* — Archive 6 completed tracks (canvas-interaction, game-preview-multi-game, export_downloadfile_refactor, gamecanvas_template_canvas, minimax_benchmark_completion, accessibility_audit).
+   **Phase 1-4: Complete**
 
 - [x] **Track: Batch Export and Reporting**
    *Link: [./archive/batch-export-and-reporting_20260503/](./archive/batch-export-and-reporting_20260503/)*
@@ -88,21 +98,21 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    **Phase 1-4: Complete (370 tests passing)**
 
 - [x] **Track: Canvas Interaction E2E Testing**
-    *Link: [./tracks/canvas-interaction-testing_20260503/](./tracks/canvas-interaction-testing_20260503/)*
-    *Priority: Medium* — Add integration tests for sprite inspection tools, zoom/pan interactions, and game canvas workflows.
-    **Phase 1-5: Complete (172 tests passing)**
+     *Link: [./archive/canvas-interaction-testing_20260503/](./archive/canvas-interaction-testing_20260503/)*
+     *Priority: Medium* — Add integration tests for sprite inspection tools, zoom/pan interactions, and game canvas workflows.
+     **Phase 1-5: Complete (172 tests passing)**
 
 - [x] **Track: Multi-Game Preview Expansion**
-   *Link: [./tracks/game-preview-multi-game_20260503/](./tracks/game-preview-multi-game_20260503/)*
+   *Link: [./archive/game-preview-multi-game_20260503/](./archive/game-preview-multi-game_20260503/)*
    *Priority: Medium* — Extend dynamic game preview to support RPG, isometric, and sci-fi templates beyond Labyrinth.
    **Phase 1-5: Complete**
 
 - [x] **Track: GameCanvas Template Canvas Dimensions**
-   *Link: [./tracks/gamecanvas_template_canvas/](./tracks/gamecanvas_template_canvas/)*
+   *Link: [./archive/gamecanvas_template_canvas/](./archive/gamecanvas_template_canvas/)*
    *Priority: Medium* — Fix GameCanvas to use template-defined canvasWidth/Height instead of hardcoded 640x480.
    **Phase 1-4: Complete**
 
 - [x] **Track: Complete Minimax M2.5 Benchmark Run**
-   *Link: [./tracks/minimax_benchmark_completion_20260505/](./tracks/minimax_benchmark_completion_20260505/)*
+   *Link: [./archive/minimax_benchmark_completion_20260505/](./archive/minimax_benchmark_completion_20260505/)*
    *Priority: High* — The minimax-m2.5 run has only generate_assets.py script but no PNGs. Execute and register results.
    **Phase 1-4: Complete**
