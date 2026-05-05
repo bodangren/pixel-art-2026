@@ -101,3 +101,8 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Link: [./tracks/gamecanvas_template_canvas/](./tracks/gamecanvas_template_canvas/)*
    *Priority: Medium* — Fix GameCanvas to use template-defined canvasWidth/Height instead of hardcoded 640x480.
    **Phase 1-4: Complete**
+
+- [x] **Track: Complete Minimax M2.5 Benchmark Run**
+   *Link: [./tracks/minimax_benchmark_completion_20260505/](./tracks/minimax_benchmark_completion_20260505/)*
+   *Priority: High* — The minimax-m2.5 run has only generate_assets.py script but no PNGs. Execute and register results.
+   **Phase 1-4: Complete**

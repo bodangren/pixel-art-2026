@@ -1,0 +1,9 @@
+{
+  "id": "minimax_benchmark_completion_20260505",
+  "created": "2026-05-05",
+  "priority": "high",
+  "status": "complete",
+  "title": "Complete Minimax M2.5 Benchmark Run",
+  "summary": "The minimax-m2.5 benchmark run has only the generate_assets.py script but no generated PNG assets. Run the script and register the results.",
+  "tech_debt_items": []
+}

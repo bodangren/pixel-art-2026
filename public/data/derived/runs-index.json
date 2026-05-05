@@ -297,5 +297,27 @@
       "total_technical_score": 5,
       "linter_notes": ""
     }
+  },
+  {
+    "run_id": "minimax-m2.5__2026-05-05__initial",
+    "model_id": "minimax-m2.5",
+    "run_date": "2026-05-05",
+    "variant": "initial",
+    "benchmark_game_id": "labyrinth-of-the-goblin-king",
+    "asset_file_paths": {
+      "background": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/background.png",
+      "hero-3x3-sheet": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/hero-3x3-sheet.png",
+      "goblin-3x3-sheet": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/goblin-3x3-sheet.png",
+      "orb-sheet": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/orb-sheet.png"
+    },
+    "status": "complete",
+    "generation_notes": "Generated using optimized Python Pillow script (original was hanging due to per-pixel loops).",
+    "technical_grade": {
+      "alignment_score": 5,
+      "palette_consistency_score": 5,
+      "transparency_score": 5,
+      "total_technical_score": 5,
+      "linter_notes": ""
+    }
   }
 ]

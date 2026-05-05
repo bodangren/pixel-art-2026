@@ -33,3 +33,4 @@
 | 2026-05-04 | game-preview-multi-game | Phase 1-5: Multi-Game Template Expansion | Low | Resolved | 4 game templates (labyrinth, rpg-town, isometric-city, scifi-platformer); template selector UI added to GameCanvas; 408 tests pass |
 | 2026-05-04 | export_downloadfile_refactor | Export components duplicate downloadFile logic | Low | Resolved | ExportButton, ExportDropdown, ComparisonExport now use lib/export.ts:downloadFile() |
 | 2026-05-04 | game-preview-multi-game | GameCanvas hardcodes CANVAS_WIDTH/HEIGHT ignoring template config | Medium | Resolved | GameCanvas now reads canvasWidth/Height from template tilemapConfig |
+| 2026-05-05 | minimax_benchmark | minimax-m2.5 generate_assets.py hangs - per-pixel loops with random() in PIL | Medium | Resolved | Rewrote script using PIL ImageDraw.rectangle/ellipse instead of per-pixel putpixel; original script had 273k+ random() calls per background |
