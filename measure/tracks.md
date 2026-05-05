@@ -116,3 +116,21 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Link: [./archive/minimax_benchmark_completion_20260505/](./archive/minimax_benchmark_completion_20260505/)*
    *Priority: High* — The minimax-m2.5 run has only generate_assets.py script but no PNGs. Execute and register results.
    **Phase 1-4: Complete**
+
+## Upcoming Tracks
+
+- [ ] **Track: Human Review Data Population Sprint**
+  *Link: [./tracks/human_review_data_population_20260506/](./tracks/human_review_data_population_20260506/)*
+  Fix review persistence API and systematically populate reviews for all existing model runs.
+
+- [ ] **Track: Public Deployment Pipeline**
+  *Link: [./tracks/public_deployment_pipeline_20260506/](./tracks/public_deployment_pipeline_20260506/)*
+  GitHub Actions workflow to deploy static benchmark dashboard to GitHub Pages on every push to main.
+
+- [ ] **Track: Asset Pack Distribution (ZIP Downloads)**
+  *Link: [./tracks/asset_pack_distribution_20260506/](./tracks/asset_pack_distribution_20260506/)*
+  Package validated PNGs into downloadable ZIP files with README/credits for game developers.
+
+- [ ] **Track: Validation-Driven Model Re-run Pipeline**
+  *Link: [./tracks/validation_driven_model_rerun_20260506/](./tracks/validation_driven_model_rerun_20260506/)*
+  Validate all existing runs for completeness, flag failures, and re-trigger generation for failing models.
