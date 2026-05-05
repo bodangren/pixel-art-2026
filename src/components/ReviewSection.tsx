@@ -4,6 +4,14 @@ import React from 'react';
 import RubricForm from './RubricForm';
 import { Review } from '@/../lib/schemas';
 
+interface ReviewData {
+  review_timestamp: string;
+  rubric_scores: { background: number; hero: number; enemy: number; effect: number; pack: number };
+  notes: string;
+  weighted_total_score: number;
+  would_use_in_prototype_now: boolean;
+}
+
 interface ReviewSectionProps {
   runId: string;
   review: Review | null;
@@ -11,7 +19,7 @@ interface ReviewSectionProps {
 }
 
 const ReviewSection: React.FC<ReviewSectionProps> = ({ runId, review, reviewMode }) => {
-  const handleSave = async (data: any) => {
+  const handleSave = async (data: ReviewData) => {
     const res = await fetch('/api/review', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -31,7 +39,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ runId, review, reviewMode
         <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded text-amber-200 text-[10px] font-bold text-center uppercase tracking-widest animate-pulse">
           Review Mode Active
         </div>
-        <RubricForm runId={runId} onSave={handleSave} />
+        <RubricForm onSave={handleSave} />
       </div>
     );
   }
@@ -55,8 +63,8 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ runId, review, reviewMode
                 <span className="text-xs font-medium text-slate-300">{cat.label}</span>
                 <div className="flex items-center gap-2">
                   <div className="w-24 h-1.5 bg-slate-900 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-blue-500" 
+                    <div
+                      className="h-full bg-blue-500"
                       style={{ width: `${(cat.score / 5) * 100}%` }}
                     />
                   </div>

@@ -38,8 +38,9 @@ async function main() {
       results.errors.forEach(err => console.error(`  - ${err}`))
       process.exit(1)
     }
-  } catch (err: any) {
-    console.error(`❌ Error reading run data: ${err.message}`)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error(`❌ Error reading run data: ${message}`)
     process.exit(1)
   }
 }

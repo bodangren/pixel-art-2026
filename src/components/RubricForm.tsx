@@ -2,12 +2,19 @@
 
 import React, { useState, useMemo } from 'react';
 
-interface RubricFormProps {
-  runId: string;
-  onSave: (data: any) => void;
+interface ReviewData {
+  review_timestamp: string;
+  rubric_scores: { background: number; hero: number; enemy: number; effect: number; pack: number };
+  notes: string;
+  weighted_total_score: number;
+  would_use_in_prototype_now: boolean;
 }
 
-const RubricForm: React.FC<RubricFormProps> = ({ runId, onSave }) => {
+interface RubricFormProps {
+  onSave: (data: ReviewData) => void;
+}
+
+const RubricForm: React.FC<RubricFormProps> = ({ onSave }) => {
   const [scores, setScores] = useState({
     background: 3,
     hero: 3,
