@@ -9,11 +9,19 @@
 [0m✗ [0mread failed
 [91m[1mError: [0mFile not found: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/current_directive.md
 [0m
-[0m$ [0mgit status --short
-M measure/output.log
+[0m$ [0mgit status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   measure/output.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
 [0m
-[0m$ [0mls -la measure/tracks/
-total 8
-drwxrwxr-x 2 daniel-bo daniel-bo 4096 May  5 17:42 .
-drwxrwxr-x 5 daniel-bo daniel-bo 4096 May  4 17:42 ..
+[0m$ [0mgit log -1 --format='%s'
+chore(review): fix 3 typecheck errors in test files
 [0m
+[0m→ [0mRead measure/output.log
