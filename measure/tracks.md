@@ -131,3 +131,15 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [ ] **Track: Validation-Driven Model Re-run Pipeline**
   *Link: [./tracks/validation_driven_model_rerun_20260506/](./tracks/validation_driven_model_rerun_20260506/)*
   Validate all existing runs for completeness, flag failures, and re-trigger generation for failing models.
+
+- [ ] **Track: Prompt Versioning & A/B Tracking**
+  *Link: [./tracks/prompt_versioning_tracking_20260507/](./tracks/prompt_versioning_tracking_20260507/)*
+  *Priority: High* — Track which prompt version was used for each benchmark run and enable A/B comparison of prompt effectiveness across models.
+
+- [ ] **Track: Mobile-Responsive Benchmark UI**
+  *Link: [./tracks/mobile_responsive_ui_20260507/](./tracks/mobile_responsive_ui_20260507/)*
+  *Priority: Medium* — Make the leaderboard, comparison view, run detail pages, and game preview usable on mobile phones and tablets.
+
+- [ ] **Track: Automated Visual Regression Detection**
+  *Link: [./tracks/visual_regression_detection_20260507/](./tracks/visual_regression_detection_20260507/)*
+  *Priority: Medium* — Add pixel-level diff detection between benchmark runs to automatically flag model output quality drift and surface before/after overlays.
