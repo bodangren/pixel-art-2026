@@ -34,3 +34,4 @@
 | 2026-05-04 | export_downloadfile_refactor | Export components duplicate downloadFile logic | Low | Resolved | ExportButton, ExportDropdown, ComparisonExport now use lib/export.ts:downloadFile() |
 | 2026-05-04 | game-preview-multi-game | GameCanvas hardcodes CANVAS_WIDTH/HEIGHT ignoring template config | Medium | Resolved | GameCanvas now reads canvasWidth/Height from template tilemapConfig |
 | 2026-05-05 | minimax_benchmark | minimax-m2.5 generate_assets.py hangs - per-pixel loops with random() in PIL | Medium | Resolved | Rewrote script using PIL ImageDraw.rectangle/ellipse instead of per-pixel putpixel; original script had 273k+ random() calls per background |
+| 2026-05-06 | public_deployment | Next.js 16 webpack build TypeScript check emits "invalid type: unit value, expected usize" | Low | Resolved | Build succeeds despite error (out/ generated correctly); issue is WASM/swc bindings on linux/x64. Tests pass with 408 tests. |

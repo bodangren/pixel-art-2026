@@ -119,13 +119,9 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 
 ## Upcoming Tracks
 
-- [x] **Track: Human Review Data Population Sprint**
-   *Link: [./archive/human_review_data_population_20260506/](./archive/human_review_data_population_20260506/)*
-   *Status: Complete* — Backfilled reviews for all 16 runs; API routes not viable with static export (output: 'export'), but review submission works via direct file save in dev mode.
-
-- [ ] **Track: Public Deployment Pipeline**
-  *Link: [./tracks/public_deployment_pipeline_20260506/](./tracks/public_deployment_pipeline_20260506/)*
-  GitHub Actions workflow to deploy static benchmark dashboard to GitHub Pages on every push to main.
+- [x] **Track: Public Deployment Pipeline**
+   *Link: [./archive/public_deployment_pipeline_20260506/](./archive/public_deployment_pipeline_20260506/)*
+   *Status: Complete* — Replaced Vercel deploy.yml with GitHub Pages workflow. Deploy.yml now uses actions/upload-pages-artifact and actions/deploy-pages. Updated README badges and deploy-workflow.test.ts.
 
 - [ ] **Track: Asset Pack Distribution (ZIP Downloads)**
   *Link: [./tracks/asset_pack_distribution_20260506/](./tracks/asset_pack_distribution_20260506/)*
