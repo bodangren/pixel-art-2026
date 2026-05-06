@@ -119,9 +119,9 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 
 ## Upcoming Tracks
 
-- [ ] **Track: Human Review Data Population Sprint**
-  *Link: [./tracks/human_review_data_population_20260506/](./tracks/human_review_data_population_20260506/)*
-  Fix review persistence API and systematically populate reviews for all existing model runs.
+- [x] **Track: Human Review Data Population Sprint**
+   *Link: [./archive/human_review_data_population_20260506/](./archive/human_review_data_population_20260506/)*
+   *Status: Complete* — Backfilled reviews for all 16 runs; API routes not viable with static export (output: 'export'), but review submission works via direct file save in dev mode.
 
 - [ ] **Track: Public Deployment Pipeline**
   *Link: [./tracks/public_deployment_pipeline_20260506/](./tracks/public_deployment_pipeline_20260506/)*
