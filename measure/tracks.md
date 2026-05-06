@@ -123,9 +123,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Link: [./archive/public_deployment_pipeline_20260506/](./archive/public_deployment_pipeline_20260506/)*
    *Status: Complete* — Replaced Vercel deploy.yml with GitHub Pages workflow. Deploy.yml now uses actions/upload-pages-artifact and actions/deploy-pages. Updated README badges and deploy-workflow.test.ts.
 
-- [ ] **Track: Asset Pack Distribution (ZIP Downloads)**
-  *Link: [./tracks/asset_pack_distribution_20260506/](./tracks/asset_pack_distribution_20260506/)*
-  Package validated PNGs into downloadable ZIP files with README/credits for game developers.
+- [x] **Track: Asset Pack Distribution (ZIP Downloads)**
+   *Link: [./archive/asset_pack_distribution_20260506/](./archive/asset_pack_distribution_20260506/)*
+   Package validated PNGs into downloadable ZIP files with README/credits for game developers.
+   **Phase 1-3: Complete**
 
 - [ ] **Track: Validation-Driven Model Re-run Pipeline**
   *Link: [./tracks/validation_driven_model_rerun_20260506/](./tracks/validation_driven_model_rerun_20260506/)*

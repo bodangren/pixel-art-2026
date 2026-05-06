@@ -2,6 +2,7 @@ import React from 'react';
 import { getRun, listRuns, getReview } from '@/../lib/data';
 import AssetGallery from '@/components/AssetGallery';
 import ReviewSection from '@/components/ReviewSection';
+import DownloadAssetPack from '@/components/DownloadAssetPack';
 
 export async function generateStaticParams() {
   const runs = await listRuns();
@@ -28,7 +29,14 @@ export default async function RunPage({ params }: { params: Promise<{ runId: str
             <span>Benchmark: <b className="text-emerald-400">{run.benchmark_id}</b></span>
           </div>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
+          <DownloadAssetPack
+            runId={run.run_id}
+            modelId={run.model_id}
+            assetPaths={Object.values(run.asset_file_paths || run.asset_paths || {})}
+            humanScore={review?.weighted_total_score}
+            techScore={run.technical_grade?.total_technical_score}
+          />
           <span className={`px-4 py-1 rounded-full text-sm font-bold ${
             run.status === 'completed' ? 'bg-green-900/50 text-green-400' : 'bg-red-900/50 text-red-400'
           }`}>
