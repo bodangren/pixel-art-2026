@@ -14,10 +14,10 @@ describe('GitHub Actions Deploy Workflow', () => {
     expect(() => { parse(content) }).not.toThrow()
   })
 
-  it('has name "Deploy"', () => {
+  it('has name "Deploy to GitHub Pages"', () => {
     const content = readFileSync(workflowPath, 'utf8')
     const parsed = parse(content)
-    expect(parsed.name).toBe('Deploy')
+    expect(parsed.name).toBe('Deploy to GitHub Pages')
   })
 
   it('triggers only on push to main', () => {
@@ -42,12 +42,12 @@ describe('GitHub Actions Deploy Workflow', () => {
     expect(job['if']).toContain('main')
   })
 
-  it('has Vercel deployment step', () => {
+  it('has GitHub Pages deployment step', () => {
     const content = readFileSync(workflowPath, 'utf8')
     const parsed = parse(content)
     const steps = parsed.jobs.deploy.steps
-    const vercelStep = steps.find((s: { name: string }) => s.name === 'Deploy to Vercel')
-    expect(vercelStep).toBeDefined()
+    const pagesStep = steps.find((s: { name: string }) => s.name === 'Deploy to GitHub Pages')
+    expect(pagesStep).toBeDefined()
   })
 
   it('has environment protection for production', () => {

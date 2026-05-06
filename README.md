@@ -1,6 +1,6 @@
 # Pixel Art Benchmark Report
 
-[![CI](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/ci.yml) [![Deploy](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/deploy.yml/badge.svg)](https://github.com/daniel-bo/pixel-art-benchmark/deployments)
+[![CI](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/ci.yml) [![Deploy](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/deploy.yml/badge.svg)](https://github.com/daniel-bo/pixel-art-benchmark/actions/workflows/deploy.yml)
 
 This repository contains the outputs from running `pixel-art-benchmark.md` across multiple models and versions.
 
@@ -49,17 +49,15 @@ This project uses GitHub Actions for continuous integration and deployment.
 ### Workflows
 
 - **CI** (`.github/workflows/ci.yml`): Runs on every push and PR to `main`. Executes lint, TypeScript type checking, unit tests, and production build on Node 20 and Node 22.
-- **Deploy** (`.github/workflows/deploy.yml`): Runs on every push to `main`. Deploys to Vercel automatically.
+- **Deploy** (`.github/workflows/deploy.yml`): Runs on every push to `main`. Deploys to GitHub Pages automatically.
 
-### Required Secrets
+### GitHub Pages Deployment
 
-To enable deployments, add these repository secrets:
+GitHub Pages deployment is automatically configured. The workflow:
+1. Builds the static export on every push to `main`
+2. Deploys the `out/` directory to GitHub Pages
 
-| Secret | Description |
-|--------|-------------|
-| `VERCEL_TOKEN` | Vercel personal access token |
-| `VERCEL_ORG_ID` | Vercel organization ID |
-| `VERCEL_PROJECT_ID` | Vercel project ID |
+No secrets are required — deployment uses GitHub's built-in Pages integration.
 
 ### Local Development
 
