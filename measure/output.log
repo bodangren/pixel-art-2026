@@ -692,3 +692,55 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
 (no output)
 [0m
 [0m→ [0mRead measure/tracks.md[90m [limit=10, offset=125][0m
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "[MiniMax-M2.7] Asset Pack Distribution: ZIP download for game assets
+
+- Added lib/asset-pack.ts with server-side ZIP generation (archiver)
+- Added lib/asset-pack.test.ts with 5 tests for metadata/size functions
+- Added client-side DownloadAssetPack component using JSZip
+- Integrated download button on run detail page
+- README includes model info, scores, and CC-BY license
+- Build succeeds (WASM error is pre-existing linux/x64 issue)
+- 413 tests pass
+
+Closes track: asset_pack_distribution_20260506"
+[main e6baf61] [MiniMax-M2.7] Asset Pack Distribution: ZIP download for game assets
+ 15 files changed, 1210 insertions(+), 1022 deletions(-)
+ create mode 100644 lib/asset-pack.test.ts
+ create mode 100644 lib/asset-pack.ts
+ rename measure/{tracks => archive}/asset_pack_distribution_20260506/metadata.json (100%)
+ create mode 100644 measure/archive/asset_pack_distribution_20260506/plan.md
+ rename measure/{tracks => archive}/asset_pack_distribution_20260506/spec.md (100%)
+ delete mode 100644 measure/tracks/asset_pack_distribution_20260506/plan.md
+ create mode 100644 src/components/DownloadAssetPack.tsx
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git push 2>&1
+To https://github.com/bodangren/pixel-art-2026.git
+   c04e511..e6baf61  main -> main
+[0m
+[0m$ [0mls -la /home/daniel-bo/Desktop/pixel-art-benchmark/measure/archive/asset_pack_distribution_20260506/
+total 20
+drwxrwxr-x  2 daniel-bo daniel-bo 4096 May  6 06:02 .
+drwxrwxr-x 30 daniel-bo daniel-bo 4096 May  7 05:44 ..
+-rw-rw-r--  1 daniel-bo daniel-bo   89 May  6 06:00 metadata.json
+-rw-rw-r--  1 daniel-bo daniel-bo 1146 May  7 05:43 plan.md
+-rw-rw-r--  1 daniel-bo daniel-bo  615 May  6 06:02 spec.md
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run test -- --reporter=dot 2>&1 | tail -10
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+·····Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+··················································································································································································································································································································
+
+ Test Files  53 passed (53)
+      Tests  413 passed (413)
+   Start at  05:45:14
+   Duration  68.45s (transform 2.13s, setup 11.74s, import 16.82s, tests 21.78s, environment 127.45s)
+[0m
+[0m# [0mTodos
+[x] Implement ZIP generation lib function with streaming
+[x] Add tests for ZIP contents
+[x] Integrate download button on run detail page
+[x] Verify app builds and tests pass
+[x] Commit and update tracks registry
+[0m
