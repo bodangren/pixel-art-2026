@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-04-04T16:00:00Z",
+  "rubric_scores": {
+    "background": 3,
+    "hero": 3,
+    "enemy": 3,
+    "effect": 3,
+    "pack": 3
+  },
+  "notes": "Automated run - lower quality than manual runs.",
+  "weighted_total_score": 3,
+  "would_use_in_prototype_now": false
+}

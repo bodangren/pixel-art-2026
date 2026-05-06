@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-04-04T21:00:00Z",
+  "rubric_scores": {
+    "background": 4,
+    "hero": 4,
+    "enemy": 4,
+    "effect": 3,
+    "pack": 4
+  },
+  "notes": "Better than glm-4.7. Good overall quality.",
+  "weighted_total_score": 3.8,
+  "would_use_in_prototype_now": true
+}

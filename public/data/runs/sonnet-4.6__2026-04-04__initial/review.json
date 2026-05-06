@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-04-05T15:00:00Z",
+  "rubric_scores": {
+    "background": 4,
+    "hero": 5,
+    "enemy": 4,
+    "effect": 4,
+    "pack": 5
+  },
+  "notes": "Strong sonnet performance. Great hero and pack.",
+  "weighted_total_score": 4.4,
+  "would_use_in_prototype_now": true
+}

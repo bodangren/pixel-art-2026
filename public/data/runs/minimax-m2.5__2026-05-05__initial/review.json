@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-05-05T13:00:00Z",
+  "rubric_scores": {
+    "background": 4,
+    "hero": 5,
+    "enemy": 4,
+    "effect": 4,
+    "pack": 4
+  },
+  "notes": "Improved minimax. Excellent hero sprite in latest run.",
+  "weighted_total_score": 4.2,
+  "would_use_in_prototype_now": true
+}

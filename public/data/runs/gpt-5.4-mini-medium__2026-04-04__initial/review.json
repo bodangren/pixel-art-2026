@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-04-05T10:00:00Z",
+  "rubric_scores": {
+    "background": 3,
+    "hero": 3,
+    "enemy": 3,
+    "effect": 3,
+    "pack": 3
+  },
+  "notes": "Mini model underperforms. Basic sprites only.",
+  "weighted_total_score": 3,
+  "would_use_in_prototype_now": false
+}

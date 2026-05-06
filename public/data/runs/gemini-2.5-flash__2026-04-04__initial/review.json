@@ -1,0 +1,13 @@
+{
+  "review_timestamp": "2026-04-04T14:00:00Z",
+  "rubric_scores": {
+    "background": 3,
+    "hero": 3,
+    "enemy": 3,
+    "effect": 3,
+    "pack": 3
+  },
+  "notes": "Decent starter pack. Background is flat, hero sprite lacks detail.",
+  "weighted_total_score": 3,
+  "would_use_in_prototype_now": false
+}
