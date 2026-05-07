@@ -1,10 +1,10 @@
 # Implementation Plan: Mobile-Responsive Benchmark UI
 
 ## Phase 1: Layout Foundation
-- [ ] Task: Audit current breakpoints
-  - [ ] Write tests verifying no horizontal overflow at 375px and 768px
-  - [ ] Audit all pages for fixed widths, overflow-x, and min-w usage
-  - [ ] Document touch-unfriendly interactions (hover-only tooltips, drag handles)
+- [x] Task: Audit current breakpoints
+  - [x] Write tests verifying no horizontal overflow at 375px and 768px
+  - [x] Audit all pages for fixed widths, overflow-x, and min-w usage
+  - [x] Document touch-unfriendly interactions (hover-only tooltips, drag handles)
 - [ ] Task: Responsive container refactor
   - [ ] Write tests for Layout component responsive behavior
   - [ ] Update globals.css with safe-area padding for mobile

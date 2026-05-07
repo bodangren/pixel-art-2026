@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-black border-b border-[#1A1A1A] py-4">
-      <div className="container mx-auto px-8 flex justify-between items-center">
+      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-8 h-8 bg-[#C5A059] flex items-center justify-center font-black text-black group-hover:brightness-110 transition-all">P</div>
           <span className="font-black tracking-tighter text-xl uppercase">PIXEL-BENCH</span>
