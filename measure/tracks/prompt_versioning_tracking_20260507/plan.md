@@ -25,10 +25,10 @@
   - [x] Write tests for PromptHistory component rendering
   - [x] Create `/prompts` page listing versions and usage counts
   - [x] Link from navbar
-- [ ] Task: A/B comparison filter
-  - [ ] Write tests for filtering runs by prompt version
-  - [ ] Add prompt version selector to comparison view
-  - [ ] Show quality delta badge when same model has multiple prompt versions
-- [ ] Task: Phase 4: Verify all runs linked
-  - [ ] Audit existing 16+ runs for prompt_version_id presence
-  - [ ] Confirm comparison view works with prompt filters
+- [x] Task: A/B comparison filter
+  - [x] Write tests for filtering runs by prompt version
+  - [x] Add prompt version selector to comparison view
+  - [x] Show quality delta badge when same model has multiple prompt versions
+- [x] Task: Phase 4: Verify all runs linked
+  - [x] Audit existing 16+ runs for prompt_version_id presence
+  - [x] Confirm comparison view works with prompt filters

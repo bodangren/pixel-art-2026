@@ -6,10 +6,7 @@
 ## Architecture & Design
 <!-- Decisions made that future tracks should be aware of -->
 
-- (2026-04-10, automated_validation_scoring_engine) Python Pillow for image validation - good choice for pixel-art analysis; handles RGBA properly
-<!-- Problems encountered repeatedly; save future tracks from the same pain -->
-
-- (2026-04-10, automated_validation_scoring_engine) datetime.utcnow() deprecated - use datetime.now(timezone.utc) instead
+- (2026-04-10, automated_validation_scoring_engine) Python Pillow for image validation - good choice for pixel-art analysis; handles RGBA properly. datetime.utcnow() deprecated - use datetime.now(timezone.utc) instead.
 
 - (2026-04-13, repo) Adding .gitignore after files are tracked does NOT remove them from history; large files (node_modules/@next/swc-*.node, 124MB) block push. Need `git rm --cached` + history rewrite to fix.
 
@@ -38,13 +35,14 @@
 - (2026-04-17, benchmark_dashboard_ui) ComparisonView client component cannot dynamically import server-only code (fs). For static export, pass initial data as props from server component instead of fetching client-side.
 
 - (2026-04-23, game_preview) ESLint rules prohibit calling setState synchronously within useEffect. Use setTimeout(() => {...}, 0) to defer execution, or use .then()/.finally() promise chains instead of async/await directly in effects.
-- (2026-04-24, game_preview) GameCanvas had duplicate sprite loading - consolidated into single loadSprites function; Turbopack on linux/x64 requires `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter
-- (2026-05-02, sprite_inspection) When a type is only used as a value (e.g., in `as const` assertions), importing it with `import type` causes unused import warnings. Use regular import. SpriteSheetPreview had internal animation state instead of using the separate AnimationControls component - refactored to use AnimationControls + FramePlayer for proper separation of concerns.
-- (2026-05-03, accessibility_audit) jest-axe with vitest requires custom `expectNoViolations()` helper since `toHaveNoViolations()` is a Chai matcher not available in vitest. axe results need to be awaited in async tests. Phase 4 tasks completed: skip-to-content link, focus-visible CSS, focus trap in modals, prefers-reduced-motion for sprite auto-play, ARIA roles (toolbar, slider, button) and aria attributes (aria-pressed, aria-live, aria-modal).
+- (2026-04-24, game_preview) GameCanvas had duplicate sprite loading; Turbopack on linux/x64 requires `next build --webpack`; Recharts Tooltip formatter ValueType | undefined type issue - remove formatter
+- (2026-05-02, sprite_inspection) When a type is only used as a value (e.g., in `as const` assertions), importing it with `import type` causes unused import warnings. Use regular import. SpriteSheetPreview had internal animation state instead of using the separate AnimationControls component.
+- (2026-05-03, accessibility_audit) jest-axe with vitest requires custom `expectNoViolations()` helper since `toHaveNoViolations()` is a Chai matcher not in vitest. axe results need await in async tests.
 - (2026-05-03, batch_export) Server components cannot pass event handlers to client components - onClick props containing functions cause serialization error during SSR. Use client components for export buttons that need event handlers, or pass serializable data (exportType, data) instead of callbacks.
 - (2026-05-03, canvas_interaction_testing) GameCanvas uses HTMLCanvasElement which requires mocking getContext() in tests; jsdom doesn't implement it. Use container.querySelector('canvas') to find canvas elements rather than getByRole('canvas'). Option text matching needs regex for partial matches (e.g., /gemini-2\.5-flash/i).
 - (2026-05-04, gamecanvas_template_canvas) React useState that depends on derived values (canvasWidth/canvasHeight from template) must be placed AFTER those derived values are computed. Hooks are called in order every render, so if useState(CANVAS_WIDTH/2) is called before const canvasWidth = ..., the initial value will be stale.
-- (2026-05-04, export_downloadfile_refactor) When refactoring, watch for variable shadowing - `const filename = filename || default` creates a circular reference because the local `filename` shadows the prop `filename`. Use different variable names (e.g., `csvFilename`, `jsonFilename`).
-- (2026-05-05, archive_cleanup) When archiving tracks, always verify track is actually in tracks/ directory (not already in archive) before trying to move it. Always check tracks.md for references to the track being archived - export_downloadfile_refactor had a date-suffixed directory that needed different handling.
+- (2026-05-04, export_downloadfile_refactor) Watch for variable shadowing - `const filename = filename || default` creates circular ref. Use different names.
+- (2026-05-05, archive_cleanup) Always verify track in tracks/ before archiving; check tracks.md refs too.
 - (2026-05-06, public_deployment) Next.js 16 webpack build on linux/x64 emits WASM TypeScript check error but build succeeds. Static export (output: 'export') incompatible with archiver - use jszip client-side for ZIP downloads.
-- (2026-05-07, validation_driven_rerun) run.json schema inconsistent - some use `asset_file_paths`, others `asset_paths`. validate_run_completeness.py only checks `asset_file_paths`. 8/16 runs fail (small/broken assets < 1KB).
+- (2026-05-07, validation_driven_rerun) run.json schema inconsistent - some use `asset_file_paths`, others `asset_paths`. 8/16 runs fail (small/broken assets < 1KB).
+- (2026-05-07, prompt_versioning) Server components use `{ searchParams: Promise<{...}> }` props. Client components need 'use client' + useSearchParams(). Form-based GET filtering works in server components.

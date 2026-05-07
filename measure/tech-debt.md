@@ -37,3 +37,4 @@
 | 2026-05-06 | public_deployment | Next.js 16 webpack build TypeScript check emits "invalid type: unit value, expected usize" | Low | Resolved | Build succeeds despite error (out/ generated correctly); issue is WASM/swc bindings on linux/x64. Tests pass with 408 tests. |
 | 2026-05-07 | asset_pack_distribution | ZIP download for asset packs | Low | Resolved | Client-side JSZip for static export compatibility; archiver kept in lib/ for future API routes |
 | 2026-05-07 | validation_driven_model_rerun | Run completeness validation - 8/16 runs have broken assets | Medium | Resolved | Phase 3 complete - validated all 16 runs (8 pass, 8 fail). Failed runs documented. Re-run trigger deferred to future API integration. |
+| 2026-05-07 | prompt_versioning | Track prompt versions used per benchmark run | Low | Resolved | Phase 1-4 complete: prompt schema, v1.md, SHA-256 hashing, backfill 16 runs, /prompts page, compare filter by prompt |
