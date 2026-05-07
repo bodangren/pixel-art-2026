@@ -7,6 +7,8 @@ export const runSchema = z.object({
   variant: z.string(),
   benchmark_id: z.string(),
   prompt_version: z.string(),
+  prompt_version_id: z.string().optional(),
+  prompt_hash: z.string().optional(),
   asset_paths: z.object({
     background: z.string(),
     hero: z.string(),

@@ -1,23 +1,23 @@
 # Implementation Plan: Prompt Versioning & A/B Tracking
 
 ## Phase 1: Prompt Schema & Storage
-- [ ] Task: Define prompt schema
-  - [ ] Write tests for prompt metadata validation (id, version, created_at, content_hash)
-  - [ ] Create `lib/prompt-schema.ts` with Zod schema
-  - [ ] Validate existing prompt file against schema
-- [ ] Task: Create prompts directory
-  - [ ] Write tests for prompt discovery (listPrompts, getPromptById)
-  - [ ] Create `prompts/v1.md` from existing benchmark prompt
-  - [ ] Create `lib/prompts.ts` for prompt loading
+- [x] Task: Define prompt schema
+  - [x] Write tests for prompt metadata validation (id, version, created_at, content_hash)
+  - [x] Create `lib/prompt-schema.ts` with Zod schema
+  - [x] Validate existing prompt file against schema
+- [x] Task: Create prompts directory
+  - [x] Write tests for prompt discovery (listPrompts, getPromptById)
+  - [x] Create `prompts/v1.md` from existing benchmark prompt
+  - [x] Create `lib/prompts.ts` for prompt loading
 
 ## Phase 2: Run-Prompt Linkage
-- [ ] Task: Extend run schema
-  - [ ] Write tests for run.json with prompt_version_id and prompt_hash
-  - [ ] Update `lib/schemas.ts` to include optional prompt fields
+- [x] Task: Extend run schema
+  - [x] Write tests for run.json with prompt_version_id and prompt_hash
+  - [x] Update `lib/schemas.ts` to include optional prompt fields
   - [ ] Backfill existing runs with "v1" prompt reference
-- [ ] Task: Update generation pipeline
-  - [ ] Write tests for pipeline using explicit prompt version
-  - [ ] Pass prompt_version_id when creating new runs
+- [x] Task: Update generation pipeline
+  - [x] Write tests for pipeline using explicit prompt version
+  - [x] Pass prompt_version_id when creating new runs
   - [ ] Compute SHA-256 content hash and store in run.json
 
 ## Phase 3: UI & Comparison

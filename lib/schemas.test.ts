@@ -28,6 +28,27 @@ describe('Run Schema', () => {
     }
     expect(() => runSchema.parse(invalidRun)).toThrow()
   })
+
+  it('should validate with optional prompt_version_id and prompt_hash', () => {
+    const validRunWithPrompt = {
+      run_id: 'gpt-4o__2026-04-04__r1',
+      model_id: 'gpt-4o',
+      run_date: '2026-04-04',
+      variant: 'r1',
+      benchmark_id: 'labyrinth-goblin-king',
+      prompt_version: 'v1.0',
+      prompt_version_id: 'prompt-001',
+      prompt_hash: 'abc123def456',
+      asset_paths: {
+        background: 'assets/background.png',
+        hero: 'assets/hero-3x3-sheet.png',
+        enemy: 'assets/goblin-3x3-sheet.png',
+        effect: 'assets/orb-sheet.png'
+      },
+      status: 'completed'
+    }
+    expect(runSchema.parse(validRunWithPrompt)).toEqual(validRunWithPrompt)
+  })
 })
 
 describe('Review Schema', () => {
