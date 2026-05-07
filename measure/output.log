@@ -1801,3 +1801,113 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/prompt_version
  - [ ] Task: Prompt history page
 
 [0m
+[0m$ [0mgit add lib/schemas.ts lib/schemas.test.ts measure/ && git commit -m "Phase 2 partial: extend run schema with prompt_version_id and prompt_hash
+
+- lib/schemas.ts: added optional prompt_version_id and prompt_hash fields
+- lib/schemas.test.ts: added test for optional prompt fields
+- Updated plan.md Phase 1-2 progress
+
+Model: minimax-cn-coding-plan/MiniMax-M2.7"
+[main d659eae] Phase 2 partial: extend run schema with prompt_version_id and prompt_hash
+ 4 files changed, 410 insertions(+), 14 deletions(-)
+[0m
+[0m# [0mTodos
+[x] Phase 2 partial: extend run schema with prompt_version_id and prompt_hash
+[ ] Create SHA-256 hash utility for prompt content
+[ ] Backfill existing runs with v1 prompt reference
+[ ] Run tests and verify build
+[0m
+[0m✱ [0mGrep "crypto|createHash"[90m in lib · 0 matches[0m
+[0m
+[0m← [0mWrite lib/prompt-hash.ts
+Wrote file successfully.
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && node -e "const { hashPromptContent } = require('./lib/prompt-hash.ts'); console.log(hashPromptContent('test'))" 2>&1 || echo "need tsx"
+9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && node -e "
+const fs = require('fs');
+const content = fs.readFileSync('prompts/v1.md', 'utf-8');
+const parts = content.split('---');
+const bodyContent = parts.slice(2).join('---').trim();
+const { hashPromptContent } = require('./lib/prompt-hash.ts');
+console.log('Body length:', bodyContent.length);
+console.log('Hash:', hashPromptContent(bodyContent));
+"
+Body length: 2192
+Hash: ab3a91e3bb6751312fddc36f918f05788af855e20134906f1f6068250689062c
+[0m
+[0m→ [0mRead prompts/v1.md[90m [limit=10][0m
+[0m
+[0m← [0mEdit prompts/v1.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/prompts/v1.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/prompts/v1.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/prompts/v1.md
+@@ -1,9 +1,9 @@
+ ---
+ id: prompt-001
+ version: v1.0
+ created_at: 2026-04-04T00:00:00Z
+-content_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
++content_hash: ab3a91e3bb6751312fddc36f918f05788af855e20134906f1f6068250689062c
+ description: Initial benchmark prompt for Labyrinth of the Goblin King pixel art asset generation
+ ---
+ 
+ # Pixel Art Asset Generation Prompt
+
+[0m
+[0m← [0mWrite scripts/backfill_prompts.py
+Wrote file successfully.
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && python3 scripts/backfill_prompts.py 2>&1
+Backfilled: gemini-2.5-flash__2026-04-04__initial
+Backfilled: gemini-2.5-pro__2026-04-04__initial
+Backfilled: gemini-3-flash__2026-04-04__initial
+Backfilled: gemini-3.1-pro__2026-04-04__automated
+Backfilled: gemini-3.1-pro__2026-04-04__initial
+Backfilled: gemini-3.1-pro__2026-04-04__r1
+Backfilled: glm-4.7__2026-04-04__initial
+Backfilled: glm-5__2026-04-04__initial
+Backfilled: gpt-5.3-codex-medium__2026-04-04__initial
+Backfilled: gpt-5.4-medium__2026-04-04__initial
+Backfilled: gpt-5.4-mini-medium__2026-04-04__initial
+Backfilled: haiku-4.6__2026-04-04__initial
+Backfilled: minimax-m2.5__2026-04-04__initial
+Backfilled: minimax-m2.5__2026-05-05__initial
+Backfilled: opus-4.6__2026-04-04__initial
+Backfilled: sonnet-4.6__2026-04-04__initial
+
+Total runs backfilled: 16
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun test lib/prompt-schema.test.ts lib/prompts.test.ts lib/schemas.test.ts 2>&1
+bun test v1.3.11 (af24e281)
+
+ 19 pass
+ 0 fail
+ 21 expect() calls
+Ran 19 tests across 3 files. [199.00ms]
+[0m
+[0m← [0mEdit measure/tracks/prompt_versioning_tracking_20260507/plan.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/prompt_versioning_tracking_20260507/plan.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/prompt_versioning_tracking_20260507/plan.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/prompt_versioning_tracking_20260507/plan.md
+@@ -13,13 +13,13 @@
+ ## Phase 2: Run-Prompt Linkage
+ - [x] Task: Extend run schema
+   - [x] Write tests for run.json with prompt_version_id and prompt_hash
+   - [x] Update `lib/schemas.ts` to include optional prompt fields
+-  - [ ] Backfill existing runs with "v1" prompt reference
++  - [x] Backfill existing runs with "v1" prompt reference
+ - [x] Task: Update generation pipeline
+   - [x] Write tests for pipeline using explicit prompt version
+   - [x] Pass prompt_version_id when creating new runs
+-  - [ ] Compute SHA-256 content hash and store in run.json
++  - [x] Compute SHA-256 content hash and store in run.json
+ 
+ ## Phase 3: UI & Comparison
+ - [ ] Task: Prompt history page
+   - [ ] Write tests for PromptHistory component rendering
+
+[0m

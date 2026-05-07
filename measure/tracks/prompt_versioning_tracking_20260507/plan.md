@@ -14,11 +14,11 @@
 - [x] Task: Extend run schema
   - [x] Write tests for run.json with prompt_version_id and prompt_hash
   - [x] Update `lib/schemas.ts` to include optional prompt fields
-  - [ ] Backfill existing runs with "v1" prompt reference
+  - [x] Backfill existing runs with "v1" prompt reference
 - [x] Task: Update generation pipeline
   - [x] Write tests for pipeline using explicit prompt version
   - [x] Pass prompt_version_id when creating new runs
-  - [ ] Compute SHA-256 content hash and store in run.json
+  - [x] Compute SHA-256 content hash and store in run.json
 
 ## Phase 3: UI & Comparison
 - [ ] Task: Prompt history page
