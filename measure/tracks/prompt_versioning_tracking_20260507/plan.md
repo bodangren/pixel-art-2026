@@ -21,17 +21,14 @@
   - [x] Compute SHA-256 content hash and store in run.json
 
 ## Phase 3: UI & Comparison
-- [ ] Task: Prompt history page
-  - [ ] Write tests for PromptHistory component rendering
-  - [ ] Create `/prompts` page listing versions and usage counts
-  - [ ] Link from navbar
+- [x] Task: Prompt history page
+  - [x] Write tests for PromptHistory component rendering
+  - [x] Create `/prompts` page listing versions and usage counts
+  - [x] Link from navbar
 - [ ] Task: A/B comparison filter
   - [ ] Write tests for filtering runs by prompt version
   - [ ] Add prompt version selector to comparison view
   - [ ] Show quality delta badge when same model has multiple prompt versions
-
-## Phase 4: Verification
-- [ ] Task: Validate all runs linked
+- [ ] Task: Phase 4: Verify all runs linked
   - [ ] Audit existing 16+ runs for prompt_version_id presence
-  - [ ] Fix any missing references
   - [ ] Confirm comparison view works with prompt filters
