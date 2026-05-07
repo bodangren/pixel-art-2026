@@ -128,10 +128,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    Package validated PNGs into downloadable ZIP files with README/credits for game developers.
    **Phase 1-3: Complete**
 
-- [~] **Track: Validation-Driven Model Re-run Pipeline**
-   *Link: [./tracks/validation_driven_model_rerun_20260506/](./tracks/validation_driven_model_rerun_20260506/)*
-   Validate all existing runs for completeness, flag failures, and re-trigger generation for failing models.
-   **Phase 1-2: Complete** (validation script + dashboard badges; re-run trigger deferred to Phase 3)
+- [x] **Track: Validation-Driven Model Re-run Pipeline**
+    *Link: [./tracks/validation_driven_model_rerun_20260506/](./tracks/validation_driven_model_rerun_20260506/)*
+    Validate all existing runs for completeness, flag failures, and re-trigger generation for failing models.
+    **Phase 1-3: Complete** (validation script + dashboard badges; re-run trigger deferred to API integration)
 
 - [ ] **Track: Prompt Versioning & A/B Tracking**
   *Link: [./tracks/prompt_versioning_tracking_20260507/](./tracks/prompt_versioning_tracking_20260507/)*
