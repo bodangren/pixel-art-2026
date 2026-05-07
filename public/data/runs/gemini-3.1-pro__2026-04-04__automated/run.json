@@ -19,5 +19,8 @@
     "transparency_score": 5,
     "total_technical_score": 5,
     "linter_notes": ""
-  }
+  },
+  "prompt_version_id": "prompt-001",
+  "prompt_hash": "ab3a91e3bb6751312fddc36f918f05788af855e20134906f1f6068250689062c",
+  "prompt_version": "v1.0"
 }
