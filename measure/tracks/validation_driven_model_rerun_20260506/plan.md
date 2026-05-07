@@ -1,15 +1,15 @@
 # Implementation Plan: Validation-Driven Model Re-run
 
 ## Phase 1: Validation Script
-- [ ] Task: Build run validator
-  - [ ] Write tests for validation rules
-  - [ ] Check PNG file sizes (reject < 1KB)
-  - [ ] Verify expected asset count matches manifest
-  - [ ] Check JSON metadata validity
-- [ ] Task: Generate validation report
-  - [ ] Write tests for report format
-  - [ ] Per-run pass/fail with reason
-  - [ ] Aggregate summary by model
+- [x] Task: Build run validator
+  - [x] Write tests for validation rules (15 tests pass)
+  - [x] Check PNG file sizes (reject < 1KB)
+  - [x] Verify expected asset count matches manifest
+  - [x] Check JSON metadata validity
+- [x] Task: Generate validation report
+  - [x] Write tests for report format (tests pass)
+  - [x] Per-run pass/fail with reason
+  - [x] Aggregate summary by model
 
 ## Phase 2: Re-run Pipeline
 - [ ] Task: Wire re-run trigger
