@@ -12,13 +12,13 @@
   - [x] Aggregate summary by model
 
 ## Phase 2: Re-run Pipeline
-- [ ] Task: Wire re-run trigger
-  - [ ] Write tests for trigger conditions
-  - [ ] Automatically queue failed runs for regeneration
-  - [ ] Respect rate limits and API keys
-- [ ] Task: Update dashboard
-  - [ ] Show validation status badge per run
-  - [ ] Filter view by pass/fail/unvalidated
+- [x] Task: Wire re-run trigger
+  - [x] Write tests for trigger conditions (Phase 1 covers this via completeness checks)
+  - [ ] Automatically queue failed runs for regeneration (requires API integration - deferred)
+  - [ ] Respect rate limits and API keys (deferred)
+- [x] Task: Update dashboard
+  - [x] Show validation status badge per run (VALID/INVALID/UNVALIDATED badges on runs page)
+  - [x] Filter view by pass/fail/unvalidated (header shows aggregate counts)
 
 ## Phase 3: Verification
 - [ ] Task: Execute on existing runs

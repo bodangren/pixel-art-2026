@@ -1,0 +1,1115 @@
+{
+  "data_dir": "data/runs",
+  "validation_timestamp": "2026-05-07T03:41:39.159432Z",
+  "runs_validated": 16,
+  "runs_passed": 8,
+  "runs_failed": 8,
+  "model_summary": {
+    "Gemini-2.5-flash": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    "Gemini-2.5-pro": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    "Gemini-3-flash": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    "gemini-3.1-pro": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2
+    },
+    "Gemini-3.1-pro": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "glm-4.7": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    "glm-5": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "gpt-5.3-codex-medium": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "gpt-5.4-medium": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "gpt-5.4-mini-medium": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    "Haiku-4.6": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "minimax-m2.5": {
+      "total": 2,
+      "passed": 1,
+      "failed": 1
+    },
+    "opus-4.6": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "sonnet-4.6": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "runs": [
+    {
+      "run_id": "gemini-2.5-flash__2026-04-04__initial",
+      "run_path": "data/runs/gemini-2.5-flash__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.153173Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gemini-2.5-flash__2026-04-04__initial",
+          "model_id": "Gemini-2.5-flash",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gemini-2.5-flash__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gemini-2.5-flash__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gemini-2.5-flash__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gemini-2.5-flash__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gemini-2.5-flash__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1139,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gemini-2.5-flash__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 223,
+          "issues": [
+            "File too small: 223 bytes (minimum: 1024 bytes)"
+          ]
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gemini-2.5-flash__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 223,
+          "issues": [
+            "File too small: 223 bytes (minimum: 1024 bytes)"
+          ]
+        },
+        "orb-sheet": {
+          "path": "data/runs/gemini-2.5-flash__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 107,
+          "issues": [
+            "File too small: 107 bytes (minimum: 1024 bytes)"
+          ]
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [
+        "hero-3x3-sheet",
+        "goblin-3x3-sheet",
+        "orb-sheet"
+      ],
+      "issues": [
+        "Small/broken assets (<1024 bytes): goblin-3x3-sheet, hero-3x3-sheet, orb-sheet"
+      ],
+      "passed": false,
+      "model_id": "Gemini-2.5-flash"
+    },
+    {
+      "run_id": "gemini-2.5-pro__2026-04-04__initial",
+      "run_path": "data/runs/gemini-2.5-pro__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.153731Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gemini-2.5-pro__2026-04-04__initial",
+          "model_id": "Gemini-2.5-pro",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gemini-2.5-pro__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gemini-2.5-pro__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gemini-2.5-pro__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gemini-2.5-pro__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gemini-2.5-pro__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 5522,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gemini-2.5-pro__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1039,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gemini-2.5-pro__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1653,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/gemini-2.5-pro__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 931,
+          "issues": [
+            "File too small: 931 bytes (minimum: 1024 bytes)"
+          ]
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [
+        "orb-sheet"
+      ],
+      "issues": [
+        "Small/broken assets (<1024 bytes): orb-sheet"
+      ],
+      "passed": false,
+      "model_id": "Gemini-2.5-pro"
+    },
+    {
+      "run_id": "gemini-3-flash__2026-04-04__initial",
+      "run_path": "data/runs/gemini-3-flash__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.154194Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gemini-3-flash__2026-04-04__initial",
+          "model_id": "Gemini-3-flash",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gemini-3-flash__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gemini-3-flash__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gemini-3-flash__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gemini-3-flash__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gemini-3-flash__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 26300,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gemini-3-flash__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1382,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gemini-3-flash__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1420,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/gemini-3-flash__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 933,
+          "issues": [
+            "File too small: 933 bytes (minimum: 1024 bytes)"
+          ]
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [
+        "orb-sheet"
+      ],
+      "issues": [
+        "Small/broken assets (<1024 bytes): orb-sheet"
+      ],
+      "passed": false,
+      "model_id": "Gemini-3-flash"
+    },
+    {
+      "run_id": "gemini-3.1-pro__2026-04-04__automated",
+      "run_path": "data/runs/gemini-3.1-pro__2026-04-04__automated",
+      "validation_timestamp": "2026-05-07T03:41:39.154626Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gemini-3.1-pro__2026-04-04__automated",
+          "model_id": "gemini-3.1-pro",
+          "run_date": "2026-04-04",
+          "variant": "automated",
+          "benchmark_game_id": "labyrinth-goblin-king",
+          "generation_method": "python-pillow",
+          "asset_file_paths": {
+            "background": "/data/runs/gemini-3.1-pro__2026-04-04__automated/assets/background.png",
+            "goblin-3x3-sheet": "/data/runs/gemini-3.1-pro__2026-04-04__automated/assets/goblin-3x3-sheet.png",
+            "hero-3x3-sheet": "/data/runs/gemini-3.1-pro__2026-04-04__automated/assets/hero-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gemini-3.1-pro__2026-04-04__automated/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Constructed prompt for model. Code generated and saved to run directory.\nAssets successfully generated by sandbox runner.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__automated/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 6513,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__automated/assets/goblin-3x3-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 664,
+          "issues": [
+            "File too small: 664 bytes (minimum: 1024 bytes)"
+          ]
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__automated/assets/hero-3x3-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 659,
+          "issues": [
+            "File too small: 659 bytes (minimum: 1024 bytes)"
+          ]
+        },
+        "orb-sheet": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__automated/assets/orb-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 281,
+          "issues": [
+            "File too small: 281 bytes (minimum: 1024 bytes)"
+          ]
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [
+        "goblin-3x3-sheet",
+        "hero-3x3-sheet",
+        "orb-sheet"
+      ],
+      "issues": [
+        "Small/broken assets (<1024 bytes): goblin-3x3-sheet, hero-3x3-sheet, orb-sheet"
+      ],
+      "passed": false,
+      "model_id": "gemini-3.1-pro"
+    },
+    {
+      "run_id": "gemini-3.1-pro__2026-04-04__initial",
+      "run_path": "data/runs/gemini-3.1-pro__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.155196Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gemini-3.1-pro__2026-04-04__initial",
+          "model_id": "Gemini-3.1-pro",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gemini-3.1-pro__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gemini-3.1-pro__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gemini-3.1-pro__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gemini-3.1-pro__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 12237,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1406,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1444,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/gemini-3.1-pro__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1224,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "Gemini-3.1-pro"
+    },
+    {
+      "run_id": "gemini-3.1-pro__2026-04-04__r1",
+      "run_path": "data/runs/gemini-3.1-pro__2026-04-04__r1",
+      "validation_timestamp": "2026-05-07T03:41:39.155629Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gemini-3.1-pro__2026-04-04__r1",
+          "model_id": "gemini-3.1-pro",
+          "run_date": "2026-04-04",
+          "variant": "r1",
+          "benchmark_id": "labyrinth-goblin-king",
+          "prompt_version": "v1.0",
+          "asset_paths": {
+            "background": "assets/background.png",
+            "hero": "assets/hero-3x3-sheet.png",
+            "enemy": "assets/goblin-3x3-sheet.png",
+            "effect": "assets/orb-sheet.png"
+          },
+          "status": "completed",
+          "generation_notes": "Benchmark run for Gemini 3.1 Pro"
+        }
+      },
+      "assets": {},
+      "expected_asset_count": 0,
+      "actual_asset_count": 0,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [
+        "No assets defined in run.json asset_file_paths"
+      ],
+      "passed": false,
+      "model_id": "gemini-3.1-pro"
+    },
+    {
+      "run_id": "glm-4.7__2026-04-04__initial",
+      "run_path": "data/runs/glm-4.7__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.155767Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "glm-4.7__2026-04-04__initial",
+          "model_id": "glm-4.7",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {},
+          "status": "incomplete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {},
+      "expected_asset_count": 0,
+      "actual_asset_count": 0,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [
+        "No assets defined in run.json asset_file_paths"
+      ],
+      "passed": false,
+      "model_id": "glm-4.7"
+    },
+    {
+      "run_id": "glm-5__2026-04-04__initial",
+      "run_path": "data/runs/glm-5__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.155927Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "glm-5__2026-04-04__initial",
+          "model_id": "glm-5",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/glm-5__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/glm-5__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/glm-5__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/glm-5__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/glm-5__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 12821,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/glm-5__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 3269,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/glm-5__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2957,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/glm-5__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1236,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "glm-5"
+    },
+    {
+      "run_id": "gpt-5.3-codex-medium__2026-04-04__initial",
+      "run_path": "data/runs/gpt-5.3-codex-medium__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.156360Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gpt-5.3-codex-medium__2026-04-04__initial",
+          "model_id": "gpt-5.3-codex-medium",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 24452,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1626,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1432,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/gpt-5.3-codex-medium__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1072,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "gpt-5.3-codex-medium"
+    },
+    {
+      "run_id": "gpt-5.4-medium__2026-04-04__initial",
+      "run_path": "data/runs/gpt-5.4-medium__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.156790Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gpt-5.4-medium__2026-04-04__initial",
+          "model_id": "gpt-5.4-medium",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gpt-5.4-medium__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gpt-5.4-medium__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gpt-5.4-medium__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gpt-5.4-medium__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gpt-5.4-medium__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 121330,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gpt-5.4-medium__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 3211,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gpt-5.4-medium__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2676,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/gpt-5.4-medium__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1480,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "gpt-5.4-medium"
+    },
+    {
+      "run_id": "gpt-5.4-mini-medium__2026-04-04__initial",
+      "run_path": "data/runs/gpt-5.4-mini-medium__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.157208Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "gpt-5.4-mini-medium__2026-04-04__initial",
+          "model_id": "gpt-5.4-mini-medium",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 64162,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2808,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2759,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/gpt-5.4-mini-medium__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": false,
+          "exists": true,
+          "size_bytes": 970,
+          "issues": [
+            "File too small: 970 bytes (minimum: 1024 bytes)"
+          ]
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [
+        "orb-sheet"
+      ],
+      "issues": [
+        "Small/broken assets (<1024 bytes): orb-sheet"
+      ],
+      "passed": false,
+      "model_id": "gpt-5.4-mini-medium"
+    },
+    {
+      "run_id": "haiku-4.6__2026-04-04__initial",
+      "run_path": "data/runs/haiku-4.6__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.157636Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "haiku-4.6__2026-04-04__initial",
+          "model_id": "Haiku-4.6",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/haiku-4.6__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/haiku-4.6__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/haiku-4.6__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/haiku-4.6__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/haiku-4.6__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 8172,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/haiku-4.6__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1336,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/haiku-4.6__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1150,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/haiku-4.6__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1357,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "Haiku-4.6"
+    },
+    {
+      "run_id": "minimax-m2.5__2026-04-04__initial",
+      "run_path": "data/runs/minimax-m2.5__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.158065Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "minimax-m2.5__2026-04-04__initial",
+          "model_id": "minimax-m2.5",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {},
+          "status": "incomplete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {},
+      "expected_asset_count": 0,
+      "actual_asset_count": 0,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [
+        "No assets defined in run.json asset_file_paths"
+      ],
+      "passed": false,
+      "model_id": "minimax-m2.5"
+    },
+    {
+      "run_id": "minimax-m2.5__2026-05-05__initial",
+      "run_path": "data/runs/minimax-m2.5__2026-05-05__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.158199Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "minimax-m2.5__2026-05-05__initial",
+          "model_id": "minimax-m2.5",
+          "run_date": "2026-05-05",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/minimax-m2.5__2026-05-05__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Generated using optimized Python Pillow script (original was hanging due to per-pixel loops).",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/minimax-m2.5__2026-05-05__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 7679,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/minimax-m2.5__2026-05-05__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 3128,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/minimax-m2.5__2026-05-05__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2881,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/minimax-m2.5__2026-05-05__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1107,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "minimax-m2.5"
+    },
+    {
+      "run_id": "opus-4.6__2026-04-04__initial",
+      "run_path": "data/runs/opus-4.6__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.158617Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "opus-4.6__2026-04-04__initial",
+          "model_id": "opus-4.6",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/opus-4.6__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/opus-4.6__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/opus-4.6__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/opus-4.6__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/opus-4.6__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 40240,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/opus-4.6__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2937,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/opus-4.6__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2973,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/opus-4.6__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 1520,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "opus-4.6"
+    },
+    {
+      "run_id": "sonnet-4.6__2026-04-04__initial",
+      "run_path": "data/runs/sonnet-4.6__2026-04-04__initial",
+      "validation_timestamp": "2026-05-07T03:41:39.159039Z",
+      "run_json": {
+        "valid": true,
+        "exists": true,
+        "data": {
+          "run_id": "sonnet-4.6__2026-04-04__initial",
+          "model_id": "sonnet-4.6",
+          "run_date": "2026-04-04",
+          "variant": "initial",
+          "benchmark_game_id": "labyrinth-of-the-goblin-king",
+          "asset_file_paths": {
+            "background": "/data/runs/sonnet-4.6__2026-04-04__initial/assets/background.png",
+            "hero-3x3-sheet": "/data/runs/sonnet-4.6__2026-04-04__initial/assets/hero-3x3-sheet.png",
+            "goblin-3x3-sheet": "/data/runs/sonnet-4.6__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+            "orb-sheet": "/data/runs/sonnet-4.6__2026-04-04__initial/assets/orb-sheet.png"
+          },
+          "status": "complete",
+          "generation_notes": "Migrated from initial benchmark run.",
+          "technical_grade": {
+            "alignment_score": 5,
+            "palette_consistency_score": 5,
+            "transparency_score": 5,
+            "total_technical_score": 5,
+            "linter_notes": ""
+          }
+        }
+      },
+      "assets": {
+        "background": {
+          "path": "data/runs/sonnet-4.6__2026-04-04__initial/assets/background.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 217698,
+          "issues": []
+        },
+        "hero-3x3-sheet": {
+          "path": "data/runs/sonnet-4.6__2026-04-04__initial/assets/hero-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2738,
+          "issues": []
+        },
+        "goblin-3x3-sheet": {
+          "path": "data/runs/sonnet-4.6__2026-04-04__initial/assets/goblin-3x3-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 2998,
+          "issues": []
+        },
+        "orb-sheet": {
+          "path": "data/runs/sonnet-4.6__2026-04-04__initial/assets/orb-sheet.png",
+          "valid": true,
+          "exists": true,
+          "size_bytes": 9232,
+          "issues": []
+        }
+      },
+      "expected_asset_count": 4,
+      "actual_asset_count": 4,
+      "missing_assets": [],
+      "small_assets": [],
+      "issues": [],
+      "passed": true,
+      "model_id": "sonnet-4.6"
+    }
+  ]
+}

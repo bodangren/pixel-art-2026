@@ -6,6 +6,35 @@ import { computeLeaderboard, sortLeaderboard, filterLeaderboard, type Leaderboar
 const DATA_DIR = path.join(process.cwd(), 'public/data/runs')
 const DERIVED_DIR = path.join(process.cwd(), 'public/data/derived')
 
+export interface ValidationStatus {
+  passed: boolean
+  issues: string[]
+  small_assets: string[]
+  missing_assets: string[]
+}
+
+export type ValidationResult = Record<string, ValidationStatus>
+
+export async function getValidationStatus(): Promise<ValidationResult> {
+  try {
+    const validationPath = path.join(DERIVED_DIR, 'validation-status.json')
+    const content = await fs.readFile(validationPath, 'utf-8')
+    const data = JSON.parse(content)
+    const result: ValidationResult = {}
+    for (const run of data.runs as Array<{ run_id: string; passed: boolean; issues: string[]; small_assets: string[]; missing_assets: string[] }>) {
+      result[run.run_id] = {
+        passed: run.passed,
+        issues: run.issues,
+        small_assets: run.small_assets,
+        missing_assets: run.missing_assets
+      }
+    }
+    return result
+  } catch {
+    return {}
+  }
+}
+
 export async function getRun(runId: string): Promise<Run> {
   const runPath = path.join(DATA_DIR, runId, 'run.json')
   const content = await fs.readFile(runPath, 'utf-8')
