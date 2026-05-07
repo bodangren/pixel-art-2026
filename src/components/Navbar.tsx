@@ -31,6 +31,14 @@ const Navbar = () => {
           >
             Compare
           </Link>
+          <Link
+            href="/prompts"
+            className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
+              pathname === '/prompts' ? 'text-[#C5A059]' : 'text-[#333333] hover:text-[#f5f5f5]'
+            }`}
+          >
+            Prompts
+          </Link>
           <div className="h-4 w-px bg-[#1A1A1A]" />
           <Link
             href="/leaderboard"

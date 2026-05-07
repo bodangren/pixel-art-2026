@@ -1911,3 +1911,117 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks/prompt_version
    - [ ] Write tests for PromptHistory component rendering
 
 [0m
+[0m$ [0mgit add lib/prompt-hash.ts scripts/backfill_prompts.py prompts/v1.md measure/ && git commit -m "Phase 2 complete: run-prompt linkage
+
+- lib/prompt-hash.ts: SHA-256 hash utility for prompt content
+- prompts/v1.md: updated content_hash with correct value
+- scripts/backfill_prompts.py: backfills 16 existing runs with prompt refs
+- All 16 runs now have prompt_version_id and prompt_hash
+- 19 prompt-related tests pass
+
+Model: minimax-cn-coding-plan/MiniMax-M2.7"
+[main 5a968b5] Phase 2 complete: run-prompt linkage
+ 5 files changed, 168 insertions(+), 3 deletions(-)
+ create mode 100644 lib/prompt-hash.ts
+ create mode 100644 scripts/backfill_prompts.py
+[0m
+[0m# [0mTodos
+[x] Phase 2 complete: run-prompt linkage
+[ ] Phase 3: UI & Comparison - Prompt history page
+[ ] Create /prompts page with version listing and usage counts
+[ ] Add prompt version selector to comparison view
+[0m
+[0m✱ [0mGlob "src/app/**/page.tsx"[90m 8 matches[0m
+[0m→ [0mRead src/app/runs/page.tsx
+[0m→ [0mRead src/app/layout.tsx
+[0m→ [0mRead src/components/Navbar.tsx
+[0m
+[0m$ [0mmkdir -p src/app/prompts
+(no output)
+[0m
+[0m← [0mWrite src/components/PromptHistory.tsx
+Wrote file successfully.
+[0m
+[0m← [0mWrite src/app/prompts/page.tsx
+Wrote file successfully.
+[0m
+[0m← [0mEdit src/components/Navbar.tsx
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/Navbar.tsx
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/Navbar.tsx
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/Navbar.tsx
+@@ -30,8 +30,16 @@
+   }`}
+ >
+   Compare
+ </Link>
++<Link
++  href="/prompts"
++  className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
++    pathname === '/prompts' ? 'text-[#C5A059]' : 'text-[#333333] hover:text-[#f5f5f5]'
++  }`}
++>
++  Prompts
++</Link>
+ <div className="h-4 w-px bg-[#1A1A1A]" />
+ <Link
+   href="/leaderboard"
+   className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${
+
+[0m
+[0m← [0mWrite src/components/PromptHistory.test.tsx
+Wrote file successfully.
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun test src/components/PromptHistory.test.tsx 2>&1
+bun test v1.3.11 (af24e281)
+
+src/components/PromptHistory.test.tsx:
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/PromptHistory.test.tsx:26:27)
+(fail) PromptHistory > renders prompt list [7.00ms]
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/PromptHistory.test.tsx:32:27)
+(fail) PromptHistory > displays usage counts
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/PromptHistory.test.tsx:38:27)
+(fail) PromptHistory > displays description when present [1.00ms]
+251 |     throw error;
+252 |   }
+253 |   if (!baseElement) {
+254 |     // default to document.body instead of documentElement to avoid output of potentially-large
+255 |     // head elements (such as JSS style blocks) in debug output
+256 |     baseElement = document.body;
+                        ^
+ReferenceError: document is not defined
+      at render (/home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/@testing-library/react/dist/pure.js:256:19)
+      at <anonymous> (/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/PromptHistory.test.tsx:44:28)
+(fail) PromptHistory > truncates content hash in display
+
+ 0 pass
+ 4 fail
+Ran 4 tests across 1 file. [232.00ms]
+[0m
