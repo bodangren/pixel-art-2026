@@ -512,3 +512,47 @@ Unstaged changes after reset:
 M	measure/output.log
 M	measure/review-output.log
 [0m
+[0m$ [0mgit add -A && git commit -m "chore(review): fix lint/style issues from past 24h"
+[main 53e258e] chore(review): fix lint/style issues from past 24h
+ 6 files changed, 539 insertions(+), 66 deletions(-)
+[0m
+[0m# [0mTodos
+[x] Fix unused imports in lib/prompts.test.ts
+[x] Fix duplicate schema definitions in lib/prompt-schema.test.ts
+[x] Fix unused imports in responsive-breakpoints.test.tsx
+[x] Fix asset_file_paths vs asset_paths inconsistency in run detail page
+[x] Run tests after fixes
+[x] Report review findings
+[0m
+## Code Review Report — Past 24 Hours
+
+**Commits reviewed:** 20 commits (validation-driven rerun, prompt versioning, mobile responsive UI)
+
+**Files reviewed:**
+- `lib/prompts.ts`, `lib/prompt-schema.ts`, `lib/prompt-hash.ts` — Prompt versioning system
+- `src/app/prompts/page.tsx`, `src/components/PromptHistory.tsx` — Prompt history UI
+- `src/app/compare/page.tsx` — Compare page with prompt filter
+- `src/app/runs/[runId]/page.tsx` — Run detail page
+- `src/components/GameCanvas.tsx` — Responsive canvas scaling
+- `src/components/LeaderboardTable.tsx` — Mobile card view + desktop table
+- `lib/data.ts`, `lib/schemas.ts` — Schema updates for prompt tracking
+- Test files for new components
+
+**Issues found:**
+1. `lib/prompt-schema.test.ts` duplicated schema definitions instead of importing from source
+2. `src/app/runs/[runId]/page.tsx` accessed non-existent properties (`asset_file_paths`, `technical_grade`) not on `Run` type
+3. Unused imports in `lib/prompts.test.ts` (`vi`, `beforeEach`, `MOCK_PROMPT_V2`)
+4. Unused imports/code in `src/components/responsive-breakpoints.test.tsx`
+
+**Issues fixed (6 files):**
+- Removed unused imports from test files
+- Changed `prompt-schema.test.ts` to import from `prompt-schema.ts`
+- Fixed type inconsistencies in run detail page (`asset_paths` only, removed `technical_grade` access)
+
+**Tests:** 438 tests passing
+
+**Lint:** Reduced from 47 to 39 issues. Remaining issues are in pre-existing code, not from recent changes.
+
+**Architectural concerns:** None new. Existing `asset_file_paths` vs `asset_paths` inconsistency in older run data already tracked in tech-debt.md.
+
+**Status:** All fixes committed.
