@@ -35,7 +35,7 @@
   - [x] Replace hover tooltips with tap-to-toggle info panels
 
 ## Phase 4: Verification
-- [ ] Task: Cross-device manual check
-  - [ ] Verify all pages at 375px, 768px, 1440px in dev tools
-  - [ ] Run full test suite; fix any responsive regressions
-  - [ ] Update DESIGN.md with responsive guidelines
+- [x] Task: Cross-device manual check
+  - [x] Verify all pages at 375px, 768px, 1440px in dev tools
+  - [x] Run full test suite; fix any responsive regressions
+  - [x] Update DESIGN.md with responsive guidelines

@@ -117,3 +117,28 @@ Elevation is achieved through sharp 1px borders (#1A1A1A) and zero-blur gold glo
 - **Border:** 1px solid Gold (#C5A059)
 - **Text:** Gold (#C5A059)
 - **Font:** Label Mono
+
+## Responsive Guidelines
+
+### Breakpoints
+- **Mobile:** 375px and below (`<md:` classes)
+- **Tablet:** 768px and above (`md:` classes)
+- **Desktop:** 1024px and above (`lg:` classes)
+
+### Layout Principles
+1. **Mobile-First:** Start with single-column layouts; expand to multi-column at `md` and `lg` breakpoints
+2. **Touch Targets:** All interactive elements must be at least 44x44px on touch devices
+3. **Container Padding:** Use `px-4 md:px-8` for horizontal padding to maintain safe distance from edges
+4. **Horizontal Scroll:** Tables with many columns use `overflow-x-auto` to maintain readability on small screens
+5. **Safe Area:** Apply `env(safe-area-inset-left/right)` to body for notched devices
+
+### Component Adaptations
+- **LeaderboardTable:** Cards on mobile (`md:hidden`), table on desktop (`hidden md:block`)
+- **Grid Layouts:** `grid-cols-1 md:grid-cols-2 lg:grid-cols-3` for flexible multi-column
+- **Navbar:** Responsive padding only; links remain visible for touch access
+- **GameCanvas:** Canvas scales via `width: 100%` with preserved aspect ratio
+
+### Accessibility
+- Use `focus-visible` outlines (gold) for keyboard navigation
+- Support `prefers-reduced-motion` for users sensitive to animation
+- Ensure color contrast meets WCAG 2.1 AA standards (4.5:1 for text)
