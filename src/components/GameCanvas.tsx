@@ -320,8 +320,8 @@ export default function GameCanvas({ runs, initialRunId, initialTemplateId = 'la
           width={canvasWidth}
           height={canvasHeight}
           onClick={handleCanvasClick}
-          className="border border-slate-700 rounded cursor-crosshair"
-          style={{ imageSmoothingEnabled: false } as React.CSSProperties}
+          className="border border-slate-700 rounded cursor-crosshair w-full max-w-full"
+          style={{ imageSmoothingEnabled: false, width: '100%', height: 'auto' } as React.CSSProperties}
         />
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 rounded">

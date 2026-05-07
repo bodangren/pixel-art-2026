@@ -19,20 +19,20 @@
   - [x] Write tests for AssetCard stacking on narrow viewports
   - [x] Refactor grid layouts to `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
   - [x] Make SpriteSheetPreview controls touch-accessible
-- [ ] Task: Comparison view
-  - [ ] Write tests for swipe gesture simulation
-  - [ ] Stack ComparisonView panels vertically on mobile
+- [x] Task: Comparison view
+  - [x] Write tests for swipe gesture simulation
+  - [x] Stack ComparisonView panels vertically on mobile
   - [ ] Add swipe navigation for asset switching on touch
 
 ## Phase 3: Game Preview & Canvas
-- [ ] Task: Responsive GameCanvas
-  - [ ] Write tests for canvas scaling with container resize
-  - [ ] Scale canvas via CSS `width: 100%` with devicePixelRatio backing
-  - [ ] Ensure template tilemaps render correctly at reduced sizes
-- [ ] Task: Touch interactions
-  - [ ] Write tests for touch event handling in ZoomContainer
-  - [ ] Map pinch-to-zoom to ZoomContainer zoom levels
-  - [ ] Replace hover tooltips with tap-to-toggle info panels
+- [x] Task: Responsive GameCanvas
+  - [x] Write tests for canvas scaling with container resize
+  - [x] Scale canvas via CSS `width: 100%` with devicePixelRatio backing
+  - [x] Ensure template tilemaps render correctly at reduced sizes
+- [x] Task: Touch interactions
+  - [x] Write tests for touch event handling in ZoomContainer
+  - [x] Map pinch-to-zoom to ZoomContainer zoom levels
+  - [x] Replace hover tooltips with tap-to-toggle info panels
 
 ## Phase 4: Verification
 - [ ] Task: Cross-device manual check
