@@ -142,6 +142,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
   *Link: [./tracks/mobile_responsive_ui_20260507/](./tracks/mobile_responsive_ui_20260507/)*
   *Priority: Medium* — Make the leaderboard, comparison view, run detail pages, and game preview usable on mobile phones and tablets.
 
-- [ ] **Track: Automated Visual Regression Detection**
-  *Link: [./tracks/visual_regression_detection_20260507/](./tracks/visual_regression_detection_20260507/)*
-  *Priority: Medium* — Add pixel-level diff detection between benchmark runs to automatically flag model output quality drift and surface before/after overlays.
+- [x] **Track: Automated Visual Regression Detection**
+   *Link: [./tracks/visual_regression_detection_20260507/](./tracks/visual_regression_detection_20260507/)*
+   *Priority: Medium* — Add pixel-level diff detection between benchmark runs to automatically flag model output quality drift and surface before/after overlays.
+   **Phase 1-4: Complete (21 tests passing)**

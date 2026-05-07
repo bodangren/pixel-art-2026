@@ -46,4 +46,4 @@
 - (2026-05-06, public_deployment) Next.js 16 webpack build on linux/x64 emits WASM TypeScript check error but build succeeds. Static export (output: 'export') incompatible with archiver - use jszip client-side for ZIP downloads.
 - (2026-05-07, validation_driven_rerun) run.json schema inconsistent - some use `asset_file_paths`, others `asset_paths`. 8/16 runs fail (small/broken assets < 1KB).
 - (2026-05-07, prompt_versioning) Server components use `{ searchParams: Promise<{...}> }` props. Client components need 'use client' + useSearchParams(). Form-based GET filtering works in server components.
-- (2026-05-08, mobile_responsive) Responsive tables with both mobile cards and desktop table views render both in DOM simultaneously (md:hidden + hidden md:block). Tests using getByText will find duplicates - use getAllByText or more specific selectors for the target view.
+- (2026-05-08, visual_regression_detection) Sharp's `raw()` channel count depends on input image - grayscale outputs 1 channel, RGBA outputs 4. Must handle channels when constructing output buffers. use `raw()` with `toBuffer({ resolveWithObject: true })` to get both data and info.

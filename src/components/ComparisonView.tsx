@@ -16,6 +16,7 @@ interface ZoomPanelProps {
   assetKey: string;
   zoom: number;
   transparent: boolean;
+  showDiff: boolean;
   onZoomChange: (zoom: number) => void;
   onRunChange: (runId: string) => void;
   runs: Run[];
@@ -26,6 +27,7 @@ const ZoomPanel: React.FC<ZoomPanelProps> = ({
   assetKey,
   zoom,
   transparent,
+  showDiff,
   onZoomChange,
   onRunChange,
   runs
@@ -77,9 +79,14 @@ const ZoomPanel: React.FC<ZoomPanelProps> = ({
         <span className="text-sm font-mono text-slate-400">{run.model_id}</span>
       </div>
       
-      <div className="flex justify-center items-center bg-slate-950 p-4 border border-slate-800 rounded relative overflow-auto min-h-[200px]"
+      <div className="bg-slate-950 p-4 border border-slate-800 rounded relative overflow-auto min-h-[200px]"
         style={{ backgroundColor: transparent ? 'transparent' : undefined }}
       >
+        {showDiff && leftRun && rightRun && leftRun.run_id !== rightRun.run_id && (
+          <div className="absolute top-2 right-2 bg-amber-900/80 text-amber-200 text-xs px-2 py-1 rounded">
+            Diff overlay mode
+          </div>
+        )}
         <div className="relative bg-black">
           {isBackground ? (
             <img 
@@ -188,6 +195,7 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({
   const [selectedAsset, setSelectedAsset] = useState(assetKey);
   const [zoom, setZoom] = useState(4);
   const [transparent, setTransparent] = useState(false);
+  const [showDiff, setShowDiff] = useState(false);
   const [leftReview, setLeftReview] = useState<Review | null>(() => {
     if (initialReviews) {
       const found = initialReviews.find(r => r.runId === leftRunId);
@@ -258,6 +266,18 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({
             Transparent
           </label>
         </div>
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="diff-toggle"
+            checked={showDiff}
+            onChange={(e) => setShowDiff(e.target.checked)}
+            className="accent-amber-500"
+          />
+          <label htmlFor="diff-toggle" className="text-sm text-slate-300">
+            Show Diff
+          </label>
+        </div>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -266,6 +286,7 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({
           assetKey={selectedAsset}
           zoom={zoom}
           transparent={transparent}
+          showDiff={showDiff}
           onZoomChange={setZoom}
           onRunChange={setLeftRunId}
           runs={runs}
@@ -275,6 +296,7 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({
           assetKey={selectedAsset}
           zoom={zoom}
           transparent={transparent}
+          showDiff={showDiff}
           onZoomChange={setZoom}
           onRunChange={setRightRunId}
           runs={runs}

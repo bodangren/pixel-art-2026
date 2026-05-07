@@ -95,14 +95,20 @@ describe('ComparisonView Component', () => {
 
   it('shows validation score comparison when reviews available', () => {
     render(<ComparisonView {...defaultProps} />)
-    
+
     expect(screen.getByText(/score/i)).toBeInTheDocument()
   })
 
   it('allows selecting different runs from dropdown', () => {
     render(<ComparisonView {...defaultProps} />)
-    
+
     const runSelects = screen.getAllByLabelText(/select run/i)
     expect(runSelects.length).toBe(2)
+  })
+
+  it('renders diff toggle', () => {
+    render(<ComparisonView {...defaultProps} />)
+
+    expect(screen.getByLabelText(/Show Diff/i)).toBeInTheDocument()
   })
 })
