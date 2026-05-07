@@ -1,15 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
-import { useEffect, useState } from 'react'
-
-const TestResizeWrapper: React.FC<{ width: number; children: React.ReactNode }> = ({ width, children }) => {
-  useEffect(() => {
-    const event = new Event('resize')
-    Object.defineProperty(event, 'target', { value: { innerWidth: width } })
-    window.dispatchEvent(event)
-  }, [width])
-  return <>{children}</>
-}
 
 describe('Responsive Layout Audit', () => {
   it('leaderboard table uses overflow-x-auto for horizontal scroll on mobile', () => {

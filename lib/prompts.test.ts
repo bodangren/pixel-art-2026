@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { listPrompts, getPromptById, getPromptByVersion, getAllPrompts, parsePromptFile } from './prompts'
 
 const MOCK_PROMPT_CONTENT = `---
@@ -12,18 +12,6 @@ description: Test prompt
 # Test Prompt
 
 This is a test prompt content.`
-
-const MOCK_PROMPT_V2 = `---
-id: prompt-002
-version: v2.0
-created_at: 2026-05-01T00:00:00Z
-content_hash: ghi789jkl012
-description: Test prompt v2
----
-
-# Test Prompt v2
-
-This is version 2 of the test prompt.`
 
 describe('Prompt Loading', () => {
   describe('parsePromptFile', () => {
