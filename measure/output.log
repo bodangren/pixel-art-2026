@@ -2195,3 +2195,71 @@ Test Files  57 passed (57)
    Start at  23:58:02
    Duration  73.56s (transform 2.14s, setup 12.74s, import 17.58s, tests 22.71s, environment 137.07s)
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "Phase 4: Mobile-responsive benchmark UI complete (DESIGN.md updated)"
+[main 90b0ab1] Phase 4: Mobile-responsive benchmark UI complete (DESIGN.md updated)
+ 3 files changed, 111 insertions(+), 4 deletions(-)
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run test 2>&1 | tail -5
+Test Files  57 passed (57)
+      Tests  438 passed (438)
+   Start at  23:59:29
+   Duration  84.15s (transform 2.21s, setup 14.05s, import 21.18s, tests 26.54s, environment 157.55s)
+[0m
+[0m← [0mEdit measure/tracks.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tracks.md
+@@ -137,9 +137,9 @@
+    *Link: [./tracks/prompt_versioning_tracking_20260507/](./tracks/prompt_versioning_tracking_20260507/)*
+    *Priority: High* — Track which prompt version was used for each benchmark run and enable A/B comparison of prompt effectiveness across models.
+    **Phase 1-4: Complete** (19 tests passing)
+ 
+-- [ ] **Track: Mobile-Responsive Benchmark UI**
++- [x] **Track: Mobile-Responsive Benchmark UI**
+   *Link: [./tracks/mobile_responsive_ui_20260507/](./tracks/mobile_responsive_ui_20260507/)*
+   *Priority: Medium* — Make the leaderboard, comparison view, run detail pages, and game preview usable on mobile phones and tablets.
+ 
+ - [ ] **Track: Automated Visual Regression Detection**
+
+[0m
+[0m→ [0mRead measure/tech-debt.md
+[0m
+[0m← [0mEdit measure/tech-debt.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
+@@ -36,5 +36,6 @@
+ | 2026-05-05 | minimax_benchmark | minimax-m2.5 generate_assets.py hangs - per-pixel loops with random() in PIL | Medium | Resolved | Rewrote script using PIL ImageDraw.rectangle/ellipse instead of per-pixel putpixel; original script had 273k+ random() calls per background |
+ | 2026-05-06 | public_deployment | Next.js 16 webpack build TypeScript check emits "invalid type: unit value, expected usize" | Low | Resolved | Build succeeds despite error (out/ generated correctly); issue is WASM/swc bindings on linux/x64. Tests pass with 408 tests. |
+ | 2026-05-07 | asset_pack_distribution | ZIP download for asset packs | Low | Resolved | Client-side JSZip for static export compatibility; archiver kept in lib/ for future API routes |
+ | 2026-05-07 | validation_driven_model_rerun | Run completeness validation - 8/16 runs have broken assets | Medium | Resolved | Phase 3 complete - validated all 16 runs (8 pass, 8 fail). Failed runs documented. Re-run trigger deferred to future API integration. |
+-| 2026-05-07 | prompt_versioning | Track prompt versions used per benchmark run | Low | Resolved | Phase 1-4 complete: prompt schema, v1.md, SHA-256 hashing, backfill 16 runs, /prompts page, compare filter by prompt |
+\ No newline at end of file
++| 2026-05-07 | prompt_versioning | Track prompt versions used per benchmark run | Low | Resolved | Phase 1-4 complete: prompt schema, v1.md, SHA-256 hashing, backfill 16 runs, /prompts page, compare filter by prompt |
++| 2026-05-08 | mobile_responsive_ui | Mobile-responsive benchmark UI implementation | Low | Resolved | LeaderboardTable cards on mobile, run detail grid responsive, GameCanvas scales with CSS, safe-area padding, DESIGN.md updated with responsive guidelines |
+\ No newline at end of file
+
+[0m
+[0m→ [0mRead measure/lessons-learned.md
+[0m
+[0m← [0mEdit measure/lessons-learned.md
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/measure/lessons-learned.md
+@@ -45,4 +45,5 @@
+ - (2026-05-05, archive_cleanup) Always verify track in tracks/ before archiving; check tracks.md refs too.
+ - (2026-05-06, public_deployment) Next.js 16 webpack build on linux/x64 emits WASM TypeScript check error but build succeeds. Static export (output: 'export') incompatible with archiver - use jszip client-side for ZIP downloads.
+ - (2026-05-07, validation_driven_rerun) run.json schema inconsistent - some use `asset_file_paths`, others `asset_paths`. 8/16 runs fail (small/broken assets < 1KB).
+ - (2026-05-07, prompt_versioning) Server components use `{ searchParams: Promise<{...}> }` props. Client components need 'use client' + useSearchParams(). Form-based GET filtering works in server components.
++- (2026-05-08, mobile_responsive) Responsive tables with both mobile cards and desktop table views render both in DOM simultaneously (md:hidden + hidden md:block). Tests using getByText will find duplicates - use getAllByText or more specific selectors for the target view.
+
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run test 2>&1 | tail -5
+Test Files  57 passed (57)
+      Tests  438 passed (438)
+   Start at  00:01:32
+   Duration  77.27s (transform 2.34s, setup 12.66s, import 19.16s, tests 28.00s, environment 141.56s)
+[0m

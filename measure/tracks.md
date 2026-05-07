@@ -138,7 +138,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Priority: High* — Track which prompt version was used for each benchmark run and enable A/B comparison of prompt effectiveness across models.
    **Phase 1-4: Complete** (19 tests passing)
 
-- [ ] **Track: Mobile-Responsive Benchmark UI**
+- [x] **Track: Mobile-Responsive Benchmark UI**
   *Link: [./tracks/mobile_responsive_ui_20260507/](./tracks/mobile_responsive_ui_20260507/)*
   *Priority: Medium* — Make the leaderboard, comparison view, run detail pages, and game preview usable on mobile phones and tablets.
 
