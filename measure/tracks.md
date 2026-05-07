@@ -61,6 +61,8 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 ---
 
 ## Upcoming Tracks
+- [ ] **Track: Benchmark Alert System** *Link: [./tracks/benchmark_alert_system_20260508/](./tracks/benchmark_alert_system_20260508/)* — Webhook/email alerts for run completion, score regression, and validation failures
+- [ ] **Track: Multi-Resolution Asset Support** *Link: [./tracks/multi_resolution_support_20260508/](./tracks/multi_resolution_support_20260508/)* — Extend benchmark to 32x32 and 128x128 asset generation and scoring
 
 - [x] **Track: Public Leaderboard System**
    *Link: [./archive/leaderboard_system_20260502/](./archive/leaderboard_system_20260502/)*
@@ -118,6 +120,8 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    **Phase 1-4: Complete**
 
 ## Upcoming Tracks
+- [ ] **Track: Benchmark Alert System** *Link: [./tracks/benchmark_alert_system_20260508/](./tracks/benchmark_alert_system_20260508/)* — Webhook/email alerts for run completion, score regression, and validation failures
+- [ ] **Track: Multi-Resolution Asset Support** *Link: [./tracks/multi_resolution_support_20260508/](./tracks/multi_resolution_support_20260508/)* — Extend benchmark to 32x32 and 128x128 asset generation and scoring
 
 - [x] **Track: Public Deployment Pipeline**
    *Link: [./archive/public_deployment_pipeline_20260506/](./archive/public_deployment_pipeline_20260506/)*
@@ -129,20 +133,28 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    **Phase 1-3: Complete**
 
 - [x] **Track: Validation-Driven Model Re-run Pipeline**
-    *Link: [./tracks/validation_driven_model_rerun_20260506/](./tracks/validation_driven_model_rerun_20260506/)*
+    *Link: [./archive/validation_driven_model_rerun_20260506/](./archive/validation_driven_model_rerun_20260506/)*
     Validate all existing runs for completeness, flag failures, and re-trigger generation for failing models.
     **Phase 1-3: Complete** (validation script + dashboard badges; re-run trigger deferred to API integration)
 
 - [x] **Track: Prompt Versioning & A/B Tracking**
-   *Link: [./tracks/prompt_versioning_tracking_20260507/](./tracks/prompt_versioning_tracking_20260507/)*
+   *Link: [./archive/prompt_versioning_tracking_20260507/](./archive/prompt_versioning_tracking_20260507/)*
    *Priority: High* — Track which prompt version was used for each benchmark run and enable A/B comparison of prompt effectiveness across models.
    **Phase 1-4: Complete** (19 tests passing)
 
 - [x] **Track: Mobile-Responsive Benchmark UI**
-  *Link: [./tracks/mobile_responsive_ui_20260507/](./tracks/mobile_responsive_ui_20260507/)*
+  *Link: [./archive/mobile_responsive_ui_20260507/](./archive/mobile_responsive_ui_20260507/)*
   *Priority: Medium* — Make the leaderboard, comparison view, run detail pages, and game preview usable on mobile phones and tablets.
 
 - [x] **Track: Automated Visual Regression Detection**
-   *Link: [./tracks/visual_regression_detection_20260507/](./tracks/visual_regression_detection_20260507/)*
+   *Link: [./archive/visual_regression_detection_20260507/](./archive/visual_regression_detection_20260507/)*
    *Priority: Medium* — Add pixel-level diff detection between benchmark runs to automatically flag model output quality drift and surface before/after overlays.
    **Phase 1-4: Complete (21 tests passing)**
+
+- [ ] **Track: ML-Based Automated Quality Scoring**
+   *Link: [./tracks/ml_automated_quality_scoring_20260508/](./tracks/ml_automated_quality_scoring_20260508/)*
+   *Priority: High* — Reduce human review burden with an ML model trained on historical human review data to automatically score asset quality (0-100) and flag likely failures.
+
+- [ ] **Track: Automated Model Onboarding Pipeline**
+   *Link: [./tracks/automated_model_onboarding_20260508/](./tracks/automated_model_onboarding_20260508/)*
+   *Priority: High* — Self-service admin UI and API for registering new LLMs without manual config edits; auto-scaffolds prompts, validation rules, and triggers an initial benchmark run.

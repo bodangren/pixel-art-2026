@@ -1,0 +1,25 @@
+# Plan: Multi-Resolution Asset Support
+
+## Phase 1: Schema & Task Update (TDD)
+- [ ] Write tests for Run schema with resolution field
+- [ ] Update RunSchema, TaskSchema, and validation to accept resolution
+- [ ] Seed tasks for 32x32 and 128x128 variants
+
+## Phase 2: Pipeline Adaptation (TDD)
+- [ ] Write tests for generation script with resolution parameter
+- [ ] Update generate_assets.py to accept --resolution flag
+- [ ] Update validation engine scoring thresholds per resolution
+
+## Phase 3: UI Integration (TDD)
+- [ ] Write tests for ResolutionBadge component
+- [ ] Add resolution filter to leaderboard and comparison pages
+- [ ] Display resolution on AssetCard and RunDetail
+
+## Phase 4: Leaderboard Segmentation (TDD)
+- [ ] Write tests for resolution-specific leaderboard queries
+- [ ] Update leaderboard API to filter/group by resolution
+- [ ] Add resolution selector to leaderboard page
+
+## Phase 5: Integration & Verification
+- [ ] Run benchmark at 32x32 and 128x128 for one model as smoke test
+- [ ] Update tracks.md and commit
