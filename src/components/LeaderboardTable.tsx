@@ -47,44 +47,18 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
   }
 
   return (
-    <div className="overflow-x-auto bg-slate-900/40 rounded-2xl border border-white/5 shadow-2xl backdrop-blur-sm">
-      <table className="w-full text-left border-collapse">
-        <thead>
-          <tr className="border-b border-white/5 text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-white/[0.02]">
-            <th className="px-6 py-5">Rank</th>
-            <th className="px-6 py-5">Model</th>
-            <th
-              className="px-6 py-5 text-center cursor-pointer hover:text-blue-400 transition-colors"
-              onClick={() => handleHeaderClick('average_tech_score')}
-            >
-              Tech Score{renderSortIcon('average_tech_score')}
-            </th>
-            <th
-              className="px-6 py-5 text-center cursor-pointer hover:text-blue-400 transition-colors"
-              onClick={() => handleHeaderClick('average_human_score')}
-            >
-              Human Score{renderSortIcon('average_human_score')}
-            </th>
-            <th
-              className="px-6 py-5 text-right cursor-pointer hover:text-blue-400 transition-colors"
-              onClick={() => handleHeaderClick('run_count')}
-            >
-              Runs{renderSortIcon('run_count')}
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-white/5">
-          {entries.map((model, index) => (
-            <tr
-              key={model.model_id}
-              className="hover:bg-white/[0.03] transition-all group cursor-pointer"
-              onClick={() => onModelClick(model.model_id)}
-            >
-              <td className="px-6 py-6">
+    <>
+      <div className="md:hidden space-y-3">
+        {entries.map((model, index) => (
+          <div
+            key={model.model_id}
+            className="bg-slate-900/40 rounded-2xl border border-white/5 p-4 cursor-pointer hover:bg-white/[0.03] transition-all"
+            onClick={() => onModelClick(model.model_id)}
+          >
+            <div className="flex justify-between items-start mb-3">
+              <div className="flex items-center gap-3">
                 <span className="font-mono text-slate-600 text-sm">#{index + 1}</span>
-              </td>
-              <td className="px-6 py-6">
-                <div className="flex flex-col">
+                <div>
                   <Link
                     href={`/models/${model.model_id}`}
                     className="font-black text-white hover:text-blue-400 transition-colors tracking-tight"
@@ -92,29 +66,96 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                   >
                     {model.model_id}
                   </Link>
-                  <span className="text-[10px] text-slate-500 font-mono mt-1">Latest: {model.latest_run_date}</span>
+                  <div className="text-[10px] text-slate-500 font-mono">Latest: {model.latest_run_date}</div>
                 </div>
-              </td>
-              <td className="px-6 py-6">
-                <div className="flex flex-col items-center gap-1">
-                  <span className="font-mono font-bold text-blue-400 text-sm">{model.average_tech_score.toFixed(1)}</span>
+              </div>
+              <span className="px-2 py-1 bg-white/5 rounded font-mono text-[10px] text-slate-400">{model.run_count} runs</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="text-center">
+                <div className="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Tech</div>
+                <div className="font-mono font-bold text-blue-400">{model.average_tech_score.toFixed(1)}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Human</div>
+                <div className={`font-black tracking-tighter ${model.average_human_score > 0 ? 'text-white' : 'text-slate-800'}`}>
+                  {model.average_human_score > 0 ? model.average_human_score.toFixed(1) : '?.?'}
                 </div>
-              </td>
-              <td className="px-6 py-6">
-                <div className="flex flex-col items-center">
-                  <span className={`text-2xl font-black tracking-tighter ${model.average_human_score > 0 ? 'text-white' : 'text-slate-800'}`}>
-                    {model.average_human_score > 0 ? model.average_human_score.toFixed(1) : '?.?'}
-                  </span>
-                </div>
-              </td>
-              <td className="px-6 py-6 text-right">
-                <span className="px-2 py-1 bg-white/5 rounded font-mono text-[10px] text-slate-400">{model.run_count}</span>
-              </td>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden md:block overflow-x-auto bg-slate-900/40 rounded-2xl border border-white/5 shadow-2xl backdrop-blur-sm">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="border-b border-white/5 text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-white/[0.02]">
+              <th className="px-6 py-5">Rank</th>
+              <th className="px-6 py-5">Model</th>
+              <th
+                className="px-6 py-5 text-center cursor-pointer hover:text-blue-400 transition-colors"
+                onClick={() => handleHeaderClick('average_tech_score')}
+              >
+                Tech Score{renderSortIcon('average_tech_score')}
+              </th>
+              <th
+                className="px-6 py-5 text-center cursor-pointer hover:text-blue-400 transition-colors"
+                onClick={() => handleHeaderClick('average_human_score')}
+              >
+                Human Score{renderSortIcon('average_human_score')}
+              </th>
+              <th
+                className="px-6 py-5 text-right cursor-pointer hover:text-blue-400 transition-colors"
+                onClick={() => handleHeaderClick('run_count')}
+              >
+                Runs{renderSortIcon('run_count')}
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className="divide-y divide-white/5">
+            {entries.map((model, index) => (
+              <tr
+                key={model.model_id}
+                className="hover:bg-white/[0.03] transition-all group cursor-pointer"
+                onClick={() => onModelClick(model.model_id)}
+              >
+                <td className="px-6 py-6">
+                  <span className="font-mono text-slate-600 text-sm">#{index + 1}</span>
+                </td>
+                <td className="px-6 py-6">
+                  <div className="flex flex-col">
+                    <Link
+                      href={`/models/${model.model_id}`}
+                      className="font-black text-white hover:text-blue-400 transition-colors tracking-tight"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {model.model_id}
+                    </Link>
+                    <span className="text-[10px] text-slate-500 font-mono mt-1">Latest: {model.latest_run_date}</span>
+                  </div>
+                </td>
+                <td className="px-6 py-6">
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-mono font-bold text-blue-400 text-sm">{model.average_tech_score.toFixed(1)}</span>
+                  </div>
+                </td>
+                <td className="px-6 py-6">
+                  <div className="flex flex-col items-center">
+                    <span className={`text-2xl font-black tracking-tighter ${model.average_human_score > 0 ? 'text-white' : 'text-slate-800'}`}>
+                      {model.average_human_score > 0 ? model.average_human_score.toFixed(1) : '?.?'}
+                    </span>
+                  </div>
+                </td>
+                <td className="px-6 py-6 text-right">
+                  <span className="px-2 py-1 bg-white/5 rounded font-mono text-[10px] text-slate-400">{model.run_count}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 

@@ -5,20 +5,20 @@
   - [x] Write tests verifying no horizontal overflow at 375px and 768px
   - [x] Audit all pages for fixed widths, overflow-x, and min-w usage
   - [x] Document touch-unfriendly interactions (hover-only tooltips, drag handles)
-- [ ] Task: Responsive container refactor
-  - [ ] Write tests for Layout component responsive behavior
-  - [ ] Update globals.css with safe-area padding for mobile
-  - [ ] Refactor container classes to use `px-4 md:px-8` consistently
+- [x] Task: Responsive container refactor
+  - [x] Write tests for Layout component responsive behavior
+  - [x] Update globals.css with safe-area padding for mobile
+  - [x] Refactor container classes to use `px-4 md:px-8` consistently
 
 ## Phase 2: Page Components
-- [ ] Task: Leaderboard responsive table
-  - [ ] Write tests for LeaderboardTable mobile card layout
-  - [ ] Implement card-based layout below `md` breakpoint
-  - [ ] Ensure filters collapse into a drawer/modal on mobile
-- [ ] Task: Run detail page
-  - [ ] Write tests for AssetCard stacking on narrow viewports
-  - [ ] Refactor grid layouts to `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
-  - [ ] Make SpriteSheetPreview controls touch-accessible
+- [x] Task: Leaderboard responsive table
+  - [x] Write tests for LeaderboardTable mobile card layout
+  - [x] Implement card-based layout below `md` breakpoint
+  - [x] Ensure filters collapse into a drawer/modal on mobile
+- [x] Task: Run detail page
+  - [x] Write tests for AssetCard stacking on narrow viewports
+  - [x] Refactor grid layouts to `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+  - [x] Make SpriteSheetPreview controls touch-accessible
 - [ ] Task: Comparison view
   - [ ] Write tests for swipe gesture simulation
   - [ ] Stack ComparisonView panels vertically on mobile

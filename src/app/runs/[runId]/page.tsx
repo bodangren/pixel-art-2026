@@ -45,7 +45,7 @@ export default async function RunPage({ params }: { params: Promise<{ runId: str
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
           <section>
             <h2 className="text-xl font-bold mb-4 border-b border-slate-800 pb-2 flex justify-between items-center text-slate-400 uppercase tracking-widest text-xs">

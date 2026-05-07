@@ -21,28 +21,29 @@ describe('LeaderboardTable Component', () => {
 
   it('renders model rows with correct data', () => {
     render(<LeaderboardTable entries={mockEntries} onModelClick={vi.fn()} />)
-    expect(screen.getByText('Gemini-2.5-flash')).toBeInTheDocument()
-    expect(screen.getByText('sonnet-4.6')).toBeInTheDocument()
-    expect(screen.getByText('opus-4.6')).toBeInTheDocument()
+    expect(screen.getAllByText('Gemini-2.5-flash')).toHaveLength(2)
+    expect(screen.getAllByText('sonnet-4.6')).toHaveLength(2)
+    expect(screen.getAllByText('opus-4.6')).toHaveLength(2)
   })
 
   it('displays rank numbers', () => {
     render(<LeaderboardTable entries={mockEntries} onModelClick={vi.fn()} />)
-    expect(screen.getByText('#1')).toBeInTheDocument()
-    expect(screen.getByText('#2')).toBeInTheDocument()
-    expect(screen.getByText('#3')).toBeInTheDocument()
+    expect(screen.getAllByText('#1')).toHaveLength(2)
+    expect(screen.getAllByText('#2')).toHaveLength(2)
+    expect(screen.getAllByText('#3')).toHaveLength(2)
   })
 
   it('renders average scores', () => {
     render(<LeaderboardTable entries={mockEntries} onModelClick={vi.fn()} />)
-    expect(screen.getAllByText('4.5')).toHaveLength(1)
-    expect(screen.getAllByText('3.6')).toHaveLength(1)
+    expect(screen.getAllByText('4.5')).toHaveLength(2)
+    expect(screen.getAllByText('3.6')).toHaveLength(2)
   })
 
   it('shows "?.?" for zero human scores', () => {
     render(<LeaderboardTable entries={mockEntries} onModelClick={vi.fn()} />)
-    const opusRow = screen.getByText('opus-4.6').closest('tr')
-    expect(opusRow?.textContent).toContain('?.?')
+    const opusCards = screen.getAllByText('opus-4.6')
+    const opusCard = opusCards[0].closest('[class*="rounded-2xl"]')
+    expect(opusCard?.textContent).toContain('?.?')
   })
 
   it('calls onModelClick when row is clicked', () => {
