@@ -92,6 +92,10 @@ export async function getLeaderboard(
     runs = await listRuns()
   }
 
+  if (filters?.resolution) {
+    runs = runs.filter(run => run.resolution === filters.resolution)
+  }
+
   try {
     const leaderboardDataContent = await fs.readFile(leaderboardDataPath, 'utf-8')
     const leaderboardData = JSON.parse(leaderboardDataContent)

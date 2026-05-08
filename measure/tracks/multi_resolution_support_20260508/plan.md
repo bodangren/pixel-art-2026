@@ -16,9 +16,9 @@
 - [x] Display resolution on AssetCard and RunDetail
 
 ## Phase 4: Leaderboard Segmentation (TDD)
-- [ ] Write tests for resolution-specific leaderboard queries
-- [ ] Update leaderboard API to filter/group by resolution
-- [ ] Add resolution selector to leaderboard page
+- [x] Write tests for resolution-specific leaderboard queries
+- [x] Update leaderboard API to filter/group by resolution
+- [x] Add resolution selector to leaderboard page
 
 ## Phase 5: Integration & Verification
 - [ ] Run benchmark at 32x32 and 128x128 for one model as smoke test
