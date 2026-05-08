@@ -47,3 +47,4 @@
 - (2026-05-07, validation_driven_rerun) run.json schema inconsistent - some use `asset_file_paths`, others `asset_paths`. 8/16 runs fail (small/broken assets < 1KB).
 - (2026-05-07, prompt_versioning) Server components use `{ searchParams: Promise<{...}> }` props. Client components need 'use client' + useSearchParams(). Form-based GET filtering works in server components.
 - (2026-05-08, visual_regression_detection) Sharp's `raw()` channel count depends on input image - grayscale outputs 1 channel, RGBA outputs 4. Must handle channels when constructing output buffers. use `raw()` with `toBuffer({ resolveWithObject: true })` to get both data and info.
+- (2026-05-08, alert_system) Zod v4 (4.3.6) has breaking changes - `z.record(z.unknown())` fails with "invalid type: unit value, expected usize". Use `z.any().optional()` for flexible metadata fields. email/url validators also changed behavior.
