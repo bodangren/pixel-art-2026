@@ -1,10 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-// This script simulates the LLM prompt construction and response capture.
-// It reads requirements.json and prepares the instruction for the model.
-
-async function generate(gameSlug: string, modelId: string) {
+async function generate(gameSlug: string, modelId: string, resolution: string = '64x64') {
   const reqPath = path.join(process.cwd(), 'data', 'requirements', `${gameSlug}.json`);
   if (!fs.existsSync(reqPath)) {
     throw new Error(`Requirements for ${gameSlug} not found. Run research-assets.ts first.`);
@@ -12,16 +9,17 @@ async function generate(gameSlug: string, modelId: string) {
 
   const requirements = JSON.parse(fs.readFileSync(reqPath, 'utf8'));
 
+  const tileSize = resolution === '32x32' ? 32 : resolution === '128x128' ? 128 : 64;
   const prompt = `
-    You are a Pixel Art Generator Agent. 
+    You are a Pixel Art Generator Agent.
     GAME THEME: ${requirements.theme}
-    
+
     TASK: Write a Python script using the Pillow (PIL) library to generate the following assets:
     ${requirements.assets.map((a: any) => `- ${a.id}: ${a.description} (${a.dimensions})`).join('\n')}
 
     CONSTRAINTS:
     - Use a cohesive color palette for all assets.
-    - All sprite sheets must align to their grid (e.g., 3x3 tiles of 64x64).
+    - All sprite sheets must align to their grid (e.g., 3x3 tiles of ${tileSize}x${tileSize}).
     - Sprite sheets must have a transparent background.
     - The Python script must save each asset as a PNG file in the current directory.
     - The script should be named 'generate_assets.py'.
@@ -61,15 +59,17 @@ create_placeholder("orb-sheet.png", (192, 64), (255, 215, 0, 255), (3,1))
   `;
 
   fs.writeFileSync(path.join(runDir, 'generate_assets.py'), dummyPythonCode);
-  
+
   const runManifest = {
     run_id: runId,
     model_id: modelId,
     run_date: new Date().toISOString().split('T')[0],
     variant: "automated",
-    benchmark_game_id: gameSlug,
+    benchmark_id: gameSlug,
+    prompt_version: "v1.0",
+    resolution,
     generation_method: "python-pillow",
-    asset_file_paths: {},
+    asset_paths: {},
     status: "incomplete",
     generation_notes: "Constructed prompt for model. Code generated and saved to run directory."
   };
@@ -81,4 +81,5 @@ create_placeholder("orb-sheet.png", (192, 64), (255, 215, 0, 255), (3,1))
 
 const game = process.argv[2] || 'labyrinth-goblin-king';
 const model = process.argv[3] || 'gemini-3.1-pro';
-generate(game, model).catch(console.error);
+const resolution = process.argv[4] || '64x64';
+generate(game, model, resolution).catch(console.error);
