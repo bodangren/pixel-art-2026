@@ -49,6 +49,68 @@ describe('Run Schema', () => {
     }
     expect(runSchema.parse(validRunWithPrompt)).toEqual(validRunWithPrompt)
   })
+
+  it('should validate with optional resolution field', () => {
+    const validRunWithResolution = {
+      run_id: 'gpt-4o__2026-04-04__r1',
+      model_id: 'gpt-4o',
+      run_date: '2026-04-04',
+      variant: 'r1',
+      benchmark_id: 'labyrinth-goblin-king',
+      prompt_version: 'v1.0',
+      resolution: '64x64',
+      asset_paths: {
+        background: 'assets/background.png',
+        hero: 'assets/hero-3x3-sheet.png',
+        enemy: 'assets/goblin-3x3-sheet.png',
+        effect: 'assets/orb-sheet.png'
+      },
+      status: 'completed'
+    }
+    expect(runSchema.parse(validRunWithResolution)).toEqual(validRunWithResolution)
+  })
+
+  it('should validate resolution field with valid values', () => {
+    for (const res of ['32x32', '64x64', '128x128']) {
+      const run = {
+        run_id: 'gpt-4o__2026-04-04__r1',
+        model_id: 'gpt-4o',
+        run_date: '2026-04-04',
+        variant: 'r1',
+        benchmark_id: 'labyrinth-goblin-king',
+        prompt_version: 'v1.0',
+        resolution: res,
+        asset_paths: {
+          background: 'assets/background.png',
+          hero: 'assets/hero-3x3-sheet.png',
+          enemy: 'assets/goblin-3x3-sheet.png',
+          effect: 'assets/orb-sheet.png'
+        },
+        status: 'completed'
+      }
+      expect(runSchema.parse(run)).toEqual(run)
+    }
+  })
+
+  it('should reject invalid resolution values', () => {
+    const run = {
+      run_id: 'gpt-4o__2026-04-04__r1',
+      model_id: 'gpt-4o',
+      run_date: '2026-04-04',
+      variant: 'r1',
+      benchmark_id: 'labyrinth-goblin-king',
+      prompt_version: 'v1.0',
+      resolution: '100x100',
+      asset_paths: {
+        background: 'assets/background.png',
+        hero: 'assets/hero-3x3-sheet.png',
+        enemy: 'assets/goblin-3x3-sheet.png',
+        effect: 'assets/orb-sheet.png'
+      },
+      status: 'completed'
+    }
+    expect(() => runSchema.parse(run)).toThrow()
+  })
 })
 
 describe('Review Schema', () => {

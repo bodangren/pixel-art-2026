@@ -9,6 +9,7 @@ export const runSchema = z.object({
   prompt_version: z.string(),
   prompt_version_id: z.string().optional(),
   prompt_hash: z.string().optional(),
+  resolution: z.enum(['32x32', '64x64', '128x128']).optional(),
   asset_paths: z.object({
     background: z.string(),
     hero: z.string(),
