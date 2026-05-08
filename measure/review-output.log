@@ -2,57 +2,69 @@
 > build · k2p6
 [0m
 [0m→ [0mRead measure/review-prompt.md
-I'll run the 24-hour code review now.
-[0m→ [0mSkill "measure"
+I'll run the review process from `@measure/review-prompt.md`.
 [0m
 [0m$ [0mgit log --since="24 hours ago" --oneline
-1e557ee Finalize: mobile-responsive track, update tech-debt and lessons-learned
-90b0ab1 Phase 4: Mobile-responsive benchmark UI complete (DESIGN.md updated)
-04c12b3 Phase 3: GameCanvas responsive canvas with CSS scaling
-b9a4b30 Phase 2: Run detail grid + AssetCard responsive, AnimationControls touch-ready
-cb6867e Phase 1: Mobile-responsive layout foundation audit + safe-area padding
-9fb5791 Checkpoint: update run.json files, add PromptHistory test
-beda7a4 finalize: Prompt Versioning track complete, memory updated
-db3a3f9 Phase 3: add prompt version filter to comparison page
-e427f43 update plan: Phase 3 in progress, Phase 4 added
-b9e27cc Phase 3: prompt history page UI
-5a968b5 Phase 2 complete: run-prompt linkage
-d659eae Phase 2 partial: extend run schema with prompt_version_id and prompt_hash
-e8752ce Phase 1: prompt schema, prompts.ts, and v1 prompt
-be4d5ae finalize: validation-driven model rerun Phase 3, update track status
-9063f9b checkpoint: validation-driven model rerun Phase 3 complete
-06c48d4 [MiniMax-M2.7] Condense lessons-learned to 50 lines
-bdea179 [MiniMax-M2.7] Update: Phase 1-2 complete, Phase 3 deferred
-bd47795 [MiniMax-M2.7] Phase 2: Add validation status badges to runs page
-1d12774 [MiniMax-M2.7] Update memory: validation findings, run schema inconsistency
-52c81fe [MiniMax-M2.7] Update track status: Phase 1 complete
-05e4c1b [MiniMax-M2.7] Validation-Driven Re-run Pipeline Phase 1: Run completeness validator
-d6db1f5 Add measure output logs to gitignore
-7372af9 measure: add 3 new tracks to raise pending count to 4
-c2a54f5 [MiniMax-M2.7] Checkpoint: Asset Pack Distribution complete - 413 tests, build succeeds
-e6baf61 [MiniMax-M2.7] Asset Pack Distribution: ZIP download for game assets
+e7b9bf5 Finalize: Benchmark Alert System complete (43 tests)
+b2b3768 Phase 5: Integration tests - full pipeline verification
+e0de81c Phase 4: AlertHistory component and AlertBell in Navbar
+c03fdaf Phase 3: Transport Layer - WebhookTransport and EmailTransport with retry
+80550ff Phase 2: Alert Storage & API - alert schema, store functions, subscriptions
+c29167d Phase 1: AlertRulesEngine with TDD - regression, failure, completion detection
+ff57300 Log checkpoint
+ee4f6ef measure: archive 4 completed tracks, add 4 new tracks (ML scoring, model onboarding, alerts, multi-resolution)
+59132c2 feat(visual-regression): Phase 1-4 complete - visual diff engine, RegressionAlert, diff toggle in ComparisonView (MiniMax-M2)
+95e29ec Checkpoint: autonomous session in progress
+53e258e chore(review): fix lint/style issues from past 24h
 [0m
 [0m$ [0mgit diff --name-only HEAD~20 HEAD
 DESIGN.md
-lib/data.ts
-lib/prompt-hash.ts
+lib/alert-integration.test.ts
+lib/alert-rules.test.ts
+lib/alert-rules.ts
+lib/alert-store.test.ts
+lib/alert-store.ts
+lib/alert-transport.test.ts
+lib/alert-transport.ts
+lib/diff-config.test.ts
+lib/diff-config.ts
+lib/diff-storage.test.ts
+lib/diff-storage.ts
 lib/prompt-schema.test.ts
-lib/prompt-schema.ts
 lib/prompts.test.ts
-lib/prompts.ts
-lib/schemas.test.ts
-lib/schemas.ts
+lib/visual-diff.test.ts
+lib/visual-diff.ts
+measure/archive/mobile_responsive_ui_20260507/metadata.json
+measure/archive/mobile_responsive_ui_20260507/plan.md
+measure/archive/mobile_responsive_ui_20260507/spec.md
+measure/archive/prompt_versioning_tracking_20260507/metadata.json
+measure/archive/prompt_versioning_tracking_20260507/plan.md
+measure/archive/prompt_versioning_tracking_20260507/spec.md
+measure/archive/validation_driven_model_rerun_20260506/metadata.json
+measure/archive/validation_driven_model_rerun_20260506/plan.md
+measure/archive/validation_driven_model_rerun_20260506/spec.md
+measure/archive/visual_regression_detection_20260507/metadata.json
+measure/archive/visual_regression_detection_20260507/plan.md
+measure/archive/visual_regression_detection_20260507/spec.md
 measure/lessons-learned.md
 measure/output.log
+measure/review-output.log
 measure/tech-debt.md
 measure/tracks.md
+measure/tracks/automated_model_onboarding_20260508/metadata.json
+measure/tracks/automated_model_onboarding_20260508/plan.md
+measure/tracks/automated_model_onboarding_20260508/spec.md
+measure/tracks/benchmark_alert_system_20260508/metadata.json
+measure/tracks/benchmark_alert_system_20260508/plan.md
+measure/tracks/benchmark_alert_system_20260508/spec.md
+measure/tracks/ml_automated_quality_scoring_20260508/metadata.json
+measure/tracks/ml_automated_quality_scoring_20260508/plan.md
+measure/tracks/ml_automated_quality_scoring_20260508/spec.md
 measure/tracks/mobile_responsive_ui_20260507/plan.md
-measure/tracks/prompt_versioning_tracking_20260507/plan.md
-measure/tracks/validation_driven_model_rerun_20260506/metadata.json
-measure/tracks/validation_driven_model_rerun_20260506/plan.md
-next-env.d.ts
-prompts/v1.md
-public/data/derived/validation-status.json
+measure/tracks/multi_resolution_support_20260508/metadata.json
+measure/tracks/multi_resolution_support_20260508/plan.md
+measure/tracks/multi_resolution_support_20260508/spec.md
+measure/tracks/visual_regression_detection_20260507/plan.md
 public/data/runs/gemini-2.5-flash__2026-04-04__initial/run.json
 public/data/runs/gemini-2.5-pro__2026-04-04__initial/run.json
 public/data/runs/gemini-3-flash__2026-04-04__initial/run.json
@@ -69,46 +81,149 @@ public/data/runs/minimax-m2.5__2026-04-04__initial/run.json
 public/data/runs/minimax-m2.5__2026-05-05__initial/run.json
 public/data/runs/opus-4.6__2026-04-04__initial/run.json
 public/data/runs/sonnet-4.6__2026-04-04__initial/run.json
-scripts/backfill_prompts.py
 src/app/compare/page.tsx
 src/app/globals.css
-src/app/prompts/page.tsx
 src/app/runs/[runId]/page.tsx
-src/app/runs/page.tsx
+src/components/AlertBell.tsx
+src/components/AlertHistory.test.tsx
+src/components/AlertHistory.tsx
+src/components/ComparisonView.test.tsx
+src/components/ComparisonView.tsx
 src/components/GameCanvas.tsx
 src/components/LeaderboardTable.test.tsx
 src/components/LeaderboardTable.tsx
 src/components/Navbar.tsx
 src/components/PromptHistory.test.tsx
-src/components/PromptHistory.tsx
+src/components/RegressionAlert.test.tsx
+src/components/RegressionAlert.tsx
 src/components/responsive-breakpoints.test.tsx
 [0m
 [0m→ [0mRead measure/tracks.md
 [0m→ [0mRead measure/tech-debt.md
-[0m→ [0mRead measure/lessons-learned.md
-[0m→ [0mRead package.json
-[0m→ [0mRead lib/prompts.ts
-[0m→ [0mRead lib/data.ts[90m [limit=80][0m
-[0m→ [0mRead lib/prompt-schema.ts
-[0m→ [0mRead lib/schemas.ts[90m [limit=80][0m
-[0m→ [0mRead src/components/LeaderboardTable.tsx[90m [limit=80][0m
-[0m→ [0mRead src/components/PromptHistory.tsx
-[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=80][0m
-[0m→ [0mRead src/app/compare/page.tsx[90m [limit=80][0m
-[0m→ [0mRead src/components/GameCanvas.tsx[90m [offset=81, limit=80][0m
-[0m→ [0mRead src/app/compare/page.tsx[90m [offset=81, limit=30][0m
-[0m→ [0mRead src/app/prompts/page.tsx
-[0m→ [0mRead src/app/runs/[runId]/page.tsx
-[0m→ [0mRead src/components/LeaderboardTable.tsx[90m [offset=81, limit=82][0m
-[0m→ [0mRead lib/prompts.test.ts
-[0m→ [0mRead lib/prompt-schema.test.ts
-[0m→ [0mRead src/components/GameCanvas.tsx[90m [limit=80, offset=161][0m
-[0m→ [0mRead lib/schemas.test.ts
+Now reviewing recent changes. Let me read the modified source files and run tests.
+[0m→ [0mRead lib/alert-rules.ts
+[0m→ [0mRead lib/diff-config.ts
+[0m→ [0mRead lib/alert-transport.ts
+[0m→ [0mRead lib/visual-diff.ts
+[0m→ [0mRead lib/alert-store.ts
+[0m→ [0mRead src/components/AlertHistory.tsx
+[0m→ [0mRead src/components/AlertBell.tsx
+[0m→ [0mRead src/components/RegressionAlert.tsx
+[0m→ [0mRead src/components/ComparisonView.tsx
 [0m
-[0m$ [0mnpm run lint
+[0m$ [0mnpm test 2>&1 | tail -n 30
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 120000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpm run lint 2>&1 | tail -n 40
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 120000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mCI=true npm test 2>&1 | tail -n 40
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 180000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m→ [0mRead package.json
+[0m
+[0m$ [0mnpx vitest run --reporter=verbose 2>&1 | tail -n 60
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 300000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts lib/alert-store.test.ts lib/alert-transport.test.ts lib/alert-integration.test.ts 2>&1 | tail -n 50
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 120000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/visual-diff.test.ts lib/diff-config.test.ts lib/diff-storage.test.ts 2>&1 | tail -n 50
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 120000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --reporter=basic 2>&1
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Failed to load custom Reporter from basic
+    at loadCustomReporterModule (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:11340:9)
+    at file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:11356:23
+    ... 3 lines matching cause stack trace ...
+    at _createServer (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/chunks/node.js:26158:84)
+    at createViteServer (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:8820:17)
+    at createVitest (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:14161:18)
+    at prepareVitest (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:14528:14)
+    at startVitest (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:14471:14) {
+  [cause]: Error: Failed to load url basic (resolved id: basic). Does the file exist?
+      at reviveInvokeError (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:538:14)
+      at Object.invoke (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:554:33)
+      at ServerModuleRunner.getModuleInformation (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:1187:7)
+      at ServerModuleRunner.import (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:1103:23)
+      at loadCustomReporterModule (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:11338:26)
+      at file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:11356:23
+      at async Promise.all (index 0)
+      at Vitest._setServer (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:13155:138)
+      at BasicMinimalPluginContext.handler (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:14127:5)
+      at _createServer (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/chunks/node.js:26158:84) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:539:64)
+        at Object.invoke (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:554:33)
+        at ServerModuleRunner.getModuleInformation (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:1187:7)
+        at ServerModuleRunner.import (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/module-runner.js:1103:23)
+        at loadCustomReporterModule (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:11338:26)
+        at file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:11356:23
+        at async Promise.all (index 0)
+        at Vitest._setServer (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:13155:138)
+        at BasicMinimalPluginContext.handler (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cli-api.Bxr1Nn49.js:14127:5)
+        at _createServer (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vite/dist/node/chunks/node.js:26158:84)
+  }
+}
+[0m
+[0m✱ [0mGlob "vitest.config.*"[90m 1 match[0m
+[0m→ [0mRead vitest.config.ts
+[0m→ [0mRead src/test-setup.ts
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/diff-config.test.ts --no-color 2>&1 | head -n 30
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  04:10:15
+   Duration  5.23s (transform 302ms, setup 741ms, import 155ms, tests 43ms, environment 3.54s)
+[0m
+[0m$ [0mnpm run lint 2>&1
 > pixel-art-next@0.1.0 lint
 > eslint
 
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-integration.test.ts
+  53:11  warning  'saved' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+  137:37  warning  '_conditions' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/daniel-bo/Desktop/pixel-art-benchmark/lib/asset-pack.test.ts
   41:87  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
@@ -135,18 +250,24 @@ src/components/responsive-breakpoints.test.tsx
 /home/daniel-bo/Desktop/pixel-art-benchmark/lib/data.test.ts
   62:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/diff-storage.ts
+   1:8   warning  'fs' is defined but never used                   @typescript-eslint/no-unused-vars
+   3:28  warning  'generateDiffOverlay' is defined but never used  @typescript-eslint/no-unused-vars
+  22:7   warning  'DIFF_DIR' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
 /home/daniel-bo/Desktop/pixel-art-benchmark/lib/e2e-batch-pipeline.test.ts
   1:36  warning  'beforeEach' is defined but never used        @typescript-eslint/no-unused-vars
   3:29  warning  'createBatchState' is defined but never used  @typescript-eslint/no-unused-vars
 
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompts.test.ts
-   1:32  warning  'vi' is defined but never used                       @typescript-eslint/no-unused-vars
-   1:36  warning  'beforeEach' is defined but never used               @typescript-eslint/no-unused-vars
-  16:7   warning  'MOCK_PROMPT_V2' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
 /home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-metrics.ts
     1:23  warning  'RubricScores' is defined but never used   @typescript-eslint/no-unused-vars
   127:9   warning  'mean' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.test.ts
+  5:54  warning  'DiffResult' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.ts
+  65:9  warning  'size' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/daniel-bo/Desktop/pixel-art-benchmark/scripts/auto-pipeline.ts
   36:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
@@ -184,29 +305,75 @@ src/components/responsive-breakpoints.test.tsx
   52:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
 
 /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ComparisonView.tsx
-   85:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-  121:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   92:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  128:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
 
 /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.tsx
   152:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
 
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/responsive-breakpoints.test.tsx
-  2:10  warning  'render' is defined but never used                      @typescript-eslint/no-unused-vars
-  2:18  warning  'screen' is defined but never used                      @typescript-eslint/no-unused-vars
-  2:26  warning  'fireEvent' is defined but never used                   @typescript-eslint/no-unused-vars
-  3:21  warning  'useState' is defined but never used                    @typescript-eslint/no-unused-vars
-  5:7   warning  'TestResizeWrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-✖ 47 problems (23 errors, 24 warnings)
+✖ 46 problems (23 errors, 23 warnings)
   2 errors and 0 warnings potentially fixable with the `--fix` option.
 [0m
-[0m$ [0mnpm test
-> pixel-art-next@0.1.0 test
-> vitest run
+[0m$ [0mnpx vitest run 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
 
+stderr | tests/accessibility.test.tsx > Accessibility Audit — jest-axe integration > LeaderboardTable > should have no accessibility violations
+An update to ForwardRef(LinkComponent) inside a test was not wrapped in act(...).
 
- RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+When testing, code that causes React state updates should be wrapped into act(...):
 
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | tests/accessibility.test.tsx > Accessibility Audit — jest-axe integration > LeaderboardTable > should have no accessibility violations
+An update to ForwardRef(LinkComponent) inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | tests/accessibility.test.tsx > Accessibility Audit — jest-axe integration > LeaderboardTable > should have no accessibility violations
+An update to ForwardRef(LinkComponent) inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | tests/accessibility.test.tsx > Accessibility Audit — jest-axe integration > LeaderboardTable > should have no accessibility violations
+An update to ForwardRef(LinkComponent) inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ❯ tests/accessibility.test.tsx (19 tests | 8 failed) 10690ms
+       × should have no accessibility violations 6195ms
+       × should have no accessibility violations 29ms
+       × should have no accessibility violations 96ms
+       × should have no violations for sprite sheet 226ms
+       × should have no violations for static asset 92ms
+       × should have no violations for background asset 73ms
+       × should have no accessibility violations 79ms
+       × should have no accessibility violations 154ms
 Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
 Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
 Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
@@ -229,330 +396,461 @@ Not implemented: HTMLCanvasElement's getContext() method: without installing the
 Not implemented: navigation to another Document
 Not implemented: navigation to another Document
 
- Test Files  57 passed (57)
-      Tests  438 passed (438)
-   Start at  02:01:04
-   Duration  116.63s (transform 3.95s, setup 18.15s, import 30.47s, tests 43.12s, environment 211.81s)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 300000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
 [0m
-[0m→ [0mRead src/components/responsive-breakpoints.test.tsx
-[0m→ [0mRead src/components/PromptHistory.test.tsx
-[0m→ [0mRead lib/prompt-hash.ts
-[0m→ [0mRead src/app/runs/page.tsx
+[0m$ [0mnpx vitest run 2>&1 | grep -E '(PASS|FAIL|Tests|Duration|passed|failed)'
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 300000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
 [0m
-[0m# [0mTodos
-[ ] Fix unused imports in lib/prompts.test.ts
-[ ] Fix duplicate schema definitions in lib/prompt-schema.test.ts
-[ ] Fix unused imports in responsive-breakpoints.test.tsx
-[ ] Fix asset_file_paths vs asset_paths inconsistency in run detail page
-[ ] Run tests after fixes
-[ ] Report review findings
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts lib/alert-store.test.ts lib/alert-transport.test.ts lib/alert-integration.test.ts
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+[vitest-pool]: Timeout terminating forks worker for test files /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.test.ts.
+
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 120000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
 [0m
-[0m← [0mEdit lib/prompts.test.ts
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompts.test.ts
+[0m→ [0mRead lib/alert-rules.test.ts
+[0m→ [0mRead lib/alert-transport.test.ts
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --pool=forks --poolOptions.forks.singleFork 2>&1
+file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:406
+          throw new CACError(`Unknown option \`${name.length > 1 ? `--${name}` : `-${name}`}\``);
+                ^
+
+CACError: Unknown option `--poolOptions`
+    at Command.checkUnknownOptions (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:406:17)
+    at CAC.runMatchedCommand (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:606:13)
+    at CAC.parse (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:547:12)
+    at file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/cli.js:11:13
+    at ModuleJob.run (node:internal/modules/esm/module_job:370:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:99:5)
+
+Node.js v24.4.0
+[0m
+[0m$ [0mnpx vitest run src/components/AlertHistory.test.tsx --testTimeout=10000 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --testTimeout=10000 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/diff-config.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  04:28:18
+   Duration  10.45s (transform 197ms, setup 734ms, import 101ms, tests 43ms, environment 8.06s)
+[0m
+[0m$ [0mnpx vitest run --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+ ❯ src/components/AnimationControls.test.tsx (18 tests | 1 failed) 98455ms
+       × renders play button when paused 86439ms
+
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 300000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts lib/alert-store.test.ts lib/alert-transport.test.ts lib/alert-integration.test.ts lib/visual-diff.test.ts lib/diff-config.test.ts lib/diff-storage.test.ts src/components/AlertHistory.test.tsx src/components/RegressionAlert.test.tsx src/components/ComparisonView.test.tsx --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 180000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --pool=vmThreads 2>&1
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --no-threads 2>&1
+file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:406
+          throw new CACError(`Unknown option \`${name.length > 1 ? `--${name}` : `-${name}`}\``);
+                ^
+
+CACError: Unknown option `--threads`
+    at Command.checkUnknownOptions (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:406:17)
+    at CAC.runMatchedCommand (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:606:13)
+    at CAC.parse (file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/chunks/cac.DRKYQDPl.js:547:12)
+    at file:///home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/vitest/dist/cli.js:11:13
+    at ModuleJob.run (node:internal/modules/esm/module_job:370:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:99:5)
+
+Node.js v24.4.0
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --pool=vmForks 2>&1
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m✱ [0mGlob "vitest*"[90m 1 match[0m
+[0m
+[0m$ [0mtimeout 30 npx vitest run lib/alert-rules.test.ts --pool=vmThreads 2>&1 || true
+(no output)
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --logLevel=debug 2>&1 | head -n 50
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mps aux | grep vitest | grep -v grep
+(no output)
+[0m
+[0m$ [0mnode --version && npx vitest --version
+v24.4.0
+vitest/4.1.2 linux-x64 node-v24.4.0
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --isolate=false 2>&1
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/prompt-schema.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  04:50:39
+   Duration  11.36s (transform 281ms, setup 1.52s, import 678ms, tests 59ms, environment 7.90s)
+[0m
+[0m$ [0mnpx vitest run lib/alert-store.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  04:51:05
+   Duration  10.34s (transform 302ms, setup 586ms, import 663ms, tests 89ms, environment 6.75s)
+[0m
+[0m$ [0mnpx vitest run lib/alert-transport.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  04:51:27
+   Duration  8.58s (transform 354ms, setup 624ms, import 284ms, tests 180ms, environment 6.19s)
+[0m
+[0m$ [0mnpx vitest run lib/alert-integration.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  04:51:28
+   Duration  8.86s (transform 449ms, setup 882ms, import 989ms, tests 126ms, environment 5.58s)
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts lib/alert-store.test.ts lib/alert-transport.test.ts lib/alert-integration.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  4 passed (4)
+      Tests  43 passed (43)
+   Start at  04:51:52
+   Duration  13.72s (transform 976ms, setup 2.65s, import 2.25s, tests 685ms, environment 27.35s)
+[0m
+[0m$ [0mnpx vitest run lib/visual-diff.test.ts lib/diff-config.test.ts lib/diff-storage.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  3 passed (3)
+      Tests  21 passed (21)
+   Start at  04:52:18
+   Duration  50.79s (transform 1.40s, setup 5.68s, import 1.78s, tests 1.96s, environment 90.80s)
+[0m
+[0m$ [0mnpx vitest run src/components/AlertHistory.test.tsx src/components/RegressionAlert.test.tsx src/components/ComparisonView.test.tsx --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  3 passed (3)
+      Tests  23 passed (23)
+   Start at  04:52:18
+   Duration  51.97s (transform 2.28s, setup 5.80s, import 4.66s, tests 2.63s, environment 91.18s)
+[0m
+[0m→ [0mRead lib/alert-integration.test.ts
+[0m→ [0mRead lib/visual-diff.test.ts
+[0m→ [0mRead lib/diff-storage.ts
+[0m
+[0m← [0mEdit lib/alert-integration.test.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-integration.test.ts
 ===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompts.test.ts
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompts.test.ts
-@@ -1,5 +1,5 @@
--import { describe, it, expect, vi, beforeEach } from 'vitest'
-+import { describe, it, expect } from 'vitest'
- import { listPrompts, getPromptById, getPromptByVersion, getAllPrompts, parsePromptFile } from './prompts'
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-integration.test.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-integration.test.ts
+@@ -49,9 +49,9 @@
+ const alerts = engine.detectFailures(runs)
+ expect(alerts).toHaveLength(1)
+ expect(alerts[0].severity).toBe('critical')
  
- const MOCK_PROMPT_CONTENT = `---
- id: prompt-001
-@@ -12,20 +12,8 @@
- # Test Prompt
+-const saved = saveAlert(alerts[0])
++saveAlert(alerts[0])
+ const stored = getAllAlerts()
+ expect(stored).toHaveLength(1)
+ expect(stored[0].type).toBe('failure')
  
- This is a test prompt content.`
- 
--const MOCK_PROMPT_V2 = `---
--id: prompt-002
--version: v2.0
--created_at: 2026-05-01T00:00:00Z
--content_hash: ghi789jkl012
--description: Test prompt v2
-----
--
--# Test Prompt v2
--
--This is version 2 of the test prompt.`
--
- describe('Prompt Loading', () => {
-   describe('parsePromptFile', () => {
-     it('parses valid prompt file with frontmatter', () => {
-       const result = parsePromptFile(MOCK_PROMPT_CONTENT)
 
 [0m
-[0m← [0mEdit lib/prompt-schema.test.ts
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompt-schema.test.ts
+[0m← [0mEdit lib/alert-rules.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
 ===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompt-schema.test.ts
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/prompt-schema.test.ts
-@@ -1,21 +1,7 @@
--import { z } from 'zod'
- import { describe, it, expect } from 'vitest'
-+import { PROMPT_METADATA_SCHEMA, PROMPT_FILE_SCHEMA } from './prompt-schema'
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+@@ -133,9 +133,9 @@
+       created_at: new Date().toISOString()
+     }))
+ }
  
--const PROMPT_METADATA_SCHEMA = z.object({
--  id: z.string(),
--  version: z.string(),
--  created_at: z.string(),
--  content_hash: z.string(),
--  description: z.string().optional(),
--  usage_count: z.number().default(0)
--})
+-evaluateConditions(run: RunScore, _conditions: AlertCondition[]): boolean {
++evaluateConditions(run: RunScore, _conditions?: AlertCondition[]): boolean {
+   if (!this.config.enabled) return false
+   if (run.average_human_score < this.config.minAverageScore) return true
+   return false
+ }
+
+[0m
+[0m← [0mEdit lib/diff-storage.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/diff-storage.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/diff-storage.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/diff-storage.ts
+@@ -1,7 +1,6 @@
+-import fs from 'fs/promises'
+ import path from 'path'
+-import { computeDiffScore, generateDiffOverlay } from './visual-diff'
++import { computeDiffScore } from './visual-diff'
+ import { getThreshold } from './diff-config'
+ import type { Run } from './schemas'
+ 
+ export interface RunDiffResult {
+@@ -18,10 +17,8 @@
+   compared_against_run_id: string | null
+   timestamp: string
+ }
+ 
+-const DIFF_DIR = path.join(process.cwd(), 'public/data/runs')
 -
--const PROMPT_FILE_SCHEMA = z.object({
--  metadata: PROMPT_METADATA_SCHEMA,
--  content: z.string().min(1)
--})
--
- describe('Prompt Schema', () => {
-   describe('PROMPT_METADATA_SCHEMA', () => {
-     it('validates correct prompt metadata', () => {
-       const valid = {
-@@ -89,9 +75,5 @@
-       }
-       expect(() => PROMPT_FILE_SCHEMA.parse(invalid)).toThrow()
+ function assetTypeFromKey(key: string): 'background' | 'hero' | 'enemy' | 'effect' {
+   const map: Record<string, 'background' | 'hero' | 'enemy' | 'effect'> = {
+     background: 'background',
+     hero: 'hero',
+
+[0m
+[0m← [0mEdit lib/visual-diff.test.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.test.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.test.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.test.ts
+@@ -1,9 +1,9 @@
+ import { describe, it, expect, beforeAll, afterAll } from 'vitest'
+ import fs from 'fs/promises'
+ import path from 'path'
+ import sharp from 'sharp'
+-import { computeDiffScore, generateDiffOverlay, type DiffResult } from './visual-diff'
++import { computeDiffScore, generateDiffOverlay } from './visual-diff'
+ 
+ const TEST_DIR = path.join(process.cwd(), 'tmp-visual-diff-test')
+ 
+ async function createTestPng(name: string, width: number, height: number, r: number, g: number, b: number, a = 255): Promise<string> {
+
+[0m
+[0m← [0mEdit lib/visual-diff.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/visual-diff.ts
+@@ -61,9 +61,8 @@
+ const [buf1, buf2] = await Promise.all([
+   sharp(imagePath1).toBuffer(),
+   sharp(imagePath2).toBuffer()
+ ])
+-const size = 256
+ const { data: data1, width, height } = await loadGrayscale(buf1)
+ const { data: data2 } = await loadGrayscale(buf2)
+ const targetLen = Math.max(data1.length, data2.length)
+ const pad = (arr: Uint8ClampedArray, len: number) => {
+
+[0m
+[0m$ [0mnpm run lint 2>&1 | grep -E "(warning|error)" | wc -l
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts lib/alert-store.test.ts lib/alert-transport.test.ts lib/alert-integration.test.ts lib/visual-diff.test.ts lib/diff-config.test.ts lib/diff-storage.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  7 passed (7)
+      Tests  64 passed (64)
+   Start at  04:54:12
+   Duration  87.54s (transform 1.92s, setup 4.73s, import 4.21s, tests 3.19s, environment 240.69s)
+[0m
+[0m$ [0mnpm run lint 2>&1 | grep -E "lib/alert|lib/diff|lib/visual|src/components" | head -n 20
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 60000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m$ [0mnpx eslint lib/alert-rules.ts lib/alert-integration.test.ts lib/diff-storage.ts lib/visual-diff.ts lib/visual-diff.test.ts 2>&1
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+  137:37  warning  '_conditions' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+[0m
+[0m← [0mEdit lib/alert-rules.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+@@ -133,9 +133,9 @@
+       created_at: new Date().toISOString()
+     }))
+ }
+ 
+-evaluateConditions(run: RunScore, _conditions?: AlertCondition[]): boolean {
++evaluateConditions(run: RunScore, _conditions: AlertCondition[] = []): boolean {
+   if (!this.config.enabled) return false
+   if (run.average_human_score < this.config.minAverageScore) return true
+   return false
+ }
+
+[0m
+[0m$ [0mnpx eslint lib/alert-rules.ts lib/alert-integration.test.ts lib/diff-storage.ts lib/visual-diff.ts lib/visual-diff.test.ts 2>&1
+/home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+  137:37  warning  '_conditions' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+[0m
+[0m← [0mEdit lib/alert-rules.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.ts
+@@ -133,9 +133,9 @@
+       created_at: new Date().toISOString()
+     }))
+ }
+ 
+-evaluateConditions(run: RunScore, _conditions: AlertCondition[] = []): boolean {
++evaluateConditions(run: RunScore): boolean {
+   if (!this.config.enabled) return false
+   if (run.average_human_score < this.config.minAverageScore) return true
+   return false
+ }
+
+[0m
+[0m✱ [0mGrep "evaluateConditions\(.*,"[90m in . · 3 matches[0m
+[0m
+[0m$ [0mnpx eslint lib/alert-rules.ts 2>&1
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 30000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+[0m→ [0mRead lib/alert-rules.test.ts[90m [offset=125, limit=30][0m
+[0m
+[0m← [0mEdit lib/alert-rules.test.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.test.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.test.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/alert-rules.test.ts
+@@ -127,26 +127,26 @@
+       const engine = new AlertRulesEngine({
+         minAverageScore: 3.0
+       })
+       const run = { run_id: 'r1', model_id: 'gpt-4o', average_human_score: 2.5, run_date: '2026-05-01' }
+-      expect(engine.evaluateConditions(run, [])).toBe(true)
++      expect(engine.evaluateConditions(run)).toBe(true)
+     })
+ 
+     it('returns false when score meets minimum', () => {
+       const engine = new AlertRulesEngine({
+         minAverageScore: 3.0
+       })
+       const run = { run_id: 'r1', model_id: 'gpt-4o', average_human_score: 3.5, run_date: '2026-05-01' }
+-      expect(engine.evaluateConditions(run, [])).toBe(false)
++      expect(engine.evaluateConditions(run)).toBe(false)
+     })
+ 
+     it('respects enabled flag', () => {
+       const engine = new AlertRulesEngine({
+         minAverageScore: 3.0,
+         enabled: false
+       })
+       const run = { run_id: 'r1', model_id: 'gpt-4o', average_human_score: 2.5, run_date: '2026-05-01' }
+-      expect(engine.evaluateConditions(run, [])).toBe(false)
++      expect(engine.evaluateConditions(run)).toBe(false)
      })
    })
--})
--
--export { PROMPT_METADATA_SCHEMA, PROMPT_FILE_SCHEMA }
--export type PromptMetadata = z.infer<typeof PROMPT_METADATA_SCHEMA>
--export type PromptFile = z.infer<typeof PROMPT_FILE_SCHEMA>
-\ No newline at end of file
-+})
-\ No newline at end of file
-
-[0m
-[0m← [0mEdit src/components/responsive-breakpoints.test.tsx
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/responsive-breakpoints.test.tsx
-===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/responsive-breakpoints.test.tsx
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/components/responsive-breakpoints.test.tsx
-@@ -1,17 +1,6 @@
- import { describe, it, expect } from 'vitest'
--import { render, screen, fireEvent } from '@testing-library/react'
--import { useEffect, useState } from 'react'
+ })
  
--const TestResizeWrapper: React.FC<{ width: number; children: React.ReactNode }> = ({ width, children }) => {
--  useEffect(() => {
--    const event = new Event('resize')
--    Object.defineProperty(event, 'target', { value: { innerWidth: width } })
--    window.dispatchEvent(event)
--  }, [width])
--  return <>{children}</>
--}
--
- describe('Responsive Layout Audit', () => {
-   it('leaderboard table uses overflow-x-auto for horizontal scroll on mobile', () => {
-     const table = document.createElement('div')
-     table.className = 'overflow-x-auto'
 
 [0m
-[0m→ [0mRead src/app/runs/[runId]/page.tsx[90m [offset=30, limit=15][0m
-[0m→ [0mRead src/components/DownloadAssetPack.tsx[90m [limit=50][0m
+[0m$ [0mnpx vitest run lib/alert-rules.test.ts --pool=vmThreads 2>&1
+RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  16 passed (16)
+   Start at  04:59:58
+   Duration  15.23s (transform 634ms, setup 1.32s, import 466ms, tests 110ms, environment 11.00s)
 [0m
-[0m← [0mEdit src/app/runs/[runId]/page.tsx
-Index: /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/runs/[runId]/page.tsx
-===================================================================
---- /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/runs/[runId]/page.tsx
-+++ /home/daniel-bo/Desktop/pixel-art-benchmark/src/app/runs/[runId]/page.tsx
-@@ -32,11 +32,10 @@
- <div className="flex gap-4 items-center">
-   <DownloadAssetPack
-     runId={run.run_id}
-     modelId={run.model_id}
--    assetPaths={Object.values(run.asset_file_paths || run.asset_paths || {})}
-+    assetPaths={Object.values(run.asset_paths)}
-     humanScore={review?.weighted_total_score}
--    techScore={run.technical_grade?.total_technical_score}
-   />
-   <span className={`px-4 py-1 rounded-full text-sm font-bold ${
-     run.status === 'completed' ? 'bg-green-900/50 text-green-400' : 'bg-red-900/50 text-red-400'
-   }`}>
+[0m$ [0mnpx eslint lib/alert-rules.ts lib/alert-integration.test.ts lib/diff-storage.ts lib/visual-diff.ts lib/visual-diff.test.ts 2>&1
+(no output)
 
+<shell_metadata>
+shell tool terminated command after exceeding timeout 30000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
 [0m
-[0m# [0mTodos
-[x] Fix unused imports in lib/prompts.test.ts
-[x] Fix duplicate schema definitions in lib/prompt-schema.test.ts
-[x] Fix unused imports in responsive-breakpoints.test.tsx
-[x] Fix asset_file_paths vs asset_paths inconsistency in run detail page
-[ ] Run tests after fixes
-[ ] Report review findings
+[0m$ [0mtimeout 20 npx eslint lib/alert-rules.ts lib/alert-integration.test.ts lib/diff-storage.ts lib/visual-diff.ts lib/visual-diff.test.ts 2>&1 || true
+(no output)
 [0m
-[0m$ [0mnpm run lint
-> pixel-art-next@0.1.0 lint
-> eslint
-
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/asset-pack.test.ts
-  41:87  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  79:65  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  94:78  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  95:77  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-orchestrator.test.ts
-   1:36  warning  'beforeEach' is defined but never used       @typescript-eslint/no-unused-vars
-  44:13  warning  'orch' is assigned a value but never used    @typescript-eslint/no-unused-vars
-  62:13  warning  'result' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-orchestrator.ts
-   57:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-   71:11  warning  'processNext' is assigned a value but never used  @typescript-eslint/no-unused-vars
-  136:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/batch-results.test.ts
-  24:91  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  36:77  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  44:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  68:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/data.test.ts
-  62:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/e2e-batch-pipeline.test.ts
-  1:36  warning  'beforeEach' is defined but never used        @typescript-eslint/no-unused-vars
-  3:29  warning  'createBatchState' is defined but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-metrics.ts
-    1:23  warning  'RubricScores' is defined but never used   @typescript-eslint/no-unused-vars
-  127:9   warning  'mean' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/auto-pipeline.ts
-  36:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/backfill-reviews.ts
-  127:7  error  'needsReview' is never reassigned. Use 'const' instead       prefer-const
-  128:7  error  'alreadyHasReview' is never reassigned. Use 'const' instead  prefer-const
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/build-derived-logic.ts
-  17:37  error    A `require()` style import is forbidden   @typescript-eslint/no-require-imports
-  44:18  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
-  48:16  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
-  54:53  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  54:66  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  56:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/build-derived.test.ts
-  43:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  45:60  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/generate-assets.ts
-  15:9   warning  'prompt' is assigned a value but never used  @typescript-eslint/no-unused-vars
-  20:35  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/research-assets.ts
-  36:9  warning  'prompt' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/sandbox-runner.ts
-  43:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/scripts/validate-run-logic.ts
-  25:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/BackgroundPreview.tsx
-  52:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ComparisonView.tsx
-   85:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-  121:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-
-/home/daniel-bo/Desktop/pixel-art-benchmark/src/components/ZoomContainer.tsx
-  152:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
-
-✖ 39 problems (23 errors, 16 warnings)
-  2 errors and 0 warnings potentially fixable with the `--fix` option.
+[0m$ [0mgit diff --stat
+lib/alert-integration.test.ts |    2 +-
+ lib/alert-rules.test.ts       |    6 +-
+ lib/alert-rules.ts            |    2 +-
+ lib/diff-storage.ts           |    5 +-
+ lib/visual-diff.test.ts       |    2 +-
+ lib/visual-diff.ts            |    1 -
+ measure/output.log            |   53 +++
+ measure/review-output.log     | 1041 ++++++++++++++++++++++++++---------------
+ 8 files changed, 724 insertions(+), 388 deletions(-)
 [0m
-[0m$ [0mnpm test
-> pixel-art-next@0.1.0 test
-> vitest run
-
-
- RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
-
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
-Not implemented: navigation to another Document
-Not implemented: navigation to another Document
-
- Test Files  57 passed (57)
-      Tests  438 passed (438)
-   Start at  02:04:21
-   Duration  111.58s (transform 3.76s, setup 17.17s, import 29.68s, tests 51.26s, environment 193.40s)
-[0m
-[0m$ [0mgit add -A && git diff --cached --stat
-lib/prompt-schema.test.ts                      |  22 +-
- lib/prompts.test.ts                            |  14 +-
- measure/output.log                             |  25 ++
- measure/review-output.log                      | 516 ++++++++++++++++++++++++-
- src/app/runs/[runId]/page.tsx                  |   3 +-
- src/components/responsive-breakpoints.test.tsx |  11 -
- 6 files changed, 525 insertions(+), 66 deletions(-)
-[0m
-[0m$ [0mgit reset HEAD measure/output.log measure/review-output.log
-Unstaged changes after reset:
-M	measure/output.log
-M	measure/review-output.log
-[0m
-[0m$ [0mgit add -A && git commit -m "chore(review): fix lint/style issues from past 24h"
-[main 53e258e] chore(review): fix lint/style issues from past 24h
- 6 files changed, 539 insertions(+), 66 deletions(-)
-[0m
-[0m# [0mTodos
-[x] Fix unused imports in lib/prompts.test.ts
-[x] Fix duplicate schema definitions in lib/prompt-schema.test.ts
-[x] Fix unused imports in responsive-breakpoints.test.tsx
-[x] Fix asset_file_paths vs asset_paths inconsistency in run detail page
-[x] Run tests after fixes
-[x] Report review findings
-[0m
-## Code Review Report — Past 24 Hours
-
-**Commits reviewed:** 20 commits (validation-driven rerun, prompt versioning, mobile responsive UI)
-
-**Files reviewed:**
-- `lib/prompts.ts`, `lib/prompt-schema.ts`, `lib/prompt-hash.ts` — Prompt versioning system
-- `src/app/prompts/page.tsx`, `src/components/PromptHistory.tsx` — Prompt history UI
-- `src/app/compare/page.tsx` — Compare page with prompt filter
-- `src/app/runs/[runId]/page.tsx` — Run detail page
-- `src/components/GameCanvas.tsx` — Responsive canvas scaling
-- `src/components/LeaderboardTable.tsx` — Mobile card view + desktop table
-- `lib/data.ts`, `lib/schemas.ts` — Schema updates for prompt tracking
-- Test files for new components
-
-**Issues found:**
-1. `lib/prompt-schema.test.ts` duplicated schema definitions instead of importing from source
-2. `src/app/runs/[runId]/page.tsx` accessed non-existent properties (`asset_file_paths`, `technical_grade`) not on `Run` type
-3. Unused imports in `lib/prompts.test.ts` (`vi`, `beforeEach`, `MOCK_PROMPT_V2`)
-4. Unused imports/code in `src/components/responsive-breakpoints.test.tsx`
-
-**Issues fixed (6 files):**
-- Removed unused imports from test files
-- Changed `prompt-schema.test.ts` to import from `prompt-schema.ts`
-- Fixed type inconsistencies in run detail page (`asset_paths` only, removed `technical_grade` access)
-
-**Tests:** 438 tests passing
-
-**Lint:** Reduced from 47 to 39 issues. Remaining issues are in pre-existing code, not from recent changes.
-
-**Architectural concerns:** None new. Existing `asset_file_paths` vs `asset_paths` inconsistency in older run data already tracked in tech-debt.md.
-
-**Status:** All fixes committed.

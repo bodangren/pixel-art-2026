@@ -1,6 +1,5 @@
-import fs from 'fs/promises'
 import path from 'path'
-import { computeDiffScore, generateDiffOverlay } from './visual-diff'
+import { computeDiffScore } from './visual-diff'
 import { getThreshold } from './diff-config'
 import type { Run } from './schemas'
 
@@ -18,8 +17,6 @@ export interface RunDiffResult {
   compared_against_run_id: string | null
   timestamp: string
 }
-
-const DIFF_DIR = path.join(process.cwd(), 'public/data/runs')
 
 function assetTypeFromKey(key: string): 'background' | 'hero' | 'enemy' | 'effect' {
   const map: Record<string, 'background' | 'hero' | 'enemy' | 'effect'> = {

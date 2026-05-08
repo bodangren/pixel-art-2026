@@ -128,7 +128,7 @@ describe('AlertRulesEngine', () => {
         minAverageScore: 3.0
       })
       const run = { run_id: 'r1', model_id: 'gpt-4o', average_human_score: 2.5, run_date: '2026-05-01' }
-      expect(engine.evaluateConditions(run, [])).toBe(true)
+      expect(engine.evaluateConditions(run)).toBe(true)
     })
 
     it('returns false when score meets minimum', () => {
@@ -136,7 +136,7 @@ describe('AlertRulesEngine', () => {
         minAverageScore: 3.0
       })
       const run = { run_id: 'r1', model_id: 'gpt-4o', average_human_score: 3.5, run_date: '2026-05-01' }
-      expect(engine.evaluateConditions(run, [])).toBe(false)
+      expect(engine.evaluateConditions(run)).toBe(false)
     })
 
     it('respects enabled flag', () => {
@@ -145,7 +145,7 @@ describe('AlertRulesEngine', () => {
         enabled: false
       })
       const run = { run_id: 'r1', model_id: 'gpt-4o', average_human_score: 2.5, run_date: '2026-05-01' }
-      expect(engine.evaluateConditions(run, [])).toBe(false)
+      expect(engine.evaluateConditions(run)).toBe(false)
     })
   })
 })

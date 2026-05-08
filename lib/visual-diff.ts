@@ -62,7 +62,6 @@ export async function generateDiffOverlay(imagePath1: string, imagePath2: string
     sharp(imagePath1).toBuffer(),
     sharp(imagePath2).toBuffer()
   ])
-  const size = 256
   const { data: data1, width, height } = await loadGrayscale(buf1)
   const { data: data2 } = await loadGrayscale(buf2)
   const targetLen = Math.max(data1.length, data2.length)

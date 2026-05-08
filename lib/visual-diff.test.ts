@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import fs from 'fs/promises'
 import path from 'path'
 import sharp from 'sharp'
-import { computeDiffScore, generateDiffOverlay, type DiffResult } from './visual-diff'
+import { computeDiffScore, generateDiffOverlay } from './visual-diff'
 
 const TEST_DIR = path.join(process.cwd(), 'tmp-visual-diff-test')
 

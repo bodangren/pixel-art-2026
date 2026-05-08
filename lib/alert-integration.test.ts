@@ -50,7 +50,7 @@ describe('Alert Integration', () => {
     expect(alerts).toHaveLength(1)
     expect(alerts[0].severity).toBe('critical')
 
-    const saved = saveAlert(alerts[0])
+    saveAlert(alerts[0])
     const stored = getAllAlerts()
     expect(stored).toHaveLength(1)
     expect(stored[0].type).toBe('failure')

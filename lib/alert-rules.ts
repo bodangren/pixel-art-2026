@@ -134,7 +134,7 @@ export class AlertRulesEngine {
       }))
   }
 
-  evaluateConditions(run: RunScore, _conditions: AlertCondition[]): boolean {
+  evaluateConditions(run: RunScore): boolean {
     if (!this.config.enabled) return false
     if (run.average_human_score < this.config.minAverageScore) return true
     return false
