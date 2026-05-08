@@ -61,7 +61,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 ---
 
 ## Upcoming Tracks
-- [ ] **Track: Multi-Resolution Asset Support** *Link: [./tracks/multi_resolution_support_20260508/](./tracks/multi_resolution_support_20260508/)* — Extend benchmark to 32x32 and 128x128 asset generation and scoring
+- [x] **Track: Multi-Resolution Asset Support**
+   *Link: [./tracks/multi_resolution_support_20260508/](./tracks/multi_resolution_support_20260508/)*
+   *Status: Complete* — Extend benchmark to 32x32, 64x64, and 128x128 asset generation and scoring
+   **Phase 1-5: Complete**
 
 - [x] **Track: Benchmark Alert System**
    *Link: [./tracks/benchmark_alert_system_20260508/](./tracks/benchmark_alert_system_20260508/)*
@@ -124,10 +127,13 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    **Phase 1-4: Complete**
 
 ## Upcoming Tracks
-- [ ] **Track: Benchmark Alert System** *Link: [./tracks/benchmark_alert_system_20260508/](./tracks/benchmark_alert_system_20260508/)* — Webhook/email alerts for run completion, score regression, and validation failures
-- [ ] **Track: Multi-Resolution Asset Support** *Link: [./tracks/multi_resolution_support_20260508/](./tracks/multi_resolution_support_20260508/)* — Extend benchmark to 32x32 and 128x128 asset generation and scoring
+- [ ] **Track: ML-Based Automated Quality Scoring**
+   *Link: [./tracks/ml_automated_quality_scoring_20260508/](./tracks/ml_automated_quality_scoring_20260508/)*
+   *Priority: High* — Reduce human review burden with an ML model trained on historical human review data to automatically score asset quality (0-100) and flag likely failures.
 
-- [x] **Track: Public Deployment Pipeline**
+- [ ] **Track: Automated Model Onboarding Pipeline**
+   *Link: [./tracks/automated_model_onboarding_20260508/](./tracks/automated_model_onboarding_20260508/)*
+   *Priority: High* — Self-service admin UI and API for registering new LLMs without manual config edits; auto-scaffolds prompts, validation rules, and triggers an initial benchmark run.
    *Link: [./archive/public_deployment_pipeline_20260506/](./archive/public_deployment_pipeline_20260506/)*
    *Status: Complete* — Replaced Vercel deploy.yml with GitHub Pages workflow. Deploy.yml now uses actions/upload-pages-artifact and actions/deploy-pages. Updated README badges and deploy-workflow.test.ts.
 

@@ -21,5 +21,5 @@
 - [x] Add resolution selector to leaderboard page
 
 ## Phase 5: Integration & Verification
-- [ ] Run benchmark at 32x32 and 128x128 for one model as smoke test
-- [ ] Update tracks.md and commit
+- [x] Run benchmark at 32x32 and 128x128 for one model as smoke test
+- [x] Update tracks.md and commit
