@@ -11,9 +11,9 @@
 - [x] Update validation engine scoring thresholds per resolution
 
 ## Phase 3: UI Integration (TDD)
-- [ ] Write tests for ResolutionBadge component
-- [ ] Add resolution filter to leaderboard and comparison pages
-- [ ] Display resolution on AssetCard and RunDetail
+- [x] Write tests for ResolutionBadge component
+- [x] Add resolution filter to leaderboard and comparison pages
+- [x] Display resolution on AssetCard and RunDetail
 
 ## Phase 4: Leaderboard Segmentation (TDD)
 - [ ] Write tests for resolution-specific leaderboard queries

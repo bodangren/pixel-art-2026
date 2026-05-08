@@ -11,12 +11,14 @@ const LeaderboardFilters: React.FC<LeaderboardFiltersProps> = ({ onFilterChange 
   const [minRuns, setMinRuns] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [resolution, setResolution] = useState('')
 
   const handleChange = () => {
     onFilterChange({
       minRuns: minRuns ? parseInt(minRuns) : undefined,
       startDate: startDate || undefined,
-      endDate: endDate || undefined
+      endDate: endDate || undefined,
+      resolution: resolution || undefined
     })
   }
 
@@ -24,6 +26,7 @@ const LeaderboardFilters: React.FC<LeaderboardFiltersProps> = ({ onFilterChange 
     setMinRuns('')
     setStartDate('')
     setEndDate('')
+    setResolution('')
     onFilterChange({})
   }
 
@@ -77,6 +80,26 @@ const LeaderboardFilters: React.FC<LeaderboardFiltersProps> = ({ onFilterChange 
           }}
           className="px-3 py-2 bg-slate-800 border border-white/10 rounded-lg text-white text-sm font-mono focus:outline-none focus:border-blue-500"
         />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="resolution" className="text-[10px] font-bold text-slate-500 uppercase">
+          Resolution
+        </label>
+        <select
+          id="resolution"
+          value={resolution}
+          onChange={(e) => {
+            setResolution(e.target.value)
+            handleChange()
+          }}
+          className="px-3 py-2 bg-slate-800 border border-white/10 rounded-lg text-white text-sm font-mono focus:outline-none focus:border-blue-500"
+        >
+          <option value="">All</option>
+          <option value="32x32">32x32</option>
+          <option value="64x64">64x64</option>
+          <option value="128x128">128x128</option>
+        </select>
       </div>
 
       <div className="flex items-end">

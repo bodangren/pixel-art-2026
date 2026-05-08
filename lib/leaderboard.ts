@@ -9,6 +9,7 @@ export interface LeaderboardEntry {
   best_human_score: number
   latest_run_date: string
   total_runs: number
+  resolution?: string
 }
 
 export interface TechGrade {
@@ -24,6 +25,7 @@ export interface LeaderboardFilters {
   startDate?: string
   endDate?: string
   minRuns?: number
+  resolution?: string
 }
 
 export function computeLeaderboard(
@@ -103,6 +105,10 @@ export function filterLeaderboard(
     }
 
     if (filters.endDate && entry.latest_run_date > filters.endDate) {
+      return false
+    }
+
+    if (filters.resolution && entry.resolution !== filters.resolution) {
       return false
     }
 

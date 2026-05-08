@@ -33,6 +33,9 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialEntries, a
     if (newFilters.endDate) {
       filtered = filtered.filter(e => e.latest_run_date <= newFilters.endDate!)
     }
+    if (newFilters.resolution) {
+      filtered = filtered.filter(e => e.resolution === newFilters.resolution)
+    }
 
     filtered.sort((a, b) => {
       const aVal = a[currentSort as keyof LeaderboardEntry]
