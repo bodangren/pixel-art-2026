@@ -62,12 +62,12 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 
 ## Upcoming Tracks
 - [x] **Track: Multi-Resolution Asset Support**
-   *Link: [./tracks/multi_resolution_support_20260508/](./tracks/multi_resolution_support_20260508/)*
+   *Link: [./archive/multi_resolution_support_20260508/](./archive/multi_resolution_support_20260508/)*
    *Status: Complete* — Extend benchmark to 32x32, 64x64, and 128x128 asset generation and scoring
    **Phase 1-5: Complete**
 
 - [x] **Track: Benchmark Alert System**
-   *Link: [./tracks/benchmark_alert_system_20260508/](./tracks/benchmark_alert_system_20260508/)*
+   *Link: [./archive/benchmark_alert_system_20260508/](./archive/benchmark_alert_system_20260508/)*
    *Status: Complete* — Webhook/email alerts for run completion, score regression, and validation failures.
    **Phase 1-5: Complete (43 alert tests passing)**
 
@@ -135,6 +135,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    *Link: [./tracks/automated_model_onboarding_20260508/](./tracks/automated_model_onboarding_20260508/)*
    *Priority: High* — Self-service admin UI and API for registering new LLMs without manual config edits; auto-scaffolds prompts, validation rules, and triggers an initial benchmark run.
    *Link: [./archive/public_deployment_pipeline_20260506/](./archive/public_deployment_pipeline_20260506/)*
+
+- [ ] **Track: Benchmark Run Re-trigger API**
+   *Link: [./tracks/rerun_trigger_api_20260509/](./tracks/rerun_trigger_api_20260509/)*
+   *Priority: High* — Add API endpoint and UI button to re-trigger asset generation for failed benchmark runs.
    *Status: Complete* — Replaced Vercel deploy.yml with GitHub Pages workflow. Deploy.yml now uses actions/upload-pages-artifact and actions/deploy-pages. Updated README badges and deploy-workflow.test.ts.
 
 - [x] **Track: Asset Pack Distribution (ZIP Downloads)**
