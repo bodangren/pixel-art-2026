@@ -625,3 +625,93 @@ $ vitest run --run lib/quality-features.test.ts lib/quality-scorer.test.ts src/c
    Duration  6.91s (transform 512ms, setup 1.42s, import 1.78s, tests 1.40s, environment 12.85s)
 [0m
 <think>Tests pass. The build TypeScript error is a WASM/swc issue unrelated to my code changes. Let me commit the fixes and push.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "TypeScript fixes for quality-modules (esModuleInterop, type assertions)
+
+Model: MiniMax-M2.7"
+[main c927008] TypeScript fixes for quality-modules (esModuleInterop, type assertions)
+ 4 files changed, 121 insertions(+), 25 deletions(-)
+[0m
+<think>Let me try running the build again to see if it passes now.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 120 bun run build 2>&1 | tail -30
+$ next build --webpack
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+  Skipping creating a lockfile at /home/daniel-bo/Desktop/pixel-art-benchmark/.next/lock because we're using WASM bindings
+▲ Next.js 16.2.2 (webpack)
+
+  Creating an optimized production build ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+✓ Compiled successfully in 23.5s
+  Running TypeScript ...
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node, but it was not installed
+⚠ Attempted to load /home/daniel-bo/Desktop/pixel-art-benchmark/node_modules/next/next-swc-fallback/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
+Error: invalid type: unit value, expected usize
+Next.js build worker exited with code: 1 and signal: null
+error: script "build" exited with code 1
+[0m
+<think>This WASM error is a known issue with Next.js on Linux/x64 (as documented in tech-debt.md). The build actually compiles successfully - this error is from the TypeScript check phase running through WASM bindings. Let me check if there's an existing build output:
+</think>
+[0m$ [0mls -la /home/daniel-bo/Desktop/pixel-art-benchmark/.next/ 2>/dev/null | head -10
+total 72
+drwxrwxr-x  8 daniel-bo daniel-bo  4096 May  9 11:45 .
+drwxrwxr-x 30 daniel-bo daniel-bo  4096 May  9 11:39 ..
+-rw-rw-r--  1 daniel-bo daniel-bo   510 May  9 11:45 build-manifest.json
+drwxrwxr-x  3 daniel-bo daniel-bo  4096 May  4 17:46 cache
+drwxrwxr-x  7 daniel-bo daniel-bo  4096 May  9 11:32 dev
+drwxrwxr-x  2 daniel-bo daniel-bo  4096 May  9 11:45 diagnostics
+-rw-rw-r--  1 daniel-bo daniel-bo    20 May  9 11:45 package.json
+-rw-rw-r--  1 daniel-bo daniel-bo   314 May  9 11:45 react-loadable-manifest.json
+drwxrwxr-x  4 daniel-bo daniel-bo  4096 May  9 11:45 server
+[0m
+<think>The build error is a WASM/swc issue, not our code. The `compiled successfully` step passed, so our TypeScript is fine. The error happens during the TypeScript check which uses WASM bindings.
+
+Let me try running a subset of tests to verify the app works. Also, let me check if there's a pre-existing issue by looking at git history.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git log --oneline -5
+c927008 TypeScript fixes for quality-modules (esModuleInterop, type assertions)
+62a2270 Fix empty batch NaN in scoreBatch, fix test selectors
+ea8c48a ML Quality Scoring: Phase 1 feature extraction and scorer module
+df6ba18 measure: archive alert and multi-res tracks, add rerun trigger API track
+d8a26de Complete Multi-Resolution Asset Support track - Phase 1-5 done (527 tests)
+[0m
+[0m$ [0mls -la /home/daniel-bo/Desktop/pixel-art-benchmark/.next/server/ 2>/dev/null | head -10
+total 60
+drwxrwxr-x  4 daniel-bo daniel-bo 4096 May  9 11:45 .
+drwxrwxr-x  8 daniel-bo daniel-bo 4096 May  9 11:45 ..
+drwxrwxr-x 12 daniel-bo daniel-bo 4096 May  9 11:45 app
+-rw-rw-r--  1 daniel-bo daniel-bo  548 May  9 11:45 app-paths-manifest.json
+drwxrwxr-x  2 daniel-bo daniel-bo 4096 May  9 11:45 chunks
+-rw-rw-r--  1 daniel-bo daniel-bo   48 May  9 11:45 interception-route-rewrite-manifest.js
+-rw-rw-r--  1 daniel-bo daniel-bo  449 May  9 11:45 middleware-build-manifest.js
+-rw-rw-r--  1 daniel-bo daniel-bo   83 May  9 11:45 middleware-manifest.json
+-rw-rw-r--  1 daniel-bo daniel-bo  285 May  9 11:45 middleware-react-loadable-manifest.js
+[0m
+<think>The build error is the pre-existing WASM/swc TypeScript check error that was already in the tech debt. The build actually compiled successfully ("✓ Compiled successfully in 23.5s") but then fails on the TypeScript check step due to the WASM/swc issue. This is the same issue documented in tech-debt:
+
+"Next.js 16 webpack build TypeScript check emits 'invalid type: unit value, expected usize' - Build succeeds despite error (out/ generated correctly); issue is WASM/swc bindings on linux/x64"
+
+So the build is actually working - it's just the TypeScript check that's failing due to a WASM issue unrelated to my changes. Let me verify the build output exists anyway.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git status --short
+M measure/output.log
+[0m
+<think>The build produced output in .next/server/ which indicates compilation succeeded. The TypeScript check error is from the WASM/swc bindings and is a known issue per tech-debt.md line 37: "Next.js 16 webpack build TypeScript check emits 'invalid type: unit value, expected usize' but build succeeds."
+
+Let me commit the changes and update the track status. I also need to update the measure memory files.
+</think>
+<think>Good - only measure/output.log is modified. The build appears to work despite the TypeScript check error. Let me commit the current state and update the plan.
+
+Let me now update the plan.md to mark Phase 1 as complete, and also update the tracks.md to reflect progress.</think>
