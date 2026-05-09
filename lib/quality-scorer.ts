@@ -1,6 +1,6 @@
 import { extractFeatures, featuresToVector, type QualityFeatures } from './quality-features'
-import fs from 'fs/promises'
-import path from 'path'
+import * as fs from 'fs/promises'
+import * as path from 'path'
 
 export interface QualityScore {
   score: number
@@ -12,7 +12,15 @@ export interface QualityScore {
 const MODEL_VERSION = '1.0.0'
 const WEIGHTS_PATH = path.join(process.cwd(), 'public/models/quality-scorer-weights.json')
 
-const DEFAULT_WEIGHTS = {
+interface ModelWeights {
+  colorHistogram: number[]
+  edgeDensity: number
+  transparencyRatio: number
+  gridAlignmentScore: number
+  uniqueColorRatio: number
+}
+
+const DEFAULT_WEIGHTS: ModelWeights = {
   colorHistogram: new Array(64).fill(0).map((_, i) => (i < 10 ? 0.3 : 0.1)),
   edgeDensity: 0.15,
   transparencyRatio: 0.2,
@@ -20,9 +28,9 @@ const DEFAULT_WEIGHTS = {
   uniqueColorRatio: 0.1
 }
 
-let cachedWeights: Record<string, number[]> | null = null
+let cachedWeights: ModelWeights | null = null
 
-async function loadWeights(): Promise<Record<string, number[]>> {
+async function loadWeights(): Promise<ModelWeights> {
   if (cachedWeights) return cachedWeights
 
   try {
@@ -34,14 +42,14 @@ async function loadWeights(): Promise<Record<string, number[]>> {
   }
 }
 
-function computeScore(features: QualityFeatures, weights: Record<string, number[]>): number {
+function computeScore(features: QualityFeatures, weights: ModelWeights): number {
   const vector = featuresToVector(features)
   const weightVector = [
-    ...weights.colorHistogram || DEFAULT_WEIGHTS.colorHistogram,
-    weights.edgeDensity ?? DEFAULT_WEIGHTS.edgeDensity,
-    weights.transparencyRatio ?? DEFAULT_WEIGHTS.transparencyRatio,
-    weights.gridAlignmentScore ?? DEFAULT_WEIGHTS.gridAlignmentScore,
-    weights.uniqueColorRatio ?? DEFAULT_WEIGHTS.uniqueColorRatio,
+    ...weights.colorHistogram,
+    weights.edgeDensity,
+    weights.transparencyRatio,
+    weights.gridAlignmentScore,
+    weights.uniqueColorRatio,
     0.1
   ]
 

@@ -18,7 +18,6 @@ interface ImageStats {
 
 async function getImageStats(buffer: Buffer): Promise<ImageStats> {
   const image = sharp(buffer)
-  const meta = await image.metadata()
   const { data, info } = await image
     .raw()
     .toBuffer({ resolveWithObject: true })
@@ -36,10 +35,10 @@ function computeColorHistogram(data: Buffer, channels: number): number[] {
   const factor = 256 / 4
 
   for (let i = 0; i < data.length; i += channels) {
-    const r = data[i]
-    const g = data[i + 1]
-    const b = data[i + 2]
-    const bin = Math.min(Math.floor(r / factor) * 16 + Math.floor(g / factor) * 4 + Math.floor(b / factor), 63)
+    const r = data[i]!
+    const g = data[i + 1]!
+    const b = data[i + 2]!
+    const bin = Math.min(Math.floor(Number(r) / factor) * 16 + Math.floor(Number(g) / factor) * 4 + Math.floor(Number(b) / factor), 63)
     histogram[bin]++
   }
 
@@ -63,10 +62,10 @@ function computeEdgeDensity(data: Buffer, width: number, height: number, channel
       let gradY = 0
 
       for (let c = 0; c < 3; c++) {
-        gradX += Math.abs(data[idx + c] - data[leftIdx + c])
-        gradX += Math.abs(data[rightIdx + c] - data[idx + c])
-        gradY += Math.abs(data[idx + c] - data[topIdx + c])
-        gradY += Math.abs(data[bottomIdx + c] - data[idx + c])
+        gradX += Math.abs(Number(data[idx + c]) - Number(data[leftIdx + c]))
+        gradX += Math.abs(Number(data[rightIdx + c]) - Number(data[idx + c]))
+        gradY += Math.abs(Number(data[idx + c]) - Number(data[topIdx + c]))
+        gradY += Math.abs(Number(data[bottomIdx + c]) - Number(data[idx + c]))
       }
 
       if (gradX > threshold || gradY > threshold) {
@@ -86,7 +85,7 @@ function computeTransparencyRatio(data: Buffer, channels: number): number {
 
   for (let i = 0; i < data.length; i += channels) {
     totalPixels++
-    if (data[i + 3] < 128) {
+    if (Number(data[i + 3]) < 128) {
       transparentPixels++
     }
   }
@@ -121,9 +120,9 @@ function countUniqueColors(data: Buffer, channels: number): { count: number; rat
   const totalPixels = data.length / channels
 
   for (let i = 0; i < data.length; i += channels) {
-    const r = data[i]
-    const g = data[i + 1]
-    const b = data[i + 2]
+    const r = data[i]!
+    const g = data[i + 1]!
+    const b = data[i + 2]!
     colors.add(`${r},${g},${b}`)
   }
 
