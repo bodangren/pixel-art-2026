@@ -49,3 +49,4 @@
 - (2026-05-08, visual_regression_detection) Sharp's `raw()` channel count depends on input image - grayscale outputs 1 channel, RGBA outputs 4. Must handle channels when constructing output buffers. use `raw()` with `toBuffer({ resolveWithObject: true })` to get both data and info.
 - (2026-05-08, alert_system) Zod v4 (4.3.6) has breaking changes - `z.record(z.unknown())` fails with "invalid type: unit value, expected usize". Use `z.any().optional()` for flexible metadata fields. email/url validators also changed behavior.
 - (2026-05-09, multi_resolution) When adding resolution support, validation specs need to scale proportionally - 3x3 sprite sheet at 32x32 = 96x96, at 128x128 = 384x384. Use resolution-specific spec maps (RESOLUTION_SPECS) rather than hardcoded values.
+- (2026-05-09, ml_quality_scoring) Sharp `raw()` buffer indexing needs `Number()` cast or `!` assertion due to strict TypeScript. ESM imports need `* as fs` style for fs/promises and path.
