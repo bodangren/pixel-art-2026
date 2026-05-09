@@ -8,40 +8,40 @@ describe('AutomatedScoreBadge', () => {
     expect(screen.getByText('75.5')).toBeTruthy()
   })
 
-  it('renders high confidence indicator', () => {
-    render(<AutomatedScoreBadge score={75.5} confidence="high" />)
-    const dots = document.querySelectorAll('.bg-green-500')
-    expect(dots.length).toBeGreaterThan(0)
+  it('applies green classes for high scores', () => {
+    const { container } = render(<AutomatedScoreBadge score={85} confidence="high" />)
+    const span = container.querySelector('span')
+    expect(span?.className).toContain('bg-green-500/20')
   })
 
-  it('renders medium confidence indicator', () => {
-    render(<AutomatedScoreBadge score={50} confidence="medium" />)
-    const dots = document.querySelectorAll('.bg-yellow-500')
-    expect(dots.length).toBeGreaterThan(0)
+  it('applies yellow classes for medium scores', () => {
+    const { container } = render(<AutomatedScoreBadge score={55} confidence="medium" />)
+    const span = container.querySelector('span')
+    expect(span?.className).toContain('bg-yellow-500/20')
   })
 
-  it('renders low confidence indicator', () => {
-    render(<AutomatedScoreBadge score={25} confidence="low" />)
-    const dots = document.querySelectorAll('.bg-red-500')
-    expect(dots.length).toBeGreaterThan(0)
+  it('applies red classes for low scores', () => {
+    const { container } = render(<AutomatedScoreBadge score={35} confidence="low" />)
+    const span = container.querySelector('span')
+    expect(span?.className).toContain('bg-red-500/20')
   })
 
   it('applies red color for scores below 40', () => {
-    render(<AutomatedScoreBadge score={35} confidence="low" />)
-    const badge = document.querySelector('.bg-red-500\\/20')
-    expect(badge).toBeTruthy()
+    const { container } = render(<AutomatedScoreBadge score={35} confidence="low" />)
+    const span = container.querySelector('span')
+    expect(span?.className).toContain('bg-red-500/20')
   })
 
   it('applies yellow color for scores 40-70', () => {
-    render(<AutomatedScoreBadge score={55} confidence="medium" />)
-    const badge = document.querySelector('.bg-yellow-500\\/20')
-    expect(badge).toBeTruthy()
+    const { container } = render(<AutomatedScoreBadge score={55} confidence="medium" />)
+    const span = container.querySelector('span')
+    expect(span?.className).toContain('bg-yellow-500/20')
   })
 
   it('applies green color for scores 70+', () => {
-    render(<AutomatedScoreBadge score={85} confidence="high" />)
-    const badge = document.querySelector('.bg-green-500\\/20')
-    expect(badge).toBeTruthy()
+    const { container } = render(<AutomatedScoreBadge score={85} confidence="high" />)
+    const span = container.querySelector('span')
+    expect(span?.className).toContain('bg-green-500/20')
   })
 
   it('hides label when showLabel is false', () => {

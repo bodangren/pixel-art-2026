@@ -88,7 +88,9 @@ export async function scoreBatch(
   buffers: Buffer[]
 ): Promise<{ scores: QualityScore[]; meanScore: number; likelyFailures: number }> {
   const scores = await Promise.all(buffers.map(buf => scoreAsset(buf)))
-  const meanScore = scores.reduce((sum, s) => sum + s.score, 0) / scores.length
+  const meanScore = scores.length > 0
+    ? scores.reduce((sum, s) => sum + s.score, 0) / scores.length
+    : 0
   const likelyFailures = scores.filter(isLikelyFailure).length
 
   return {

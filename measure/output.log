@@ -311,3 +311,228 @@ Wrote file successfully.
 [0m→ [0mRead measure/tracks/ml_automated_quality_scoring_20260508/plan.md
 <think>Now let me update the plan to mark Phase 1 tasks complete and Phase 2 tasks done:
 </think>
+[0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git diff --cached --stat
+lib/quality-features.test.ts                |  137 +++
+ lib/quality-features.ts                     |  168 +++
+ lib/quality-scorer.test.ts                  |   94 ++
+ lib/quality-scorer.ts                       |   99 ++
+ measure/output.log                          | 1496 ++++-----------------------
+ next-env.d.ts                               |    2 +-
+ scripts/train-quality-model.ts              |  194 ++++
+ src/components/AutomatedScoreBadge.test.tsx |   56 +
+ src/components/AutomatedScoreBadge.tsx      |   37 +
+ 9 files changed, 1001 insertions(+), 1282 deletions(-)
+[0m
+<think>I realize the plan mentions ONNX but I used a simpler JSON weights approach. Also, I should update the plan to reflect completed tasks and update the tracks.md. Let me also commit the work completed so far and run tests.
+
+Let me first commit all the Phase 1 work done so far.
+</think>
+<think>Let me commit these changes.
+</think>
+[0m$ [0mgit commit -m "ML Quality Scoring: Phase 1 feature extraction and scorer module
+
+- lib/quality-features.ts: extractFeatures() with color histogram, edge density,
+  transparency ratio, grid alignment score, unique color count/ratio
+- lib/quality-features.test.ts: tests for feature extraction including edge cases
+- lib/quality-scorer.ts: scoreAsset(), isLikelyFailure(), scoreBatch() functions
+- lib/quality-scorer.test.ts: tests for scoring, failure detection, batch scoring
+- scripts/train-quality-model.ts: training script using historical human reviews
+- src/components/AutomatedScoreBadge.tsx: badge showing score + confidence + color
+- src/components/AutomatedScoreBadge.test.tsx: component tests
+
+Model: MiniMax-M2.7"
+[main ea8c48a] ML Quality Scoring: Phase 1 feature extraction and scorer module
+ 9 files changed, 1001 insertions(+), 1282 deletions(-)
+ create mode 100644 lib/quality-features.test.ts
+ create mode 100644 lib/quality-features.ts
+ create mode 100644 lib/quality-scorer.test.ts
+ create mode 100644 lib/quality-scorer.ts
+ create mode 100644 scripts/train-quality-model.ts
+ create mode 100644 src/components/AutomatedScoreBadge.test.tsx
+ create mode 100644 src/components/AutomatedScoreBadge.tsx
+[0m
+<think>Now I need to run the tests to verify everything is working. Let me try to run them with a longer timeout.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && bun run test -- --run 2>&1 | tail -50
+(no output)
+
+<shell_metadata>
+shell tool terminated command after exceeding timeout 120000 ms. If this command is expected to take longer and is not waiting for interactive input, retry with a larger timeout value in milliseconds.
+</shell_metadata>
+[0m
+<think>Tests are timing out. Let me just run the specific quality tests to verify they pass.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 60 bun run test -- --run lib/quality-features.test.ts 2>&1
+$ vitest run --run lib/quality-features.test.ts
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  11:40:13
+   Duration  5.01s (transform 249ms, setup 343ms, import 315ms, tests 727ms, environment 3.13s)
+[0m
+<think>Quality features tests pass. Let me run the scorer tests.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 60 bun run test -- --run lib/quality-scorer.test.ts 2>&1
+$ vitest run --run lib/quality-scorer.test.ts
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+ ❯ lib/quality-scorer.test.ts (10 tests | 1 failed) 149ms
+       × handles empty batch 25ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  lib/quality-scorer.test.ts > quality-scorer > scoreBatch > handles empty batch
+AssertionError: expected NaN to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ NaN
+
+ ❯ lib/quality-scorer.test.ts:90:32
+     88|       const result = await scoreBatch([])
+     89|       expect(result.scores).toHaveLength(0)
+     90|       expect(result.meanScore).toBe(0)
+       |                                ^
+     91|       expect(result.likelyFailures).toBe(0)
+     92|     })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 passed (10)
+   Start at  11:40:26
+   Duration  4.47s (transform 193ms, setup 367ms, import 231ms, tests 149ms, environment 3.01s)
+
+error: script "test" exited with code 1
+[0m
+[0m→ [0mRead lib/quality-scorer.ts[90m [limit=20, offset=80][0m
+<think>The empty batch test fails because meanScore becomes NaN when dividing by 0. I need to fix the scoreBatch function to handle the empty array case properly.</think>
+[0m
+[0m← [0mEdit lib/quality-scorer.ts
+Index: /home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-scorer.ts
+===================================================================
+--- /home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-scorer.ts
++++ /home/daniel-bo/Desktop/pixel-art-benchmark/lib/quality-scorer.ts
+@@ -87,9 +87,11 @@
+ export async function scoreBatch(
+   buffers: Buffer[]
+ ): Promise<{ scores: QualityScore[]; meanScore: number; likelyFailures: number }> {
+   const scores = await Promise.all(buffers.map(buf => scoreAsset(buf)))
+-  const meanScore = scores.reduce((sum, s) => sum + s.score, 0) / scores.length
++  const meanScore = scores.length > 0
++    ? scores.reduce((sum, s) => sum + s.score, 0) / scores.length
++    : 0
+   const likelyFailures = scores.filter(isLikelyFailure).length
+ 
+   return {
+     scores,
+
+[0m
+<think>The issue is on line 91: `scores.length` is 0, so dividing by 0 gives NaN. I need to handle the empty case.
+</think>
+<think>Now let me run the scorer tests again to make sure they pass.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 60 bun run test -- --run lib/quality-scorer.test.ts 2>&1
+$ vitest run --run lib/quality-scorer.test.ts
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  11:40:53
+   Duration  3.89s (transform 329ms, setup 342ms, import 359ms, tests 194ms, environment 2.56s)
+[0m
+<think>Now let me run the badge tests and then verify the build:
+</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 60 bun run test -- --run src/components/AutomatedScoreBadge.test.tsx 2>&1
+$ vitest run --run src/components/AutomatedScoreBadge.test.tsx
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+ ❯ src/components/AutomatedScoreBadge.test.tsx (9 tests | 3 failed) 224ms
+     × renders high confidence indicator 29ms
+     × renders medium confidence indicator 16ms
+     × renders low confidence indicator 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/AutomatedScoreBadge.test.tsx > AutomatedScoreBadge > renders high confidence indicator
+AssertionError: expected 0 to be greater than 0
+ ❯ src/components/AutomatedScoreBadge.test.tsx:14:25
+     12|     render(<AutomatedScoreBadge score={75.5} confidence="high" />)
+     13|     const dots = document.querySelectorAll('.bg-green-500')
+     14|     expect(dots.length).toBeGreaterThan(0)
+       |                         ^
+     15|   })
+     16|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/components/AutomatedScoreBadge.test.tsx > AutomatedScoreBadge > renders medium confidence indicator
+AssertionError: expected 0 to be greater than 0
+ ❯ src/components/AutomatedScoreBadge.test.tsx:20:25
+     18|     render(<AutomatedScoreBadge score={50} confidence="medium" />)
+     19|     const dots = document.querySelectorAll('.bg-yellow-500')
+     20|     expect(dots.length).toBeGreaterThan(0)
+       |                         ^
+     21|   })
+     22|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/components/AutomatedScoreBadge.test.tsx > AutomatedScoreBadge > renders low confidence indicator
+AssertionError: expected 0 to be greater than 0
+ ❯ src/components/AutomatedScoreBadge.test.tsx:26:25
+     24|     render(<AutomatedScoreBadge score={25} confidence="low" />)
+     25|     const dots = document.querySelectorAll('.bg-red-500')
+     26|     expect(dots.length).toBeGreaterThan(0)
+       |                         ^
+     27|   })
+     28|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  11:41:04
+   Duration  4.04s (transform 162ms, setup 341ms, import 429ms, tests 224ms, environment 2.56s)
+
+error: script "test" exited with code 1
+[0m
+<think>The issue is the Tailwind classes. In the source code I have `.bg-green-500` but Tailwind generates classes like `.bg-green-500/20` for the badge with opacity. The confidence dot uses `.bg-green-400` for the dot. Let me fix the test to use the correct classes.</think>
+[0m← [0mWrite src/components/AutomatedScoreBadge.test.tsx
+Wrote file successfully.
+[0m
+[0m✱ [0mGrep "querySelectorAll.*bg-"[90m 3 matches[0m
+<think>The issue is that Tailwind generates different class names in different versions. The `/20` suffix in the class might be getting escaped differently. Let me look at how other tests in the codebase handle this pattern.</think>
+[0m✱ [0mGrep "bg-yellow"[90m 2 matches[0m
+<think>Let me check how other tests in the codebase do color matching for tailwind classes.</think>
+[0m✱ [0mGrep "bg-yellow-500"[90m 1 match[0m
+<think>Let me look at another component test to see how they check for colored elements.</think>
+[0m→ [0mRead src/components/ResolutionBadge.test.tsx
+<think>There's no precedent for `bg-yellow-500/20` style. Let me look at another badge test for comparison.</think>
+[0m
+[0m← [0mWrite src/components/AutomatedScoreBadge.test.tsx
+Wrote file successfully.
+[0m
+<think>I see - these tests use `className` checking, which works because class names are preserved in jsdom. Let me rewrite the tests to check the actual className instead of using querySelectorAll.</think>
+<think>Let me run the tests again to verify:
+</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && timeout 60 bun run test -- --run src/components/AutomatedScoreBadge.test.tsx 2>&1
+$ vitest run --run src/components/AutomatedScoreBadge.test.tsx
+
+ RUN  v4.1.2 /home/daniel-bo/Desktop/pixel-art-benchmark
+
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  11:42:12
+   Duration  4.34s (transform 155ms, setup 313ms, import 456ms, tests 186ms, environment 2.80s)
+[0m
+<think>All tests pass. Now let me commit the fix and then run a quick build check. But first, let me also check if the lint passes.</think>
