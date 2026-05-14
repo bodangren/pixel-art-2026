@@ -779,3 +779,25 @@ Index: /home/daniel-bo/Desktop/pixel-art-benchmark/measure/tech-debt.md
 \ No newline at end of file
 
 [0m
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git add -A && git commit -m "Update lessons-learned and tech-debt with ML quality scoring notes
+
+Model: MiniMax-M2.7"
+[main da6a7f0] Update lessons-learned and tech-debt with ML quality scoring notes
+ 3 files changed, 67 insertions(+), 1 deletion(-)
+[0m
+<think>Now commit and push the memory updates.</think>
+<think>Now let me push the final commit and we're done.</think>
+[0m$ [0mcd /home/daniel-bo/Desktop/pixel-art-benchmark && git push 2>&1
+To https://github.com/bodangren/pixel-art-2026.git
+   ec65070..da6a7f0  main -> main
+[0m
+<think>All done. Let me summarize what was accomplished.</think>
+
+ML-Based Automated Quality Scoring Phase 1 complete. Commits:
+- `ea8c48a`: Feature extraction + scorer module
+- `62a2270`: Empty batch NaN fix, test selector fixes  
+- `c927008`: TypeScript esModuleInterop + type assertions
+- `ec65070`: Output log cleanup
+- `da6a7f0`: Memory updates
+
+28 tests passing. Build emits pre-existing WASM TypeScript error on linux/x64 (not related to new code).

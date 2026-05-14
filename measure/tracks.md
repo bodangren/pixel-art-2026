@@ -127,6 +127,10 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
    **Phase 1-4: Complete**
 
 ## Upcoming Tracks
+- [ ] **Track: Benchmark Run Re-trigger Dashboard UI**
+  *Link: [./tracks/benchmark_retrigger_dashboard_ui_20260514/](./tracks/benchmark_retrigger_dashboard_ui_20260514/)*
+  Frontend UI for re-triggering failed benchmark runs via the existing API.
+
 - [ ] **Track: ML-Based Automated Quality Scoring**
    *Link: [./tracks/ml_automated_quality_scoring_20260508/](./tracks/ml_automated_quality_scoring_20260508/)*
    *Priority: High* — Reduce human review burden with an ML model trained on historical human review data to automatically score asset quality (0-100) and flag likely failures.
