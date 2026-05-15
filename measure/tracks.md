@@ -131,17 +131,8 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
   *Link: [./tracks/benchmark_retrigger_dashboard_ui_20260514/](./tracks/benchmark_retrigger_dashboard_ui_20260514/)*
   Frontend UI for re-triggering failed benchmark runs via the existing API.
 
-- [ ] **Track: ML-Based Automated Quality Scoring**
-   *Link: [./tracks/ml_automated_quality_scoring_20260508/](./tracks/ml_automated_quality_scoring_20260508/)*
-   *Priority: High* — Reduce human review burden with an ML model trained on historical human review data to automatically score asset quality (0-100) and flag likely failures.
-
-- [ ] **Track: Automated Model Onboarding Pipeline**
-   *Link: [./tracks/automated_model_onboarding_20260508/](./tracks/automated_model_onboarding_20260508/)*
-   *Priority: High* — Self-service admin UI and API for registering new LLMs without manual config edits; auto-scaffolds prompts, validation rules, and triggers an initial benchmark run.
-   *Link: [./archive/public_deployment_pipeline_20260506/](./archive/public_deployment_pipeline_20260506/)*
-
-- [ ] **Track: Benchmark Run Re-trigger API**
-   *Link: [./tracks/rerun_trigger_api_20260509/](./tracks/rerun_trigger_api_20260509/)*
+- [x] **Track: Benchmark Run Re-trigger API**
+   *Link: [./archive/rerun_trigger_api_20260509/](./archive/rerun_trigger_api_20260509/)*
    *Priority: High* — Add API endpoint and UI button to re-trigger asset generation for failed benchmark runs.
    *Status: Complete* — Replaced Vercel deploy.yml with GitHub Pages workflow. Deploy.yml now uses actions/upload-pages-artifact and actions/deploy-pages. Updated README badges and deploy-workflow.test.ts.
 
@@ -176,3 +167,7 @@ This repository tracks the ability of LLMs to generate game-ready pixel art asse
 - [ ] **Track: Automated Model Onboarding Pipeline**
    *Link: [./tracks/automated_model_onboarding_20260508/](./tracks/automated_model_onboarding_20260508/)*
    *Priority: High* — Self-service admin UI and API for registering new LLMs without manual config edits; auto-scaffolds prompts, validation rules, and triggers an initial benchmark run.
+
+- [ ] **Track: Multi-Reviewer Consensus Scoring**
+   *Link: [./tracks/multi_reviewer_consensus_scoring_20260516/](./tracks/multi_reviewer_consensus_scoring_20260516/)*
+   *Priority: Medium* — Enable multiple reviewers to score the same asset and compute consensus scores with outlier detection. Improves review reliability and enriches ML training data.

@@ -1,0 +1,8 @@
+{
+  "track_id": "multi_reviewer_consensus_scoring_20260516",
+  "type": "feature",
+  "status": "planned",
+  "created_at": "2026-05-16T00:00:00Z",
+  "updated_at": "2026-05-16T00:00:00Z",
+  "description": "Enable multiple reviewers to score the same benchmark asset and compute consensus scores with outlier detection, improving review reliability and providing richer training data for ML quality scoring."
+}
